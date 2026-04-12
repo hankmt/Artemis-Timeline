@@ -2587,6 +2587,21 @@ function updatePhoto() {
   }
   updateAudio(photo.t);
   renderTimeline();
+  // Preload neighboring images: previous 1, next 3
+  const preloadOffsets = [-1, 1, 2, 3];
+  for (const off of preloadOffsets) {
+    const idx = currentPhotoIdx + off;
+    if (idx >= 0 && idx < filteredPhotos.length) {
+      const src = 'web/' + encodeURIComponent(filteredPhotos[idx].f);
+      if (!document.querySelector('link[rel="prefetch"][href="' + CSS.escape(src) + '"]')) {
+        const link = document.createElement('link');
+        link.rel = 'prefetch';
+        link.as = 'image';
+        link.href = src;
+        document.head.appendChild(link);
+      }
+    }
+  }
 }
 
 // Each audio clip "owns" the segment from its timestamp to the next clip's timestamp.
