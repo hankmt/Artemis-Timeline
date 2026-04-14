@@ -162,26 +162,33 @@
   }
   .zoom-controls {
     position: absolute;
-    top: -1px;
-    right: 0;
+    top: -4px;
+    right: -4px;
     display: flex;
     gap: 4px;
-    z-index: 10;
+    z-index: 50;
+    background: rgba(13, 13, 26, 0.92);
+    padding: 3px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
   }
   .zoom-btn {
-    width: 18px;
-    height: 18px;
+    width: 30px;
+    height: 30px;
     border: 1px solid #333;
     background: #1a1a2e;
-    color: #888;
-    border-radius: 3px;
+    color: #aaa;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 18px;
+    line-height: 28px;
     text-align: center;
     padding: 0;
+    font-weight: 600;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
   }
-  .zoom-btn:hover { color: #fff; border-color: #4FC3F7; }
+  .zoom-btn:hover { color: #fff; border-color: #4FC3F7; background: #24243e; }
 
   /* Controls row */
   .controls-row {
@@ -544,7 +551,7 @@
   .timeline-hover-tip {
     display: none;
     position: absolute;
-    bottom: 58px;
+    top: 40px;
     transform: translateX(-50%);
     background: #12121f;
     border: 1px solid #333;
@@ -1674,23 +1681,23 @@ const EVENTS = [
   {t:edt("2026-04-01 12:50:00"),title:"Suit Up",desc:"Crew dons orange Orion suits",icon:"🧑‍🚀"},
   {t:edt("2026-04-01 14:30:00"),title:"Board Orion",desc:"Crew boards spacecraft at Pad 39B",icon:"🚀"},
   {t:edt("2026-04-01 18:35:25"),title:"LIFTOFF",desc:"SLS launches from Kennedy Space Center",icon:"🔥"},
-  {t:edt("2026-04-02 19:49:00"),title:"Trans Lunar Injection",desc:"5:50 burn toward the Moon",icon:"🌙"},
-  {t:edt("2026-04-06 00:37:00"),title:"Lunar Sphere of Influence",desc:"Orion enters Moon's gravity",icon:"🌑"},
-  {t:edt("2026-04-06 13:56:00"),title:"DISTANCE RECORD",desc:"252,756 miles from Earth",icon:"🏆"},
-  {t:edt("2026-04-06 18:41:00"),title:"EARTHSET",desc:"Earth disappears — loss of signal",icon:"📡"},
-  {t:edt("2026-04-06 19:02:00"),title:"CLOSEST APPROACH",desc:"4,070 miles above lunar surface",icon:"🌕"},
-  {t:edt("2026-04-06 19:24:00"),title:"EARTHRISE",desc:"Earth reappears — comms restored",icon:"🌎"},
-  {t:edt("2026-04-06 20:35:00"),title:"ECLIPSE",desc:"Eclipse and impact-flash observations",icon:"🌘"},
-  {t:edt("2026-04-10 20:07:00"),title:"SPLASHDOWN",desc:"Pacific Ocean, off San Diego",icon:"🌊"}
+  {t:edt("2026-04-02 20:12:25"),title:"Trans Lunar Injection",desc:"5:50 burn toward the Moon",icon:"🌙"},
+  {t:edt("2026-04-06 01:34:25"),title:"Lunar Sphere of Influence",desc:"Orion enters Moon's gravity",icon:"🌑"},
+  {t:edt("2026-04-06 19:38:00"),title:"EARTHSET",desc:"Earth disappears — loss of signal",icon:"📡"},
+  {t:edt("2026-04-06 19:58:45"),title:"CLOSEST APPROACH",desc:"4,070 miles above lunar surface",icon:"🌕"},
+  {t:edt("2026-04-06 20:02:22"),title:"DISTANCE RECORD",desc:"252,756 miles from Earth",icon:"🏆"},
+  {t:edt("2026-04-06 20:20:00"),title:"EARTHRISE",desc:"Earth reappears — comms restored",icon:"🌎"},
+  {t:edt("2026-04-06 21:32:00"),title:"ECLIPSE",desc:"Eclipse and impact-flash observations",icon:"🌘"},
+  {t:edt("2026-04-10 20:21:25"),title:"SPLASHDOWN",desc:"Pacific Ocean, off San Diego",icon:"🌊"}
 ];
 
 const QUOTES = [
   {t:edt("2026-04-01 18:35:25"),who:"Launch Director",text:"Liftoff of Artemis II — America returns to the Moon with crew!"},
-  {t:edt("2026-04-02 19:55:00"),who:"CAPCOM",text:"Integrity, TLI is complete. You are on your way to the Moon."},
-  {t:edt("2026-04-06 13:56:00"),who:"CAPCOM",text:"You have just traveled farther from Earth than any human in history."},
-  {t:edt("2026-04-06 18:41:00"),who:"CAPCOM",text:"Going behind the Moon. We'll see you on the other side."},
-  {t:edt("2026-04-06 19:24:00"),who:"Reid Wiseman",text:"Houston, Integrity. We see Earth again. What a sight."},
-  {t:edt("2026-04-10 20:07:00"),who:"Recovery Director",text:"Welcome home, Integrity. Splashdown confirmed."}
+  {t:edt("2026-04-02 20:18:00"),who:"CAPCOM",text:"Integrity, TLI is complete. You are on your way to the Moon."},
+  {t:edt("2026-04-06 20:02:22"),who:"CAPCOM",text:"You have just traveled farther from Earth than any human in history."},
+  {t:edt("2026-04-06 19:38:00"),who:"CAPCOM",text:"Going behind the Moon. We'll see you on the other side."},
+  {t:edt("2026-04-06 20:20:00"),who:"Reid Wiseman",text:"Houston, Integrity. We see Earth again. What a sight."},
+  {t:edt("2026-04-10 20:21:25"),who:"Recovery Director",text:"Welcome home, Integrity. Splashdown confirmed."}
 ];
 
 // Distance waypoints: [timestamp, miles from Earth surface]
@@ -2142,8 +2149,8 @@ const SCHEDULE = [
   {s:edt("2026-04-01 23:00:00"),e:edt("2026-04-02 06:00:00"),a:"sleep",l:"Sleep (short)"},
   {s:edt("2026-04-02 06:00:00"),e:edt("2026-04-02 08:00:00"),a:"free",l:"Wake & meals"},
   {s:edt("2026-04-02 08:00:00"),e:edt("2026-04-02 12:00:00"),a:"science",l:"Systems checkout"},
-  {s:edt("2026-04-02 12:00:00"),e:edt("2026-04-02 19:49:00"),a:"piloting",l:"TLI prep"},
-  {s:edt("2026-04-02 19:49:00"),e:edt("2026-04-02 22:00:00"),a:"piloting",l:"TLI burn & post-burn checkout"},
+  {s:edt("2026-04-02 12:00:00"),e:edt("2026-04-02 20:12:25"),a:"piloting",l:"TLI prep"},
+  {s:edt("2026-04-02 20:12:25"),e:edt("2026-04-02 22:00:00"),a:"piloting",l:"TLI burn & post-burn checkout"},
   {s:edt("2026-04-02 22:00:00"),e:edt("2026-04-03 01:30:00"),a:"deep-obs",l:"First deep-space photography"},
   {s:edt("2026-04-03 01:30:00"),e:edt("2026-04-03 11:00:00"),a:"sleep",l:"Sleep"},
   {s:edt("2026-04-03 11:00:00"),e:edt("2026-04-03 13:00:00"),a:"exercise",l:"Exercise"},
@@ -2174,8 +2181,8 @@ const SCHEDULE = [
   {s:edt("2026-04-09 18:00:00"),e:edt("2026-04-09 22:00:00"),a:"free",l:"Final free time"},
   {s:edt("2026-04-09 22:00:00"),e:edt("2026-04-10 10:00:00"),a:"sleep",l:"Sleep"},
   {s:edt("2026-04-10 10:00:00"),e:edt("2026-04-10 15:00:00"),a:"reentry-prep",l:"Final reentry prep"},
-  {s:edt("2026-04-10 15:00:00"),e:edt("2026-04-10 19:53:00"),a:"suit-ops",l:"Suited for reentry"},
-  {s:edt("2026-04-10 19:53:00"),e:edt("2026-04-10 20:07:00"),a:"piloting",l:"REENTRY & LANDING"},
+  {s:edt("2026-04-10 15:00:00"),e:edt("2026-04-10 20:08:25"),a:"suit-ops",l:"Suited for reentry"},
+  {s:edt("2026-04-10 20:08:25"),e:edt("2026-04-10 20:21:25"),a:"piloting",l:"REENTRY & LANDING"},
 ];
 
 const AUDIO = [
@@ -2188,20 +2195,20 @@ const AUDIO = [
   {t:edt("2026-04-01 18:00:00"),f:"artemis-ii-launch-beautiful-moonrise-and-were-headed-right-at-it.mp3",desc:"Beautiful moonrise"},
   {t:edt("2026-04-01 18:35:25"),f:"artemis-ii-liftoff.mp3",desc:"Liftoff!"},
   {t:edt("2026-04-01 18:40:00"),f:"artemis-ii-launch-orion-communications-check.mp3",desc:"Orion comms check"},
-  {t:edt("2026-04-01 19:40:00"),f:"artemis-ii-go-for-translunar-injection.mp3",desc:"Go for TLI"},
-  {t:edt("2026-04-01 19:58:00"),f:"artemis-ii-good-burn.mp3",desc:"Good burn"},
+  {t:edt("2026-04-02 20:05:00"),f:"artemis-ii-go-for-translunar-injection.mp3",desc:"Go for TLI"},
+  {t:edt("2026-04-02 20:18:00"),f:"artemis-ii-good-burn.mp3",desc:"Good burn"},
   {t:edt("2026-04-04 15:00:00"),f:"artemis-ii-message-from-apollo-astronaut-jim-lovell.mp3",desc:"Message from Jim Lovell"},
   {t:edt("2026-04-05 10:00:00"),f:"artemis-ii-message-from-apollo-astronaut-charlie-duke.mp3",desc:"Message from Charlie Duke"},
-  {t:edt("2026-04-06 13:56:00"),f:"artemis-ii-breaks-apollo-13-distance-record.mp3",desc:"Breaks Apollo 13 distance record"},
+  {t:edt("2026-04-06 15:37:25"),f:"artemis-ii-breaks-apollo-13-distance-record.mp3",desc:"Breaks Apollo 13 distance record"},
   {t:edt("2026-04-06 15:59:12"),f:"artemis-ii-amaze-amaze-amaze.mp3",desc:"Amaze, amaze, amaze"},
-  {t:edt("2026-04-06 18:41:00"),f:"artemis-ii-los.wav",desc:"Loss of signal — Earthset"},
-  {t:edt("2026-04-06 18:44:00"),f:"artemis-ii-hey-babe-love-you-from-the-moon.mp3",desc:"We love you, from the Moon"},
-  {t:edt("2026-04-06 19:00:00"),f:"artemis-ii-closest-point-to-moon.wav",desc:"Closest approach to Moon"},
-  {t:edt("2026-04-06 19:24:00"),f:"artemis-ii-we-will-explore.wav",desc:"Contact restored — We will explore"},
-  {t:edt("2026-04-06 20:00:00"),f:"artemis-ii-names-new-craters-integrity-and-carroll.mp3",desc:"Names new craters"},
-  {t:edt("2026-04-06 20:35:00"),f:"victor-the-terminator.wav",desc:"Eclipse / impact-flash observations"},
+  {t:edt("2026-04-06 19:38:00"),f:"artemis-ii-los.wav",desc:"Loss of signal — Earthset"},
+  {t:edt("2026-04-06 19:41:00"),f:"artemis-ii-hey-babe-love-you-from-the-moon.mp3",desc:"We love you, from the Moon"},
+  {t:edt("2026-04-06 19:58:45"),f:"artemis-ii-closest-point-to-moon.wav",desc:"Closest approach to Moon"},
+  {t:edt("2026-04-06 20:20:00"),f:"artemis-ii-we-will-explore.wav",desc:"Contact restored — We will explore"},
+  {t:edt("2026-04-06 20:57:00"),f:"artemis-ii-names-new-craters-integrity-and-carroll.mp3",desc:"Names new craters"},
+  {t:edt("2026-04-06 21:32:00"),f:"victor-the-terminator.wav",desc:"Eclipse / impact-flash observations"},
   {t:edt("2026-04-09 12:00:00"),f:"artemis-ii-humanity-has-shown-what-we-are-capable-of.mp3",desc:"What we are capable of"},
-  {t:edt("2026-04-10 20:07:00"),f:"artemis-ii-splashdown-shorter.mp3",desc:"Splashdown"},
+  {t:edt("2026-04-10 20:21:25"),f:"artemis-ii-splashdown-shorter.mp3",desc:"Splashdown"},
 ];
 
 let currentPhotoIdx = 0;
