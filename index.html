@@ -4,7 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ARTEMIS II PHOTO TIMELINE</title>
+<meta name="description" content="An interactive photo timeline of NASA's Artemis II mission — scrub through every crew moment, lunar flyby shot, and audio clip from April 1–10, 2026.">
 <link rel="icon" type="image/png" href="pngtree-detailed-full-moon-rendered-in-3d-for-creative-use-png-image_15976807.png">
+
+<!-- Open Graph / link preview -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Artemis II Photo Timeline">
+<meta property="og:description" content="An interactive photo timeline of NASA's Artemis II mission — scrub through every crew moment, lunar flyby shot, and audio clip from April 1–10, 2026.">
+<meta property="og:image" content="web/55194627304_c3cb06ab2f_o.jpg">
+<meta property="og:image:alt" content="The Moon from Orion during the Artemis II lunar flyby">
+
+<!-- Twitter card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Artemis II Photo Timeline">
+<meta name="twitter:description" content="An interactive photo timeline of NASA's Artemis II mission — scrub through every crew moment, lunar flyby shot, and audio clip from April 1–10, 2026.">
+<meta name="twitter:image" content="web/55194627304_c3cb06ab2f_o.jpg">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -599,16 +613,17 @@
     #header h1 { font-size: 18px; }
     #header .crew { display: none; }
     .timeline-bar { padding: 4px 12px; }
-    .timeline-track { height: 20px; }
-    .timeline-dot { top: 5px; width: 8px; height: 8px; transform: translateX(-4px); }
-    .timeline-dot.cluster { width: 10px; height: 10px; top: 4px; transform: translateX(-5px); }
-    .timeline-playhead { top: 0; height: 20px; }
-    .timeline-activity-bars { display: none; }
-    .timeline-labels { display: none; }
+    .timeline-track { height: 24px; }
+    .timeline-playhead { top: 0; height: 24px; }
+    /* Keep activity bars, audio dots, and day labels visible on mobile */
+    .timeline-labels { font-size: 8px; margin-top: 4px; }
+    .timeline-audio-dots { display: block; }
+    .audio-dot { width: 6px; height: 6px; top: 2px; transform: translateX(-3px); }
+    .photo-dot { width: 6px; height: 6px; top: 2px; transform: translateX(-3px); }
+    .photo-dot.active { width: 8px; height: 8px; top: 1px; transform: translateX(-4px); }
+    /* Hover tooltip and zoom controls don't work well on touch — keep hidden */
     .zoom-controls { display: none; }
     .timeline-hover-tip { display: none !important; }
-    .timeline-event-markers { display: none; }
-    .timeline-audio-dots { display: none; }
     .mobile-activity { display: block; }
     .controls-row { padding: 6px 12px; gap: 6px; }
 
@@ -1683,11 +1698,11 @@ const EVENTS = [
   {t:edt("2026-04-01 18:35:25"),title:"LIFTOFF",desc:"SLS launches from Kennedy Space Center",icon:"🔥"},
   {t:edt("2026-04-02 20:12:25"),title:"Trans Lunar Injection",desc:"5:50 burn toward the Moon",icon:"🌙"},
   {t:edt("2026-04-06 01:34:25"),title:"Lunar Sphere of Influence",desc:"Orion enters Moon's gravity",icon:"🌑"},
-  {t:edt("2026-04-06 19:38:00"),title:"EARTHSET",desc:"Earth disappears — loss of signal",icon:"📡"},
+  {t:edt("2026-04-06 19:38:00"),title:"EARTHSET",desc:"Earth disappears — loss of signal (approx.)",icon:"📡"},
   {t:edt("2026-04-06 19:58:45"),title:"CLOSEST APPROACH",desc:"4,070 miles above lunar surface",icon:"🌕"},
   {t:edt("2026-04-06 20:02:22"),title:"DISTANCE RECORD",desc:"252,756 miles from Earth",icon:"🏆"},
-  {t:edt("2026-04-06 20:20:00"),title:"EARTHRISE",desc:"Earth reappears — comms restored",icon:"🌎"},
-  {t:edt("2026-04-06 21:32:00"),title:"ECLIPSE",desc:"Eclipse and impact-flash observations",icon:"🌘"},
+  {t:edt("2026-04-06 20:20:00"),title:"EARTHRISE",desc:"Earth reappears — comms restored (approx.)",icon:"🌎"},
+  {t:edt("2026-04-06 21:32:00"),title:"ECLIPSE",desc:"Eclipse and impact-flash observations (approx.)",icon:"🌘"},
   {t:edt("2026-04-10 20:21:25"),title:"SPLASHDOWN",desc:"Pacific Ocean, off San Diego",icon:"🌊"}
 ];
 
@@ -2117,7 +2132,7 @@ function getDistanceAtTime(ts) {
   return 0;
 }
 
-const SPLASHDOWN_T = edt("2026-04-10 20:07:00");
+const SPLASHDOWN_T = edt("2026-04-10 20:21:25");
 const LIFTOFF_T = edt("2026-04-01 18:35:25");
 const SRB_SEP_T = edt("2026-04-01 18:37:37");
 function getDisplayDistance(ts) {
