@@ -714,6 +714,7 @@
   <div class="photo-side">
     <div class="photo-container">
       <img id="currentPhoto" class="photo-img" alt="Current photo">
+      <video id="currentVideo" class="photo-img" style="display:none" controls playsinline preload="none"></video>
       <button class="nav-arrow nav-prev" id="prevBtn" title="Previous photo">‹</button>
       <button class="nav-arrow nav-next" id="nextBtn" title="Next photo">›</button>
       <div id="printBanner" class="print-overlay" style="display:none">
@@ -794,7 +795,9 @@ function getFlickrId(filename) {
   const m = filename.match(/^(\d{11})[_-]/);
   if (m) return m[1];
   const n = filename.match(/^(art\d+e\d+)/);
-  return n ? n[1] : null;
+  if (n) return n[1];
+  const ig = filename.match(/^(ig-[a-z0-9-]+)\./);
+  return ig ? ig[1] : null;
 }
 
 const FLICKR_TITLES = {
@@ -1099,6 +1102,14 @@ const FLICKR_TITLES = {
   '55200794328': 'Artemis II Recovery (NHQ202604110113)',
   '55201553321': 'Artemis II Recovery (NHQ202604110116)',
   '55200659842': 'Artemis II Recovery (NHQ202604110117)',
+  'ig-earthset-wiseman': 'Only One Chance in This Lifetime',
+  'ig-gravity-flyby': 'Playing with Earth-Moon Gravity',
+  'ig-earthshine-koch': 'Earthshine',
+  'ig-fd8-evening-vibes': 'Flight Day 8 Evening Vibes',
+  'ig-pink-pony-club': 'Pink Pony Club Morning',
+  'ig-fd8-press-conference': 'Flight Day 8 Press Conference',
+  'ig-welcome-aboard': 'Welcome Aboard Integrity',
+  'ig-capsule-egress': 'Coming Home',
   'art002e014256': 'Sharing a Unique Perspective',
   'art002e016165': 'Lunar Flyby Observations \u2013 Reid Wiseman',
   'art002e016171': 'Lunar Flyby Observations \u2013 Jeremy Hansen',
@@ -1402,6 +1413,14 @@ const FLICKR_DESCS = {
   "55201813575": "jsc2026e022270 (April 11, 2026) - Artemis II Pilot Victor Glover returns home to Houston, stepping off a plane at Ellington Airport near NASA's Johnson Space Center, on Saturday, April 11, 2026, following his 10-day mission around the Moon. He and his three fellow crew members launched April 1, 2026, from NASA’s Kennedy Space Center in Florida, and splashed down off the coast of California on Friday, April 10, 2026. Photo Credit: NASA/David DeHoyos",
   "55201813860": "jsc2026e022266 (April 10, 2026) - NASA's Orion spacecraft carrying Artemis II Commander Reid Wiseman, Pilot Victor Glover, and Mission Specialist Christina Koch from NASA, along with Mission Specialist Jeremy Hansen from the CSA (Canadian Space Agency), splashes down in the Pacific Ocean near San Diego, California, at 5:07 p.m. PDT, (8:07 p.m. EDT) on Friday, April 10, 2026. The Artemis II test flight launched on Wednesday, April 1, from NASA’s Kennedy Space Center in Florida to begin its 10-day journey around the Moon for scientific discovery, economic benefits, and to build on our foundation for the first crewed missions to Mars. NASA’s Landing and Recovery team and the U.S. military are coordinating efforts to extract the Artemis II crew from the Orion spacecraft. Credit: NASA/James Blair",
   "55201827775": "jsc2026e022310 (April 11, 2026) - NASA’s Artemis II crew, NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, shared brief remarks with friends, family, and colleagues after they landed at Ellington Airport near NASA’s Johnson Space Center in Houston on Saturday, April 11, 2026, after a nearly 10-day journey around the Moon and back to Earth. Credit: NASA/Helen Arase Vargas",
+  "ig-earthset-wiseman": "Only one chance in this lifetime\u2026 Like watching sunset at the beach from the most foreign seat in the house. This video captures Earth setting behind the Moon during the Artemis II lunar flyby. \u2014 Reid Wiseman via Instagram",
+  "ig-gravity-flyby": "Out here playing with Earth-Moon gravity like it is a toy and seeing things that are beautiful beyond words. 215,010 miles from Earth. 12,787 miles from the Moon. \u2014 via Instagram",
+  "ig-earthshine-koch": "Earthshine. Artemis II astronaut Christina Koch captured this video of Earth outside the Orion spacecraft windows during the lunar flyby. \u2014 Christina Koch via Instagram",
+  "ig-fd8-evening-vibes": "Flight Day 8 evening vibes. This day was so fun and productive because we had gotten our sea legs and were executing like a well-oiled machine. Sound on! \u2014 via Instagram",
+  "ig-pink-pony-club": "What really happened on Pink Pony Club morning. Wake-up songs are a tradition at NASA, and this crew got Chappell Roan\u2019s Pink Pony Club on Flight Day 4. Sound on! \u2014 via Instagram",
+  "ig-fd8-press-conference": "Flight Day 8 evening, before bed \u2014 the Artemis II crew during a press conference on their return journey to Earth. \u2014 via Instagram",
+  "ig-welcome-aboard": "Jesse, Steve, Laddy, and Vlad\u2026 such an incredible feeling to welcome you aboard Integrity after your journey around the Moon. The recovery team opens the Orion capsule hatch aboard USS John P. Murtha. \u2014 via Instagram",
+  "ig-capsule-egress": "The moments just after the capsule is opened \u2014 the Artemis II crew exits the Orion spacecraft aboard USS John P. Murtha following splashdown. \u2014 via Instagram",
   "art002e014256": "art002e014256 (April 6, 2026) \u2013 CSA (Canadian Space Agency) astronaut and Artemis II Mission Specialist Jeremy Hansen is seen making observations through the window of the Orion spacecraft early in the Artemis II lunar flyby. Hansen and his fellow crewmates spent approximately seven hours taking turns at the Orion windows capturing science data to share with their team back on Earth. Credit: NASA",
   "art002e016165": "art002e016165 (April 6, 2026) \u2013 NASA astronaut and Artemis II Commander Reid Wiseman pictured here in the Orion spacecraft during the Artemis II lunar flyby. Wiseman and his fellow crewmates spent approximately seven hours taking turns at the Orion windows capturing science data to share with their team back on Earth. At closest approach, they came within 4,067 miles of the Moon\u2019s surface. Credit: NASA",
   "art002e016171": "art002e016171 (April 6, 2026) \u2013 CSA (Canadian Space Agency) astronaut and Artemis II Mission Specialist Jeremy Hansen pictured here in the Orion spacecraft during the Artemis II lunar flyby. Hansen and his fellow crewmates spent approximately seven hours taking turns at the Orion windows capturing science data to share with their team back on Earth. Credit: NASA",
@@ -1482,6 +1501,7 @@ const PHOTOS = [
   {t:edt("2026-04-03 22:03:18"),f:"55187348577_9a3666de4f_o.jpg",p:"Artemis II Crew",loc:"Orion Spacecraft",cam:"NIKON D5 + 80.0-400.0 mm f/4.5-5.6",set:"400mm · f/18.0 · 1/640s · ISO 500",sc:true,b:1,cid:"d5a"},
   {t:edt("2026-04-04 00:34:19"),f:"55190036409_b8751c9d86_o.jpg",p:"Artemis II Crew",loc:"Orion Spacecraft",cam:"NIKON D5 + 80.0-400.0 mm f/4.5-5.6",set:"210mm · f/8.0 · 1/1000s · ISO 400",sc:true,b:1,cid:"d5a"},
   {t:edt("2026-04-04 01:06:49"),f:"55189767696_27cf3376e4_o.jpg",p:"Artemis II Crew",loc:"Orion Spacecraft",cam:"NIKON D5 + 80.0-400.0 mm f/4.5-5.6",set:"400mm · f/8.0 · 1/1000s · ISO 400",sc:true,b:1,cid:"d5a"},
+  {t:edt("2026-04-04 07:30:00"),f:"ig-pink-pony-club.mp4",p:"Artemis II Crew",loc:"Orion Spacecraft",cam:"Instagram Video",set:"720×1280 · 58s",sc:true,b:1,v:true},
   {t:edt("2026-04-04 12:20:54"),f:"55190303117_0330a107be_o.jpg",p:"Unknown",loc:"Unknown",cam:"iPhone 17 Pro Max",set:"24mm · f/1.8 · 1/2s · ISO 32000",sc:true,b:1},
   {t:edt("2026-04-04 19:23:11"),f:"55195961058_8ac0d8b4af_o.jpg",p:"Unknown",loc:"Unknown",cam:"HERO4 Black",set:"15mm · f/2.8 · 1/15s · ISO 141",sc:false,b:1},
   {t:edt("2026-04-04 19:23:14"),f:"55194920227_1ced7587f1_o.jpg",p:"Unknown",loc:"Unknown",cam:"HERO4 Black",set:"15mm · f/2.8 · 1/30s · ISO 530",sc:false,b:1},
@@ -1528,6 +1548,7 @@ const PHOTOS = [
   {t:edt("2026-04-06 15:25:21"),f:"55194529188_d90aa501b6_o.jpg",p:"Jeremy Hansen",loc:"Orion Spacecraft",cam:"NIKON D5 + 80.0-400.0 mm f/4.5-5.6",set:"185mm · f/8.0 · 1/1000s · ISO 400",sc:true,b:1,cid:"d5a"},
   {t:edt("2026-04-06 15:28:57"),f:"55194627309_3957207b4b_o.jpg",p:"Jeremy Hansen",loc:"Orion Spacecraft",cam:"NIKON D5 + 80.0-400.0 mm f/4.5-5.6",set:"400mm · f/8.0 · 1/1000s · ISO 400",sc:true,b:1,cid:"d5a"},
   {t:edt("2026-04-06 15:34:27"),f:"55196010752_5b3201ef0d_o.jpg",p:"Reid Wiseman",loc:"Orion Spacecraft",cam:"NIKON D5 + 80.0-400.0 mm f/4.5-5.6",set:"80mm · f/5.6 · 1/500s · ISO 400",sc:true,b:1,cid:"d5a"},
+  {t:edt("2026-04-06 15:40:00"),f:"ig-gravity-flyby.mp4",p:"Artemis II Crew",loc:"Orion Spacecraft",cam:"Instagram Video",set:"720×1280 · 39s",sc:true,b:1,v:true},
   {t:edt("2026-04-06 15:41:45"),f:"55193206753_03e267f92b_o.jpg",p:"Artemis II Crew",loc:"Orion Spacecraft",cam:"NIKON D5 + 80.0-400.0 mm f/4.5-5.6",set:"180mm · f/8.0 · 1/1000s · ISO 400",sc:true,b:1,cid:"d5a"},
   {t:edt("2026-04-06 15:46:20"),f:"55197995935_c2a38d06b9_o.jpg",p:"Reid Wiseman",loc:"Orion Spacecraft",cam:"NIKON D5 + 80.0-400.0 mm f/4.5-5.6",set:"130mm · f/5.6 · 1/500s · ISO 400",sc:true,b:1,cid:"d5a"},
   {t:edt("2026-04-06 15:57:39"),f:"55196704886_deccb80f7a_o.jpg",p:"Reid Wiseman",loc:"Orion Spacecraft",cam:"NIKON Z 9 + 35mm f/2D",set:"35mm · f/3.5 · 1/50s · ISO 16000",sc:true,b:1,cid:"z9"},
@@ -1548,6 +1569,7 @@ const PHOTOS = [
   {t:edt("2026-04-06 17:50:25"),f:"55193946135_2664677690_o.jpg",p:"Unknown",loc:"Unknown",cam:"HERO4 Black",set:"15mm · f/2.8 · 1/2200s · ISO 100",sc:false,b:1},
   {t:edt("2026-04-06 17:58:14"),f:"55193149063_81719d37c8_o.jpg",p:"Artemis II Crew",loc:"Orion Spacecraft",cam:"NIKON D5 + 80.0-400.0 mm f/4.5-5.6",set:"400mm · f/5.6 · 1/500s · ISO 400",sc:true,b:1,cid:"d5a"},
   {t:edt("2026-04-06 18:02:22"),f:"55193071311_0170f32df8_o.jpg",p:"Unknown",loc:"Unknown",cam:"iPhone 17 Pro Max",set:"19mm · f/1.9 · 1/7s · ISO 1000",sc:true,b:1},
+  {t:edt("2026-04-06 18:03:00"),f:"ig-earthshine-koch.mp4",p:"Christina Koch",loc:"Orion Spacecraft",cam:"Instagram Video",set:"720×1280 · 19s",sc:true,b:1,v:true},
   {t:edt("2026-04-06 18:05:33"),f:"55193414680_6b40b7bc89_o (1).jpg",p:"Artemis II Crew",loc:"Orion Spacecraft",cam:"NIKON D5 + 80.0-400.0 mm f/4.5-5.6",set:"80mm · f/8.0 · 1/1000s · ISO 400",sc:true,b:1,cid:"d5a"},
   {t:edt("2026-04-06 18:10:17"),f:"55194917013_732620c66e_o.jpg",p:"Artemis II Crew",loc:"Orion Spacecraft",cam:"NIKON Z 9 + 35mm f/2D",set:"35mm · f/8.0 · 1/1000s · ISO 400",sc:true,b:1,cid:"z9"},
   {t:edt("2026-04-06 18:32:05"),f:"55195026049_90a254f6a3_o (1).jpg",p:"Artemis II Crew",loc:"Orion Spacecraft",cam:"NIKON Z 9 + 35mm f/2D",set:"35mm · f/8.0 · 1/1000s · ISO 400",sc:true,b:1,cid:"z9"},
@@ -1556,6 +1578,7 @@ const PHOTOS = [
   {t:edt("2026-04-06 18:33:44"),f:"55197737178_9b35dbcb12_o.jpg",p:"Reid Wiseman",loc:"Orion Spacecraft",cam:"NIKON Z 9 + 35mm f/2D",set:"35mm · f/8.0 · 1/1000s · ISO 400",sc:true,b:1,cid:"z9"},
   {t:edt("2026-04-06 18:35:54"),f:"55192123432_66aed38dd0_o (1).jpg",p:"Artemis II Crew",loc:"Orion Spacecraft",cam:"NIKON D5 + 80.0-400.0 mm f/4.5-5.6",set:"210mm · f/8.0 · 1/1000s · ISO 400",sc:true,b:1,cid:"d5a"},
   {t:edt("2026-04-06 18:35:56"),f:"55193368072_2d78e28314_o.jpg",p:"NASA/Robert Markowitz",loc:"Mission Control, Houston",cam:"NIKON Z 9 + NIKKOR Z 20mm f/1.8 S",set:"20mm · f/2.8 · 1/125s · ISO 2500",sc:false,b:1},
+  {t:edt("2026-04-06 18:36:30"),f:"ig-earthset-wiseman.mp4",p:"Reid Wiseman",loc:"Orion Spacecraft",cam:"Instagram Video",set:"720×1280 · 53s",sc:true,b:1,v:true},
   {t:edt("2026-04-06 18:39:44"),f:"55206394005_d4b2519114_o.jpg",p:"Artemis",loc:"Orion Spacecraft",cam:"HERO4 Black",set:"3mm · f/2.8 · 1/3600s · ISO 100",sc:true,b:1},
   {t:edt("2026-04-06 18:40:29"),f:"55208655682_9b9025ca38_o.jpg",p:"Artemis Crew",loc:"Orion Spacecraft",cam:"NIKON D5 + 80.0-400.0 mm f/4.5-5.6",set:"140mm · f/7.1 · 1/800s · ISO 400",sc:true,b:1,cid:"d5a"},
   {t:edt("2026-04-06 18:40:47"),f:"55193180468_5de0cf977a_o (1).jpg",p:"Artemis II Crew",loc:"Orion Spacecraft",cam:"NIKON D5 + 80.0-400.0 mm f/4.5-5.6",set:"380mm · f/7.1 · 1/800s · ISO 400",sc:true,b:1,cid:"d5a"},
@@ -1611,6 +1634,8 @@ const PHOTOS = [
   {t:edt("2026-04-07 19:30:48"),f:"55194733465_29355a7bca_o.jpg",p:"NASA",loc:"USS John P. Murtha, Pacific Ocean",cam:"NIKON Z 9 + NIKKOR Z 24-70mm f/2.8 S II",set:"48mm · f/14.0 · 1/200s · ISO 90",sc:false,b:1,ext:true},
   {t:edt("2026-04-08 12:00:00"),f:"55199431156_eb43ddc6be_o.jpg",p:"Artemis II Crew",loc:"Orion Spacecraft",cam:"Unknown",set:"Unknown",sc:true,b:1},
   {t:edt("2026-04-08 17:14:12"),f:"55197019103_990dff0021_o.jpg",p:"NASA",loc:"USS John P. Murtha, Pacific Ocean",cam:"NIKON Z 9 + NIKKOR Z 35mm f/1.2 S",set:"35mm · f/2.0 · 1/1000s · ISO 500",sc:false,b:1,ext:true},
+  {t:edt("2026-04-08 20:00:00"),f:"ig-fd8-evening-vibes.mp4",p:"Artemis II Crew",loc:"Orion Spacecraft",cam:"Instagram Video",set:"720×1280 · 25s",sc:true,b:1,v:true},
+  {t:edt("2026-04-08 21:00:00"),f:"ig-fd8-press-conference.mp4",p:"Artemis II Crew",loc:"Orion Spacecraft",cam:"Instagram Video",set:"720×1280 · 43s",sc:true,b:1,v:true},
   {t:edt("2026-04-08 21:47:48"),f:"55207851286_830ee84047_o.jpg",p:"Artemis Crew",loc:"Orion Spacecraft",cam:"NIKON D5 + 70.0-200.0 mm f/2.8",set:"135mm · f/13.0 · 1/160s · ISO 3200",sc:true,b:1},
   {t:edt("2026-04-09 11:34:59"),f:"55197162528_0c6a732d79_o.jpg",p:"NASA",loc:"USS John P. Murtha, Pacific Ocean",cam:"NIKON Z 9 + NIKKOR Z 135mm f/1.8 S Plena",set:"135mm · f/2.0 · 1/200s · ISO 1100",sc:false,b:1,ext:true},
   {t:edt("2026-04-09 13:12:59"),f:"55197806006_51d6c66a41_o.jpg",p:"NASA",loc:"USS John P. Murtha, Pacific Ocean",cam:"NIKON Z 9 + NIKKOR Z 24-70mm f/2.8 S II",set:"40mm · f/2.8 · 1/60s · ISO 400",sc:false,b:1,ext:true},
@@ -1658,9 +1683,11 @@ const PHOTOS = [
   {t:edt("2026-04-10 20:28:43"),f:"55201813860_9e0777e100_o.jpg",p:"NASA/James Blair",loc:"USS John P. Murtha",cam:"NIKON Z 9 + NIKKOR Z 400mm f/2.8 TC VR S",set:"800mm · f/14.0 · 1/5000s · ISO 2000",sc:false,b:1,ext:true},
   {t:edt("2026-04-10 20:29:32"),f:"55199695466-e0a2e1c3cc-o.jpg",p:"NASA",loc:"Pacific Ocean Recovery Zone",cam:"Canon EOS R5 + EF800mm f/5.6L IS USM",set:"800mm · f/10.0 · 1/400s · ISO 160",sc:false,b:1,ext:true},
   {t:edt("2026-04-10 20:37:18"),f:"55199695136-23fb9ed419-o.jpg",p:"NASA",loc:"Pacific Ocean Recovery Zone",cam:"Canon EOS R5 + EF800mm f/5.6L IS USM",set:"800mm · f/10.0 · 1/400s · ISO 200",sc:false,b:1,ext:true},
+  {t:edt("2026-04-10 20:41:00"),f:"ig-welcome-aboard.mp4",p:"Artemis II Crew",loc:"USS John P. Murtha, Pacific Ocean",cam:"Instagram Video",set:"848×478 · 70s",sc:false,b:1,ext:true,v:true},
   {t:edt("2026-04-10 20:42:00"),f:"55200111364_d9b54c1e7e_o~large.jpg",p:"NASA/Bill Ingalls",loc:"USS John P. Murtha",cam:"Unknown",set:"Unknown",sc:false,b:1,ext:true},
   {t:edt("2026-04-10 20:43:00"),f:"55199863796_16582c725f_o~large.jpg",p:"NASA/Bill Ingalls",loc:"USS John P. Murtha",cam:"Unknown",set:"Unknown",sc:false,b:1,ext:true},
   {t:edt("2026-04-10 20:44:00"),f:"55200013283_2e53db356a_o~large.jpg",p:"NASA/Bill Ingalls",loc:"USS John P. Murtha",cam:"Unknown",set:"Unknown",sc:false,b:1,ext:true},
+  {t:edt("2026-04-10 20:45:30"),f:"ig-capsule-egress.mp4",p:"Artemis II Crew",loc:"USS John P. Murtha, Pacific Ocean",cam:"Instagram Video",set:"720×1280 · 121s",sc:false,b:1,ext:true,v:true},
   {t:edt("2026-04-10 20:46:00"),f:"55199868461_8d940863c6_o~large.jpg",p:"NASA/Bill Ingalls",loc:"USS John P. Murtha",cam:"Unknown",set:"Unknown",sc:false,b:1,ext:true},
   {t:edt("2026-04-10 20:47:00"),f:"55199869846_89d52282b1_o~large.jpg",p:"NASA/Bill Ingalls",loc:"USS John P. Murtha",cam:"Unknown",set:"Unknown",sc:false,b:1,ext:true},
   {t:edt("2026-04-10 20:48:00"),f:"55200119619_85e4d36722_o~large.jpg",p:"NASA/Bill Ingalls",loc:"USS John P. Murtha",cam:"Unknown",set:"Unknown",sc:false,b:1,ext:true},
@@ -2636,7 +2663,20 @@ function updatePhoto() {
   const flickrId = getFlickrId(photo.f);
   const nasaTitle = flickrId ? FLICKR_TITLES[flickrId] || '' : '';
   const imgEl = document.getElementById('currentPhoto');
-  imgEl.src = 'web/' + safeSrc;
+  const vidEl = document.getElementById('currentVideo');
+  if (photo.v) {
+    imgEl.style.display = 'none';
+    vidEl.pause();
+    vidEl.poster = 'web/' + encodeURIComponent(photo.f.replace(/\.mp4$/,'-poster.jpg'));
+    vidEl.src = 'web/' + safeSrc;
+    vidEl.style.display = '';
+  } else {
+    vidEl.pause();
+    vidEl.removeAttribute('src');
+    vidEl.style.display = 'none';
+    imgEl.src = 'web/' + safeSrc;
+    imgEl.style.display = '';
+  }
   imgEl.alt = nasaTitle || (photo.p + ' — ' + photo.loc);
   const titleRow = document.getElementById('photoTitleRow');
   const titleEl = document.getElementById('metaTitle');
@@ -2652,7 +2692,7 @@ function updatePhoto() {
     titleRow.style.display = 'none';
     descHover.style.display = 'none';
   }
-  document.getElementById('downloadLink').href = safeSrc;
+  document.getElementById('downloadLink').href = photo.v ? ('web/' + safeSrc) : safeSrc;
   document.getElementById('downloadLink').download = photo.f;
   document.getElementById('metaPhotographer').textContent = photo.p;
   document.getElementById('metaLocation').textContent = photo.loc;
