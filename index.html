@@ -369,11 +369,13 @@
   /* Metadata panel — right side, fixed width */
   .meta-panel {
     width: 280px;
-    flex-shrink: 0;
+    flex: 0 1 auto;
     display: flex;
     flex-direction: column;
     gap: 10px;
     overflow-y: auto;
+    min-height: 0;
+    max-height: 100%;
   }
   .meta-section {
     padding: 12px;
@@ -456,44 +458,51 @@
   }
 
   /* Timeline hover tooltip */
-  /* Print availability overlay — removed for now, will return */
 
   /* Calendar promo — always visible */
   .calendar-promo {
-    padding: 12px;
-    background: linear-gradient(135deg, #0d1b2a, #1b2838);
-    border: 1px solid #1e3a5f;
-    border-radius: 6px;
-    margin-top: auto;
+    margin-top: 4px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: #0a0a14;
+    flex-shrink: 0;
+    transition: border-color 0.2s;
   }
-  .calendar-promo-inner {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
+  .calendar-promo:hover {
+    border-color: rgba(255,255,255,0.18);
   }
-  .calendar-icon { font-size: 22px; flex-shrink: 0; line-height: 1; }
+  .calendar-cover {
+    width: 100%;
+    display: block;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+  .calendar-body {
+    padding: 12px 14px 14px;
+  }
   .calendar-title {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
     color: #e0e0e0;
-    letter-spacing: -0.2px;
+    letter-spacing: 0.5px;
   }
   .calendar-subtitle {
     font-size: 11px;
     color: #778899;
     line-height: 1.4;
-    margin-top: 2px;
+    margin-top: 4px;
   }
   .calendar-link {
     display: block;
     text-align: center;
     margin-top: 10px;
-    padding: 7px 0;
+    padding: 8px 0;
     font-size: 11px;
     font-weight: 700;
     color: #fff;
     background: linear-gradient(135deg, #1565c0, #0d47a1);
-    border-radius: 4px;
+    border-radius: 5px;
     text-decoration: none;
     transition: background 0.2s;
     letter-spacing: 0.3px;
@@ -573,7 +582,23 @@
       overflow-y: auto;
     }
     .photo-side { min-height: 50vw; max-height: 60vh; }
-    .meta-panel { width: 100%; flex-shrink: 0; flex-direction: row; flex-wrap: wrap; gap: 8px; }
+    .meta-panel { width: 100%; flex-shrink: 0; flex-direction: row; flex-wrap: wrap; gap: 8px; overflow-y: visible; }
+    .calendar-promo {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .calendar-cover {
+      width: 80px;
+      aspect-ratio: 1;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+    .calendar-body { padding: 8px 0; }
+    .calendar-title { font-size: 12px; }
+    .calendar-subtitle { display: none; }
+    .calendar-link { margin-top: 6px; padding: 6px 14px; display: inline-block; font-size: 10px; }
     .meta-section { flex: 1; min-width: 140px; padding: 10px; }
     .meta-field { margin-bottom: 6px; }
     .meta-value.time-value { font-size: 13px; }
@@ -708,14 +733,12 @@
       <div class="meta-desc" id="metaDesc"></div>
     </div>
     <div class="calendar-promo">
-      <div class="calendar-promo-inner">
-        <div class="calendar-icon">📅</div>
-        <div class="calendar-copy">
-          <div class="calendar-title">Artemis II — 2027 Calendar</div>
-          <div class="calendar-subtitle">13 months of historic mission photography on premium matte paper.</div>
-        </div>
+      <img class="calendar-cover" src="web/Farther.png" alt="Farther — 2027 Calendar">
+      <div class="calendar-body">
+        <div class="calendar-title">FARTHER — 2027 Calendar</div>
+        <div class="calendar-subtitle">13 months of historic Artemis II mission photography on premium matte paper.</div>
+        <a class="calendar-link" href="#">Pre-order Now →</a>
       </div>
-      <a class="calendar-link" href="#">Pre-order Now →</a>
     </div>
   </div>
 </div>
