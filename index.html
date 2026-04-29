@@ -47,6 +47,8 @@
   #header h1 { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; white-space: nowrap; }
   #header h1 span { color: #4FC3F7; }
   #header .subtitle { color: #fff; font-size: 12px; }
+  .faq-link { color: #4FC3F7; font-size: 12px; font-weight: 600; text-decoration: none; letter-spacing: 0.5px; margin-left: auto; }
+  .faq-link:hover { text-decoration: underline; }
 
   /* Timeline bar — single line at top */
   .timeline-bar {
@@ -57,7 +59,7 @@
   }
   .timeline-track {
     position: relative;
-    height: 32px;
+    height: 38px;
     cursor: pointer;
   }
   .timeline-track-bg {
@@ -81,7 +83,7 @@
     position: absolute;
     top: 0;
     width: 3px;
-    height: 32px;
+    height: 38px;
     background: #4FC3F7;
     transform: translateX(-1.5px);
     pointer-events: none;
@@ -426,19 +428,19 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 14px;
+    height: 22px;
     pointer-events: none;
   }
   .timeline-activity-bar {
     position: absolute;
     bottom: 0;
-    height: 14px;
-    border-radius: 2px;
+    height: 22px;
+    border-radius: 3px;
     opacity: 0.7;
-    font-size: 8px;
+    font-size: 9px;
     font-weight: 600;
     color: rgba(255,255,255,0.85);
-    line-height: 14px;
+    line-height: 22px;
     padding: 0 4px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -447,14 +449,9 @@
   }
   .timeline-activity-bar.observation-bar {
     color: rgba(0,0,0,0.9);
-    animation: obs-glow 2s ease-in-out infinite;
   }
   .timeline-activity-bar.observation-bar-plain {
     color: rgba(0,0,0,0.9);
-  }
-  @keyframes obs-glow {
-    0%, 100% { box-shadow: 0 0 4px rgba(255,214,0,0.4); opacity: 0.7; }
-    50% { box-shadow: 0 0 12px rgba(255,214,0,0.8), 0 0 20px rgba(255,214,0,0.3); opacity: 0.95; }
   }
 
   /* Timeline hover tooltip */
@@ -560,8 +557,8 @@
     #header h1 { font-size: 18px; }
     #header .crew { display: none; }
     .timeline-bar { padding: 4px 12px; }
-    .timeline-track { height: 24px; }
-    .timeline-playhead { top: 0; height: 24px; }
+    .timeline-track { height: 34px; }
+    .timeline-playhead { top: 0; height: 34px; }
     /* Keep activity bars, audio dots, and day labels visible on mobile */
     .timeline-labels { font-size: 8px; margin-top: 4px; }
     .timeline-audio-dots { display: block; }
@@ -620,6 +617,7 @@
 <div id="header">
   <h1>ARTEMIS <span>II</span> PHOTO TIMELINE</h1>
   <div class="subtitle">April 1–10, 2026</div>
+  <a href="faq.html" class="faq-link">FAQ</a>
 </div>
 
 <!-- Timeline bar -->
@@ -664,7 +662,7 @@
   <button class="filter-btn cam-filter" data-cam="gopro" title="GoPro exterior camera mounted on Orion">GoPro</button>
   <button class="filter-btn cam-filter" data-cam="iphone" title="Crew iPhone 17 Pro Max on Orion">iPhone</button>
   <span class="filter-sep">|</span>
-  <button class="filter-btn" data-batch="1">Released Before April 12</button>
+  <button class="filter-btn" data-filter="videos">Videos</button>
   <span class="filter-sep">|</span>
   <button class="filter-btn" id="muteBtn" title="Toggle mission audio">Add Audio</button>
   <span class="audio-now" id="audioNow"></span>
@@ -737,7 +735,7 @@
       <div class="calendar-body">
         <div class="calendar-title">FARTHER — 2027 Calendar</div>
         <div class="calendar-subtitle">13 months of historic Artemis II mission photography on premium matte paper.</div>
-        <a class="calendar-link" href="#">Pre-order Now →</a>
+        <a class="calendar-link" href="https://store.dftba.com/products/artemis-ii-2027-calendar" target="_blank" rel="noopener">Pre-order Now →</a>
       </div>
     </div>
   </div>
@@ -753,7 +751,9 @@ function getFlickrId(filename) {
   const n = filename.match(/^(art\d+e\d+)/);
   if (n) return n[1];
   const ig = filename.match(/^(ig-[a-z0-9-]+)\./);
-  return ig ? ig[1] : null;
+  if (ig) return ig[1];
+  const yt = filename.match(/^(yt-[a-z0-9-]+)\./);
+  return yt ? yt[1] : null;
 }
 
 const FLICKR_TITLES = {
@@ -1067,6 +1067,7 @@ const FLICKR_TITLES = {
   'ig-fd8-press-conference': 'Flight Day 8 Press Conference',
   'ig-welcome-aboard': 'Welcome Aboard Integrity',
   'ig-capsule-egress': 'Coming Home',
+  'yt-mic-trouble': 'Email Trouble',
   'art002e014256': 'Sharing a Unique Perspective',
   'art002e016165': 'Lunar Flyby Observations \u2013 Reid Wiseman',
   'art002e016171': 'Lunar Flyby Observations \u2013 Jeremy Hansen',
@@ -1378,6 +1379,7 @@ const FLICKR_DESCS = {
   "ig-nutella": "Nutella flying away in zero gravity, about four minutes before the Artemis II crew broke Apollo 13\u2019s record for the farthest distance from Earth by humans. Behind the far side of the Moon, 252,000+ miles from home. \u2014 via Reddit/Instagram",
   "ig-fd8-press-conference": "Flight Day 8 evening, before bed \u2014 the Artemis II crew during a press conference on their return journey to Earth. \u2014 via Instagram",
   "ig-welcome-aboard": "Jesse, Steve, Laddy, and Vlad\u2026 such an incredible feeling to welcome you aboard Integrity after your journey around the Moon. The recovery team opens the Orion capsule hatch aboard USS John P. Murtha. \u2014 via Instagram",
+  "yt-mic-trouble": "The Artemis II crew discovers they have two Microsoft Outlooks open and neither microphone is working \u2014 a familiar IT moment, 3,300 miles from Earth. \u2014 via YouTube Shorts",
   "ig-capsule-egress": "The moments just after the capsule is opened \u2014 the Artemis II crew exits the Orion spacecraft aboard USS John P. Murtha following splashdown. \u2014 via Instagram",
   "art002e014256": "art002e014256 (April 6, 2026) \u2013 CSA (Canadian Space Agency) astronaut and Artemis II Mission Specialist Jeremy Hansen is seen making observations through the window of the Orion spacecraft early in the Artemis II lunar flyby. Hansen and his fellow crewmates spent approximately seven hours taking turns at the Orion windows capturing science data to share with their team back on Earth. Credit: NASA",
   "art002e016165": "art002e016165 (April 6, 2026) \u2013 NASA astronaut and Artemis II Commander Reid Wiseman pictured here in the Orion spacecraft during the Artemis II lunar flyby. Wiseman and his fellow crewmates spent approximately seven hours taking turns at the Orion windows capturing science data to share with their team back on Earth. At closest approach, they came within 4,067 miles of the Moon\u2019s surface. Credit: NASA",
@@ -1426,6 +1428,7 @@ const PHOTOS = [
   {t:edt("2026-04-01 18:49:10"),f:"55185144555_4ecdcc2611_o.jpg",p:"NASA",loc:"Kennedy Space Center",cam:"NIKON Z 9 + NIKKOR Z 70-200mm f/2.8 VR S",set:"75mm · f/4.0 · 1/160s · ISO 4000",sc:false,b:1,ext:true},
   {t:edt("2026-04-01 19:37:21"),f:"55186154951_6208feeb42_o.jpg",p:"NASA",loc:"Kennedy Space Center",cam:"NIKON Z 9 + NIKKOR Z 14-24mm f/2.8 S",set:"24mm · f/5.6 · 1/160s · ISO 8000",sc:false,b:1,ext:true},
   {t:edt("2026-04-01 21:27:22"),f:"55196507489_63cc22c484_o.jpg",p:"NASA/Robert Markowitz",loc:"Mission Control, Houston",cam:"NIKON Z 9 + NIKKOR Z 24-70mm f/2.8 S",set:"59mm · f/2.8 · 1/100s · ISO 2500",sc:false,b:1},
+  {t:edt("2026-04-01 21:37:00"),f:"yt-mic-trouble.mp4",p:"Artemis II Crew",loc:"Orion Spacecraft",cam:"YouTube Short",set:"1080×1920 · 14s",sc:false,b:1,v:true},
   {t:edt("2026-04-01 21:45:05"),f:"55196663265_ef59978360_o.jpg",p:"NASA/Robert Markowitz",loc:"Mission Control, Houston",cam:"NIKON Z 9 + NIKKOR Z 70-200mm f/2.8 VR S",set:"89mm · f/2.8 · 1/250s · ISO 2500",sc:false,b:1},
   {t:edt("2026-04-01 22:21:15"),f:"55196252006_59544763b0_o.jpg",p:"NASA/Robert Markowitz",loc:"Mission Control, Houston",cam:"NIKON Z 9 + NIKKOR Z 24-70mm f/2.8 S",set:"28mm · f/2.8 · 1/160s · ISO 2500",sc:false,b:1},
   {t:edt("2026-04-02 08:15:52"),f:"55224434205_228b6d3cee_o.jpg",p:"Victor Glover",loc:"Orion Spacecraft",cam:"NIKON D5 + 80.0-400.0 mm f/4.5-5.6",set:"100mm · f/14.0 · 1/320s · ISO 400",sc:true,b:1,cid:"d5a"},
@@ -1459,7 +1462,7 @@ const PHOTOS = [
   {t:edt("2026-04-03 22:03:18"),f:"55187348577_9a3666de4f_o.jpg",p:"Artemis II Crew",loc:"Orion Spacecraft",cam:"NIKON D5 + 80.0-400.0 mm f/4.5-5.6",set:"400mm · f/18.0 · 1/640s · ISO 500",sc:true,b:1,cid:"d5a"},
   {t:edt("2026-04-04 00:34:19"),f:"55190036409_b8751c9d86_o.jpg",p:"Artemis II Crew",loc:"Orion Spacecraft",cam:"NIKON D5 + 80.0-400.0 mm f/4.5-5.6",set:"210mm · f/8.0 · 1/1000s · ISO 400",sc:true,b:1,cid:"d5a"},
   {t:edt("2026-04-04 01:06:49"),f:"55189767696_27cf3376e4_o.jpg",p:"Artemis II Crew",loc:"Orion Spacecraft",cam:"NIKON D5 + 80.0-400.0 mm f/4.5-5.6",set:"400mm · f/8.0 · 1/1000s · ISO 400",sc:true,b:1,cid:"d5a"},
-  {t:edt("2026-04-04 07:30:00"),f:"ig-pink-pony-club.mp4",p:"Artemis II Crew",loc:"Orion Spacecraft",cam:"Instagram Video",set:"720×1280 · 58s",sc:true,b:1,v:true},
+  {t:edt("2026-04-04 11:35:00"),f:"ig-pink-pony-club.mp4",p:"Artemis II Crew",loc:"Orion Spacecraft",cam:"Instagram Video",set:"720×1280 · 58s",sc:true,b:1,v:true},
   {t:edt("2026-04-04 12:20:54"),f:"55190303117_0330a107be_o.jpg",p:"Unknown",loc:"Unknown",cam:"iPhone 17 Pro Max",set:"24mm · f/1.8 · 1/2s · ISO 32000",sc:true,b:1},
   {t:edt("2026-04-04 19:23:11"),f:"55195961058_8ac0d8b4af_o.jpg",p:"Unknown",loc:"Unknown",cam:"HERO4 Black",set:"15mm · f/2.8 · 1/15s · ISO 141",sc:false,b:1},
   {t:edt("2026-04-04 19:23:14"),f:"55194920227_1ced7587f1_o.jpg",p:"Unknown",loc:"Unknown",cam:"HERO4 Black",set:"15mm · f/2.8 · 1/30s · ISO 530",sc:false,b:1},
@@ -1742,14 +1745,22 @@ const EVENTS = [
   {t:edt("2026-04-01 12:50:00"),title:"Suit Up",desc:"Crew dons orange Orion suits",icon:"🧑‍🚀"},
   {t:edt("2026-04-01 14:30:00"),title:"Board Orion",desc:"Crew boards spacecraft at Pad 39B",icon:"🚀"},
   {t:edt("2026-04-01 18:35:25"),title:"LIFTOFF",desc:"SLS launches from Kennedy Space Center",icon:"🔥"},
-  {t:edt("2026-04-02 20:12:25"),title:"Trans Lunar Injection",desc:"5:50 burn toward the Moon",icon:"🌙"},
-  {t:edt("2026-04-06 01:34:25"),title:"Lunar Sphere of Influence",desc:"Orion enters Moon's gravity",icon:"🌑"},
-  {t:edt("2026-04-06 18:38:00"),title:"EARTHSET",desc:"Earth disappears — loss of signal (approx.)",icon:"📡"},
-  {t:edt("2026-04-06 18:58:45"),title:"CLOSEST APPROACH",desc:"4,070 miles above lunar surface",icon:"🌕"},
-  {t:edt("2026-04-06 19:02:22"),title:"DISTANCE RECORD",desc:"252,756 miles from Earth",icon:"🏆"},
-  {t:edt("2026-04-06 19:20:00"),title:"EARTHRISE",desc:"Earth reappears — comms restored (approx.)",icon:"🌎"},
-  {t:edt("2026-04-06 20:32:00"),title:"ECLIPSE",desc:"Eclipse and impact-flash observations (approx.)",icon:"🌘"},
-  {t:edt("2026-04-10 20:21:25"),title:"SPLASHDOWN",desc:"Pacific Ocean, off San Diego",icon:"🌊"}
+  {t:edt("2026-04-01 22:35:00"),title:"Proximity Operations",desc:"Orion practices flying near its upper stage in Earth orbit",icon:"🛰️"},
+  {t:edt("2026-04-02 20:12:25"),title:"On the Way to the Moon",desc:"A six-minute engine burn sends Orion toward the Moon",icon:"🌙"},
+  {t:edt("2026-04-03 12:35:00"),title:"First Full Day in Space",desc:"The crew settles into a daily rhythm — meals, exercise, and housekeeping",icon:"⚙️"},
+  {t:edt("2026-04-05 14:35:00"),title:"Spacesuit Pressure Test",desc:"The crew suits up and depressurizes the cabin to test their survival suits",icon:"🧑‍🚀"},
+  {t:edt("2026-04-05 23:35:00"),title:"Splashdown Survival Test",desc:"Orion simulates a post-landing emergency to verify crew safety systems",icon:"🔧"},
+  {t:edt("2026-04-06 01:34:25"),title:"Entering Lunar Gravity",desc:"Orion crosses into the Moon's gravitational sphere of influence",icon:"🌑"},
+  {t:edt("2026-04-06 18:38:00"),title:"EARTHSET",desc:"Earth slips behind the Moon — all contact with home is lost",icon:"📡"},
+  {t:edt("2026-04-06 18:58:45"),title:"CLOSEST APPROACH",desc:"4,070 miles above the lunar surface",icon:"🌕"},
+  {t:edt("2026-04-06 19:02:22"),title:"DISTANCE RECORD",desc:"252,756 miles from Earth — farther than any humans in history",icon:"🏆"},
+  {t:edt("2026-04-06 19:20:00"),title:"EARTHRISE",desc:"Earth reappears from behind the Moon — contact restored",icon:"🌎"},
+  {t:edt("2026-04-06 20:32:00"),title:"Eclipse Observations",desc:"The crew watches the Moon's shadow and looks for impact flashes",icon:"🌘"},
+  {t:edt("2026-04-07 14:22:00"),title:"Leaving Lunar Gravity",desc:"Orion exits the Moon's gravitational pull, now coasting home",icon:"🌑"},
+  {t:edt("2026-04-08 19:35:00"),title:"Radiation Shelter Test",desc:"The crew builds a shelter inside Orion to test protection from solar storms",icon:"☢️"},
+  {t:edt("2026-04-10 19:33:00"),title:"Module Separation",desc:"The crew module detaches from the service module, exposing the heat shield",icon:"⚡"},
+  {t:edt("2026-04-10 19:53:00"),title:"Hitting the Atmosphere",desc:"Orion enters Earth's atmosphere at 25,000 mph, 400,000 feet up",icon:"🔥"},
+  {t:edt("2026-04-10 20:07:27"),title:"SPLASHDOWN",desc:"Pacific Ocean, off the coast of San Diego",icon:"🌊"}
 ];
 
 const QUOTES = [
@@ -1758,7 +1769,7 @@ const QUOTES = [
   {t:edt("2026-04-06 19:02:22"),who:"CAPCOM",text:"You have just traveled farther from Earth than any human in history."},
   {t:edt("2026-04-06 18:38:00"),who:"CAPCOM",text:"Going behind the Moon. We'll see you on the other side."},
   {t:edt("2026-04-06 19:20:00"),who:"Reid Wiseman",text:"Houston, Integrity. We see Earth again. What a sight."},
-  {t:edt("2026-04-10 20:21:25"),who:"Recovery Director",text:"Welcome home, Integrity. Splashdown confirmed."}
+  {t:edt("2026-04-10 20:07:27"),who:"Recovery Director",text:"Welcome home, Integrity. Splashdown confirmed."}
 ];
 
 // Distance waypoints: [timestamp, miles from Earth surface]
@@ -2203,47 +2214,76 @@ const ACOL = {sleep:"#1a237e",exercise:"#2e7d32",science:"#0277bd",piloting:"#e6
 const ALAB = {sleep:"Sleep",exercise:"Exercise",science:"Science & Testing",piloting:"Piloting & Burns","suit-ops":"Suit Ops",observation:"Lunar Observation","deep-obs":"Observation","reentry-prep":"Reentry Prep",free:"Free Time"};
 
 const SCHEDULE = [
+  // FD01 — Launch Day
   {s:edt("2026-04-01 09:25:00"),e:edt("2026-04-01 12:50:00"),a:"free",l:"Pre-launch prep"},
   {s:edt("2026-04-01 12:50:00"),e:edt("2026-04-01 14:30:00"),a:"suit-ops",l:"Suit up"},
   {s:edt("2026-04-01 14:30:00"),e:edt("2026-04-01 18:35:25"),a:"free",l:"In spacecraft"},
-  {s:edt("2026-04-01 18:35:25"),e:edt("2026-04-01 23:00:00"),a:"piloting",l:"Launch & orbit ops"},
-  {s:edt("2026-04-01 23:00:00"),e:edt("2026-04-02 06:00:00"),a:"sleep",l:"Sleep (short)"},
-  {s:edt("2026-04-02 06:00:00"),e:edt("2026-04-02 08:00:00"),a:"free",l:"Wake & meals"},
-  {s:edt("2026-04-02 08:00:00"),e:edt("2026-04-02 12:00:00"),a:"science",l:"Systems checkout"},
-  {s:edt("2026-04-02 12:00:00"),e:edt("2026-04-02 20:12:25"),a:"piloting",l:"TLI prep"},
-  {s:edt("2026-04-02 20:12:25"),e:edt("2026-04-02 22:00:00"),a:"piloting",l:"TLI burn & post-burn checkout"},
-  {s:edt("2026-04-02 22:00:00"),e:edt("2026-04-03 01:30:00"),a:"deep-obs",l:"First deep-space photography"},
-  {s:edt("2026-04-03 01:30:00"),e:edt("2026-04-03 11:00:00"),a:"sleep",l:"Sleep"},
-  {s:edt("2026-04-03 11:00:00"),e:edt("2026-04-03 13:00:00"),a:"exercise",l:"Exercise"},
-  {s:edt("2026-04-03 13:00:00"),e:edt("2026-04-03 18:00:00"),a:"science",l:"Correction burn prep"},
-  {s:edt("2026-04-03 18:00:00"),e:edt("2026-04-04 01:00:00"),a:"free",l:"Free time, meals & photography"},
-  {s:edt("2026-04-04 01:00:00"),e:edt("2026-04-04 11:35:00"),a:"sleep",l:"Sleep"},
-  {s:edt("2026-04-04 11:35:00"),e:edt("2026-04-04 14:00:00"),a:"exercise",l:"Exercise"},
-  {s:edt("2026-04-04 14:00:00"),e:edt("2026-04-04 20:00:00"),a:"piloting",l:"Manual piloting demo"},
-  {s:edt("2026-04-04 20:00:00"),e:edt("2026-04-05 00:30:00"),a:"free",l:"Free time & photography"},
-  {s:edt("2026-04-05 00:30:00"),e:edt("2026-04-05 12:00:00"),a:"sleep",l:"Sleep"},
-  {s:edt("2026-04-05 12:00:00"),e:edt("2026-04-05 15:00:00"),a:"suit-ops",l:"Suit pressure tests"},
-  {s:edt("2026-04-05 15:00:00"),e:edt("2026-04-05 17:00:00"),a:"science",l:"CPR demo & medical"},
-  {s:edt("2026-04-05 17:00:00"),e:edt("2026-04-06 00:00:00"),a:"science",l:"Flyby prep & photography"},
-  {s:edt("2026-04-06 00:00:00"),e:edt("2026-04-06 10:50:00"),a:"sleep",l:"Sleep"},
-  {s:edt("2026-04-06 10:50:00"),e:edt("2026-04-06 13:30:00"),a:"science",l:"Flyby prep"},
-  {s:edt("2026-04-06 13:30:00"),e:edt("2026-04-06 14:45:00"),a:"science",l:"Science briefing"},
-  {s:edt("2026-04-06 14:45:00"),e:edt("2026-04-07 02:45:00"),a:"observation",l:"LUNAR FLYBY & post-flyby photography"},
-  {s:edt("2026-04-07 02:45:00"),e:edt("2026-04-07 11:00:00"),a:"sleep",l:"Sleep"},
-  {s:edt("2026-04-07 11:00:00"),e:edt("2026-04-07 13:00:00"),a:"free",l:"Group photo & meals"},
-  {s:edt("2026-04-07 13:00:00"),e:edt("2026-04-07 18:00:00"),a:"science",l:"Science activities"},
-  {s:edt("2026-04-07 18:00:00"),e:edt("2026-04-08 00:00:00"),a:"piloting",l:"Return correction burn & photography"},
-  {s:edt("2026-04-08 00:00:00"),e:edt("2026-04-08 11:00:00"),a:"sleep",l:"Sleep"},
-  {s:edt("2026-04-08 11:00:00"),e:edt("2026-04-08 14:00:00"),a:"science",l:"Orthostatic garment test"},
-  {s:edt("2026-04-08 14:00:00"),e:edt("2026-04-08 18:00:00"),a:"exercise",l:"Exercise"},
-  {s:edt("2026-04-08 18:00:00"),e:edt("2026-04-08 22:00:00"),a:"piloting",l:"Manual piloting demo 2"},
-  {s:edt("2026-04-08 22:00:00"),e:edt("2026-04-09 11:00:00"),a:"sleep",l:"Sleep"},
-  {s:edt("2026-04-09 11:00:00"),e:edt("2026-04-09 18:00:00"),a:"reentry-prep",l:"Stowage & reentry prep"},
-  {s:edt("2026-04-09 18:00:00"),e:edt("2026-04-09 22:00:00"),a:"free",l:"Final free time"},
-  {s:edt("2026-04-09 22:00:00"),e:edt("2026-04-10 10:00:00"),a:"sleep",l:"Sleep"},
-  {s:edt("2026-04-10 10:00:00"),e:edt("2026-04-10 15:00:00"),a:"reentry-prep",l:"Final reentry prep"},
-  {s:edt("2026-04-10 15:00:00"),e:edt("2026-04-10 20:08:25"),a:"suit-ops",l:"Suited for reentry"},
-  {s:edt("2026-04-10 20:08:25"),e:edt("2026-04-10 20:21:25"),a:"piloting",l:"REENTRY & LANDING"},
+  {s:edt("2026-04-01 18:35:25"),e:edt("2026-04-01 20:35:00"),a:"piloting",l:"Launch & ascent"},
+  {s:edt("2026-04-01 20:35:00"),e:edt("2026-04-01 22:35:00"),a:"science",l:"Post-insertion checkout & suit removal"},
+  {s:edt("2026-04-01 22:35:00"),e:edt("2026-04-02 00:35:00"),a:"piloting",l:"Proximity Operations Demo"},
+  {s:edt("2026-04-02 00:35:00"),e:edt("2026-04-02 03:35:00"),a:"science",l:"Cabin setup & orbit ops"},
+  {s:edt("2026-04-02 03:35:00"),e:edt("2026-04-02 07:35:00"),a:"sleep",l:"Sleep (4 hrs)"},
+  {s:edt("2026-04-02 07:35:00"),e:edt("2026-04-02 09:05:00"),a:"free",l:"Post-sleep & navigation"},
+  {s:edt("2026-04-02 09:05:00"),e:edt("2026-04-02 11:35:00"),a:"sleep",l:"Sleep (4.5 hrs)"},
+  // FD02 — Trans-Lunar Injection
+  {s:edt("2026-04-02 11:35:00"),e:edt("2026-04-02 13:35:00"),a:"free",l:"Wake & meals"},
+  {s:edt("2026-04-02 13:35:00"),e:edt("2026-04-02 16:35:00"),a:"science",l:"Systems checkout & exercise test"},
+  {s:edt("2026-04-02 16:35:00"),e:edt("2026-04-02 20:12:25"),a:"piloting",l:"TLI prep"},
+  {s:edt("2026-04-02 20:12:25"),e:edt("2026-04-02 20:20:00"),a:"piloting",l:"TLI burn"},
+  {s:edt("2026-04-02 20:20:00"),e:edt("2026-04-03 01:30:00"),a:"deep-obs",l:"First deep-space photography"},
+  {s:edt("2026-04-03 01:30:00"),e:edt("2026-04-03 11:35:00"),a:"sleep",l:"Sleep"},
+  // FD03 — Flywheel Day
+  {s:edt("2026-04-03 11:35:00"),e:edt("2026-04-03 13:35:00"),a:"free",l:"Wake & meals"},
+  {s:edt("2026-04-03 13:35:00"),e:edt("2026-04-03 17:35:00"),a:"exercise",l:"Flywheel Day — daily life in space"},
+  {s:edt("2026-04-03 17:35:00"),e:edt("2026-04-03 19:35:00"),a:"free",l:"Meal & demonstrations"},
+  {s:edt("2026-04-03 19:35:00"),e:edt("2026-04-03 22:35:00"),a:"science",l:"Science ops & med kit review"},
+  {s:edt("2026-04-03 22:35:00"),e:edt("2026-04-04 03:05:00"),a:"free",l:"Comm window & photography"},
+  {s:edt("2026-04-04 03:05:00"),e:edt("2026-04-04 11:35:00"),a:"sleep",l:"Sleep"},
+  // FD04 — Science & Testing
+  {s:edt("2026-04-04 11:35:00"),e:edt("2026-04-04 13:35:00"),a:"free",l:"Wake & meals"},
+  {s:edt("2026-04-04 13:35:00"),e:edt("2026-04-04 17:35:00"),a:"science",l:"Acoustic testing & measurements"},
+  {s:edt("2026-04-04 17:35:00"),e:edt("2026-04-04 19:35:00"),a:"free",l:"Meal & PAO"},
+  {s:edt("2026-04-04 19:35:00"),e:edt("2026-04-04 22:35:00"),a:"science",l:"Equipment reviews & comm demos"},
+  {s:edt("2026-04-04 22:35:00"),e:edt("2026-04-05 03:05:00"),a:"free",l:"Free time & photography"},
+  {s:edt("2026-04-05 03:05:00"),e:edt("2026-04-05 11:35:00"),a:"sleep",l:"Sleep"},
+  // FD05 — Suit Test Day
+  {s:edt("2026-04-05 11:35:00"),e:edt("2026-04-05 13:35:00"),a:"free",l:"Wake & meals"},
+  {s:edt("2026-04-05 13:35:00"),e:edt("2026-04-05 20:35:00"),a:"suit-ops",l:"OCSS suit test & cabin depressurization"},
+  {s:edt("2026-04-05 20:35:00"),e:edt("2026-04-05 23:35:00"),a:"science",l:"SAT mode test & flyby prep"},
+  {s:edt("2026-04-05 23:35:00"),e:edt("2026-04-06 03:05:00"),a:"free",l:"Pre-sleep & photography"},
+  {s:edt("2026-04-06 03:05:00"),e:edt("2026-04-06 11:35:00"),a:"sleep",l:"Sleep"},
+  // FD06 — Lunar Flyby
+  {s:edt("2026-04-06 11:35:00"),e:edt("2026-04-06 13:30:00"),a:"science",l:"Flyby prep"},
+  {s:edt("2026-04-06 13:30:00"),e:edt("2026-04-06 14:00:00"),a:"science",l:"Science briefing"},
+  {s:edt("2026-04-06 14:00:00"),e:edt("2026-04-07 02:45:00"),a:"observation",l:"LUNAR FLYBY & post-flyby photography"},
+  {s:edt("2026-04-07 02:45:00"),e:edt("2026-04-07 11:35:00"),a:"sleep",l:"Sleep"},
+  // FD07 — Off Duty & Return
+  {s:edt("2026-04-07 11:35:00"),e:edt("2026-04-07 13:35:00"),a:"free",l:"Wake & meals"},
+  {s:edt("2026-04-07 13:35:00"),e:edt("2026-04-07 17:35:00"),a:"exercise",l:"Off duty & P/TV exercise"},
+  {s:edt("2026-04-07 17:35:00"),e:edt("2026-04-07 19:35:00"),a:"free",l:"Meal & navigation"},
+  {s:edt("2026-04-07 19:35:00"),e:edt("2026-04-07 23:35:00"),a:"piloting",l:"Return correction burn & ops"},
+  {s:edt("2026-04-07 23:35:00"),e:edt("2026-04-08 02:35:00"),a:"free",l:"Off duty & photography"},
+  {s:edt("2026-04-08 02:35:00"),e:edt("2026-04-08 11:35:00"),a:"sleep",l:"Sleep (9 hrs, sleep shift)"},
+  // FD08 — Rad Shelter & Manual Piloting
+  {s:edt("2026-04-08 11:35:00"),e:edt("2026-04-08 13:35:00"),a:"free",l:"Wake & meals"},
+  {s:edt("2026-04-08 13:35:00"),e:edt("2026-04-08 17:35:00"),a:"exercise",l:"P/TV exercise & checkouts"},
+  {s:edt("2026-04-08 17:35:00"),e:edt("2026-04-08 19:35:00"),a:"free",l:"Meal & ops"},
+  {s:edt("2026-04-08 19:35:00"),e:edt("2026-04-08 23:35:00"),a:"science",l:"Radiation shelter demo"},
+  {s:edt("2026-04-08 23:35:00"),e:edt("2026-04-09 01:35:00"),a:"piloting",l:"Manual piloting demo"},
+  {s:edt("2026-04-09 01:35:00"),e:edt("2026-04-09 03:05:00"),a:"free",l:"Post-activity wind-down"},
+  {s:edt("2026-04-09 03:05:00"),e:edt("2026-04-09 11:35:00"),a:"sleep",l:"Sleep"},
+  // FD09 — Entry Prep
+  {s:edt("2026-04-09 11:35:00"),e:edt("2026-04-09 13:35:00"),a:"free",l:"Wake & meals"},
+  {s:edt("2026-04-09 13:35:00"),e:edt("2026-04-09 16:35:00"),a:"reentry-prep",l:"Entry study & conference"},
+  {s:edt("2026-04-09 16:35:00"),e:edt("2026-04-09 18:35:00"),a:"science",l:"Orthostatic garment test"},
+  {s:edt("2026-04-09 18:35:00"),e:edt("2026-04-09 20:35:00"),a:"free",l:"Meal & PAO"},
+  {s:edt("2026-04-09 20:35:00"),e:edt("2026-04-10 03:05:00"),a:"reentry-prep",l:"Entry stow & packing"},
+  {s:edt("2026-04-10 03:05:00"),e:edt("2026-04-10 11:35:00"),a:"sleep",l:"Sleep"},
+  // FD10 — Reentry & Landing
+  {s:edt("2026-04-10 11:35:00"),e:edt("2026-04-10 13:35:00"),a:"free",l:"Wake & meals"},
+  {s:edt("2026-04-10 13:35:00"),e:edt("2026-04-10 15:35:00"),a:"reentry-prep",l:"Cabin config & final checks"},
+  {s:edt("2026-04-10 15:35:00"),e:edt("2026-04-10 19:33:00"),a:"suit-ops",l:"Entry checklist & suited for reentry"},
+  {s:edt("2026-04-10 19:33:00"),e:edt("2026-04-10 20:07:27"),a:"piloting",l:"REENTRY & LANDING"},
 ];
 
 const AUDIO = [
@@ -2262,10 +2302,10 @@ const AUDIO = [
   {t:edt("2026-04-05 10:00:00"),f:"artemis-ii-message-from-apollo-astronaut-charlie-duke.mp3",desc:"Message from Charlie Duke"},
   {t:edt("2026-04-06 15:37:25"),f:"artemis-ii-breaks-apollo-13-distance-record.mp3",desc:"Breaks Apollo 13 distance record"},
   {t:edt("2026-04-06 15:59:12"),f:"artemis-ii-amaze-amaze-amaze.mp3",desc:"Amaze, amaze, amaze"},
-  {t:edt("2026-04-06 18:38:00"),f:"artemis-ii-los.wav",desc:"Loss of signal — Earthset"},
+  {t:edt("2026-04-06 18:38:00"),f:"artemis-ii-los.mp3",desc:"Loss of signal — Earthset"},
   {t:edt("2026-04-06 18:41:00"),f:"artemis-ii-hey-babe-love-you-from-the-moon.mp3",desc:"We love you, from the Moon"},
   {t:edt("2026-04-06 18:58:45"),f:"artemis-ii-closest-point-to-moon.wav",desc:"Closest approach to Moon"},
-  {t:edt("2026-04-06 19:20:00"),f:"artemis-ii-we-will-explore.wav",desc:"Contact restored — We will explore"},
+  {t:edt("2026-04-06 19:20:00"),f:"artemis-ii-we-will-explore.mp3",desc:"Contact restored — We will explore"},
   {t:edt("2026-04-06 19:57:00"),f:"artemis-ii-names-new-craters-integrity-and-carroll.mp3",desc:"Names new craters"},
   {t:edt("2026-04-06 20:32:00"),f:"victor-the-terminator.wav",desc:"Eclipse / impact-flash observations"},
   {t:edt("2026-04-09 12:00:00"),f:"artemis-ii-humanity-has-shown-what-we-are-capable-of.mp3",desc:"What we are capable of"},
@@ -2560,8 +2600,8 @@ function drawTrajectory(ts) {
     ctx.fillText('Moon', mx, my - 7);
   }
 
-  // Spacecraft current position
-  const scPos = interpTraj(TRAJ_SC, TRAJ_STEP_SC, ts);
+  // Spacecraft current position (clamp to Earth before trajectory data starts)
+  const scPos = ts < TRAJ_START ? [0, 0] : interpTraj(TRAJ_SC, TRAJ_STEP_SC, ts);
   const [sx, sy] = toCanvas(scPos[0], scPos[1]);
   const glow = ctx.createRadialGradient(sx, sy, 0, sx, sy, 10);
   glow.addColorStop(0, 'rgba(79,195,247,0.6)'); glow.addColorStop(1, 'rgba(79,195,247,0)');
@@ -2930,7 +2970,7 @@ document.querySelectorAll('[data-filter]').forEach(btn => {
     clearAllFilters();
     this.classList.add('active');
     const filter = this.dataset.filter;
-    filteredPhotos = filter === 'all' ? PHOTOS : PHOTOS.filter(p => p.sc);
+    filteredPhotos = filter === 'all' ? PHOTOS : filter === 'videos' ? PHOTOS.filter(p => p.v) : PHOTOS.filter(p => p.sc);
     currentPhotoIdx = 0;
     viewStart = T_START; viewEnd = T_END;
     updatePhoto();
