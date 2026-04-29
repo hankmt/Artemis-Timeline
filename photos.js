@@ -197,7 +197,7 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Crew Walkout Wide View",
       "flickr_desc": "The Artemis II crew walks down the ramp from the Neil Armstrong Operations and Checkout Building at Kennedy Space Center, with the crew names banner visible above the doorway.",
-      "enabled": true
+      "enabled": false
     },
     {
       "time": "2026-04-01 13:53:11",
@@ -315,7 +315,7 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Crew Walks to the Launch Pad",
       "flickr_desc": "Victor Glover and Jeremy Hansen lead the Artemis II crew out of the Operations and Checkout building, walking toward the crew transport vehicle at Kennedy Space Center.",
-      "enabled": true
+      "enabled": false
     },
     {
       "time": "2026-04-01 15:34:08",

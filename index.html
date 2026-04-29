@@ -62,10 +62,7 @@
     height: 38px;
     cursor: pointer;
   }
-  .timeline-track-bg {
-    display: none;
-  }
-  .timeline-dot {
+.timeline-dot {
     position: absolute;
     top: 9px;
     width: 10px;
@@ -96,8 +93,6 @@
     color: #555;
     margin-top: 6px;
   }
-  /* Event markers removed — dots above the line instead */
-
   /* Photo dots on timeline */
   .timeline-photo-dots {
     position: absolute;
@@ -133,8 +128,8 @@
     height: 14px;
     pointer-events: none;
     display: none;
+    z-index: 17;
   }
-  .timeline-audio-dots { z-index: 17; }
   .audio-dot {
     position: absolute;
     top: 3px;
@@ -622,7 +617,6 @@
     .meta-section { min-width: unset; }
   }
 </style>
-<script defer src="/_vercel/insights/script.js"></script>
 <script src="photos.js"></script>
 </head>
 <body>
@@ -637,7 +631,6 @@
 <!-- Timeline bar -->
 <div class="timeline-bar">
   <div class="timeline-track" id="timelineTrack">
-    <div class="timeline-track-bg"></div>
     <div class="timeline-activity-bars" id="activityBars"></div>
     <div class="timeline-photo-dots" id="photoDots"></div>
     <div class="timeline-audio-dots" id="audioDots"></div>
@@ -692,8 +685,6 @@
       <video id="currentVideo" class="photo-img" style="display:none" controls playsinline preload="none"></video>
       <button class="nav-arrow nav-prev" id="prevBtn" title="Previous photo">‹</button>
       <button class="nav-arrow nav-next" id="nextBtn" title="Next photo">›</button>
-      <!-- Print banner placeholder — will return -->
-      <div id="printBanner" style="display:none"></div>
     </div>
     <div class="photo-links">
       <span class="desc-hover" id="descHover" style="display:none">
@@ -757,8 +748,40 @@
 
 
 <script>
+// ============================================================================
+//  ARTEMIS II PHOTO TIMELINE
+//
+//  Architecture:
+//    photos.js    — all photo/audio metadata as a single PHOTO_DATA object
+//    index.html   — this file: CSS + HTML + JS in one self-contained page
+//    admin.html   — visual editor for photos.js (toggle, edit, export)
+//    web/         — 1600px-wide web-optimized versions of every photo
+//
+//  Data flow:
+//    photos.js defines PHOTO_DATA → loadPhotoData() builds PHOTOS[], AUDIO[],
+//    PHOTO_TITLES{}, and PHOTO_DESCS{} → the IIFE initializes the viewer.
+//
+//  Timestamps:
+//    Every timestamp in the system is Eastern Daylight Time (EDT / UTC-4).
+//    Photos came from 8+ cameras set to 6 different timezones (EDT, PDT, HST,
+//    CET, UTC+4, UTC). Each was cross-referenced against known mission events
+//    (liftoff at 18:35:25, splashdown at 20:07:27) to determine the offset.
+//
+//  Trajectory:
+//    DIST_WAYPOINTS contains ~400 distance-from-Earth entries sourced from
+//    the JPL Horizons API. These are interpolated to draw the real-time
+//    trajectory visualization showing Orion's position between Earth and Moon.
+// ============================================================================
+
+
+// --- PARSING & ID EXTRACTION ---
+
+// Parse a "YYYY-MM-DD HH:MM:SS" string as EDT and return a Unix timestamp (ms).
 function edt(s) { return new Date(s.replace(' ','T') + "-04:00").getTime(); }
 
+// Extract a unique photo ID from a filename. Used to key into PHOTO_TITLES
+// and PHOTO_DESCS. Handles Flickr 11-digit IDs, DVIDS 7-digit IDs, NASA
+// art-series IDs, Instagram/YouTube embeds, and KSC/NHQ photo IDs.
 function getFlickrId(filename) {
   const m = filename.match(/^(\d{11})[_-]/);
   if (m) return m[1];
@@ -775,10 +798,12 @@ function getFlickrId(filename) {
   return base || null;
 }
 
-// These get populated from photos.json
-let FLICKR_TITLES = {};
-let FLICKR_DESCS = {};
-let PHOTOS = [];
+
+// --- DATA LOADING ---
+// These are populated by loadPhotoData() from the PHOTO_DATA global (photos.js).
+let PHOTO_TITLES = {};   // photoId → display title
+let PHOTO_DESCS = {};    // photoId → long description (for hover tooltip)
+let PHOTOS = [];         // [{t, f, p, loc, cam, set, sc, b, v, ext, desc}, ...]
 let AUDIO = [];
 
 // Load photo/audio data from PHOTO_DATA global (set by photos.js)
@@ -791,46 +816,14 @@ function loadPhotoData() {
     if (p.desc) entry.desc = p.desc;
     PHOTOS.push(entry);
     const fid = getFlickrId(p.file);
-    if (fid && p.title) FLICKR_TITLES[fid] = p.title;
-    if (fid && p.flickr_desc) FLICKR_DESCS[fid] = p.flickr_desc;
+    if (fid && p.title) PHOTO_TITLES[fid] = p.title;
+    if (fid && p.flickr_desc) PHOTO_DESCS[fid] = p.flickr_desc;
   });
   data.audio.filter(a => a.enabled !== false).forEach(a => {
     AUDIO.push({t:edt(a.time),f:a.file,desc:a.desc});
   });
 }
 
-
-const EVENTS = [
-  {t:edt("2026-04-01 09:25:00"),title:"Crew Wake-Up",desc:"Astronauts wake at Kennedy Space Center",icon:"☀️"},
-  {t:edt("2026-04-01 12:50:00"),title:"Suit Up",desc:"Crew dons orange Orion suits",icon:"🧑‍🚀"},
-  {t:edt("2026-04-01 14:30:00"),title:"Board Orion",desc:"Crew boards spacecraft at Pad 39B",icon:"🚀"},
-  {t:edt("2026-04-01 18:35:25"),title:"LIFTOFF",desc:"SLS launches from Kennedy Space Center",icon:"🔥"},
-  {t:edt("2026-04-01 22:35:00"),title:"Proximity Operations",desc:"Orion practices flying near its upper stage in Earth orbit",icon:"🛰️"},
-  {t:edt("2026-04-02 20:12:25"),title:"On the Way to the Moon",desc:"A six-minute engine burn sends Orion toward the Moon",icon:"🌙"},
-  {t:edt("2026-04-03 12:35:00"),title:"First Full Day in Space",desc:"The crew settles into a daily rhythm — meals, exercise, and housekeeping",icon:"⚙️"},
-  {t:edt("2026-04-05 14:35:00"),title:"Spacesuit Pressure Test",desc:"The crew suits up and depressurizes the cabin to test their survival suits",icon:"🧑‍🚀"},
-  {t:edt("2026-04-05 23:35:00"),title:"Splashdown Survival Test",desc:"Orion simulates a post-landing emergency to verify crew safety systems",icon:"🔧"},
-  {t:edt("2026-04-06 01:34:25"),title:"Entering Lunar Gravity",desc:"Orion crosses into the Moon's gravitational sphere of influence",icon:"🌑"},
-  {t:edt("2026-04-06 18:38:00"),title:"EARTHSET",desc:"Earth slips behind the Moon — all contact with home is lost",icon:"📡"},
-  {t:edt("2026-04-06 18:58:45"),title:"CLOSEST APPROACH",desc:"4,070 miles above the lunar surface",icon:"🌕"},
-  {t:edt("2026-04-06 19:02:22"),title:"DISTANCE RECORD",desc:"252,756 miles from Earth — farther than any humans in history",icon:"🏆"},
-  {t:edt("2026-04-06 19:20:00"),title:"EARTHRISE",desc:"Earth reappears from behind the Moon — contact restored",icon:"🌎"},
-  {t:edt("2026-04-06 20:32:00"),title:"Eclipse Observations",desc:"The crew watches the Moon's shadow and looks for impact flashes",icon:"🌘"},
-  {t:edt("2026-04-07 14:22:00"),title:"Leaving Lunar Gravity",desc:"Orion exits the Moon's gravitational pull, now coasting home",icon:"🌑"},
-  {t:edt("2026-04-08 19:35:00"),title:"Radiation Shelter Test",desc:"The crew builds a shelter inside Orion to test protection from solar storms",icon:"☢️"},
-  {t:edt("2026-04-10 19:33:00"),title:"Module Separation",desc:"The crew module detaches from the service module, exposing the heat shield",icon:"⚡"},
-  {t:edt("2026-04-10 19:53:00"),title:"Hitting the Atmosphere",desc:"Orion enters Earth's atmosphere at 25,000 mph, 400,000 feet up",icon:"🔥"},
-  {t:edt("2026-04-10 20:07:27"),title:"SPLASHDOWN",desc:"Pacific Ocean, off the coast of San Diego",icon:"🌊"}
-];
-
-const QUOTES = [
-  {t:edt("2026-04-01 18:35:25"),who:"Launch Director",text:"Liftoff of Artemis II — America returns to the Moon with crew!"},
-  {t:edt("2026-04-02 20:18:00"),who:"CAPCOM",text:"Integrity, TLI is complete. You are on your way to the Moon."},
-  {t:edt("2026-04-06 19:02:22"),who:"CAPCOM",text:"You have just traveled farther from Earth than any human in history."},
-  {t:edt("2026-04-06 18:38:00"),who:"CAPCOM",text:"Going behind the Moon. We'll see you on the other side."},
-  {t:edt("2026-04-06 19:20:00"),who:"Reid Wiseman",text:"Houston, Integrity. We see Earth again. What a sight."},
-  {t:edt("2026-04-10 20:07:27"),who:"Recovery Director",text:"Welcome home, Integrity. Splashdown confirmed."}
-];
 
 // Distance waypoints: [timestamp, miles from Earth surface]
 // Artemis II profile: launch → LEO orbits → TLI → coast to Moon → flyby → return → splashdown
@@ -1270,8 +1263,21 @@ function formatDistance(miles) {
   return Math.round(miles).toLocaleString() + ' miles';
 }
 
-const ACOL = {sleep:"#1a237e",exercise:"#2e7d32",science:"#0277bd",piloting:"#e65100","suit-ops":"#6a1b9a",observation:"#ffd600","deep-obs":"#ffd600","reentry-prep":"#b71c1c",free:"#37474f"};
-const ALAB = {sleep:"Sleep",exercise:"Exercise",science:"Science & Testing",piloting:"Piloting & Burns","suit-ops":"Suit Ops",observation:"Lunar Observation","deep-obs":"Observation","reentry-prep":"Reentry Prep",free:"Free Time"};
+// --- CREW ACTIVITY SCHEDULE ---
+// Color-coded activity bars on the timeline. Sourced from NASA's Artemis II
+// Overview Timeline PDF (artemis-ii-overview-timeline-public-final.pdf).
+
+const ACTIVITY_COLORS = {
+  sleep:"#1a237e", exercise:"#2e7d32", science:"#0277bd", piloting:"#e65100",
+  "suit-ops":"#6a1b9a", observation:"#ffd600", "deep-obs":"#ffd600",
+  "reentry-prep":"#b71c1c", free:"#37474f"
+};
+const ACTIVITY_LABELS = {
+  sleep:"Sleep", exercise:"Exercise", science:"Science & Testing",
+  piloting:"Piloting & Burns", "suit-ops":"Suit Ops",
+  observation:"Lunar Observation", "deep-obs":"Observation",
+  "reentry-prep":"Reentry Prep", free:"Free Time"
+};
 
 const SCHEDULE = [
   // FD01 — Launch Day
@@ -1353,7 +1359,6 @@ loadPhotoData();
 
 let currentPhotoIdx = 0;
 let filteredPhotos = PHOTOS;
-// Print banner removed for now
 let audioMuted = true;
 let currentAudio = null;
 let lastAudioClip = null;
@@ -1368,9 +1373,11 @@ let viewStart = T_START;
 let viewEnd = T_END;
 const MIN_VIEW_SPAN = 2 * 3600000;
 
-// Convert timestamp to EDT Date components (EDT = UTC-4)
+// Convert a Unix timestamp to EDT date components.
+// Trick: subtract 4 hours, then read UTC accessors — the UTC values now
+// represent EDT. This avoids Intl/toLocaleString which varies by browser.
 function edtParts(ts) {
-  const d = new Date(ts - 4 * 3600000); // shift to UTC that reads as EDT
+  const d = new Date(ts - 4 * 3600000);
   const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   return {
     mon: months[d.getUTCMonth()],
@@ -1408,6 +1415,8 @@ function getActivityAt(t) {
   return null;
 }
 
+// --- TIMELINE RENDERING ---
+
 // Render activity color bars on the timeline
 let lastBarViewStart = null, lastBarViewEnd = null;
 function renderActivityBars(force) {
@@ -1424,9 +1433,9 @@ function renderActivityBars(force) {
     const width = Math.min(100, rightPct) - left;
     if (width > 0) {
       const pxWidth = (width / 100) * containerWidth;
-      const label = pxWidth > 40 ? ALAB[s.a] : '';
+      const label = pxWidth > 40 ? ACTIVITY_LABELS[s.a] : '';
       const extraCls = s.a === 'observation' ? ' observation-bar' : (s.a === 'deep-obs' ? ' observation-bar-plain' : '');
-      html += `<div class="timeline-activity-bar${extraCls}" style="left:${left}%;width:${width}%;background:${ACOL[s.a]}" title="${s.l}">${label}</div>`;
+      html += `<div class="timeline-activity-bar${extraCls}" style="left:${left}%;width:${width}%;background:${ACTIVITY_COLORS[s.a]}" title="${s.l}">${label}</div>`;
     }
   });
   container.innerHTML = html;
@@ -1541,10 +1550,15 @@ function interpTraj(arr, step, ts) {
   ];
 }
 
-// Rotate so Earth is left, flyby is right: 108.7 deg
+// Aesthetic rotation of the ecliptic coordinate frame: 108.7° puts Earth on
+// the left and the lunar flyby on the right for a natural left-to-right reading.
+// This is a display choice, not a physical parameter.
 const TRAJ_ROT = 108.7 * Math.PI / 180;
 const TRAJ_COS = Math.cos(TRAJ_ROT), TRAJ_SIN = Math.sin(TRAJ_ROT);
 function rotXY(x, y) { return [x*TRAJ_COS - y*TRAJ_SIN, x*TRAJ_SIN + y*TRAJ_COS]; }
+
+const MOON_RADIUS_KM = 1737.4;  // Mean lunar radius (km)
+const KM_TO_MI = 0.621371;
 
 function getMoonDistKm(ts) {
   const scPos = interpTraj(TRAJ_SC, TRAJ_STEP_SC, ts);
@@ -1666,7 +1680,7 @@ function drawTrajectory(ts) {
     } else {
       const dist = getDisplayDistance(ts);
       const moonDistKm = getMoonDistKm(ts);
-      const moonDistMi = Math.round((moonDistKm - 1737.4) * 0.621371); // subtract Moon radius
+      const moonDistMi = Math.round((moonDistKm - MOON_RADIUS_KM) * KM_TO_MI); // subtract Moon radius
       const earthStr = dist === -1 ? 'Liftoff' : (dist < 1 ? 'Near Earth' : Math.round(dist).toLocaleString() + ' mi from Earth');
       const moonStr = moonDistMi > 0 ? moonDistMi.toLocaleString() + ' mi from Moon' : 'At the Moon';
       label.textContent = earthStr + '  ·  ' + moonStr;
@@ -1674,6 +1688,9 @@ function drawTrajectory(ts) {
   }
 }
 
+// --- PHOTO VIEWER ---
+// Main display update: swaps image/video, updates metadata panel, draws
+// trajectory, triggers audio, preloads neighbors, and updates the URL hash.
 function updatePhoto() {
   if (filteredPhotos.length === 0) {
     document.getElementById('currentPhoto').src = '';
@@ -1694,7 +1711,7 @@ function updatePhoto() {
   const photo = filteredPhotos[currentPhotoIdx];
   const safeSrc = encodeURIComponent(photo.f);
   const flickrId = getFlickrId(photo.f);
-  const nasaTitle = flickrId ? FLICKR_TITLES[flickrId] || '' : '';
+  const nasaTitle = flickrId ? PHOTO_TITLES[flickrId] || '' : '';
   const imgEl = document.getElementById('currentPhoto');
   const vidEl = document.getElementById('currentVideo');
   if (photo.v) {
@@ -1718,7 +1735,7 @@ function updatePhoto() {
   if (nasaTitle) {
     titleEl.textContent = nasaTitle;
     titleRow.style.display = '';
-    const fullDesc = flickrId ? (FLICKR_DESCS[flickrId] || nasaTitle) : nasaTitle;
+    const fullDesc = flickrId ? (PHOTO_DESCS[flickrId] || nasaTitle) : nasaTitle;
     descTip.textContent = fullDesc;
     descHover.style.display = fullDesc ? '' : 'none';
   } else {
@@ -1732,7 +1749,7 @@ function updatePhoto() {
   // Moon distance
   if (photo.t >= TRAJ_START && photo.t <= TRAJ_START + TRAJ_SC.length * TRAJ_STEP_SC) {
     const moonKm = getMoonDistKm(photo.t);
-    const moonMi = Math.round((moonKm - 1737.4) * 0.621371); // surface-to-surface
+    const moonMi = Math.round((moonKm - MOON_RADIUS_KM) * KM_TO_MI); // surface-to-surface
     document.getElementById('metaMoonDist').textContent = moonMi > 0 ? moonMi.toLocaleString() + ' miles' : 'At the Moon';
   } else {
     document.getElementById('metaMoonDist').textContent = photo.t < TRAJ_START ? '~239,000 miles' : '—';
@@ -1746,15 +1763,12 @@ function updatePhoto() {
   } else {
     document.getElementById('descSection').style.display = 'none';
   }
-  // Print banner removed for now
-
-  // updateEventAndQuote(photo.t);
   drawTrajectory(photo.t);
   // Mobile activity label
   const mAct = getActivityAt(photo.t);
   const mEl = document.getElementById('mobileActivity');
   if (mAct) {
-    mEl.innerHTML = `<span class="activity-dot" style="background:${ACOL[mAct.a]}"></span><span class="activity-name">${mAct.l}</span>`;
+    mEl.innerHTML = `<span class="activity-dot" style="background:${ACTIVITY_COLORS[mAct.a]}"></span><span class="activity-name">${mAct.l}</span>`;
   } else {
     mEl.innerHTML = `<span class="activity-name" style="color:#555">Between activities</span>`;
   }
@@ -1763,7 +1777,9 @@ function updatePhoto() {
   // Update URL hash to current photo slug (without triggering hashchange)
   const _hid = photoSlug(photo);
   if (location.hash !== '#' + _hid) history.replaceState(null, '', '#' + _hid);
-  // Preload neighboring images: previous 1, next 3
+  // Preload neighboring images via <link rel="prefetch">. Using prefetch (not
+  // preload) lets the browser deprioritize these behind the current image,
+  // so they load in idle time without competing for bandwidth.
   const preloadOffsets = [-1, 1, 2, 3];
   for (const off of preloadOffsets) {
     const idx = currentPhotoIdx + off;
@@ -1815,21 +1831,6 @@ function updateAudio(ts) {
   lastAudioClip = clip.f;
 }
 
-function updateEventAndQuote(ts) {
-  let past = EVENTS.filter(e => e.t <= ts);
-  let nearest = past.length > 0 ? past[past.length - 1] : EVENTS[0];
-  const isFuture = nearest.t > ts;
-  const eventEl = document.getElementById('eventBox');
-  eventEl.innerHTML = `<div class="event-title">${nearest.icon} ${nearest.title}</div><div class="event-desc">${nearest.desc}</div><div class="event-time">${formatTime(nearest.t)}</div>`;
-  eventEl.style.opacity = isFuture ? '0.4' : '1';
-
-  let q = QUOTES.reduce((best, qt) => Math.abs(qt.t - ts) < Math.abs(best.t - ts) ? qt : best);
-  const quoteEl = document.getElementById('quoteBox');
-  const qDist = Math.abs(q.t - ts);
-  quoteEl.innerHTML = `<div class="quote-text">"${q.text}"</div><div class="quote-speaker">— ${q.who}</div>`;
-  quoteEl.style.opacity = qDist > 3600000 ? '0.3' : '1';
-}
-
 // --- Timeline hover tooltip showing activity ---
 const hoverTip = document.getElementById('timelineHoverTip');
 const tipTime = document.getElementById('tipTime');
@@ -1845,7 +1846,7 @@ document.getElementById('timelineTrack').addEventListener('mousemove', function(
   tipTime.textContent = formatTimeShort(t);
   const act = getActivityAt(t);
   if (act) {
-    tipActivity.innerHTML = `<span class="tip-dot" style="background:${ACOL[act.a]}"></span><span class="tip-label">${act.l}</span>`;
+    tipActivity.innerHTML = `<span class="tip-dot" style="background:${ACTIVITY_COLORS[act.a]}"></span><span class="tip-label">${act.l}</span>`;
   } else {
     tipActivity.innerHTML = `<span class="tip-label" style="color:#555">No scheduled activity</span>`;
   }
@@ -1875,11 +1876,13 @@ function zoomTimeline(factor, anchorFraction) {
   renderTimeline();
 }
 
+// Wheel event disambiguation: trackpads send horizontal deltaX for swipe (pan),
+// vertical deltaY with ctrlKey for pinch-to-zoom, and plain vertical scroll
+// which we intentionally ignore so the page scrolls normally.
 document.getElementById('timelineTrack').addEventListener('wheel', function(e) {
   e.preventDefault();
   const rect = this.getBoundingClientRect();
   const anchorFrac = (e.clientX - rect.left) / rect.width;
-  // Horizontal swipe → pan, pinch (ctrlKey) → zoom, vertical scroll → ignore
   if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
     const span = viewEnd - viewStart;
     const shift = (e.deltaX / rect.width) * span;
@@ -1974,10 +1977,11 @@ document.getElementById('prevBtn').addEventListener('click', goPrev);
 document.getElementById('nextBtn').addEventListener('click', goNext);
 
 
+// --- FILTERS ---
+
 function clearAllFilters() {
   document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('[data-crew]').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('[data-batch]').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('[data-cam]').forEach(b => b.classList.remove('active'));
 }
 
@@ -2023,31 +2027,12 @@ document.querySelectorAll('[data-crew]').forEach(btn => {
   btn.addEventListener('click', function() {
     // Clear non-multi-select filters
     document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('[data-batch]').forEach(b => b.classList.remove('active'));
-    // Toggle this crew filter
+      // Toggle this crew filter
     this.classList.toggle('active');
     const anyActive = applyMultiFilter();
     if (!anyActive) {
       document.querySelector('[data-filter="all"]').classList.add('active');
       filteredPhotos = PHOTOS;
-    }
-    currentPhotoIdx = 0;
-    viewStart = T_START; viewEnd = T_END;
-    updatePhoto();
-  });
-});
-
-document.querySelectorAll('[data-batch]').forEach(btn => {
-  btn.addEventListener('click', function() {
-    const wasActive = this.classList.contains('active');
-    clearAllFilters();
-    if (wasActive) {
-      document.querySelector('[data-filter="all"]').classList.add('active');
-      filteredPhotos = PHOTOS;
-    } else {
-      this.classList.add('active');
-      const batch = parseInt(this.dataset.batch);
-      filteredPhotos = PHOTOS.filter(p => p.b === batch);
     }
     currentPhotoIdx = 0;
     viewStart = T_START; viewEnd = T_END;
@@ -2061,8 +2046,7 @@ document.querySelectorAll('[data-cam]').forEach(btn => {
   btn.addEventListener('click', function() {
     // Clear non-multi-select filters
     document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('[data-batch]').forEach(b => b.classList.remove('active'));
-    // Toggle this camera filter
+      // Toggle this camera filter
     this.classList.toggle('active');
     const anyActive = applyMultiFilter();
     if (!anyActive) {
@@ -2079,8 +2063,6 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowLeft' && currentPhotoIdx > 0) { currentPhotoIdx--; updatePhoto(); ensurePhotoInView(); }
   if (e.key === 'ArrowRight' && currentPhotoIdx < filteredPhotos.length - 1) { currentPhotoIdx++; updatePhoto(); ensurePhotoInView(); }
 });
-
-// Print banner listener removed for now
 
 document.getElementById('muteBtn').addEventListener('click', function() {
   audioMuted = !audioMuted;
@@ -2099,10 +2081,12 @@ document.getElementById('muteBtn').addEventListener('click', function() {
   }
 });
 
-// Generate slug from photo
+// --- DEEP LINKING ---
+// Each photo gets a URL hash like #christina-koch-smiles-before-launch so
+// individual photos can be shared and bookmarked.
 function photoSlug(p) {
   const fid = getFlickrId(p.f);
-  const title = fid ? FLICKR_TITLES[fid] : null;
+  const title = fid ? PHOTO_TITLES[fid] : null;
   return title ? title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : (fid || p.f.replace(/\.[^.]+$/, ''));
 }
 

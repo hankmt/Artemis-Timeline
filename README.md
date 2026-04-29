@@ -1,0 +1,64 @@
+# Artemis II Photo Timeline
+
+An interactive, chronological timeline of every publicly released photograph from NASA's Artemis II mission — from the rocket on the pad to the crew's recovery at sea.
+
+Browse 400+ photos with mission context: crew activity schedule, real-time trajectory visualization, distance from Earth and Moon, and audio clips from mission communications.
+
+**Live site:** [artemis-timeline.vercel.app](https://artemis-timeline.vercel.app)
+
+## How it works
+
+The entire site is two HTML files and a data file — no build step, no framework, no dependencies. Open `index.html` in a browser and it just works, even from `file://`.
+
+```
+index.html     The viewer — CSS, HTML, and JS in one self-contained file
+photos.js      All photo/audio metadata (titles, timestamps, camera info)
+admin.html     Visual editor for photos.js (toggle entries, edit metadata, export)
+web/           1600px-wide web-optimized versions of every photo
+faq.html       Frequently asked questions
+```
+
+## Adding photos
+
+1. Place the original image in the project root directory.
+2. Create a 1600px-wide web version: `convert original.jpg -resize 1600x -quality 85 web/filename.jpg`
+3. Open `admin.html` in your browser. Click the card for any existing photo to see the metadata fields, then add your new entry with the correct timestamp, photographer, camera info, etc.
+4. Click **Export photos.js** to download the updated data file.
+5. Replace `photos.js` with the exported version.
+
+### Timestamps
+
+Every timestamp in the system is **Eastern Daylight Time (EDT / UTC-4)**. If your photo's EXIF data is in a different timezone, you'll need to convert it. The cameras used for this mission were set to at least 6 different timezones (EDT, PDT, HST, CET, UTC+4, UTC), so always cross-reference against known mission events:
+
+- Liftoff: April 1, 2026 at 18:35:25 EDT
+- Splashdown: April 10, 2026 at 20:07:27 EDT
+
+### Photo ID conventions
+
+The viewer identifies photos by filename patterns:
+
+- `55182417729_3e6cb18922_o.jpg` — Flickr (11-digit ID)
+- `9608627.jpg` — DVIDS / Navy (7-digit ID)
+- `art002e014256~large.jpg` — NASA art-series
+- `KSC-20260401-PH-KLS01_0013.jpg` — Kennedy Space Center
+- `NHQ202604100032.jpg` — NASA Headquarters photographer
+- `ig-*.mp4` / `yt-*.jpg` — Instagram / YouTube embeds
+
+## Data sources
+
+- **Photo metadata:** NASA Flickr, DVIDS, NASA Image Gallery
+- **Flight trajectory:** JPL Horizons API (target -1024, center Earth 399)
+- **Crew schedule:** NASA's Artemis II Overview Timeline PDF
+- **Mission audio:** NASA livestream recordings
+
+## Admin editor
+
+Open `admin.html` to browse and edit the photo database. You can search, filter by status (enabled/disabled/videos/crew photos), toggle individual entries on and off, and edit all metadata fields. Changes are exported as a new `photos.js` file.
+
+## Built with
+
+[Claude Code](https://claude.ai/claude-code) with Opus 4.6. JPL Horizons API for flight data. Flickr API for pulling image descriptions.
+
+## License
+
+The code is open source. NASA imagery is public domain per [NASA Media Usage Guidelines](https://www.nasa.gov/nasa-brand-center/images-and-media/). U.S. Navy imagery is public domain per DoD Visual Information policy.
