@@ -2721,6 +2721,9 @@ function updatePhoto() {
   }
   updateAudio(photo.t);
   renderTimeline();
+  // Update URL hash to current photo slug (without triggering hashchange)
+  const _hid = photoSlug(photo);
+  if (location.hash !== '#' + _hid) history.replaceState(null, '', '#' + _hid);
   // Preload neighboring images: previous 1, next 3
   const preloadOffsets = [-1, 1, 2, 3];
   for (const off of preloadOffsets) {
@@ -3057,7 +3060,40 @@ document.getElementById('muteBtn').addEventListener('click', function() {
   }
 });
 
+// Generate slug from photo
+function photoSlug(p) {
+  const fid = getFlickrId(p.f);
+  const title = fid ? FLICKR_TITLES[fid] : null;
+  return title ? title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : (fid || p.f.replace(/\.[^.]+$/, ''));
+}
+
+// Navigate to photo from URL hash
+function navigateToHash() {
+  const hash = decodeURIComponent(location.hash.slice(1));
+  if (!hash) return false;
+  for (let i = 0; i < filteredPhotos.length; i++) {
+    if (photoSlug(filteredPhotos[i]) === hash) { currentPhotoIdx = i; return true; }
+  }
+  // Also check all photos in case filter is hiding it
+  for (let i = 0; i < PHOTOS.length; i++) {
+    if (photoSlug(PHOTOS[i]) === hash) {
+      // Reset filter to 'all' so the photo is visible
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
+      filteredPhotos = PHOTOS;
+      currentPhotoIdx = i;
+      return true;
+    }
+  }
+  return false;
+}
+
+navigateToHash();
 updatePhoto();
+
+window.addEventListener('hashchange', () => {
+  if (navigateToHash()) { updatePhoto(); ensurePhotoInView(); }
+});
 </script>
 </body>
 </html>
