@@ -3482,7 +3482,7 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": false,
-      "enabled": true
+      "enabled": false
     },
     {
       "time": "2026-04-10 15:36:40",

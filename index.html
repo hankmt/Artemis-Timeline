@@ -335,7 +335,7 @@
     position: relative;
     font-size: 12px;
     color: #888;
-    cursor: default;
+    cursor: pointer;
     letter-spacing: 0.3px;
     transition: color 0.15s;
   }
@@ -357,11 +357,23 @@
     width: max-content;
     white-space: normal;
     z-index: 50;
-    pointer-events: none;
     box-shadow: 0 6px 20px rgba(0,0,0,0.6);
     backdrop-filter: blur(12px);
   }
-  .desc-hover:hover .desc-hover-tip { display: block; }
+  .desc-hover-tip.open { display: block; }
+  .desc-close {
+    position: absolute;
+    top: 4px;
+    right: 8px;
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 16px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 2px;
+  }
+  .desc-close:hover { color: #fff; }
 
   /* Metadata panel — right side, fixed width */
   .meta-panel {
@@ -747,9 +759,11 @@
       <button class="nav-arrow nav-next" id="nextBtn" title="Next photo">›</button>
     </div>
     <div class="photo-links">
-      <span class="desc-hover" id="descHover" style="display:none">
+      <span class="desc-hover" id="descHover" style="display:none" onclick="toggleDescTip()">
         Image description ▾
-        <span class="desc-hover-tip" id="descHoverTip"></span>
+        <span class="desc-hover-tip" id="descHoverTip">
+          <button class="desc-close" onclick="event.stopPropagation();closeDescTip()">&times;</button>
+        </span>
       </span>
     </div>
   </div>
@@ -1842,10 +1856,12 @@ function updatePhoto() {
     titleEl.textContent = nasaTitle;
     titleRow.style.display = '';
     const fullDesc = flickrId ? (PHOTO_DESCS[flickrId] || nasaTitle) : nasaTitle;
-    descTip.textContent = fullDesc;
+    descTip.innerHTML = '<button class="desc-close" onclick="event.stopPropagation();closeDescTip()">&times;</button>' + (fullDesc || '').replace(/</g, '&lt;');
+    descTip.classList.remove('open');
     descHover.style.display = fullDesc ? '' : 'none';
   } else {
     titleRow.style.display = 'none';
+    descTip.classList.remove('open');
     descHover.style.display = 'none';
   }
   document.getElementById('metaPhotographer').textContent = photo.p;
@@ -2198,6 +2214,16 @@ window.addEventListener('hashchange', () => {
 
 // --- CALENDAR COUNTDOWN ---
 // Pre-order deadline: May 12, 2026 at midnight EDT
+// --- IMAGE DESCRIPTION TOGGLE ---
+window.toggleDescTip = function() {
+  const tip = document.getElementById('descHoverTip');
+  if (tip) tip.classList.toggle('open');
+};
+window.closeDescTip = function() {
+  const tip = document.getElementById('descHoverTip');
+  if (tip) tip.classList.remove('open');
+};
+
 // --- CALENDAR DISMISS ---
 window.dismissCalendar = function() {
   const el = document.getElementById('calendarPromo');
