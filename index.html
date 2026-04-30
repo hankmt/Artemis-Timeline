@@ -702,11 +702,6 @@
   <button class="filter-btn active" data-filter="all">All Photos and Video</button>
   <button class="filter-btn" data-filter="spacecraft">Crew Photos Only</button>
   <span class="filter-sep">|</span>
-  <button class="filter-btn crew-filter" data-crew="Wiseman">Wiseman</button>
-  <button class="filter-btn crew-filter" data-crew="Glover">Glover</button>
-  <button class="filter-btn crew-filter" data-crew="Koch">Koch</button>
-  <button class="filter-btn crew-filter" data-crew="Hansen">Hansen</button>
-  <span class="filter-sep">|</span>
   <button class="filter-btn cam-filter" data-cam="d5a" title="Nikon D5 body 3500015 — on Orion">D5 #1</button>
   <button class="filter-btn cam-filter" data-cam="d5b" title="Nikon D5 body 3500017 — on Orion">D5 #2</button>
   <button class="filter-btn cam-filter" data-cam="z9" title="Nikon Z 9 body 3920019 — on Orion">Z9</button>
@@ -1328,14 +1323,7 @@ function formatDistance(miles) {
   return Math.round(miles).toLocaleString() + ' miles';
 }
 
-function formatMoonDist(moonKm) {
-  const surfaceDist = moonKm - MOON_RADIUS_KM;
-  if (surfaceDist <= 0) return 'At the Moon';
-  if (useMetric) return Math.round(surfaceDist).toLocaleString() + ' km';
-  return Math.round(surfaceDist * KM_TO_MI).toLocaleString() + ' miles';
-}
-
-// toggleUnits is defined inside the IIFE where updatePhoto is accessible
+// formatMoonDist and toggleUnits are defined inside the IIFE where MOON_RADIUS_KM is accessible
 
 // --- CREW ACTIVITY SCHEDULE ---
 // Color-coded activity bars on the timeline. Sourced from NASA's Artemis II
@@ -1633,6 +1621,13 @@ function rotXY(x, y) { return [x*TRAJ_COS - y*TRAJ_SIN, x*TRAJ_SIN + y*TRAJ_COS]
 
 const MOON_RADIUS_KM = 1737.4;  // Mean lunar radius (km)
 const KM_TO_MI = 0.621371;
+
+function formatMoonDist(moonKm) {
+  const surfaceDist = moonKm - MOON_RADIUS_KM;
+  if (surfaceDist <= 0) return 'At the Moon';
+  if (useMetric) return Math.round(surfaceDist).toLocaleString() + ' km';
+  return Math.round(surfaceDist * KM_TO_MI).toLocaleString() + ' miles';
+}
 
 function getMoonDistKm(ts) {
   const scPos = interpTraj(TRAJ_SC, TRAJ_STEP_SC, ts);
@@ -2064,28 +2059,18 @@ function clearAllFilters() {
   document.querySelectorAll('[data-cam]').forEach(b => b.classList.remove('active'));
 }
 
-// Apply combined multi-select filter (crew names + camera types, union within each group, intersection across groups).
+// Apply camera multi-select filter (union of selected camera types).
 // Returns true if any filter is active.
 function applyMultiFilter() {
   const activeCams = Array.from(document.querySelectorAll('[data-cam].active')).map(b => b.dataset.cam);
-  const activeCrews = Array.from(document.querySelectorAll('[data-crew].active')).map(b => b.dataset.crew);
-  if (activeCams.length === 0 && activeCrews.length === 0) return false;
+  if (activeCams.length === 0) return false;
   filteredPhotos = PHOTOS.filter(p => {
-    let camMatch = activeCams.length === 0;
-    if (!camMatch) {
-      for (const c of activeCams) {
-        if (c === 'gopro' && p.cam && p.cam.includes('HERO')) { camMatch = true; break; }
-        if (c === 'iphone' && p.cam && p.cam.includes('iPhone')) { camMatch = true; break; }
-        if (c !== 'gopro' && c !== 'iphone' && p.cid === c) { camMatch = true; break; }
-      }
+    for (const c of activeCams) {
+      if (c === 'gopro' && p.cam && p.cam.includes('HERO')) return true;
+      if (c === 'iphone' && p.cam && p.cam.includes('iPhone')) return true;
+      if (c !== 'gopro' && c !== 'iphone' && p.cid === c) return true;
     }
-    let crewMatch = activeCrews.length === 0;
-    if (!crewMatch) {
-      for (const name of activeCrews) {
-        if (p.p && p.p.includes(name)) { crewMatch = true; break; }
-      }
-    }
-    return camMatch && crewMatch;
+    return false;
   });
   return true;
 }
@@ -2102,25 +2087,8 @@ document.querySelectorAll('[data-filter]').forEach(btn => {
   });
 });
 
-document.querySelectorAll('[data-crew]').forEach(btn => {
-  btn.addEventListener('click', function() {
-    // Clear non-multi-select filters
-    document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
-      // Toggle this crew filter
-    this.classList.toggle('active');
-    const anyActive = applyMultiFilter();
-    if (!anyActive) {
-      document.querySelector('[data-filter="all"]').classList.add('active');
-      filteredPhotos = PHOTOS;
-    }
-    currentPhotoIdx = 0;
-    viewStart = T_START; viewEnd = T_END;
-    updatePhoto();
-  });
-});
-
 // Camera filters: multi-select among themselves. Clicking one clears non-camera
-// filters (All / Crew Only / crew-member / batch) but toggles its own state.
+// filters (All / Crew Only) but toggles its own state.
 document.querySelectorAll('[data-cam]').forEach(btn => {
   btn.addEventListener('click', function() {
     // Clear non-multi-select filters
