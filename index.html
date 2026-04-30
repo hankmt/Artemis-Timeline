@@ -60,7 +60,8 @@
   .timeline-track {
     position: relative;
     height: 38px;
-    cursor: pointer;
+    cursor: ew-resize;
+    touch-action: pan-y;
   }
 .timeline-dot {
     position: absolute;
@@ -325,55 +326,54 @@
 
   .photo-links {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    padding: 5px 0;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 10px;
     flex-shrink: 0;
   }
   .desc-hover {
-    position: relative;
-    font-size: 12px;
-    color: #888;
-    cursor: pointer;
-    letter-spacing: 0.3px;
-    transition: color 0.15s;
+    width: 100%;
+    border: 1px solid #1a1a2e;
+    background: rgba(0,0,0,0.25);
+    border-radius: 6px;
+    overflow: hidden;
   }
-  .desc-hover:hover { color: #B0BEC5; }
+  .photo-desc-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 11px 14px;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .photo-desc-toggle:hover { background: rgba(255,255,255,0.03); }
+  .photo-desc-toggle::after {
+    content: 'Show';
+    color: #888;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .photo-desc-toggle[aria-expanded="true"]::after { content: 'Hide'; }
   .desc-hover-tip {
     display: none;
-    position: absolute;
-    bottom: 28px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(12,12,24,0.95);
-    border: 1px solid rgba(255,255,255,0.12);
-    color: #ccc;
-    font-size: 12.5px;
-    line-height: 1.55;
-    padding: 12px 16px;
-    border-radius: 8px;
-    max-width: 440px;
-    width: max-content;
-    white-space: normal;
-    z-index: 50;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.6);
-    backdrop-filter: blur(12px);
+    padding: 0 14px 14px;
+    color: #999;
+    font-size: 12px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    border-top: 1px solid rgba(255,255,255,0.06);
   }
   .desc-hover-tip.open { display: block; }
-  .desc-close {
-    position: absolute;
-    top: 4px;
-    right: 8px;
-    background: none;
-    border: none;
-    color: #888;
-    font-size: 16px;
-    cursor: pointer;
-    line-height: 1;
-    padding: 2px;
-  }
-  .desc-close:hover { color: #fff; }
 
   /* Metadata panel — right side, fixed width */
   .meta-panel {
@@ -635,7 +635,7 @@
     /* Hover tooltip and zoom controls don't work well on touch — keep hidden */
     .zoom-controls { display: none; }
     .timeline-hover-tip { display: none !important; }
-    .mobile-activity { display: block; }
+    .mobile-activity { display: none; }
     .controls-row { padding: 6px 12px; gap: 6px; }
 
     /* Stack viewer vertically */
@@ -683,7 +683,9 @@
       z-index: 50;
     }
     .nav-prev { left: 0; }
-    .nav-next { right: 0; }
+      .nav-next { right: 0; }
+    .photo-desc-toggle { padding: 12px 14px; }
+    .desc-hover-tip { font-size: 13px; line-height: 1.65; }
   }
 
   @media (max-width: 480px) {
@@ -760,12 +762,12 @@
       <button class="nav-arrow nav-next" id="nextBtn" title="Next photo">›</button>
     </div>
     <div class="photo-links">
-      <span class="desc-hover" id="descHover" style="display:none" onclick="toggleDescTip()">
-        Image description ▾
-        <span class="desc-hover-tip" id="descHoverTip">
-          <button class="desc-close" onclick="event.stopPropagation();closeDescTip()">&times;</button>
-        </span>
-      </span>
+      <div class="desc-hover" id="descHover" style="display:none">
+        <button class="photo-desc-toggle" id="descToggleBtn" type="button" onclick="toggleDescTip()" aria-expanded="false">
+          Image Description
+        </button>
+        <div class="desc-hover-tip" id="descHoverTip"></div>
+      </div>
     </div>
   </div>
   <div class="meta-panel">
@@ -1615,7 +1617,7 @@ function renderTimeline() {
 function updateTimelineLabels() {
   const labelsContainer = document.querySelector('.timeline-labels');
   const span = viewEnd - viewStart;
-  const numLabels = 11;
+  const numLabels = window.matchMedia('(max-width: 768px)').matches ? 6 : 11;
   let html = '';
   for (let i = 0; i < numLabels; i++) {
     const t = viewStart + (span * i / (numLabels - 1));
@@ -1859,12 +1861,14 @@ function updatePhoto() {
     titleEl.textContent = nasaTitle;
     titleRow.style.display = '';
     const fullDesc = flickrId ? (PHOTO_DESCS[flickrId] || nasaTitle) : nasaTitle;
-    descTip.innerHTML = '<button class="desc-close" onclick="event.stopPropagation();closeDescTip()">&times;</button>' + (fullDesc || '').replace(/</g, '&lt;');
+    descTip.textContent = fullDesc || '';
     descTip.classList.remove('open');
+    document.getElementById('descToggleBtn').setAttribute('aria-expanded', 'false');
     descHover.style.display = fullDesc ? '' : 'none';
   } else {
     titleRow.style.display = 'none';
     descTip.classList.remove('open');
+    document.getElementById('descToggleBtn').setAttribute('aria-expanded', 'false');
     descHover.style.display = 'none';
   }
   document.getElementById('metaPhotographer').textContent = photo.p;
@@ -1985,6 +1989,27 @@ document.getElementById('timelineTrack').addEventListener('mouseleave', function
   hoverTip.style.display = 'none';
 });
 
+function getTimelineTimeFromClientX(clientX) {
+  const track = document.getElementById('timelineTrack');
+  const rect = track.getBoundingClientRect();
+  const frac = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+  return viewStart + (viewEnd - viewStart) * frac;
+}
+
+function jumpToNearestPhotoForClientX(clientX) {
+  if (!filteredPhotos.length) return;
+  const clickTime = getTimelineTimeFromClientX(clientX);
+  let best = 0, bestDist = Infinity;
+  filteredPhotos.forEach((p, i) => {
+    const d = Math.abs(p.t - clickTime);
+    if (d < bestDist) { bestDist = d; best = i; }
+  });
+  if (currentPhotoIdx !== best) {
+    currentPhotoIdx = best;
+    updatePhoto();
+  }
+}
+
 // --- Zoom & Pan ---
 function zoomTimeline(factor, anchorFraction) {
   const span = viewEnd - viewStart;
@@ -2023,57 +2048,25 @@ document.getElementById('timelineTrack').addEventListener('wheel', function(e) {
   }
 }, { passive: false });
 
-// Drag to pan
 let isDragging = false;
-let dragStartX = 0;
-let dragStartViewStart = 0;
-let dragStartViewEnd = 0;
 
 document.getElementById('timelineTrack').addEventListener('mousedown', function(e) {
   if (e.target.classList.contains('photo-dot') || e.target.classList.contains('audio-dot') || e.target.classList.contains('zoom-btn')) return;
   isDragging = true;
-  dragStartX = e.clientX;
-  dragStartViewStart = viewStart;
-  dragStartViewEnd = viewEnd;
   hoverTip.style.display = 'none';
+  jumpToNearestPhotoForClientX(e.clientX);
   e.preventDefault();
 });
 
 document.addEventListener('mousemove', function(e) {
   if (!isDragging) return;
-  const track = document.getElementById('timelineTrack');
-  const rect = track.getBoundingClientRect();
-  const dx = e.clientX - dragStartX;
-  const frac = dx / rect.width;
-  const span = dragStartViewEnd - dragStartViewStart;
-  let shift = -frac * span;
-  let ns = dragStartViewStart + shift;
-  let ne = dragStartViewEnd + shift;
-  if (ns < T_START) { ns = T_START; ne = ns + span; }
-  if (ne > T_END) { ne = T_END; ns = ne - span; }
-  if (ns < T_START) ns = T_START;
-  viewStart = ns;
-  viewEnd = ne;
-  renderTimeline();
+  jumpToNearestPhotoForClientX(e.clientX);
 });
 
 document.addEventListener('mouseup', function(e) {
-  if (isDragging) {
-    isDragging = false;
-    if (Math.abs(e.clientX - dragStartX) < 4) {
-      const track = document.getElementById('timelineTrack');
-      const rect = track.getBoundingClientRect();
-      const frac = (e.clientX - rect.left) / rect.width;
-      const clickTime = viewStart + (viewEnd - viewStart) * frac;
-      let best = 0, bestDist = Infinity;
-      filteredPhotos.forEach((p, i) => {
-        const d = Math.abs(p.t - clickTime);
-        if (d < bestDist) { bestDist = d; best = i; }
-      });
-      currentPhotoIdx = best;
-      updatePhoto();
-    }
-  }
+  if (!isDragging) return;
+  isDragging = false;
+  jumpToNearestPhotoForClientX(e.clientX);
 });
 
 // Zoom buttons
@@ -2220,11 +2213,10 @@ window.addEventListener('hashchange', () => {
 // --- IMAGE DESCRIPTION TOGGLE ---
 window.toggleDescTip = function() {
   const tip = document.getElementById('descHoverTip');
-  if (tip) tip.classList.toggle('open');
-};
-window.closeDescTip = function() {
-  const tip = document.getElementById('descHoverTip');
-  if (tip) tip.classList.remove('open');
+  const btn = document.getElementById('descToggleBtn');
+  if (!tip || !btn) return;
+  const open = tip.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
 };
 
 // --- CALENDAR DISMISS ---
