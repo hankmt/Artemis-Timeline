@@ -433,8 +433,23 @@ let currentTab = 'photos';
 let currentFilter = 'all';
 let searchQuery = '';
 
+// Heal double-escaped Unicode (e.g. literal "–" → "–") that may have
+// been introduced by an upstream ingestion step before reaching photos.js.
+function healEscapes(v) {
+  if (typeof v === 'string') {
+    return v.replace(/\\u([0-9a-fA-F]{4})/g, (_, h) => String.fromCharCode(parseInt(h, 16)));
+  }
+  if (Array.isArray(v)) return v.map(healEscapes);
+  if (v && typeof v === 'object') {
+    const out = {};
+    for (const k of Object.keys(v)) out[k] = healEscapes(v[k]);
+    return out;
+  }
+  return v;
+}
+
 // Load data from photos.js global
-data = PHOTO_DATA;
+data = healEscapes(PHOTO_DATA);
 updateStats();
 renderPhotos();
 renderAudio();
