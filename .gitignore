@@ -46,3 +46,14 @@ venv/
 /*.JPEG
 # (Allow the pngtree moon favicon explicitly — it IS served)
 !pngtree-*.png
+
+# Scratch / superseded data files
+photos.json
+photos2.js
+photos22.js
+
+# Source reference materials (not part of the site)
+artemis-ii-overview-timeline-public-final.pdf
+artemis-ii-timeline.jsx
+2026-04-10-post-rtc3-to-ei.zip
+2026.04.10 - Post-RTC3 to EI

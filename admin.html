@@ -407,6 +407,7 @@ a:hover { text-decoration: underline; }
     <button class="filter-btn" data-filter="videos">Videos Only</button>
     <button class="filter-btn" data-filter="crew">Crew Photos Only</button>
   </div>
+  <button class="save-btn" style="background:var(--enabled)" onclick="addPhoto()">+ Add Photo</button>
   <button class="save-btn" onclick="exportJSON()">Export photos.js</button>
 </div>
 
@@ -575,7 +576,12 @@ function renderPhotos() {
             <label><input type="checkbox" ${photo.external ? 'checked' : ''}
                    onchange="setPhotoField(${idx},'external',this.checked)"> External</label>
           </div>
-          <span style="font-size:11px;color:var(--text-dim);font-family:monospace">${esc(photo.file)}</span>
+          <div class="card-field">
+            <label>File</label>
+            <input class="med" style="font-size:11px;font-family:monospace;color:var(--text-dim)" value="${esc(photo.file)}"
+                   onchange="setPhotoField(${idx},'file',this.value)"
+                   placeholder="filename.jpg">
+          </div>
         </div>
         <button class="desc-toggle" onclick="toggleDesc(this)">Show description</button>
         <div class="desc-section">
@@ -674,6 +680,34 @@ function setAudioField(idx, field, value) {
     const card = document.querySelector(`.audio-card[data-aidx="${idx}"]`);
     if (card) card.classList.toggle('disabled-card', !value);
   }
+}
+
+// Add new photo
+function addPhoto() {
+  const newEntry = {
+    file: '',
+    title: '',
+    time: '',
+    photographer: '',
+    location: '',
+    camera: '',
+    settings: '',
+    spacecraft: false,
+    video: false,
+    external: false,
+    enabled: true,
+    flickr_desc: ''
+  };
+  data.photos.unshift(newEntry);
+  markChanged();
+  updateStats();
+  renderPhotos();
+  // Scroll to top and focus the first title input
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  setTimeout(() => {
+    const firstTitle = document.querySelector('#photo-list .card .title-input');
+    if (firstTitle) firstTitle.focus();
+  }, 100);
 }
 
 // Description toggle

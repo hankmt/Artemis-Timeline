@@ -5965,139 +5965,139 @@ const PHOTO_DATA = {
   "audio": [
     {
       "time": "2026-04-01 14:30:00",
-      "file": "artemis-ii-launch-crew-walkout.mp3",
+      "file": "audio/artemis-ii-launch-crew-walkout.mp3",
       "desc": "Crew walkout",
       "enabled": true
     },
     {
       "time": "2026-04-01 17:00:00",
-      "file": "artemis-ii-launch-go-no-go-poll.mp3",
+      "file": "audio/artemis-ii-launch-go-no-go-poll.mp3",
       "desc": "Go/No-Go poll",
       "enabled": true
     },
     {
       "time": "2026-04-01 17:20:00",
-      "file": "artemis-ii-launch-integrity-voice-check.mp3",
+      "file": "audio/artemis-ii-launch-integrity-voice-check.mp3",
       "desc": "Integrity voice check",
       "enabled": true
     },
     {
       "time": "2026-04-01 17:30:00",
-      "file": "artemis-ii-launch-launch-director-message.mp3",
+      "file": "audio/artemis-ii-launch-launch-director-message.mp3",
       "desc": "Launch Director message",
       "enabled": true
     },
     {
       "time": "2026-04-01 17:40:00",
-      "file": "artemis-ii-launch-full-send.mp3",
+      "file": "audio/artemis-ii-launch-full-send.mp3",
       "desc": "Full send",
       "enabled": true
     },
     {
       "time": "2026-04-01 17:55:00",
-      "file": "artemis-ii-houston-we-have-you-loud-and-clear-1.mp3",
+      "file": "audio/artemis-ii-houston-we-have-you-loud-and-clear-1.mp3",
       "desc": "Houston loud and clear",
       "enabled": true
     },
     {
       "time": "2026-04-01 18:00:00",
-      "file": "artemis-ii-launch-beautiful-moonrise-and-were-headed-right-at-it.mp3",
+      "file": "audio/artemis-ii-launch-beautiful-moonrise-and-were-headed-right-at-it.mp3",
       "desc": "Beautiful moonrise",
       "enabled": true
     },
     {
       "time": "2026-04-01 18:35:25",
-      "file": "artemis-ii-liftoff.mp3",
+      "file": "audio/artemis-ii-liftoff.mp3",
       "desc": "Liftoff!",
       "enabled": true
     },
     {
       "time": "2026-04-01 18:40:00",
-      "file": "artemis-ii-launch-orion-communications-check.mp3",
+      "file": "audio/artemis-ii-launch-orion-communications-check.mp3",
       "desc": "Orion comms check",
       "enabled": true
     },
     {
       "time": "2026-04-02 20:05:00",
-      "file": "artemis-ii-go-for-translunar-injection.mp3",
+      "file": "audio/artemis-ii-go-for-translunar-injection.mp3",
       "desc": "Go for TLI",
       "enabled": true
     },
     {
       "time": "2026-04-02 20:18:00",
-      "file": "artemis-ii-good-burn.mp3",
+      "file": "audio/artemis-ii-good-burn.mp3",
       "desc": "Good burn",
       "enabled": true
     },
     {
       "time": "2026-04-04 15:00:00",
-      "file": "artemis-ii-message-from-apollo-astronaut-jim-lovell.mp3",
+      "file": "audio/artemis-ii-message-from-apollo-astronaut-jim-lovell.mp3",
       "desc": "Message from Jim Lovell",
       "enabled": true
     },
     {
       "time": "2026-04-05 10:00:00",
-      "file": "artemis-ii-message-from-apollo-astronaut-charlie-duke.mp3",
+      "file": "audio/artemis-ii-message-from-apollo-astronaut-charlie-duke.mp3",
       "desc": "Message from Charlie Duke",
       "enabled": true
     },
     {
       "time": "2026-04-06 15:37:25",
-      "file": "artemis-ii-breaks-apollo-13-distance-record.mp3",
+      "file": "audio/artemis-ii-breaks-apollo-13-distance-record.mp3",
       "desc": "Breaks Apollo 13 distance record",
       "enabled": true
     },
     {
       "time": "2026-04-06 15:59:12",
-      "file": "artemis-ii-amaze-amaze-amaze.mp3",
+      "file": "audio/artemis-ii-amaze-amaze-amaze.mp3",
       "desc": "Amaze, amaze, amaze",
       "enabled": true
     },
     {
       "time": "2026-04-06 18:38:00",
-      "file": "artemis-ii-los.mp3",
+      "file": "audio/artemis-ii-los.mp3",
       "desc": "Loss of signal — Earthset",
       "enabled": true
     },
     {
       "time": "2026-04-06 18:41:00",
-      "file": "artemis-ii-hey-babe-love-you-from-the-moon.mp3",
+      "file": "audio/artemis-ii-hey-babe-love-you-from-the-moon.mp3",
       "desc": "We love you, from the Moon",
       "enabled": true
     },
     {
       "time": "2026-04-06 18:58:45",
-      "file": "artemis-ii-closest-point-to-moon.wav",
+      "file": "audio/artemis-ii-closest-point-to-moon.wav",
       "desc": "Closest approach to Moon",
       "enabled": true
     },
     {
       "time": "2026-04-06 19:20:00",
-      "file": "artemis-ii-we-will-explore.mp3",
+      "file": "audio/artemis-ii-we-will-explore.mp3",
       "desc": "Contact restored — We will explore",
       "enabled": true
     },
     {
       "time": "2026-04-06 19:57:00",
-      "file": "artemis-ii-names-new-craters-integrity-and-carroll.mp3",
+      "file": "audio/artemis-ii-names-new-craters-integrity-and-carroll.mp3",
       "desc": "Names new craters",
       "enabled": true
     },
     {
       "time": "2026-04-06 20:32:00",
-      "file": "victor-the-terminator.wav",
+      "file": "audio/victor-the-terminator.wav",
       "desc": "Eclipse / impact-flash observations",
       "enabled": true
     },
     {
       "time": "2026-04-09 12:00:00",
-      "file": "artemis-ii-humanity-has-shown-what-we-are-capable-of.mp3",
+      "file": "audio/artemis-ii-humanity-has-shown-what-we-are-capable-of.mp3",
       "desc": "What we are capable of",
       "enabled": true
     },
     {
       "time": "2026-04-10 20:21:25",
-      "file": "artemis-ii-splashdown-shorter.mp3",
+      "file": "audio/artemis-ii-splashdown-shorter.mp3",
       "desc": "Splashdown",
       "enabled": true
     }

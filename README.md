@@ -1,10 +1,8 @@
 # Artemis II Photo Timeline
 
-An interactive, chronological timeline of every publicly released photograph from NASA's Artemis II mission — from the rocket on the pad to the crew's recovery at sea.
+An attempt to contextualize the photography of the Artemis II mission chronologically, in space, and with other media including video and audio from the mission as well as the crew activity schedule. Real-time trajectory visualization, distance from Earth and Moon, and photography metadata.
 
-Browse 400+ photos with mission context: crew activity schedule, real-time trajectory visualization, distance from Earth and Moon, and audio clips from mission communications.
-
-**Live site:** [artemis-timeline.vercel.app](https://artemis-timeline.vercel.app)
+**Live site:** [ArtemisTimeline.com](https://artemistimeline.com)
 
 ## How it works
 
@@ -15,14 +13,15 @@ index.html     The viewer — CSS, HTML, and JS in one self-contained file
 photos.js      All photo/audio metadata (titles, timestamps, camera info)
 admin.html     Visual editor for photos.js (toggle entries, edit metadata, export)
 web/           1600px-wide web-optimized versions of every photo
+audio/         Mission audio clips (MP3/WAV)
 faq.html       Frequently asked questions
 ```
 
 ## Adding photos
 
-1. Place the original image in the project root directory.
-2. Create a 1600px-wide web version: `convert original.jpg -resize 1600x -quality 85 web/filename.jpg`
-3. Open `admin.html` in your browser. Click the card for any existing photo to see the metadata fields, then add your new entry with the correct timestamp, photographer, camera info, etc.
+1. Create a 1600px-wide web version of your image: `convert original.jpg -resize 1600x -quality 85 web/filename.jpg`
+2. Open `admin.html` in your browser and click **+ Add Photo**.
+3. Fill in the filename, timestamp, photographer, camera info, etc. The entry will sort into chronological position automatically.
 4. Click **Export photos.js** to download the updated data file.
 5. Replace `photos.js` with the exported version.
 
@@ -61,4 +60,4 @@ Open `admin.html` to browse and edit the photo database. You can search, filter 
 
 ## License
 
-The code is open source. NASA imagery is public domain per [NASA Media Usage Guidelines](https://www.nasa.gov/nasa-brand-center/images-and-media/). U.S. Navy imagery is public domain per DoD Visual Information policy.
+The code is released under the [MIT License](LICENSE). NASA imagery is public domain per [NASA Media Usage Guidelines](https://www.nasa.gov/nasa-brand-center/images-and-media/). U.S. Navy imagery is public domain per DoD Visual Information policy.
