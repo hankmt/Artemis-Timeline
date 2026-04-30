@@ -62,7 +62,10 @@
     height: 38px;
     cursor: ew-resize;
     touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
   }
+  .timeline-track.scrubbing { cursor: grabbing; }
 .timeline-dot {
     position: absolute;
     top: 9px;
@@ -1964,7 +1967,9 @@ const hoverTip = document.getElementById('timelineHoverTip');
 const tipTime = document.getElementById('tipTime');
 const tipActivity = document.getElementById('tipActivity');
 
-document.getElementById('timelineTrack').addEventListener('mousemove', function(e) {
+const timelineTrack = document.getElementById('timelineTrack');
+
+timelineTrack.addEventListener('mousemove', function(e) {
   if (isDragging) { hoverTip.style.display = 'none'; return; }
   const rect = this.getBoundingClientRect();
   const frac = (e.clientX - rect.left) / rect.width;
@@ -1985,7 +1990,7 @@ document.getElementById('timelineTrack').addEventListener('mousemove', function(
   hoverTip.style.left = Math.max(60, Math.min(maxLeft, leftPx)) + 'px';
 });
 
-document.getElementById('timelineTrack').addEventListener('mouseleave', function() {
+timelineTrack.addEventListener('mouseleave', function() {
   hoverTip.style.display = 'none';
 });
 
@@ -2008,6 +2013,16 @@ function jumpToNearestPhotoForClientX(clientX) {
     currentPhotoIdx = best;
     updatePhoto();
   }
+}
+
+function isTimelineInteractiveTarget(target) {
+  return !!(target && target.closest('.photo-dot, .audio-dot, .zoom-btn'));
+}
+
+function setTimelineScrubbing(active) {
+  isDragging = active;
+  timelineTrack.classList.toggle('scrubbing', active);
+  if (!active) hoverTip.style.display = 'none';
 }
 
 // --- Zoom & Pan ---
@@ -2049,25 +2064,74 @@ document.getElementById('timelineTrack').addEventListener('wheel', function(e) {
 }, { passive: false });
 
 let isDragging = false;
+let activeTimelinePointerId = null;
+let pendingTimelinePointerId = null;
+let pendingStartX = 0;
+let pendingStartY = 0;
 
-document.getElementById('timelineTrack').addEventListener('mousedown', function(e) {
-  if (e.target.classList.contains('photo-dot') || e.target.classList.contains('audio-dot') || e.target.classList.contains('zoom-btn')) return;
-  isDragging = true;
+timelineTrack.addEventListener('pointerdown', function(e) {
+  if (e.button !== 0 || isTimelineInteractiveTarget(e.target)) return;
+
   hoverTip.style.display = 'none';
-  jumpToNearestPhotoForClientX(e.clientX);
-  e.preventDefault();
+
+  if (e.pointerType === 'mouse') {
+    activeTimelinePointerId = e.pointerId;
+    setTimelineScrubbing(true);
+    timelineTrack.setPointerCapture(e.pointerId);
+    jumpToNearestPhotoForClientX(e.clientX);
+    e.preventDefault();
+    return;
+  }
+
+  pendingTimelinePointerId = e.pointerId;
+  pendingStartX = e.clientX;
+  pendingStartY = e.clientY;
 });
 
-document.addEventListener('mousemove', function(e) {
-  if (!isDragging) return;
-  jumpToNearestPhotoForClientX(e.clientX);
+timelineTrack.addEventListener('pointermove', function(e) {
+  if (activeTimelinePointerId === e.pointerId && isDragging) {
+    jumpToNearestPhotoForClientX(e.clientX);
+    e.preventDefault();
+    return;
+  }
+
+  if (pendingTimelinePointerId !== e.pointerId) return;
+
+  const dx = e.clientX - pendingStartX;
+  const dy = e.clientY - pendingStartY;
+  if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+
+  if (Math.abs(dx) >= Math.abs(dy)) {
+    activeTimelinePointerId = e.pointerId;
+    pendingTimelinePointerId = null;
+    setTimelineScrubbing(true);
+    timelineTrack.setPointerCapture(e.pointerId);
+    jumpToNearestPhotoForClientX(e.clientX);
+    e.preventDefault();
+  } else {
+    pendingTimelinePointerId = null;
+  }
 });
 
-document.addEventListener('mouseup', function(e) {
-  if (!isDragging) return;
-  isDragging = false;
-  jumpToNearestPhotoForClientX(e.clientX);
-});
+function finishTimelinePointer(e) {
+  if (activeTimelinePointerId === e.pointerId) {
+    jumpToNearestPhotoForClientX(e.clientX);
+    if (timelineTrack.hasPointerCapture(e.pointerId)) {
+      timelineTrack.releasePointerCapture(e.pointerId);
+    }
+    activeTimelinePointerId = null;
+    setTimelineScrubbing(false);
+    return;
+  }
+
+  if (pendingTimelinePointerId === e.pointerId) {
+    pendingTimelinePointerId = null;
+    jumpToNearestPhotoForClientX(e.clientX);
+  }
+}
+
+timelineTrack.addEventListener('pointerup', finishTimelinePointer);
+timelineTrack.addEventListener('pointercancel', finishTimelinePointer);
 
 // Zoom buttons
 document.getElementById('zoomInBtn').addEventListener('click', (e) => { e.stopPropagation(); zoomTimeline(0.5, 0.5); });
