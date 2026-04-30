@@ -790,7 +790,7 @@ const PHOTO_DATA = {
       "video": true,
       "external": false,
       "title": "Email Trouble",
-      "flickr_desc": "The Artemis II crew discovers they have two Microsoft Outlooks open and neither microphone is working \\u2014 a familiar IT moment, 3,300 miles from Earth. \\u2014 via YouTube Shorts",
+      "flickr_desc": "The Artemis II crew discovers they have two Microsoft Outlooks open and neither microphone is working — a familiar IT moment, 3,300 miles from Earth. — via YouTube Shorts",
       "enabled": true
     },
     {
@@ -1017,7 +1017,7 @@ const PHOTO_DATA = {
       "video": true,
       "external": false,
       "title": "Earthshine",
-      "flickr_desc": "Earthshine. Artemis II astronaut Christina Koch captured this video of Earth outside the Orion spacecraft windows during the lunar flyby. \\u2014 Christina Koch via Instagram",
+      "flickr_desc": "Earthshine. Artemis II astronaut Christina Koch captured this video of Earth outside the Orion spacecraft windows during the lunar flyby. — Christina Koch via Instagram",
       "enabled": true
     },
     {
@@ -1328,7 +1328,7 @@ const PHOTO_DATA = {
       "video": true,
       "external": false,
       "title": "Pink Pony Club Morning",
-      "flickr_desc": "What really happened on Pink Pony Club morning. Wake-up songs are a tradition at NASA, and this crew got Chappell Roan\\u2019s Pink Pony Club on Flight Day 4. Sound on! \\u2014 via Instagram",
+      "flickr_desc": "What really happened on Pink Pony Club morning. Wake-up songs are a tradition at NASA, and this crew got Chappell Roan’s Pink Pony Club on Flight Day 4. Sound on! — via Instagram",
       "enabled": true
     },
     {
@@ -1478,7 +1478,7 @@ const PHOTO_DATA = {
       "video": true,
       "external": false,
       "title": "Playing with Earth-Moon Gravity",
-      "flickr_desc": "Out here playing with Earth-Moon gravity like it is a toy and seeing things that are beautiful beyond words. 215,010 miles from Earth. 12,787 miles from the Moon. \\u2014 via Instagram",
+      "flickr_desc": "Out here playing with Earth-Moon gravity like it is a toy and seeing things that are beautiful beyond words. 215,010 miles from Earth. 12,787 miles from the Moon. — via Instagram",
       "enabled": true
     },
     {
@@ -1508,7 +1508,7 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": false,
-      "title": "Artemis II Lunar Science Team \\u2013 Amber Turner",
+      "title": "Artemis II Lunar Science Team – Amber Turner",
       "flickr_desc": "Artemis II lunar science team member, foreground, Amber Turner, and David Hollibaugh-Baker, and Cherie Achilles, background, participate in the team’s analysis of crew observations during the lunar flyby on April 6, 2026. The team worked in the Science Evaluation Room (SER) in Mission Control at NASA’s Johnson Space Center in Houston. Built specifically for Artemis missions with these science priorities in mind, the SER is equipped to support rapid data interpretation, collaborative analysis, real-time decision making, and seamless coordination between the science and operations teams. Credits: NASA/ Robert Markowitz",
       "enabled": true
     },
@@ -1665,7 +1665,7 @@ const PHOTO_DATA = {
       "video": true,
       "external": false,
       "title": "Nutella in Zero-G",
-      "flickr_desc": "Nutella flying away in zero gravity, about four minutes before the Artemis II crew broke Apollo 13\\u2019s record for the farthest distance from Earth by humans. Behind the far side of the Moon, 252,000+ miles from home. \\u2014 via Reddit/Instagram",
+      "flickr_desc": "Nutella flying away in zero gravity, about four minutes before the Artemis II crew broke Apollo 13’s record for the farthest distance from Earth by humans. Behind the far side of the Moon, 252,000+ miles from home. — via Reddit/Instagram",
       "enabled": true
     },
     {
@@ -1998,7 +1998,7 @@ const PHOTO_DATA = {
       "video": false,
       "external": false,
       "title": "Sharing a Unique Perspective",
-      "flickr_desc": "art002e014256 (April 6, 2026) \\u2013 CSA (Canadian Space Agency) astronaut and Artemis II Mission Specialist Jeremy Hansen is seen making observations through the window of the Orion spacecraft early in the Artemis II lunar flyby. Hansen and his fellow crewmates spent approximately seven hours taking turns at the Orion windows capturing science data to share with their team back on Earth. Credit: NASA",
+      "flickr_desc": "art002e014256 (April 6, 2026) – CSA (Canadian Space Agency) astronaut and Artemis II Mission Specialist Jeremy Hansen is seen making observations through the window of the Orion spacecraft early in the Artemis II lunar flyby. Hansen and his fellow crewmates spent approximately seven hours taking turns at the Orion windows capturing science data to share with their team back on Earth. Credit: NASA",
       "enabled": true
     },
     {
@@ -2012,7 +2012,7 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": false,
-      "title": "Capture My Good Side \\u2013 The Moon",
+      "title": "Capture My Good Side – The Moon",
       "flickr_desc": "art002e012183 (April 6, 2026) - On the first shift during the lunar flyby observation period, the Artemis II crew captured more than two-thirds of the Moon showcasing the intricate features of the nearside. The 600-mile-wide impact crater, Orientale basin, lies along the transition between the near and far sides and is sometimes partly visible from Earth. The round black spot northeast of Orientale is Grimaldi crater, known for its exceptionally dark mare lava floor and heavily degraded rim. Credit: NASA",
       "enabled": true,
       "camera_id": "d5a"
@@ -2123,7 +2123,7 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": false,
-      "title": "Lunar Flyby Observations \\u2013 Victor Glover and Christina Koch",
+      "title": "Lunar Flyby Observations – Victor Glover and Christina Koch",
       "flickr_desc": "art002e016195 (April 6, 2026) – Artemis II Pilot Victor Glover, on the left, and Mission Specialist Christina Koch, on the right, gather images and observations of the lunar surface to share with the world during the lunar flyby on the sixth day of the mission. The crew spent approximately seven hours taking turns at the windows of the Orion spacecraft as they flew around the far side of the Moon. At closest approach, they came within 4,067 miles of the Moon’s surface. Credit: NASA",
       "enabled": true
     },
@@ -2138,7 +2138,7 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": false,
-      "title": "Lunar Flyby Observations \\u2013 Victor Glover",
+      "title": "Lunar Flyby Observations – Victor Glover",
       "flickr_desc": "art002e016204 (April 6, 2026) – NASA astronaut and Artemis II Pilot Victor Glover pictured here in the Orion spacecraft during the Artemis II lunar flyby. Glover and his fellow crewmates spent approximately seven hours taking turns at the Orion windows capturing science data to share with their team back on Earth. At closest approach, they came within 4,067 miles of the Moon’s surface. Credit: NASA",
       "enabled": true
     },
@@ -2153,8 +2153,8 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": false,
-      "title": "Lunar Flyby Observations \\u2013 Reid Wiseman",
-      "flickr_desc": "art002e016165 (April 6, 2026) \\u2013 NASA astronaut and Artemis II Commander Reid Wiseman pictured here in the Orion spacecraft during the Artemis II lunar flyby. Wiseman and his fellow crewmates spent approximately seven hours taking turns at the Orion windows capturing science data to share with their team back on Earth. At closest approach, they came within 4,067 miles of the Moon\\u2019s surface. Credit: NASA",
+      "title": "Lunar Flyby Observations – Reid Wiseman",
+      "flickr_desc": "art002e016165 (April 6, 2026) – NASA astronaut and Artemis II Commander Reid Wiseman pictured here in the Orion spacecraft during the Artemis II lunar flyby. Wiseman and his fellow crewmates spent approximately seven hours taking turns at the Orion windows capturing science data to share with their team back on Earth. At closest approach, they came within 4,067 miles of the Moon’s surface. Credit: NASA",
       "enabled": true
     },
     {
@@ -2168,8 +2168,8 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": false,
-      "title": "Lunar Flyby Observations \\u2013 Jeremy Hansen",
-      "flickr_desc": "art002e016171 (April 6, 2026) \\u2013 CSA (Canadian Space Agency) astronaut and Artemis II Mission Specialist Jeremy Hansen pictured here in the Orion spacecraft during the Artemis II lunar flyby. Hansen and his fellow crewmates spent approximately seven hours taking turns at the Orion windows capturing science data to share with their team back on Earth. Credit: NASA",
+      "title": "Lunar Flyby Observations – Jeremy Hansen",
+      "flickr_desc": "art002e016171 (April 6, 2026) – CSA (Canadian Space Agency) astronaut and Artemis II Mission Specialist Jeremy Hansen pictured here in the Orion spacecraft during the Artemis II lunar flyby. Hansen and his fellow crewmates spent approximately seven hours taking turns at the Orion windows capturing science data to share with their team back on Earth. Credit: NASA",
       "enabled": true
     },
     {
@@ -2183,8 +2183,8 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": false,
-      "title": "Lunar Flyby Observations \\u2013 Christina Koch",
-      "flickr_desc": "art002e016172 (April 6, 2026) \\u2013 NASA astronaut and Artemis II Mission Specialist Christina Koch pictured here in the Orion spacecraft during the Artemis II lunar flyby. Koch and her fellow crewmates spent approximately seven hours taking turns at the Orion windows capturing science data to share with their team back on Earth. Credit: NASA",
+      "title": "Lunar Flyby Observations – Christina Koch",
+      "flickr_desc": "art002e016172 (April 6, 2026) – NASA astronaut and Artemis II Mission Specialist Christina Koch pictured here in the Orion spacecraft during the Artemis II lunar flyby. Koch and her fellow crewmates spent approximately seven hours taking turns at the Orion windows capturing science data to share with their team back on Earth. Credit: NASA",
       "enabled": true
     },
     {
@@ -2636,7 +2636,7 @@ const PHOTO_DATA = {
       "video": true,
       "external": false,
       "title": "Only One Chance in This Lifetime",
-      "flickr_desc": "Only one chance in this lifetime\\u2026 Like watching sunset at the beach from the most foreign seat in the house. This video captures Earth setting behind the Moon during the Artemis II lunar flyby. \\u2014 Reid Wiseman via Instagram",
+      "flickr_desc": "Only one chance in this lifetime… Like watching sunset at the beach from the most foreign seat in the house. This video captures Earth setting behind the Moon during the Artemis II lunar flyby. — Reid Wiseman via Instagram",
       "enabled": true
     },
     {
@@ -3076,7 +3076,7 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": false,
-      "title": "Artemis Lunar Science Team \\u2013 Aaron Regberg",
+      "title": "Artemis Lunar Science Team – Aaron Regberg",
       "flickr_desc": "Artemis lunar science team member, Aaron Regberg, works in the Science Mission Operations Room, where scientists analyzed imagery and audio recordings of lunar observations captured by the Artemis II astronauts during their lunar flyby on April 6, 2026. Credit: NASA",
       "enabled": true
     },
@@ -3136,7 +3136,7 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": false,
-      "title": "Artemis Lunar Science Team \\u2013 Alexandra Constantinou",
+      "title": "Artemis Lunar Science Team – Alexandra Constantinou",
       "flickr_desc": "Artemis lunar science team member, Alexandra Constantinou, works in the Science Mission Operations Room at NASA’s Johnson Space Center in Houston, where scientists analyzed imagery and audio recordings of lunar observations captured by the Artemis II astronauts during their lunar flyby on April 6, 2026. Credits: NASA/Helen Arase Vargas",
       "enabled": true
     },
@@ -3211,7 +3211,7 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": false,
-      "title": "Artemis II Science Officers \\u2013 Trevor Graff and Kelsey Young",
+      "title": "Artemis II Science Officers – Trevor Graff and Kelsey Young",
       "flickr_desc": "Artemis II science officers, Trevor Graff, background, and Kelsey Young are seen monitoring mission data in real-time from the Science console in the White Flight Control Room in Mission Control at NASA's Johnson Space Center in Houston. Science officers are the senior flight controllers responsible for lunar science and geology objectives during Artemis missions. Credits: NASA/Robert Markowitz",
       "enabled": true
     },
@@ -3380,7 +3380,7 @@ const PHOTO_DATA = {
       "video": true,
       "external": false,
       "title": "Flight Day 8 Evening Vibes",
-      "flickr_desc": "Flight Day 8 evening vibes. This day was so fun and productive because we had gotten our sea legs and were executing like a well-oiled machine. Sound on! \\u2014 via Instagram",
+      "flickr_desc": "Flight Day 8 evening vibes. This day was so fun and productive because we had gotten our sea legs and were executing like a well-oiled machine. Sound on! — via Instagram",
       "enabled": true
     },
     {
@@ -3395,7 +3395,7 @@ const PHOTO_DATA = {
       "video": true,
       "external": false,
       "title": "Flight Day 8 Press Conference",
-      "flickr_desc": "Flight Day 8 evening, before bed \\u2014 the Artemis II crew during a press conference on their return journey to Earth. \\u2014 via Instagram",
+      "flickr_desc": "Flight Day 8 evening, before bed — the Artemis II crew during a press conference on their return journey to Earth. — via Instagram",
       "enabled": true
     },
     {
@@ -4092,7 +4092,7 @@ const PHOTO_DATA = {
       "video": true,
       "external": true,
       "title": "Welcome Aboard Integrity",
-      "flickr_desc": "Jesse, Steve, Laddy, and Vlad\\u2026 such an incredible feeling to welcome you aboard Integrity after your journey around the Moon. The recovery team opens the Orion capsule hatch aboard USS John P. Murtha. \\u2014 via Instagram",
+      "flickr_desc": "Jesse, Steve, Laddy, and Vlad… such an incredible feeling to welcome you aboard Integrity after your journey around the Moon. The recovery team opens the Orion capsule hatch aboard USS John P. Murtha. — via Instagram",
       "enabled": true
     },
     {
@@ -4160,7 +4160,7 @@ const PHOTO_DATA = {
       "video": true,
       "external": true,
       "title": "Coming Home",
-      "flickr_desc": "The moments just after the capsule is opened \\u2014 the Artemis II crew exits the Orion spacecraft aboard USS John P. Murtha following splashdown. \\u2014 via Instagram",
+      "flickr_desc": "The moments just after the capsule is opened — the Artemis II crew exits the Orion spacecraft aboard USS John P. Murtha following splashdown. — via Instagram",
       "enabled": true
     },
     {
@@ -4549,7 +4549,7 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": true,
-      "title": "Wiseman and Hansen \\u2013 Portrait",
+      "title": "Wiseman and Hansen – Portrait",
       "enabled": true
     },
     {
@@ -4725,7 +4725,7 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": true,
-      "title": "Christina Koch \\u2013 Portrait",
+      "title": "Christina Koch – Portrait",
       "enabled": true
     },
     {
@@ -4811,7 +4811,7 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": true,
-      "title": "Glover Claps for the Ship\\u2019s Crew",
+      "title": "Glover Claps for the Ship’s Crew",
       "enabled": true
     },
     {
