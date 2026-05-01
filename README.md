@@ -61,4 +61,4 @@ Open `admin.html` to browse and edit the photo database. You can search, filter 
 
 ## License
 
-The code is released under the [MIT License](LICENSE). NASA imagery is public domain per [NASA Media Usage Guidelines](https://www.nasa.gov/nasa-brand-center/images-and-media/). U.S. Navy imagery is public domain per DoD Visual Information policy.
+The code is released under the [MIT License](LICENSE). NASA imagery is generally not subject to U.S. copyright and is made available under [NASA's Media Usage Guidelines](https://www.nasa.gov/nasa-brand-center/images-and-media/). U.S. Navy imagery is public domain per DoD Visual Information policy.
