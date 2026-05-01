@@ -649,7 +649,6 @@
     .photo-desc-btn { display: none !important; }
   }
   @media (max-width: 768px) {
-    .photo-links,
     .desc-hover { display: none !important; }
   }
   /* Photo description button — top-left corner of the image, opens popup */
@@ -760,9 +759,23 @@
     vertical-align: middle;
   }
 
-    @media (max-width: 768px) {
+  @media (max-width: 768px) {
+    /* Mobile bottom-sheet vars — single source of truth for snap points */
+    :root {
+      --sheet-handle-h: 44px;
+      --sheet-middle-h: 192px; /* orion map flush at top + a little chrome */
+      /* y-coord of the sheet's top edge; default matches the middle snap so
+         pre-JS layout already reserves the right space for the photo. */
+      --sheet-top-y: calc(var(--vh) - 192px);
+    }
 
-    body { height: auto; min-height: 100vh; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+    body { height: var(--vh); overflow: hidden; }
+    /* Mirror sheet-state on body so .viewer can size the photo so it
+       never sits underneath the sheet's top edge. The closed-state offset
+       includes the home-indicator gutter so the handle isn't clipped. */
+    body.sheet-state-open    { --sheet-top-y: 35vh; }
+    body.sheet-state-middle  { --sheet-top-y: calc(var(--vh) - var(--sheet-middle-h)); }
+    body.sheet-state-closed  { --sheet-top-y: calc(var(--vh) - var(--sheet-handle-h) - var(--safe-bottom)); }
     #header { flex-wrap: wrap; gap: 6px 12px; padding: 8px 12px; }
     #header h1 { font-size: 18px; }
     #header .crew { display: none; }
@@ -789,13 +802,29 @@
        the dropdown only half-width — drop it so the trigger fills the row. */
     .controls-row .controls-spacer { display: none; }
 
-    /* n/n photo counter — stays inline in the controls row on mobile, same
-       as desktop. */
+    /* n/n photo counter — floats as a translucent pill above the sheet,
+       styled like the "Show Desc" button. position:fixed is used so the
+       element stays a flex child of controls-row in DOM (desktop layout
+       unchanged) but visually leaves the row on mobile. */
     #photoCounter {
-      color: #4FC3F7;
-      font-size: 12px;
-      font-weight: 600;
-      white-space: nowrap;
+      position: fixed;
+      bottom: calc(var(--vh) - var(--sheet-top-y) + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+      background: rgba(0,0,0,0.55);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      pointer-events: none;
+      transition: bottom 0.32s cubic-bezier(0.32, 0.72, 0, 1);
     }
     .filter-dropdown-trigger {
       display: flex;
@@ -956,19 +985,23 @@
        the bottom border of the filters row. The viewer reserves space for
        the sheet up to the middle snap. Beyond that the sheet overlaps. */
     .viewer {
-      flex: none;
       flex-direction: column;
       padding: 0;
       gap: 0;
+      overflow: hidden;
+      padding-bottom: calc(min(var(--vh) - var(--sheet-top-y), var(--sheet-middle-h)) + 4px);
+    }
+    /* Middle snap: let the photo extend slightly past the sheet's top edge
+       so a sliver of image peeks through the rounded sheet corners. */
+    body.sheet-state-middle .viewer {
+      padding-bottom: calc(var(--sheet-middle-h) - 24px);
     }
     .photo-side {
-      flex: none;
+      flex: 1;
       min-height: 0;
-      overflow: visible;
+      max-height: none;
     }
     .photo-container {
-      flex: none;
-      min-height: 40vh;
       border: 0;
       border-radius: 0;
     }
@@ -985,16 +1018,59 @@
 
     /* ---------- BOTTOM SHEET ---------- */
     .meta-panel {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
       width: 100%;
       max-width: 100%;
+      max-height: none;
       flex-direction: column;
       flex-wrap: nowrap;
       gap: 0;
+      /* Bottom padding includes home-indicator gutter so the last scroll
+         row (data-sources) isn't clipped behind the indicator. */
       padding: 0 0 calc(24px + var(--safe-bottom));
       background: #0a0a14;
+      border-top: 1px solid #1a1a2e;
+      border-radius: 14px 14px 0 0;
+      box-shadow: 0 -8px 24px rgba(0,0,0,0.5);
+      z-index: 100;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      transition: top 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+      /* default = middle */
+      top: calc(var(--vh) - var(--sheet-middle-h));
     }
-    /* The bottom-sheet handle is hidden; no drag interaction on mobile */
-    .bottom-sheet-handle { display: none; }
+    .meta-panel.sheet-open    { top: 35vh; }
+    .meta-panel.sheet-middle  { top: calc(var(--vh) - var(--sheet-middle-h)); }
+    .meta-panel.sheet-closed  { top: calc(var(--vh) - var(--sheet-handle-h) - var(--safe-bottom)); overflow-y: hidden; }
+    .meta-panel.sheet-dragging { transition: none; }
+
+    /* Handle floats absolutely over the orion map; only the drag bar is
+       visible in open/middle states. Closed state lets the handle stretch
+       to fill the visible sheet area and reveal the title. */
+    .bottom-sheet-handle {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 6px;
+      padding: 8px 16px 14px; /* generous bottom padding = comfortable touch target */
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: none;
+      background: transparent;
+    }
+    .meta-panel.sheet-dragging .bottom-sheet-handle { cursor: grabbing; }
     .sheet-handle-bar {
       width: 44px;
       height: 4px;
@@ -1009,32 +1085,47 @@
       letter-spacing: 0.3px;
     }
 
+    /* In closed state, stretch the handle to fill the (small) sheet so the
+       title sits over a solid background. Bottom padding accounts for the
+       iPhone home-indicator gutter so the title isn't sitting under it. */
+    .meta-panel.sheet-closed .bottom-sheet-handle {
+      bottom: 0;
+      justify-content: center;
+      background: #0a0a14;
+      padding: 8px 16px calc(8px + var(--safe-bottom));
+    }
 
-
+    /* Reorder: orion map first so it's the only thing visible at the middle snap.
+       Orion map is flush with sheet edges (no margin/border); the handle floats
+       on top of it. */
     .traj-section {
+      order: 1;
       margin: 0;
       padding: 0;
       border: none;
       border-radius: 14px 14px 0 0;
       background: rgba(0,0,0,0.35);
+      flex-shrink: 0;
       max-height: 140px;
       overflow: hidden;
     }
     .traj-section canvas {
       border-radius: 14px 14px 0 0;
       width: 100%;
-      height: 122px;
+      height: 122px; /* leaves room for the trajectory label, total ≤140px */
       object-fit: contain;
       display: block;
     }
     .traj-label { padding-bottom: 4px; }
-    .meta-panel > .calendar-promo { margin: 10px 12px 0; }
-    .desc-hover { margin: 10px 12px 0; width: auto; }
-    .meta-panel > .meta-section:not(#descSection) { margin: 10px 12px 0; }
-    .meta-panel > #descSection { margin: 10px 12px 0; }
-    .meta-panel > .data-sources { margin: 0; padding: 16px 12px; }
+    .meta-panel > .calendar-promo { order: 2; margin: 10px 12px 0; flex-shrink: 0; }
+    .desc-hover { order: 3; margin: 10px 12px 0; width: auto; flex-shrink: 0; }
+    .meta-panel > .meta-section:not(#descSection) { order: 4; margin: 10px 12px 0; flex-shrink: 0; }
+    .meta-panel > #descSection { order: 5; margin: 10px 12px 0; flex-shrink: 0; }
+    .meta-panel > .data-sources { order: 6; margin-top: 14px; flex-shrink: 0; }
 
+    /* Title only visible when sheet is closed */
     .sheet-handle-title { display: none; }
+    .meta-panel.sheet-closed .sheet-handle-title { display: block; }
 
     .meta-section { padding: 12px; }
     .meta-field { margin-bottom: 8px; }
@@ -1878,7 +1969,6 @@ let filteredPhotos = PHOTOS;
 let audioMuted = true;
 let currentAudio = null;
 let lastAudioClip = null;
-let descTipOpen = false;
 
 // Full timeline range
 const T_START = PHOTOS[0].t;
@@ -2271,12 +2361,17 @@ function updatePhoto() {
     titleRow.style.display = '';
     const fullDesc = flickrId ? (PHOTO_DESCS[flickrId] || nasaTitle) : nasaTitle;
     descTip.textContent = fullDesc || '';
-    descTip.classList.toggle('open', descTipOpen);
-    document.getElementById('descToggleBtn').setAttribute('aria-expanded', descTipOpen ? 'true' : 'false')
+    // Preserve open/closed state of description panel across photo navigation
+    if (descWasOpen && fullDesc) {
+      descTip.classList.add('open');
+      document.getElementById('descToggleBtn').setAttribute('aria-expanded', 'true');
+    } else {
+      descTip.classList.remove('open');
+      document.getElementById('descToggleBtn').setAttribute('aria-expanded', 'false');
+    }
     setPhotoDescription(fullDesc);
   } else {
     titleRow.style.display = 'none';
-    descTipOpen = false;
     descTip.classList.remove('open');
     document.getElementById('descToggleBtn').setAttribute('aria-expanded', 'false');
     setPhotoDescription(null);
@@ -2377,7 +2472,7 @@ const tipActivity = document.getElementById('tipActivity');
 const timelineTrack = document.getElementById('timelineTrack');
 
 function updateTooltip(e) {
-  if (isDragging || isTimelineInteractiveTarget(e.target)) { hoverTip.style.display = 'none'; return; }
+  if (isDragging) { hoverTip.style.display = 'none'; return; }
   const rect = this.getBoundingClientRect();
   const frac = (e.clientX - rect.left) / rect.width;
   const t = viewStart + (viewEnd - viewStart) * frac;
@@ -2753,9 +2848,8 @@ window.toggleDescTip = function() {
   const tip = document.getElementById('descHoverTip');
   const btn = document.getElementById('descToggleBtn');
   if (!tip || !btn) return;
-  descTipOpen = !descTipOpen;
-  tip.classList.toggle('open', descTipOpen);
-  btn.setAttribute('aria-expanded', descTipOpen ? 'true' : 'false');
+  const open = tip.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
 };
 
 // --- PHOTO DESCRIPTION BUTTON + POPUP ---
@@ -2768,13 +2862,9 @@ function setPhotoDescription(text) {
     if (text) { btn.style.display = ''; btn.dataset.text = text; }
     else      { btn.style.display = 'none'; btn.dataset.text = ''; }
   }
+  // Desktop UI — restored. CSS hides this on mobile so it doesn't double up
+  // with the new top-left "Show Desc" pill.
   if (descHover) descHover.style.display = text ? '' : 'none';
-  const modal = document.getElementById('descPopupModal');
-  const popupText = document.getElementById('descPopupText');
-  if (modal && modal.style.display === 'flex' && popupText) {
-    if (text) popupText.textContent = text;
-    else closeDescPopup();
-  }
 }
 
 window.showDescPopup = function() {
@@ -2915,7 +3005,130 @@ setInterval(updateCountdown, 3600000); // refresh hourly
 document.getElementById('calendarCover').src = MEDIA_BASE + 'web/Farther.png';
 
 
+// --- MOBILE BOTTOM SHEET ---
+// On mobile we relocate #descHover into the meta-panel so the description
+// toggle, the orion map, and the photo info live together inside a single
+// fixed-position bottom sheet with three snap points.
+const MOBILE_MQ = window.matchMedia('(max-width: 768px)');
+const sheetEl = document.getElementById('metaPanel');
+const sheetHandleEl = document.getElementById('sheetHandle');
+const descHoverEl = document.getElementById('descHover');
+const trajSectionEl = document.querySelector('.traj-section');
+const photoLinksEl = document.querySelector('.photo-side .photo-links');
 
+let sheetState = 'middle'; // 'open' | 'middle' | 'closed'
+
+function applySheetState(state) {
+  sheetState = state;
+  sheetEl.classList.remove('sheet-open', 'sheet-middle', 'sheet-closed');
+  sheetEl.classList.add('sheet-' + state);
+  document.body.classList.remove('sheet-state-open', 'sheet-state-middle', 'sheet-state-closed');
+  document.body.classList.add('sheet-state-' + state);
+  sheetEl.style.top = '';
+}
+
+function snapPxFor(state) {
+  const vh = window.innerHeight;
+  const handle = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sheet-handle-h')) || 56;
+  const middleH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sheet-middle-h')) || 290;
+  if (state === 'open') return vh * 0.35;
+  if (state === 'middle') return vh - middleH;
+  return vh - handle;
+}
+
+function relocateDescHoverForViewport() {
+  if (!descHoverEl) return;
+  if (MOBILE_MQ.matches) {
+    if (descHoverEl.parentElement !== sheetEl) {
+      // Place it right after the orion map so it's grouped with photo info.
+      trajSectionEl.insertAdjacentElement('afterend', descHoverEl);
+    }
+  } else {
+    if (photoLinksEl && descHoverEl.parentElement !== photoLinksEl) {
+      photoLinksEl.appendChild(descHoverEl);
+    }
+  }
+}
+
+// --- Drag/snap interaction ---
+let dragStartY = 0;
+let dragStartTop = 0;
+let dragging = false;
+
+function getSheetTopPx() {
+  return sheetEl.getBoundingClientRect().top;
+}
+
+function pickClosestSnap(currentTop) {
+  const targets = ['open', 'middle', 'closed'];
+  let best = 'open';
+  let bestDist = Infinity;
+  for (const s of targets) {
+    const d = Math.abs(currentTop - snapPxFor(s));
+    if (d < bestDist) { bestDist = d; best = s; }
+  }
+  return best;
+}
+
+function onPointerDown(e) {
+  if (!MOBILE_MQ.matches) return;
+  dragging = true;
+  dragStartY = (e.touches ? e.touches[0].clientY : e.clientY);
+  dragStartTop = getSheetTopPx();
+  sheetEl.classList.add('sheet-dragging');
+  // Lock current position so transitions don't fight the drag.
+  sheetEl.style.top = dragStartTop + 'px';
+}
+
+function onPointerMove(e) {
+  if (!dragging) return;
+  const y = (e.touches ? e.touches[0].clientY : e.clientY);
+  const delta = y - dragStartY;
+  const minTop = window.innerHeight * 0.35;
+  const maxTop = snapPxFor('closed');
+  const next = Math.max(minTop, Math.min(maxTop, dragStartTop + delta));
+  sheetEl.style.top = next + 'px';
+  if (e.cancelable) e.preventDefault();
+}
+
+function onPointerUp() {
+  if (!dragging) return;
+  dragging = false;
+  sheetEl.classList.remove('sheet-dragging');
+  const finalTop = getSheetTopPx();
+  const dragDistance = Math.abs(finalTop - dragStartTop);
+  if (dragDistance < 6) {
+    // Treat as tap: cycle through the snaps expanding upward, then dismiss.
+    // closed → middle → open → closed
+    applySheetState(sheetState === 'closed' ? 'middle' : sheetState === 'middle' ? 'open' : 'closed');
+  } else {
+    applySheetState(pickClosestSnap(finalTop));
+  }
+}
+
+if (sheetHandleEl) {
+  sheetHandleEl.addEventListener('touchstart', onPointerDown, { passive: true });
+  sheetHandleEl.addEventListener('touchmove', onPointerMove, { passive: false });
+  sheetHandleEl.addEventListener('touchend', onPointerUp);
+  sheetHandleEl.addEventListener('touchcancel', onPointerUp);
+  sheetHandleEl.addEventListener('mousedown', onPointerDown);
+  window.addEventListener('mousemove', onPointerMove);
+  window.addEventListener('mouseup', onPointerUp);
+}
+
+function syncMobileLayout() {
+  relocateDescHoverForViewport();
+  if (MOBILE_MQ.matches) {
+    applySheetState(sheetState);
+  } else {
+    sheetEl.classList.remove('sheet-open', 'sheet-middle', 'sheet-closed', 'sheet-dragging');
+    document.body.classList.remove('sheet-state-open', 'sheet-state-middle', 'sheet-state-closed');
+    sheetEl.style.top = '';
+  }
+}
+
+syncMobileLayout();
+window.addEventListener('resize', syncMobileLayout);
 
 
 })(); // end init
