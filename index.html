@@ -2016,7 +2016,7 @@ const tipActivity = document.getElementById('tipActivity');
 
 const timelineTrack = document.getElementById('timelineTrack');
 
-timelineTrack.addEventListener('mousemove', function(e) {
+function updateTooltip(e) {
   if (isDragging) { hoverTip.style.display = 'none'; return; }
   const rect = this.getBoundingClientRect();
   const frac = (e.clientX - rect.left) / rect.width;
@@ -2035,7 +2035,9 @@ timelineTrack.addEventListener('mousemove', function(e) {
   const leftPx = e.clientX - rect.left;
   const maxLeft = rect.width - 120;
   hoverTip.style.left = Math.max(60, Math.min(maxLeft, leftPx)) + 'px';
-});
+}
+
+timelineTrack.addEventListener('mousemove', updateTooltip);
 
 timelineTrack.addEventListener('mouseleave', function() {
   hoverTip.style.display = 'none';
@@ -2119,6 +2121,7 @@ document.getElementById('timelineTrack').addEventListener('wheel', function(e) {
     if (viewEnd > T_END) { viewStart -= viewEnd - T_END; viewEnd = T_END; }
     if (viewStart < T_START) viewStart = T_START;
     renderTimeline();
+    updateTooltip.call(this, e);
   } else {
     // Zoom in/out with deltaY
     const factor = e.deltaY > 0 ? 1.15 : 0.87;
