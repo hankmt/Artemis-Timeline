@@ -4898,7 +4898,7 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Glover and Koch Exit the Helicopter",
       "flickr_desc": "NASA astronauts Victor Glover and Christina Koch sit in the doorway of a Navy Seahawk helicopter on the flight deck of USS John P. Murtha, talking with recovery team members.",
-      "enabled": true
+      "enabled": false
     },
     {
       "time": "2026-04-10 22:08:55",
@@ -5000,7 +5000,7 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Glover and Koch Laugh on the Flight Deck",
       "flickr_desc": "NASA astronauts Victor Glover and Christina Koch laugh next to the Navy helicopter on the flight deck of USS John P. Murtha, wearing NASA caps over their orange suits.",
-      "enabled": true
+      "enabled": false
     },
     {
       "time": "2026-04-10 22:10:16",
@@ -6023,7 +6023,7 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": false,
-      "enabled": true
+      "enabled": false
     },
     {
       "time": "2026-04-11 17:32:00",
@@ -6036,7 +6036,7 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": false,
-      "enabled": true
+      "enabled": false
     },
     {
       "time": "2026-04-11 17:35:00",
