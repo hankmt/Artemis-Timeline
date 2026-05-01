@@ -66,6 +66,8 @@
     -webkit-user-select: none;
   }
   .timeline-track.scrubbing { cursor: grabbing; }
+  .timeline-track.zoomed { cursor: grab; }
+  .timeline-track.zoomed.scrubbing { cursor: grabbing; }
 .timeline-dot {
     position: absolute;
     top: 9px;
@@ -1602,6 +1604,9 @@ function renderActivityBars(force) {
 function renderTimeline() {
   const dotsContainer = document.getElementById('photoDots');
 
+  // Toggle grab cursor when zoomed in
+  timelineTrack.classList.toggle('zoomed', isZoomedIn());
+
   // Activity bars
   renderActivityBars();
 
@@ -2125,17 +2130,34 @@ let activeTimelinePointerId = null;
 let pendingTimelinePointerId = null;
 let pendingStartX = 0;
 let pendingStartY = 0;
+let dragMode = null; // 'scrub' or 'pan'
+let lastPanX = 0;
+let dragMoved = false; // track whether pointer moved significantly during drag
+
+function isZoomedIn() {
+  return (viewEnd - viewStart) < T_SPAN * 0.95;
+}
 
 timelineTrack.addEventListener('pointerdown', function(e) {
   if (e.button !== 0 || isTimelineInteractiveTarget(e.target)) return;
 
   hoverTip.style.display = 'none';
+  dragMoved = false;
 
   if (e.pointerType === 'mouse') {
     activeTimelinePointerId = e.pointerId;
-    setTimelineScrubbing(true);
     timelineTrack.setPointerCapture(e.pointerId);
-    jumpToNearestPhotoForClientX(e.clientX);
+    lastPanX = e.clientX;
+    if (isZoomedIn()) {
+      // When zoomed in, start in pan mode — click (no drag) will still jump to photo
+      dragMode = 'pan';
+      timelineTrack.style.cursor = 'grabbing';
+    } else {
+      // When fully zoomed out, scrub as before
+      dragMode = 'scrub';
+      setTimelineScrubbing(true);
+      jumpToNearestPhotoForClientX(e.clientX);
+    }
     e.preventDefault();
     return;
   }
@@ -2146,8 +2168,24 @@ timelineTrack.addEventListener('pointerdown', function(e) {
 });
 
 timelineTrack.addEventListener('pointermove', function(e) {
-  if (activeTimelinePointerId === e.pointerId && isDragging) {
-    jumpToNearestPhotoForClientX(e.clientX);
+  if (activeTimelinePointerId === e.pointerId) {
+    if (dragMode === 'pan') {
+      const dx = e.clientX - lastPanX;
+      if (Math.abs(dx) >= 2) dragMoved = true;
+      const rect = timelineTrack.getBoundingClientRect();
+      const span = viewEnd - viewStart;
+      const shift = -(dx / rect.width) * span;
+      viewStart += shift;
+      viewEnd += shift;
+      if (viewStart < T_START) { viewEnd += T_START - viewStart; viewStart = T_START; }
+      if (viewEnd > T_END) { viewStart -= viewEnd - T_END; viewEnd = T_END; }
+      if (viewStart < T_START) viewStart = T_START;
+      lastPanX = e.clientX;
+      renderTimeline();
+    } else if (dragMode === 'scrub' && isDragging) {
+      dragMoved = true;
+      jumpToNearestPhotoForClientX(e.clientX);
+    }
     e.preventDefault();
     return;
   }
@@ -2161,9 +2199,17 @@ timelineTrack.addEventListener('pointermove', function(e) {
   if (Math.abs(dx) >= Math.abs(dy)) {
     activeTimelinePointerId = e.pointerId;
     pendingTimelinePointerId = null;
-    setTimelineScrubbing(true);
     timelineTrack.setPointerCapture(e.pointerId);
-    jumpToNearestPhotoForClientX(e.clientX);
+    lastPanX = e.clientX;
+    dragMoved = true;
+    if (isZoomedIn()) {
+      dragMode = 'pan';
+      timelineTrack.style.cursor = 'grabbing';
+    } else {
+      dragMode = 'scrub';
+      setTimelineScrubbing(true);
+      jumpToNearestPhotoForClientX(e.clientX);
+    }
     e.preventDefault();
   } else {
     pendingTimelinePointerId = null;
@@ -2172,11 +2218,18 @@ timelineTrack.addEventListener('pointermove', function(e) {
 
 function finishTimelinePointer(e) {
   if (activeTimelinePointerId === e.pointerId) {
-    jumpToNearestPhotoForClientX(e.clientX);
+    if (dragMode === 'pan' && !dragMoved) {
+      // Click without drag while zoomed in — jump to nearest photo
+      jumpToNearestPhotoForClientX(e.clientX);
+    } else if (dragMode === 'scrub') {
+      jumpToNearestPhotoForClientX(e.clientX);
+    }
     if (timelineTrack.hasPointerCapture(e.pointerId)) {
       timelineTrack.releasePointerCapture(e.pointerId);
     }
     activeTimelinePointerId = null;
+    dragMode = null;
+    timelineTrack.style.cursor = '';
     setTimelineScrubbing(false);
     return;
   }
