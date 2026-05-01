@@ -2464,7 +2464,7 @@ const tipActivity = document.getElementById('tipActivity');
 
 const timelineTrack = document.getElementById('timelineTrack');
 
-timelineTrack.addEventListener('mousemove', function(e) {
+function updateTooltip(e) {
   if (isDragging) { hoverTip.style.display = 'none'; return; }
   const rect = this.getBoundingClientRect();
   const frac = (e.clientX - rect.left) / rect.width;
@@ -2483,7 +2483,9 @@ timelineTrack.addEventListener('mousemove', function(e) {
   const leftPx = e.clientX - rect.left;
   const maxLeft = rect.width - 120;
   hoverTip.style.left = Math.max(60, Math.min(maxLeft, leftPx)) + 'px';
-});
+}
+
+timelineTrack.addEventListener('mousemove', updateTooltip);
 
 timelineTrack.addEventListener('mouseleave', function() {
   hoverTip.style.display = 'none';
@@ -2550,24 +2552,26 @@ function zoomTimeline(factor, anchorFraction) {
   renderTimeline();
 }
 
-// Wheel event disambiguation: trackpads send horizontal deltaX for swipe (pan),
-// vertical deltaY with ctrlKey for pinch-to-zoom, and plain vertical scroll
-// which we intentionally ignore so the page scrolls normally.
+// Wheel event disambiguation: trackpads send horizontal deltaX for swipe (pan)
+// and vertical deltaY with ctrlKey for pinch-to-zoom.
 document.getElementById('timelineTrack').addEventListener('wheel', function(e) {
   e.preventDefault();
   const rect = this.getBoundingClientRect();
   const anchorFrac = (e.clientX - rect.left) / rect.width;
-  if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+  if (e.shiftKey || Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+    // Pan horizontally with with deltaX or shiftKey + deltaY
     const span = viewEnd - viewStart;
-    const shift = (e.deltaX / rect.width) * span;
+    const deltaX = e.shiftKey ? e.deltaY * 0.5 : e.deltaX;
+    const shift = (deltaX / rect.width) * span;
     viewStart += shift;
     viewEnd += shift;
     if (viewStart < T_START) { viewEnd += T_START - viewStart; viewStart = T_START; }
     if (viewEnd > T_END) { viewStart -= viewEnd - T_END; viewEnd = T_END; }
     if (viewStart < T_START) viewStart = T_START;
     renderTimeline();
-  } else if (e.ctrlKey) {
-    // Pinch-to-zoom on trackpad sets ctrlKey
+    updateTooltip.call(this, e);
+  } else {
+    // Zoom in/out with deltaY
     const factor = e.deltaY > 0 ? 1.15 : 0.87;
     zoomTimeline(factor, anchorFrac);
   }
