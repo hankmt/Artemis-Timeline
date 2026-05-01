@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>ARTEMIS II PHOTO TIMELINE</title>
 <meta name="description" content="An interactive photo timeline of NASA's Artemis II mission — scrub through every crew moment, lunar flyby shot, and audio clip from April 1–10, 2026.">
 <link rel="icon" type="image/png" href="pngtree-detailed-full-moon-rendered-in-3d-for-creative-use-png-image_15976807.png">
@@ -21,11 +21,20 @@
 <meta name="twitter:image" content="web/9608627.jpg">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* Viewport-height token: 100dvh on supporting browsers (adapts to iOS
+     Safari's collapsing toolbars), falls back to 100vh elsewhere. */
+  :root {
+    --vh: 100vh;
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @supports (height: 100dvh) {
+    :root { --vh: 100dvh; }
+  }
   body {
     background: #0a0a14;
     color: #e0e0e0;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    height: 100vh;
+    height: var(--vh);
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -624,6 +633,104 @@
   .timeline-hover-tip .tip-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
   .timeline-hover-tip .tip-label { color: #bbb; font-size: 10px; }
 
+  /* Bottom sheet handle — hidden on desktop, shown on mobile */
+  .bottom-sheet-handle { display: none; }
+
+  /* Filter dropdown trigger (mobile only — hidden on desktop) */
+  .filter-dropdown-trigger { display: none; }
+  .filter-popup-modal { display: none; }
+
+  /* Photo description button — mobile only; desktop keeps the old desc-hover box */
+  @media (min-width: 769px) {
+    .photo-desc-btn { display: none !important; }
+  }
+  @media (max-width: 768px) {
+    .desc-hover { display: none !important; }
+  }
+  /* Photo description button — top-left corner of the image, opens popup */
+  .photo-desc-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 4;
+    background: rgba(0,0,0,0.55);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.18);
+    color: #fff;
+    padding: 6px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 999px;
+    font-family: inherit;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .photo-desc-btn:hover {
+    background: rgba(0,0,0,0.78);
+    border-color: rgba(255,255,255,0.32);
+  }
+
+  /* Long-description popup */
+  .desc-popup-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .desc-popup-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.78);
+    cursor: pointer;
+  }
+  .desc-popup-card {
+    position: relative;
+    background: #12121f;
+    border: 1px solid #2a2a4e;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 24px 24px 22px;
+    z-index: 1;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+  }
+  .desc-popup-card h3 {
+    color: #fff;
+    font-size: 13px;
+    margin: 0 0 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+  .desc-popup-text {
+    color: #ddd;
+    font-size: 14px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+  }
+  .desc-popup-close {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 32px;
+    height: 32px;
+    border: 0;
+    background: transparent;
+    color: #aaa;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+  .desc-popup-close:hover { color: #fff; background: rgba(255,255,255,0.1); }
+
   /* --- Mobile / narrow screens --- */
   /* Mobile activity label — hidden on desktop */
   .mobile-activity {
@@ -649,7 +756,22 @@
   }
 
   @media (max-width: 768px) {
-    body { height: auto; overflow: auto; }
+    /* Mobile bottom-sheet vars — single source of truth for snap points */
+    :root {
+      --sheet-handle-h: 44px;
+      --sheet-middle-h: 192px; /* orion map flush at top + a little chrome */
+      /* y-coord of the sheet's top edge; default matches the middle snap so
+         pre-JS layout already reserves the right space for the photo. */
+      --sheet-top-y: calc(var(--vh) - 192px);
+    }
+
+    body { height: var(--vh); overflow: hidden; }
+    /* Mirror sheet-state on body so .viewer can size the photo so it
+       never sits underneath the sheet's top edge. The closed-state offset
+       includes the home-indicator gutter so the handle isn't clipped. */
+    body.sheet-state-open    { --sheet-top-y: 35vh; }
+    body.sheet-state-middle  { --sheet-top-y: calc(var(--vh) - var(--sheet-middle-h)); }
+    body.sheet-state-closed  { --sheet-top-y: calc(var(--vh) - var(--sheet-handle-h) - var(--safe-bottom)); }
     #header { flex-wrap: wrap; gap: 6px 12px; padding: 8px 12px; }
     #header h1 { font-size: 18px; }
     #header .crew { display: none; }
@@ -668,61 +790,378 @@
     .mobile-activity { display: none; }
     .controls-row { padding: 6px 12px; gap: 6px; }
 
-    /* Stack viewer vertically */
-    .viewer {
+    /* Replace inline filter buttons with a single dropdown trigger + popup */
+    .controls-row .filter-btn[data-filter],
+    .controls-row .filter-btn[data-cam],
+    .controls-row .filter-sep { display: none; }
+    /* Spacer would compete with the trigger's flex-grow on mobile, leaving
+       the dropdown only half-width — drop it so the trigger fills the row. */
+    .controls-row .controls-spacer { display: none; }
+
+    /* n/n photo counter — floats as a translucent pill above the sheet,
+       styled like the "Show Desc" button. position:fixed is used so the
+       element stays a flex child of controls-row in DOM (desktop layout
+       unchanged) but visually leaves the row on mobile. */
+    #photoCounter {
+      position: fixed;
+      bottom: calc(var(--vh) - var(--sheet-top-y) + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+      background: rgba(0,0,0,0.55);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      pointer-events: none;
+      transition: bottom 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+    .filter-dropdown-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex: 1 1 auto;
+      min-width: 0;
+      background: transparent;
+      border: 1px solid #2a2a4e;
+      border-radius: 6px;
+      color: #e0e0e0;
+      padding: 7px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      cursor: pointer;
+      font-family: inherit;
+      text-align: left;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      align-self: stretch;
+    }
+    .filter-dropdown-trigger:hover { border-color: #4FC3F7; }
+    #filterDropdownLabel {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      flex: 1;
+    }
+    /* Use the same `‹` character as the prev/next nav arrows so the chevron
+       reads the same visually; rotate it to point down/up. */
+    .filter-dropdown-chevron {
+      display: inline-block;
+      color: #888;
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 1;
+      transform: rotate(-90deg);
+      flex-shrink: 0;
+    }
+
+    /* PLAY AUDIO button — full row height, with a checkbox indicator */
+    .controls-row #muteBtn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      align-self: stretch;
+      padding: 0 12px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+    .audio-checkbox {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 1.5px solid currentColor;
+      border-radius: 3px;
+      position: relative;
+      flex-shrink: 0;
+    }
+    #muteBtn.audio-on .audio-checkbox::after {
+      content: '';
+      position: absolute;
+      top: 0px;
+      left: 3px;
+      width: 4px;
+      height: 8px;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: rotate(45deg);
+    }
+
+    .filter-popup-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1100;
+      display: flex;
       flex-direction: column;
-      padding: 8px 12px;
-      gap: 10px;
+      background: #0a0a14;
       overflow-y: auto;
     }
-    .photo-side { min-height: 50vw; max-height: 60vh; }
-    .meta-panel { width: 100%; flex-shrink: 0; flex-direction: row; flex-wrap: wrap; gap: 8px; overflow-y: visible; }
-    .calendar-promo {
+    .filter-popup-close {
       width: 100%;
+      background: #12121f;
+      border: 0;
+      border-bottom: 1px solid #2a2a4e;
+      color: #e0e0e0;
+      padding: 14px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: inherit;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    .filter-popup-close:hover { background: #1a1a2e; }
+    .filter-popup-close-chevron {
+      display: inline-block;
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 1;
+      transform: rotate(90deg);
+    }
+    .filter-popup-body {
+      padding: 14px 16px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+    .filter-section h4 {
+      color: #888;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin: 0 0 8px;
+    }
+    .filter-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 4px;
+      color: #e0e0e0;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .filter-option:hover { background: rgba(255,255,255,0.03); }
+    .filter-option input {
+      width: 18px;
+      height: 18px;
+      accent-color: #4FC3F7;
+      cursor: pointer;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .filter-option em {
+      display: block;
+      color: #888;
+      font-size: 11px;
+      font-style: normal;
+      margin-top: 2px;
+    }
+
+    /* On mobile the photo is flush: no inset from the sides and flush with
+       the bottom border of the filters row. The viewer reserves space for
+       the sheet up to the middle snap. Beyond that the sheet overlaps. */
+    .viewer {
+      flex-direction: column;
+      padding: 0;
+      gap: 0;
+      overflow: hidden;
+      padding-bottom: calc(min(var(--vh) - var(--sheet-top-y), var(--sheet-middle-h)) + 4px);
+    }
+    /* Middle snap: let the photo extend slightly past the sheet's top edge
+       so a sliver of image peeks through the rounded sheet corners. */
+    body.sheet-state-middle .viewer {
+      padding-bottom: calc(var(--sheet-middle-h) - 24px);
+    }
+    .photo-side {
+      flex: 1;
+      min-height: 0;
+      max-height: none;
+    }
+    .photo-container {
+      border: 0;
+      border-radius: 0;
+    }
+    /* On mobile, fill the container width with the photo and crop vertical
+       overflow rather than letterboxing. */
+    .photo-img {
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    /* descHover lives inside the bottom sheet on mobile (moved by JS) */
+    .photo-side .photo-links { display: none; }
+
+    /* ---------- BOTTOM SHEET ---------- */
+    .meta-panel {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      max-width: 100%;
+      max-height: none;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      gap: 0;
+      /* Bottom padding includes home-indicator gutter so the last scroll
+         row (data-sources) isn't clipped behind the indicator. */
+      padding: 0 0 calc(24px + var(--safe-bottom));
+      background: #0a0a14;
+      border-top: 1px solid #1a1a2e;
+      border-radius: 14px 14px 0 0;
+      box-shadow: 0 -8px 24px rgba(0,0,0,0.5);
+      z-index: 100;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      transition: top 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+      /* default = middle */
+      top: calc(var(--vh) - var(--sheet-middle-h));
+    }
+    .meta-panel.sheet-open    { top: 35vh; }
+    .meta-panel.sheet-middle  { top: calc(var(--vh) - var(--sheet-middle-h)); }
+    .meta-panel.sheet-closed  { top: calc(var(--vh) - var(--sheet-handle-h) - var(--safe-bottom)); overflow-y: hidden; }
+    .meta-panel.sheet-dragging { transition: none; }
+
+    /* Handle floats absolutely over the orion map; only the drag bar is
+       visible in open/middle states. Closed state lets the handle stretch
+       to fill the visible sheet area and reveal the title. */
+    .bottom-sheet-handle {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 6px;
+      padding: 8px 16px 14px; /* generous bottom padding = comfortable touch target */
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: none;
+      background: transparent;
+    }
+    .meta-panel.sheet-dragging .bottom-sheet-handle { cursor: grabbing; }
+    .sheet-handle-bar {
+      width: 44px;
+      height: 4px;
+      background: #888;
+      border-radius: 2px;
+      box-shadow: 0 0 4px rgba(0,0,0,0.5); /* legible over the orion map */
+    }
+    .sheet-handle-title {
+      color: #aaa;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    /* In closed state, stretch the handle to fill the (small) sheet so the
+       title sits over a solid background. Bottom padding accounts for the
+       iPhone home-indicator gutter so the title isn't sitting under it. */
+    .meta-panel.sheet-closed .bottom-sheet-handle {
+      bottom: 0;
+      justify-content: center;
+      background: #0a0a14;
+      padding: 8px 16px calc(8px + var(--safe-bottom));
+    }
+
+    /* Reorder: orion map first so it's the only thing visible at the middle snap.
+       Orion map is flush with sheet edges (no margin/border); the handle floats
+       on top of it. */
+    .traj-section {
+      order: 1;
+      margin: 0;
+      padding: 0;
+      border: none;
+      border-radius: 14px 14px 0 0;
+      background: rgba(0,0,0,0.35);
+      flex-shrink: 0;
+      max-height: 140px;
+      overflow: hidden;
+    }
+    .traj-section canvas {
+      border-radius: 14px 14px 0 0;
+      width: 100%;
+      height: 122px; /* leaves room for the trajectory label, total ≤140px */
+      object-fit: contain;
+      display: block;
+    }
+    .traj-label { padding-bottom: 4px; }
+    .meta-panel > .calendar-promo { order: 2; margin: 10px 12px 0; flex-shrink: 0; }
+    .desc-hover { order: 3; margin: 10px 12px 0; width: auto; flex-shrink: 0; }
+    .meta-panel > .meta-section:not(#descSection) { order: 4; margin: 10px 12px 0; flex-shrink: 0; }
+    .meta-panel > #descSection { order: 5; margin: 10px 12px 0; flex-shrink: 0; }
+    .meta-panel > .data-sources { order: 6; margin-top: 14px; flex-shrink: 0; }
+
+    /* Title only visible when sheet is closed */
+    .sheet-handle-title { display: none; }
+    .meta-panel.sheet-closed .sheet-handle-title { display: block; }
+
+    .meta-section { padding: 12px; }
+    .meta-field { margin-bottom: 8px; }
+    .meta-value.time-value { font-size: 13px; }
+
+    /* Keep nav arrows centered in the visible photo area
+       (the photo-container shrinks with sheet state, so absolute centering
+       there tracks the middle of the viewport above the sheet). */
+    .nav-arrow {
+      width: 36px;
+      height: 52px;
+      font-size: 24px;
+    }
+    .nav-prev { left: 0; }
+    .nav-next { right: 0; }
+    .photo-desc-toggle { padding: 12px 14px; }
+    .desc-hover-tip { font-size: 13px; line-height: 1.65; }
+
+    /* Calendar promo — inline inside the sheet (original template) */
+    .calendar-promo {
+      width: auto;
       display: flex;
       align-items: center;
       gap: 12px;
     }
-    .calendar-cover-wrap {
-      width: 80px;
-      flex-shrink: 0;
-    }
-    .calendar-cover {
-      width: 80px;
-      aspect-ratio: 1;
-      border-radius: 6px;
-    }
+    .calendar-cover-wrap { width: 80px; flex-shrink: 0; }
+    .calendar-cover { width: 80px; aspect-ratio: 1; border-radius: 6px; }
     .calendar-countdown { display: none; }
     .calendar-body { padding: 8px 0; }
     .calendar-title { font-size: 12px; }
     .calendar-subtitle { display: none; }
-    .calendar-countdown-mobile { display: block; font-size: 11px; color: var(--accent); font-weight: 600; margin-top: 2px; }
+    .calendar-countdown-mobile { display: block; font-size: 11px; color: #4FC3F7; font-weight: 600; margin-top: 2px; }
     .calendar-link { margin-top: 6px; padding: 6px 14px; display: inline-block; font-size: 10px; }
-    .meta-section { flex: 1; min-width: 140px; padding: 10px; }
-    .meta-field { margin-bottom: 6px; }
-    .meta-value.time-value { font-size: 13px; }
-    /* Fix nav arrows to consistent screen position on mobile */
-    .nav-arrow {
-      position: fixed;
-      top: auto;
-      bottom: 50vh;
-      transform: none;
-      width: 36px;
-      height: 52px;
-      font-size: 24px;
-      z-index: 50;
-    }
-    .nav-prev { left: 0; }
-      .nav-next { right: 0; }
-    .photo-desc-toggle { padding: 12px 14px; }
-    .desc-hover-tip { font-size: 13px; line-height: 1.65; }
   }
 
   @media (max-width: 480px) {
     #header .subtitle { font-size: 10px; }
     #header .disclaimer { display: none; }
-    .photo-side { min-height: 40vw; }
-    .meta-panel { flex-direction: column; }
     .meta-section { min-width: unset; }
   }
 </style>
@@ -764,6 +1203,10 @@
 
 <!-- Controls row -->
 <div class="controls-row">
+  <button class="filter-dropdown-trigger" id="filterDropdownTrigger" type="button" onclick="openFilterPopup()">
+    <span id="filterDropdownLabel">Showing All Photos and Videos</span>
+    <span class="filter-dropdown-chevron" aria-hidden="true">&#x2039;</span>
+  </button>
   <button class="filter-btn active" data-filter="all">All Photos and Video</button>
   <button class="filter-btn" data-filter="spacecraft">Crew Photos Only</button>
   <button class="filter-btn" data-filter="exterior">Spacecraft Exterior</button>
@@ -776,7 +1219,7 @@
   <span class="filter-sep">|</span>
   <button class="filter-btn" data-filter="videos">Videos</button>
   <span class="filter-sep">|</span>
-  <button class="filter-btn" id="muteBtn" title="Toggle mission audio">Add Audio</button>
+  <button class="filter-btn" id="muteBtn" title="Toggle mission audio"><span class="audio-checkbox" aria-hidden="true"></span><span>PLAY AUDIO</span></button>
   <span class="audio-now" id="audioNow"></span>
   <div class="controls-spacer"></div>
   <span class="info-text" id="photoCounter">1 / 220</span>
@@ -790,6 +1233,7 @@
       <video id="currentVideo" class="photo-img" style="display:none" controls playsinline preload="none"></video>
       <button class="nav-arrow nav-prev" id="prevBtn" title="Previous photo">‹</button>
       <button class="nav-arrow nav-next" id="nextBtn" title="Next photo">›</button>
+      <button class="photo-desc-btn" id="photoDescBtn" type="button" onclick="showDescPopup()" style="display:none">Show Desc</button>
     </div>
     <div class="photo-links">
       <div class="desc-hover" id="descHover" style="display:none">
@@ -800,7 +1244,11 @@
       </div>
     </div>
   </div>
-  <div class="meta-panel">
+  <div class="meta-panel" id="metaPanel">
+    <div class="bottom-sheet-handle" id="sheetHandle" role="button" aria-label="Toggle information panel">
+      <div class="sheet-handle-bar"></div>
+      <div class="sheet-handle-title" id="sheetHandleTitle">Show More Information</div>
+    </div>
     <div class="traj-section">
       <canvas id="trajCanvas" width="400" height="200"></canvas>
       <div class="traj-label" id="trajLabel"></div>
@@ -1909,12 +2357,12 @@ function updatePhoto() {
     descTip.textContent = fullDesc || '';
     descTip.classList.remove('open');
     document.getElementById('descToggleBtn').setAttribute('aria-expanded', 'false');
-    descHover.style.display = fullDesc ? '' : 'none';
+    setPhotoDescription(fullDesc);
   } else {
     titleRow.style.display = 'none';
     descTip.classList.remove('open');
     document.getElementById('descToggleBtn').setAttribute('aria-expanded', 'false');
-    descHover.style.display = 'none';
+    setPhotoDescription(null);
   }
   document.getElementById('metaPhotographer').textContent = photo.p;
   document.getElementById('metaLocation').textContent = photo.loc;
@@ -2262,7 +2710,7 @@ document.addEventListener('keydown', (e) => {
 
 document.getElementById('muteBtn').addEventListener('click', function() {
   audioMuted = !audioMuted;
-  this.textContent = audioMuted ? 'Add Audio' : 'Audio On';
+  this.classList.toggle('audio-on', !audioMuted);
   this.classList.toggle('active', !audioMuted);
   document.getElementById('audioDots').style.display = audioMuted ? 'none' : 'block';
   if (audioMuted && currentAudio) {
@@ -2325,6 +2773,113 @@ window.toggleDescTip = function() {
   btn.setAttribute('aria-expanded', open ? 'true' : 'false');
 };
 
+// --- PHOTO DESCRIPTION BUTTON + POPUP ---
+// A small translucent "Show Desc" button sits in the top-left of the photo.
+// Clicking it always opens the description in a modal popup.
+function setPhotoDescription(text) {
+  const btn = document.getElementById('photoDescBtn');
+  const descHover = document.getElementById('descHover');
+  if (btn) {
+    if (text) { btn.style.display = ''; btn.dataset.text = text; }
+    else      { btn.style.display = 'none'; btn.dataset.text = ''; }
+  }
+  // Desktop UI — restored. CSS hides this on mobile so it doesn't double up
+  // with the new top-left "Show Desc" pill.
+  if (descHover) descHover.style.display = text ? '' : 'none';
+}
+
+window.showDescPopup = function() {
+  const btn = document.getElementById('photoDescBtn');
+  const text = (btn && btn.dataset.text) || '';
+  if (!text) return;
+  document.getElementById('descPopupText').textContent = text;
+  document.getElementById('descPopupModal').style.display = 'flex';
+};
+
+window.closeDescPopup = function() {
+  const modal = document.getElementById('descPopupModal');
+  if (modal) modal.style.display = 'none';
+};
+
+// --- MOBILE FILTER DROPDOWN ---
+// On mobile we replace the inline filter row with a "Showing X" outlined
+// dropdown trigger that opens a full-screen popup. The popup's inputs are
+// just thin wrappers — they programmatically click the existing filter
+// buttons so the underlying filter logic stays unchanged.
+window.openFilterPopup = function() {
+  syncFilterPopupState();
+  const m = document.getElementById('filterPopupModal');
+  if (m) m.style.display = 'flex';
+};
+window.closeFilterPopup = function() {
+  const m = document.getElementById('filterPopupModal');
+  if (m) m.style.display = 'none';
+};
+
+function syncFilterPopupState() {
+  const activeFilter = document.querySelector('[data-filter].active');
+  const dfValue = activeFilter ? activeFilter.dataset.filter : null;
+  // WHERE: All is the implicit default whenever the active filter is not
+  // a where-specific one (i.e. "all" or "videos" both map to All here).
+  const whereVal = (dfValue === 'spacecraft' || dfValue === 'exterior') ? dfValue : 'all';
+  document.querySelectorAll('input[name="filter-where"]').forEach(r => {
+    r.checked = (r.value === whereVal);
+  });
+  // CAMERAS
+  document.querySelectorAll('input[data-cam-input]').forEach(input => {
+    const btn = document.querySelector('[data-cam="' + input.dataset.camInput + '"]');
+    input.checked = !!(btn && btn.classList.contains('active'));
+  });
+  // MEDIA TYPE
+  const videosBox = document.getElementById('filterVideosOnly');
+  if (videosBox) videosBox.checked = (dfValue === 'videos');
+  updateFilterDropdownLabel();
+}
+
+function updateFilterDropdownLabel() {
+  const label = document.getElementById('filterDropdownLabel');
+  if (!label) return;
+  const activeFilter = document.querySelector('[data-filter].active');
+  const dfValue = activeFilter ? activeFilter.dataset.filter : null;
+  const activeCams = Array.from(document.querySelectorAll('[data-cam].active'));
+  const parts = [];
+  if (dfValue === 'spacecraft') parts.push('Crew Photos');
+  else if (dfValue === 'exterior') parts.push('Spacecraft Exterior');
+  else if (dfValue === 'videos') parts.push('Videos Only');
+  if (activeCams.length) {
+    parts.push(activeCams.length + ' Camera' + (activeCams.length > 1 ? 's' : ''));
+  }
+  label.textContent = parts.length ? ('Showing ' + parts.join(' • ')) : 'Showing All Photos and Videos';
+}
+
+// Use event delegation so wiring works even though the popup markup lives
+// after this <script> in the document (the popup HTML hasn't been parsed
+// yet when this code runs).
+document.addEventListener('change', e => {
+  const t = e.target;
+  if (!t || t.tagName !== 'INPUT') return;
+  let btn = null;
+  if (t.matches('input[name="filter-where"]')) {
+    if (!t.checked) return;
+    btn = document.querySelector('[data-filter="' + t.value + '"]');
+  } else if (t.matches('input[data-cam-input]')) {
+    btn = document.querySelector('[data-cam="' + t.dataset.camInput + '"]');
+  } else if (t.id === 'filterVideosOnly') {
+    btn = document.querySelector(t.checked ? '[data-filter="videos"]' : '[data-filter="all"]');
+  } else {
+    return;
+  }
+  if (btn) btn.click();
+  setTimeout(syncFilterPopupState, 0);
+});
+
+// Keep the dropdown label in sync whenever the underlying filter buttons
+// are clicked (whether from the inline desktop UI or via popup proxies).
+document.querySelectorAll('.filter-btn').forEach(b => {
+  b.addEventListener('click', () => setTimeout(updateFilterDropdownLabel, 0));
+});
+updateFilterDropdownLabel();
+
 // --- CALENDAR DISMISS ---
 window.dismissCalendar = function() {
   const el = document.getElementById('calendarPromo');
@@ -2371,8 +2926,200 @@ setInterval(updateCountdown, 3600000); // refresh hourly
 document.getElementById('calendarCover').src = MEDIA_BASE + 'web/Farther.png';
 
 
+// --- MOBILE BOTTOM SHEET ---
+// On mobile we relocate #descHover into the meta-panel so the description
+// toggle, the orion map, and the photo info live together inside a single
+// fixed-position bottom sheet with three snap points.
+const MOBILE_MQ = window.matchMedia('(max-width: 768px)');
+const sheetEl = document.getElementById('metaPanel');
+const sheetHandleEl = document.getElementById('sheetHandle');
+const descHoverEl = document.getElementById('descHover');
+const trajSectionEl = document.querySelector('.traj-section');
+const photoLinksEl = document.querySelector('.photo-side .photo-links');
+
+let sheetState = 'middle'; // 'open' | 'middle' | 'closed'
+
+function applySheetState(state) {
+  sheetState = state;
+  sheetEl.classList.remove('sheet-open', 'sheet-middle', 'sheet-closed');
+  sheetEl.classList.add('sheet-' + state);
+  document.body.classList.remove('sheet-state-open', 'sheet-state-middle', 'sheet-state-closed');
+  document.body.classList.add('sheet-state-' + state);
+  sheetEl.style.top = '';
+}
+
+function snapPxFor(state) {
+  const vh = window.innerHeight;
+  const handle = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sheet-handle-h')) || 56;
+  const middleH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sheet-middle-h')) || 290;
+  if (state === 'open') return vh * 0.35;
+  if (state === 'middle') return vh - middleH;
+  return vh - handle;
+}
+
+function relocateDescHoverForViewport() {
+  if (!descHoverEl) return;
+  if (MOBILE_MQ.matches) {
+    if (descHoverEl.parentElement !== sheetEl) {
+      // Place it right after the orion map so it's grouped with photo info.
+      trajSectionEl.insertAdjacentElement('afterend', descHoverEl);
+    }
+  } else {
+    if (photoLinksEl && descHoverEl.parentElement !== photoLinksEl) {
+      photoLinksEl.appendChild(descHoverEl);
+    }
+  }
+}
+
+// --- Drag/snap interaction ---
+let dragStartY = 0;
+let dragStartTop = 0;
+let dragging = false;
+
+function getSheetTopPx() {
+  return sheetEl.getBoundingClientRect().top;
+}
+
+function pickClosestSnap(currentTop) {
+  const targets = ['open', 'middle', 'closed'];
+  let best = 'open';
+  let bestDist = Infinity;
+  for (const s of targets) {
+    const d = Math.abs(currentTop - snapPxFor(s));
+    if (d < bestDist) { bestDist = d; best = s; }
+  }
+  return best;
+}
+
+function onPointerDown(e) {
+  if (!MOBILE_MQ.matches) return;
+  dragging = true;
+  dragStartY = (e.touches ? e.touches[0].clientY : e.clientY);
+  dragStartTop = getSheetTopPx();
+  sheetEl.classList.add('sheet-dragging');
+  // Lock current position so transitions don't fight the drag.
+  sheetEl.style.top = dragStartTop + 'px';
+}
+
+function onPointerMove(e) {
+  if (!dragging) return;
+  const y = (e.touches ? e.touches[0].clientY : e.clientY);
+  const delta = y - dragStartY;
+  const minTop = window.innerHeight * 0.35;
+  const maxTop = snapPxFor('closed');
+  const next = Math.max(minTop, Math.min(maxTop, dragStartTop + delta));
+  sheetEl.style.top = next + 'px';
+  if (e.cancelable) e.preventDefault();
+}
+
+function onPointerUp() {
+  if (!dragging) return;
+  dragging = false;
+  sheetEl.classList.remove('sheet-dragging');
+  const finalTop = getSheetTopPx();
+  const dragDistance = Math.abs(finalTop - dragStartTop);
+  if (dragDistance < 6) {
+    // Treat as tap: cycle through the snaps expanding upward, then dismiss.
+    // closed → middle → open → closed
+    applySheetState(sheetState === 'closed' ? 'middle' : sheetState === 'middle' ? 'open' : 'closed');
+  } else {
+    applySheetState(pickClosestSnap(finalTop));
+  }
+}
+
+if (sheetHandleEl) {
+  sheetHandleEl.addEventListener('touchstart', onPointerDown, { passive: true });
+  sheetHandleEl.addEventListener('touchmove', onPointerMove, { passive: false });
+  sheetHandleEl.addEventListener('touchend', onPointerUp);
+  sheetHandleEl.addEventListener('touchcancel', onPointerUp);
+  sheetHandleEl.addEventListener('mousedown', onPointerDown);
+  window.addEventListener('mousemove', onPointerMove);
+  window.addEventListener('mouseup', onPointerUp);
+}
+
+function syncMobileLayout() {
+  relocateDescHoverForViewport();
+  if (MOBILE_MQ.matches) {
+    applySheetState(sheetState);
+  } else {
+    sheetEl.classList.remove('sheet-open', 'sheet-middle', 'sheet-closed', 'sheet-dragging');
+    document.body.classList.remove('sheet-state-open', 'sheet-state-middle', 'sheet-state-closed');
+    sheetEl.style.top = '';
+  }
+}
+
+syncMobileLayout();
+window.addEventListener('resize', syncMobileLayout);
+
+
 })(); // end init
 </script>
+
+<!-- Mobile filter popup -->
+<div class="filter-popup-modal" id="filterPopupModal" style="display:none">
+  <button class="filter-popup-close" type="button" onclick="closeFilterPopup()">
+    <span>Close</span>
+    <span class="filter-popup-close-chevron" aria-hidden="true">&#x2039;</span>
+  </button>
+  <div class="filter-popup-body">
+    <div class="filter-section">
+      <h4>Where Media Was Taken</h4>
+      <label class="filter-option">
+        <input type="radio" name="filter-where" value="all" checked>
+        <span>All Photos and Video</span>
+      </label>
+      <label class="filter-option">
+        <input type="radio" name="filter-where" value="spacecraft">
+        <span>Crew Photos Only</span>
+      </label>
+      <label class="filter-option">
+        <input type="radio" name="filter-where" value="exterior">
+        <span>Spacecraft Exterior</span>
+      </label>
+    </div>
+    <div class="filter-section">
+      <h4>What Camera</h4>
+      <label class="filter-option">
+        <input type="checkbox" data-cam-input="d5a">
+        <span>D5 #1 <em>Nikon D5 body 3500015 on Orion</em></span>
+      </label>
+      <label class="filter-option">
+        <input type="checkbox" data-cam-input="d5b">
+        <span>D5 #2 <em>Nikon D5 body 3500017 on Orion</em></span>
+      </label>
+      <label class="filter-option">
+        <input type="checkbox" data-cam-input="z9">
+        <span>Z9 <em>Nikon Z 9 body 3920019 on Orion</em></span>
+      </label>
+      <label class="filter-option">
+        <input type="checkbox" data-cam-input="gopro">
+        <span>GoPro <em>exterior camera</em></span>
+      </label>
+      <label class="filter-option">
+        <input type="checkbox" data-cam-input="iphone">
+        <span>iPhone <em>crew iPhone 17 Pro Max</em></span>
+      </label>
+    </div>
+    <div class="filter-section">
+      <h4>Media Type</h4>
+      <label class="filter-option">
+        <input type="checkbox" id="filterVideosOnly">
+        <span>Videos Only</span>
+      </label>
+    </div>
+  </div>
+</div>
+
+<!-- Long image-description popup -->
+<div class="desc-popup-modal" id="descPopupModal" style="display:none">
+  <div class="desc-popup-backdrop" onclick="closeDescPopup()"></div>
+  <div class="desc-popup-card" role="dialog" aria-modal="true" aria-labelledby="descPopupHeading">
+    <button class="desc-popup-close" type="button" onclick="closeDescPopup()" aria-label="Close">&times;</button>
+    <h3 id="descPopupHeading">Image Description</h3>
+    <div class="desc-popup-text" id="descPopupText"></div>
+  </div>
+</div>
+
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
