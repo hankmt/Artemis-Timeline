@@ -23,6 +23,7 @@ Desktop.ini
 *~
 .vscode/
 .idea/
+.claude/
 
 # Dependencies / build output
 node_modules/
