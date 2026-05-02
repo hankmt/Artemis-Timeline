@@ -9,16 +9,17 @@
 
 <!-- Open Graph / link preview -->
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://artemistimeline.com/">
 <meta property="og:title" content="Artemis II Photo Timeline">
 <meta property="og:description" content="An interactive photo timeline of NASA's Artemis II mission — scrub through every crew moment, lunar flyby shot, and audio clip from April 1–10, 2026.">
-<meta property="og:image" content="web/9608627.jpg">
+<meta property="og:image" content="https://artemistimeline.com/web/9608627.jpg">
 <meta property="og:image:alt" content="NASA astronaut Christina Koch sits in a U.S. Navy Seahawk on the flight deck of USS John P. Murtha after returning from space">
 
 <!-- Twitter card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Artemis II Photo Timeline">
 <meta name="twitter:description" content="An interactive photo timeline of NASA's Artemis II mission — scrub through every crew moment, lunar flyby shot, and audio clip from April 1–10, 2026.">
-<meta name="twitter:image" content="web/9608627.jpg">
+<meta name="twitter:image" content="https://artemistimeline.com/web/9608627.jpg">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   /* Viewport-height token: 100dvh on supporting browsers (adapts to iOS
@@ -1988,7 +1989,7 @@ const T_SPAN = T_END - T_START;
 
 // Zoom/pan state
 let viewStart = T_START;
-let viewEnd = T_END;
+let viewEnd = (window.innerWidth <= 768) ? T_START + 24 * 3600000 : T_END;
 const MIN_VIEW_SPAN = 2 * 3600000;
 
 // Convert a Unix timestamp to EDT date components.
