@@ -295,6 +295,7 @@
     flex-direction: column;
     min-width: 0;
     min-height: 0;
+    position: relative;
   }
   .photo-container {
     flex: 1;
@@ -1131,9 +1132,7 @@
     .meta-field { margin-bottom: 8px; }
     .meta-value.time-value { font-size: 13px; }
 
-    /* Keep nav arrows centered in the visible photo area
-       (the photo-container shrinks with sheet state, so absolute centering
-       there tracks the middle of the viewport above the sheet). */
+    /* Nav arrows are positioned relative to photo-side on all breakpoints */
     .nav-arrow {
       width: 48px;
       height: 72px;
@@ -1233,10 +1232,10 @@
     <div class="photo-container">
       <img id="currentPhoto" class="photo-img" alt="Current photo">
       <video id="currentVideo" class="photo-img" style="display:none" controls playsinline preload="none"></video>
-      <button class="nav-arrow nav-prev" id="prevBtn" title="Previous photo">‹</button>
-      <button class="nav-arrow nav-next" id="nextBtn" title="Next photo">›</button>
       <button class="photo-desc-btn" id="photoDescBtn" type="button" onclick="showDescPopup()" style="display:none">Show Desc</button>
     </div>
+    <button class="nav-arrow nav-prev" id="prevBtn" title="Previous photo">‹</button>
+    <button class="nav-arrow nav-next" id="nextBtn" title="Next photo">›</button>
     <div class="photo-links">
       <div class="desc-hover" id="descHover" style="display:none">
         <button class="photo-desc-toggle" id="descToggleBtn" type="button" onclick="toggleDescTip()" aria-expanded="false">
@@ -1393,6 +1392,7 @@ function getFlickrId(filename) {
 // These are populated by loadPhotoData() from the PHOTO_DATA global (photos.js).
 let PHOTO_TITLES = {};   // photoId → display title
 let PHOTO_DESCS = {};    // photoId → long description (for hover tooltip)
+let descPanelOpen = false; // tracks user's open/closed intent across navigation
 let PHOTOS = [];         // [{t, f, p, loc, cam, set, sc, b, v, ext, desc}, ...]
 let AUDIO = [];
 
@@ -2355,14 +2355,13 @@ function updatePhoto() {
   const titleEl = document.getElementById('metaTitle');
   const descHover = document.getElementById('descHover');
   const descTip = document.getElementById('descHoverTip');
-  const descWasOpen = descTip.classList.contains('open');
   if (nasaTitle) {
     titleEl.textContent = nasaTitle;
     titleRow.style.display = '';
     const fullDesc = flickrId ? (PHOTO_DESCS[flickrId] || nasaTitle) : nasaTitle;
     descTip.textContent = fullDesc || '';
-    // Preserve open/closed state of description panel across photo navigation
-    if (descWasOpen && fullDesc) {
+    // Restore user's open/closed intent when the photo has a description
+    if (descPanelOpen && fullDesc) {
       descTip.classList.add('open');
       document.getElementById('descToggleBtn').setAttribute('aria-expanded', 'true');
     } else {
@@ -2850,6 +2849,7 @@ window.toggleDescTip = function() {
   if (!tip || !btn) return;
   const open = tip.classList.toggle('open');
   btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  descPanelOpen = open;
 };
 
 // --- PHOTO DESCRIPTION BUTTON + POPUP ---
