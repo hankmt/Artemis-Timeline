@@ -314,6 +314,17 @@
     object-fit: contain;
     border-radius: 4px;
   }
+  .photo-img.fullscreen {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 50;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-color: #0d0d1a;
+  }
   /* Prev/Next arrow overlays on photo */
   .nav-arrow {
     position: absolute;
@@ -2723,8 +2734,10 @@ function ensurePhotoInView() {
 
 function goPrev() { if (currentPhotoIdx > 0) { currentPhotoIdx--; updatePhoto(); ensurePhotoInView(); } }
 function goNext() { if (currentPhotoIdx < filteredPhotos.length - 1) { currentPhotoIdx++; updatePhoto(); ensurePhotoInView(); } }
+function toggleFullscreenPhoto() { const currentPhoto = document.getElementById("currentPhoto"); currentPhoto.classList.toggle("fullscreen"); }
 document.getElementById('prevBtn').addEventListener('click', goPrev);
 document.getElementById('nextBtn').addEventListener('click', goNext);
+document.getElementById("currentPhoto").addEventListener("click", toggleFullscreenPhoto);
 
 
 // --- FILTERS ---
