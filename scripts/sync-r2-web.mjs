@@ -39,6 +39,10 @@ const MIME_TYPES = {
 };
 const CACHE_CONTROL =
   process.env.R2_CACHE_CONTROL || "public, max-age=31536000, immutable";
+const CONCURRENCY = Math.max(
+  1,
+  Number.parseInt(process.env.R2_WEB_CONCURRENCY || "8", 10) || 8,
+);
 
 const args = new Set(process.argv.slice(2));
 const isCheckOnly = args.has("--check") || args.has("--dry-run");
@@ -156,6 +160,65 @@ function shouldUpload(remote, localSize, localChecksum) {
   return { upload: false, reason: "up-to-date" };
 }
 
+async function processFile({ client, bucket, keyPrefix, file }) {
+  const fileStats = await stat(file.absolutePath);
+  const checksum = await sha256File(file.absolutePath);
+  const key = `${keyPrefix}/${file.relativePath}`;
+  const remote = await inspectRemoteObject(client, bucket, key);
+  const decision = shouldUpload(remote, fileStats.size, checksum);
+
+  if (!decision.upload) {
+    console.log(`skip  ${key} (${decision.reason})`);
+    return { uploaded: 0, skipped: 1 };
+  }
+
+  console.log(
+    `${isCheckOnly ? "would " : ""}upload ${key} (${decision.reason})`,
+  );
+
+  if (isCheckOnly) {
+    return { uploaded: 1, skipped: 0 };
+  }
+
+  await client.send(
+    new PutObjectCommand({
+      Bucket: bucket,
+      Key: key,
+      Body: createReadStream(file.absolutePath),
+      ContentType: MIME_TYPES[file.extension] || "application/octet-stream",
+      CacheControl: CACHE_CONTROL,
+      Metadata: {
+        sha256: checksum,
+      },
+    }),
+  );
+
+  return { uploaded: 1, skipped: 0 };
+}
+
+async function runWithConcurrency(items, worker, concurrency) {
+  const results = new Array(items.length);
+  let nextIndex = 0;
+
+  async function runWorker() {
+    while (true) {
+      const currentIndex = nextIndex;
+      nextIndex += 1;
+
+      if (currentIndex >= items.length) {
+        return;
+      }
+
+      results[currentIndex] = await worker(items[currentIndex], currentIndex);
+    }
+  }
+
+  const workerCount = Math.min(concurrency, items.length);
+  await Promise.all(Array.from({ length: workerCount }, () => runWorker()));
+
+  return results;
+}
+
 async function main() {
   const bucket = getEnv("R2_BUCKET");
   const keyPrefix = (process.env.R2_WEB_PREFIX || "web").replace(
@@ -170,46 +233,13 @@ async function main() {
     return;
   }
 
-  let uploaded = 0;
-  let skipped = 0;
-
-  for (const file of files) {
-    const fileStats = await stat(file.absolutePath);
-    const checksum = await sha256File(file.absolutePath);
-    const key = `${keyPrefix}/${file.relativePath}`;
-    const remote = await inspectRemoteObject(client, bucket, key);
-    const decision = shouldUpload(remote, fileStats.size, checksum);
-
-    if (!decision.upload) {
-      skipped += 1;
-      console.log(`skip  ${key} (${decision.reason})`);
-      continue;
-    }
-
-    console.log(
-      `${isCheckOnly ? "would " : ""}upload ${key} (${decision.reason})`,
-    );
-
-    if (isCheckOnly) {
-      uploaded += 1;
-      continue;
-    }
-
-    await client.send(
-      new PutObjectCommand({
-        Bucket: bucket,
-        Key: key,
-        Body: createReadStream(file.absolutePath),
-        ContentType: MIME_TYPES[file.extension] || "application/octet-stream",
-        CacheControl: CACHE_CONTROL,
-        Metadata: {
-          sha256: checksum,
-        },
-      }),
-    );
-
-    uploaded += 1;
-  }
+  const results = await runWithConcurrency(
+    files,
+    (file) => processFile({ client, bucket, keyPrefix, file }),
+    CONCURRENCY,
+  );
+  const uploaded = results.reduce((sum, result) => sum + result.uploaded, 0);
+  const skipped = results.reduce((sum, result) => sum + result.skipped, 0);
 
   console.log("");
   console.log(`Processed ${files.length} local media files.`);
@@ -217,6 +247,7 @@ async function main() {
     `${isCheckOnly ? "Would upload" : "Uploaded"} ${uploaded} file(s).`,
   );
   console.log(`Skipped ${skipped} file(s).`);
+  console.log(`Used concurrency ${CONCURRENCY}.`);
 }
 
 main().catch((error) => {
