@@ -1,8 +1,13 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  import TimelineActivityBars from "./timeline/TimelineActivityBars.svelte";
+  import TimelineAudioDots from "./timeline/TimelineAudioDots.svelte";
+  import TimelineHoverTip from "./timeline/TimelineHoverTip.svelte";
+  import TimelineLabels from "./timeline/TimelineLabels.svelte";
+  import TimelinePhotoDots from "./timeline/TimelinePhotoDots.svelte";
+  import TimelineZoomControls from "./timeline/TimelineZoomControls.svelte";
   import {
     ACTIVITY_COLORS,
-    ACTIVITY_LABELS,
     SCHEDULE,
     getActivityAt,
   } from "../lib/mission-data.js";
@@ -91,14 +96,6 @@
       ),
     }))
     .filter(({ pct }) => pct >= -2 && pct <= 102);
-  $: photoDotsHtml = visiblePhotos
-    .map(({ photo, index, pct }) => {
-      const classes = ["photo-dot"];
-      if (photo.sc) classes.push("spacecraft");
-      if (index === currentPhotoIdx) classes.push("active");
-      return `<div class="${classes.join(" ")}" style="left:${pct}%" data-idx="${index}" title="${escapeHtmlAttr(photo.loc || "")}"></div>`;
-    })
-    .join("");
 
   $: visibleAudio = audio
     .map((clip) => ({
@@ -109,29 +106,9 @@
       ),
     }))
     .filter(({ pct }) => pct >= -2 && pct <= 102);
-  $: audioDotsHtml = visibleAudio
-    .map(({ clip, pct }) => {
-      const classes = ["audio-dot"];
-      if (currentClipFile === clip.f) classes.push("playing");
-      return `<div class="${classes.join(" ")}" style="left:${pct}%" data-audio-file="${escapeHtmlAttr(clip.f || "")}"><span class="audio-tip">🔊 ${escapeHtmlText(clip.desc || "")}</span></div>`;
-    })
-    .join("");
 
   function timeToViewPercent(time) {
     return Math.max(-5, Math.min(105, ((time - localViewStart) / span) * 100));
-  }
-
-  function escapeHtmlText(value) {
-    return String(value)
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;");
-  }
-
-  function escapeHtmlAttr(value) {
-    return escapeHtmlText(value)
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#39;");
   }
 
   function buildLabels(start, currentSpan) {
@@ -400,21 +377,7 @@
     zoomTimeline(factor, 0.5);
   }
 
-  function handlePhotoDotsClick(event) {
-    const dot = event.target.closest(".photo-dot[data-idx]");
-    if (!dot) return;
-    event.stopPropagation();
-    const index = Number(dot.getAttribute("data-idx"));
-    if (Number.isFinite(index)) {
-      dispatch("selectphoto", { index, ensureInView: false });
-    }
-  }
-
-  function handleAudioDotsClick(event) {
-    const dot = event.target.closest(".audio-dot[data-audio-file]");
-    if (!dot) return;
-    event.stopPropagation();
-    const file = dot.getAttribute("data-audio-file");
+  function handleAudioSelect(file) {
     const clip = audio.find((entry) => entry.f === file);
     if (clip) {
       selectNearestPhotoFromTime(clip.t, true);
@@ -438,73 +401,39 @@
     on:pointercancel={finishPointer}
     on:wheel={handleWheel}
   >
-    <div class="timeline-activity-bars">
-      {#each visibleActivities as { activity, left, width }}
-        <div
-          class:observation-bar={activity.a === "observation"}
-          class:observation-bar-plain={activity.a === "deep-obs"}
-          class="timeline-activity-bar"
-          style={`left:${left}%;width:${width}%;background:${ACTIVITY_COLORS[activity.a]}`}
-          title={activity.l}
-        >
-          {#if width > 8}
-            {ACTIVITY_LABELS[activity.a]}
-          {/if}
-        </div>
-      {/each}
-    </div>
+    <TimelineActivityBars {visibleActivities} />
 
-    <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
-    <div class="timeline-photo-dots" on:click={handlePhotoDotsClick}>
-      {@html photoDotsHtml}
-    </div>
+    <TimelinePhotoDots
+      {visiblePhotos}
+      {currentPhotoIdx}
+      on:selectphoto={(event) => dispatch("selectphoto", event.detail)}
+    />
 
     {#if showAudioDots}
-      <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
-      <div class="timeline-audio-dots" on:click={handleAudioDotsClick}>
-        {@html audioDotsHtml}
-      </div>
+      <TimelineAudioDots
+        {visibleAudio}
+        {currentClipFile}
+        on:selectaudio={(event) => handleAudioSelect(event.detail.file)}
+      />
     {/if}
 
     <div class="timeline-playhead" style={playheadStyle}></div>
 
     {#if hoverVisible}
-      <div class="timeline-hover-tip" style={`left:${hoverLeft}px`}>
-        <div class="tip-time">{hoverTime}</div>
-        <div class="tip-activity">
-          <span class="tip-dot" style={`background:${hoverColor}`}></span><span
-            class="tip-label">{hoverActivity}</span
-          >
-        </div>
-      </div>
+      <TimelineHoverTip
+        {hoverLeft}
+        {hoverTime}
+        {hoverActivity}
+        {hoverColor}
+      />
     {/if}
 
-    <div class="zoom-controls">
-      <button
-        class="zoom-btn"
-        title="Zoom in"
-        type="button"
-        on:click|stopPropagation={() => zoom(0.5)}>+</button
-      >
-      <button
-        class="zoom-btn"
-        title="Zoom out"
-        type="button"
-        on:click|stopPropagation={() => zoom(2)}>−</button
-      >
-      <button
-        class="zoom-btn"
-        title="Reset zoom"
-        type="button"
-        on:click|stopPropagation={() => emitView(timelineStart, timelineEnd)}
-        >⊙</button
-      >
-    </div>
+    <TimelineZoomControls
+      on:zoomin={() => zoom(0.5)}
+      on:zoomout={() => zoom(2)}
+      on:reset={() => emitView(timelineStart, timelineEnd)}
+    />
   </div>
 
-  <div class="timeline-labels">
-    {#each labels as label}
-      <span>{label}</span>
-    {/each}
-  </div>
+  <TimelineLabels {labels} />
 </div>
