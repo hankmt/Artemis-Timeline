@@ -15,7 +15,8 @@ config();
 
 const REPO_ROOT = process.cwd();
 const WEB_DIR = path.join(REPO_ROOT, "web");
-const MEDIA_EXTENSIONS = new Set([
+const AUDIO_DIR = path.join(REPO_ROOT, "audio");
+const WEB_EXTENSIONS = new Set([
   ".avif",
   ".gif",
   ".jpeg",
@@ -26,14 +27,28 @@ const MEDIA_EXTENSIONS = new Set([
   ".webm",
   ".webp",
 ]);
+const AUDIO_EXTENSIONS = new Set([
+  ".aac",
+  ".flac",
+  ".m4a",
+  ".mp3",
+  ".ogg",
+  ".wav",
+]);
 const MIME_TYPES = {
+  ".aac": "audio/aac",
   ".avif": "image/avif",
+  ".flac": "audio/flac",
   ".gif": "image/gif",
   ".jpeg": "image/jpeg",
   ".jpg": "image/jpeg",
+  ".m4a": "audio/mp4",
   ".mp4": "video/mp4",
+  ".mp3": "audio/mpeg",
+  ".ogg": "audio/ogg",
   ".png": "image/png",
   ".svg": "image/svg+xml",
+  ".wav": "audio/wav",
   ".webm": "video/webm",
   ".webp": "image/webp",
 };
@@ -41,7 +56,10 @@ const CACHE_CONTROL =
   process.env.R2_CACHE_CONTROL || "public, max-age=31536000, immutable";
 const CONCURRENCY = Math.max(
   1,
-  Number.parseInt(process.env.R2_WEB_CONCURRENCY || "8", 10) || 8,
+  Number.parseInt(
+    process.env.R2_UPLOAD_CONCURRENCY || process.env.R2_WEB_CONCURRENCY || "8",
+    10,
+  ) || 8,
 );
 
 const args = new Set(process.argv.slice(2));
@@ -68,8 +86,17 @@ function createClient() {
   });
 }
 
-async function listMediaFiles(dirPath, relativeBase = "") {
-  const entries = await readdir(dirPath, { withFileTypes: true });
+async function listMediaFiles(target, dirPath, relativeBase = "") {
+  let entries;
+  try {
+    entries = await readdir(dirPath, { withFileTypes: true });
+  } catch (error) {
+    if (error?.code === "ENOENT") {
+      return [];
+    }
+    throw error;
+  }
+
   const files = [];
 
   for (const entry of entries) {
@@ -77,19 +104,21 @@ async function listMediaFiles(dirPath, relativeBase = "") {
     const relativePath = path.join(relativeBase, entry.name);
 
     if (entry.isDirectory()) {
-      files.push(...(await listMediaFiles(absolutePath, relativePath)));
+      files.push(...(await listMediaFiles(target, absolutePath, relativePath)));
       continue;
     }
 
     const extension = path.extname(entry.name).toLowerCase();
-    if (!MEDIA_EXTENSIONS.has(extension)) {
+    if (!target.extensions.has(extension)) {
       continue;
     }
 
     files.push({
       absolutePath,
+      key: `${target.keyPrefix}/${relativePath.split(path.sep).join("/")}`,
       relativePath: relativePath.split(path.sep).join("/"),
       extension,
+      sourceLabel: target.label,
     });
   }
 
@@ -160,10 +189,10 @@ function shouldUpload(remote, localSize, localChecksum) {
   return { upload: false, reason: "up-to-date" };
 }
 
-async function processFile({ client, bucket, keyPrefix, file }) {
+async function processFile({ client, bucket, file }) {
   const fileStats = await stat(file.absolutePath);
   const checksum = await sha256File(file.absolutePath);
-  const key = `${keyPrefix}/${file.relativePath}`;
+  const key = file.key;
   const remote = await inspectRemoteObject(client, bucket, key);
   const decision = shouldUpload(remote, fileStats.size, checksum);
 
@@ -221,28 +250,53 @@ async function runWithConcurrency(items, worker, concurrency) {
 
 async function main() {
   const bucket = getEnv("R2_BUCKET");
-  const keyPrefix = (process.env.R2_WEB_PREFIX || "web").replace(
-    /^\/+|\/+$/g,
-    "",
-  );
   const client = createClient();
+  const targets = [
+    {
+      label: "web",
+      dirPath: WEB_DIR,
+      extensions: WEB_EXTENSIONS,
+      keyPrefix: (process.env.R2_WEB_PREFIX || "web").replace(/^\/+|\/+$/g, ""),
+    },
+    {
+      label: "audio",
+      dirPath: AUDIO_DIR,
+      extensions: AUDIO_EXTENSIONS,
+      keyPrefix: (process.env.R2_AUDIO_PREFIX || "audio").replace(
+        /^\/+|\/+$/g,
+        "",
+      ),
+    },
+  ];
 
-  const files = await listMediaFiles(WEB_DIR);
+  const filesPerTarget = await Promise.all(
+    targets.map(async (target) => ({
+      label: target.label,
+      files: await listMediaFiles(target, target.dirPath),
+    })),
+  );
+  const files = filesPerTarget.flatMap((entry) => entry.files);
+
   if (files.length === 0) {
-    console.log("No media files found in web/.");
+    console.log("No media files found in web/ or audio/.");
     return;
   }
 
+  for (const entry of filesPerTarget) {
+    console.log(`Found ${entry.files.length} ${entry.label} file(s).`);
+  }
+  console.log("");
+
   const results = await runWithConcurrency(
     files,
-    (file) => processFile({ client, bucket, keyPrefix, file }),
+    (file) => processFile({ client, bucket, file }),
     CONCURRENCY,
   );
   const uploaded = results.reduce((sum, result) => sum + result.uploaded, 0);
   const skipped = results.reduce((sum, result) => sum + result.skipped, 0);
 
   console.log("");
-  console.log(`Processed ${files.length} local media files.`);
+  console.log(`Processed ${files.length} local web/audio file(s).`);
   console.log(
     `${isCheckOnly ? "Would upload" : "Uploaded"} ${uploaded} file(s).`,
   );

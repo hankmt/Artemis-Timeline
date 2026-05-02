@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "web/**"
+      - "audio/**"
       - "scripts/sync-r2-web.mjs"
       - ".github/workflows/sync-r2-web.yml"
   workflow_dispatch:
@@ -39,5 +40,6 @@ jobs:
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           R2_BUCKET: ${{ secrets.R2_BUCKET }}
           R2_WEB_PREFIX: ${{ vars.R2_WEB_PREFIX || 'web' }}
+          R2_AUDIO_PREFIX: ${{ vars.R2_AUDIO_PREFIX || 'audio' }}
           R2_CACHE_CONTROL: public, max-age=31536000, immutable
         run: pnpm r2:web:sync
