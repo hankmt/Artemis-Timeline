@@ -4,13 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "serve": "vite"
+    "serve": "vite",
+    "r2:web:check": "node scripts/sync-r2-web.mjs --check",
+    "r2:web:sync": "node scripts/sync-r2-web.mjs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.15.0",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.908.0",
+    "dotenv": "^17.4.2",
     "vite": "^8.0.10"
   }
 }

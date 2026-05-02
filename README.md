@@ -20,11 +20,40 @@ Images and audio are hosted on Cloudflare R2 and referenced via `MEDIA_BASE` at 
 ## Adding photos
 
 1. Create a 1600px-wide web version of your image: `convert original.jpg -resize 1600x -quality 85 web/filename.jpg`
-2. Upload it to the `web/` folder in the R2 bucket (via the Cloudflare dashboard or `wrangler r2 object put artemistimeline/web/filename.jpg --file=web/filename.jpg`).
+2. Upload it to the `web/` folder in the R2 bucket by running `pnpm r2:web:sync`, or let the GitHub Action handle it automatically on push.
 3. Open `admin.html` in your browser and click **+ Add Photo**.
 4. Fill in the filename, timestamp, photographer, camera info, etc. The entry will sort into chronological position automatically.
 5. Click **Export photos.js** to download the updated data file.
 6. Replace `photos.js` with the exported version and deploy.
+
+### Automatic R2 sync
+
+The repo includes a media sync script at `scripts/sync-r2-web.mjs` and a GitHub Action at `.github/workflows/sync-r2-web.yml`.
+
+The sync script scans `web/` for image and video files, checks whether each object already exists in R2, compares the stored `sha256` metadata and object size, and uploads only files that are missing or changed. Uploaded objects get `Cache-Control: public, max-age=31536000, immutable` for CDN-friendly caching.
+
+Required environment variables:
+
+- `R2_ACCOUNT_ID`
+- `R2_ACCESS_KEY_ID`
+- `R2_SECRET_ACCESS_KEY`
+- `R2_BUCKET`
+
+Optional environment variables:
+
+- `R2_WEB_PREFIX` — object prefix inside the bucket, defaults to `web`
+- `R2_CACHE_CONTROL` — overrides the cache header for uploaded objects
+
+Local usage:
+
+- Preview what would upload: `pnpm r2:web:check`
+- Upload missing or changed media: `pnpm r2:web:sync`
+
+GitHub Actions setup:
+
+1. Add repository secrets named `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, and `R2_BUCKET`.
+2. Optionally add a repository variable `R2_WEB_PREFIX` if you want a prefix other than `web`.
+3. Push changes to `main` that touch `web/`, or run the workflow manually from the Actions tab.
 
 ### Timestamps
 

@@ -1,0 +1,47 @@
+name: Sync Web Media To R2
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'web/**'
+      - 'scripts/sync-r2-web.mjs'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/sync-r2-web.yml'
+  workflow_dispatch:
+
+jobs:
+  sync-web-media:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Sync web media to Cloudflare R2
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          R2_WEB_PREFIX: ${{ vars.R2_WEB_PREFIX || 'web' }}
+          R2_CACHE_CONTROL: public, max-age=31536000, immutable
+        run: pnpm r2:web:sync
