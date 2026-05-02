@@ -215,6 +215,7 @@
     transition: color 0.15s, border-color 0.15s, background 0.15s;
   }
   .zoom-btn:hover { color: #fff; border-color: #4FC3F7; background: #24243e; }
+  #timelineExpandBtn { display: none; }
 
   /* Controls row */
   .controls-row {
@@ -792,16 +793,41 @@
     #header h1 { font-size: 18px; }
     #header .crew { display: none; }
     .timeline-bar { padding: 4px 12px; }
-    .timeline-track { height: 34px; }
-    .timeline-playhead { top: 0; height: 34px; }
-    /* Keep activity bars, audio dots, and day labels visible on mobile */
+    .timeline-track { height: 40px; }
+    .timeline-bar.timeline-expanded .timeline-track { height: 92px; }
+    .timeline-playhead { top: 0; height: 40px; }
+    .timeline-bar.timeline-expanded .timeline-playhead { height: 92px; }
+    /* Keep activity bars and audio dots visible on mobile; labels shown only in expanded timeline */
     .timeline-labels { font-size: 8px; margin-top: 4px; }
     .timeline-audio-dots { display: block; }
     .audio-dot { width: 6px; height: 6px; top: 2px; transform: translateX(-3px); }
     .photo-dot { width: 6px; height: 6px; top: 2px; transform: translateX(-3px); }
     .photo-dot.active { width: 8px; height: 8px; top: 1px; transform: translateX(-4px); }
-    /* Hover tooltip and zoom controls don't work well on touch — keep hidden */
-    .zoom-controls { display: none; }
+
+    /* Timeline compact/expanded states */
+    .timeline-activity-bars { height: 14px; }
+    .timeline-bar.timeline-expanded .timeline-activity-bars { height: 24px; }
+    .timeline-activity-bar { height: 14px; line-height: 14px; font-size: 7px; border-radius: 2px; }
+    .timeline-bar.timeline-expanded .timeline-activity-bar { height: 24px; line-height: 24px; font-size: 9px; border-radius: 3px; }
+
+    /* Labels hidden in compact */
+    .timeline-labels { display: none; }
+    .timeline-bar.timeline-expanded .timeline-labels { display: flex; }
+
+    /* Dots compact */
+    .photo-dot { top: 1px; }
+    .photo-dot.active { top: 1px; }
+    .audio-dot { top: 1px; }
+
+    /* Dots expanded */
+    .timeline-bar.timeline-expanded .photo-dot { width: 8px; height: 8px; top: 2px; transform: translateX(-4px); }
+    .timeline-bar.timeline-expanded .audio-dot { width: 8px; height: 8px; top: 2px; transform: translateX(-4px); }
+    .timeline-bar.timeline-expanded .photo-dot.active { width: 10px; height: 10px; top: 1px; transform: translateX(-5px); }
+    /* Hover tooltip hidden on touch; zoom controls stay visible */
+    .zoom-controls { display: flex; top: 2px; right: 2px; padding: 2px; }
+    .zoom-btn { width: 26px; height: 26px; font-size: 14px; line-height: 24px; }
+    #timelineExpandBtn { display: block; }
+    .zoom-hint { display: none; }
     .timeline-hover-tip { display: none !important; }
     .mobile-activity { display: none; }
     .controls-row { padding: 6px 12px; gap: 6px; }
@@ -1203,6 +1229,7 @@
       <button class="zoom-btn" id="zoomInBtn" title="Zoom in">+</button>
       <button class="zoom-btn" id="zoomOutBtn" title="Zoom out">−</button>
       <button class="zoom-btn" id="zoomResetBtn" title="Reset zoom">⊙</button>
+      <button class="zoom-btn" id="timelineExpandBtn" title="Expand timeline">↓</button>
     </div>
   </div>
   <div class="timeline-labels">
@@ -2415,6 +2442,7 @@ function updatePhoto() {
   } else {
     mEl.innerHTML = `<span class="activity-name" style="color:#555">Between activities</span>`;
   }
+  ensurePhotoInView();
   updateAudio(photo.t);
   renderTimeline();
   // Update URL hash to current photo slug (without triggering hashchange)
@@ -2716,10 +2744,36 @@ timelineTrack.addEventListener('pointercancel', finishTimelinePointer);
 document.getElementById('zoomInBtn').addEventListener('click', (e) => { e.stopPropagation(); zoomTimeline(0.5, 0.5); });
 document.getElementById('zoomOutBtn').addEventListener('click', (e) => { e.stopPropagation(); zoomTimeline(2, 0.5); });
 document.getElementById('zoomResetBtn').addEventListener('click', (e) => { e.stopPropagation(); viewStart = T_START; viewEnd = T_END; renderTimeline(); });
+document.getElementById('timelineExpandBtn').addEventListener('click', (e) => {
+  e.stopPropagation();
+  const bar = document.querySelector('.timeline-bar');
+  const isExpanded = bar.classList.toggle('timeline-expanded');
+  const btn = document.getElementById('timelineExpandBtn');
+  btn.title = isExpanded ? 'Collapse timeline' : 'Expand timeline';
+  btn.textContent = isExpanded ? '↑' : '↓';
+  if (isExpanded) {
+    viewStart = T_START;
+    viewEnd = T_END;
+    renderTimeline();
+  } else {
+    ensurePhotoInView();
+  }
+});
 
 // --- Navigation ---
 function ensurePhotoInView() {
   const t = filteredPhotos[currentPhotoIdx].t;
+  const isMobileCompact = window.matchMedia('(max-width: 768px)').matches && !document.querySelector('.timeline-bar').classList.contains('timeline-expanded');
+  if (isMobileCompact) {
+    const span = 24 * 3600000;
+    viewStart = t - span / 2;
+    viewEnd = t + span / 2;
+    if (viewStart < T_START) { viewStart = T_START; viewEnd = viewStart + span; }
+    if (viewEnd > T_END) { viewEnd = T_END; viewStart = viewEnd - span; }
+    if (viewStart < T_START) viewStart = T_START;
+    renderTimeline();
+    return;
+  }
   if (t < viewStart || t > viewEnd) {
     const span = viewEnd - viewStart;
     viewStart = t - span / 2;
