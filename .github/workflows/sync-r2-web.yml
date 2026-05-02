@@ -5,11 +5,11 @@ on:
     branches:
       - main
     paths:
-      - 'web/**'
-      - 'scripts/sync-r2-web.mjs'
-      - 'package.json'
-      - 'pnpm-lock.yaml'
-      - '.github/workflows/sync-r2-web.yml'
+      - "web/**"
+      - "scripts/sync-r2-web.mjs"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - ".github/workflows/sync-r2-web.yml"
   workflow_dispatch:
 
 jobs:
