@@ -14,16 +14,52 @@
     getMoonDistKm,
     getTrajIndex,
     interpTraj,
-  } from '../lib/mission-data.js';
+  } from "../lib/mission-data.js";
 
   export let timestamp = null;
   export let useMetric = false;
 
   let canvas;
-  let label = 'Trajectory · JPL Horizons data';
+  let label = "Trajectory · JPL Horizons data";
 
   function rotXY(x, y) {
     return [x * TRAJ_COS - y * TRAJ_SIN, x * TRAJ_SIN + y * TRAJ_COS];
+  }
+
+  function buildCanvasPoints(points, toCanvas) {
+    return points.map(([x, y]) => {
+      const [cx, cy] = toCanvas(x, y);
+      return { x: cx, y: cy };
+    });
+  }
+
+  function strokeSmoothPath(ctx, points, strokeStyle, lineWidth) {
+    if (points.length < 2) return;
+
+    ctx.beginPath();
+    ctx.moveTo(points[0].x, points[0].y);
+
+    if (points.length === 2) {
+      ctx.lineTo(points[1].x, points[1].y);
+    } else {
+      for (let index = 1; index < points.length - 1; index += 1) {
+        const current = points[index];
+        const next = points[index + 1];
+        const midX = (current.x + next.x) / 2;
+        const midY = (current.y + next.y) / 2;
+        ctx.quadraticCurveTo(current.x, current.y, midX, midY);
+      }
+
+      const penultimate = points[points.length - 2];
+      const last = points[points.length - 1];
+      ctx.quadraticCurveTo(penultimate.x, penultimate.y, last.x, last.y);
+    }
+
+    ctx.strokeStyle = strokeStyle;
+    ctx.lineWidth = lineWidth;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.stroke();
   }
 
   function draw() {
@@ -38,7 +74,7 @@
     canvas.height = height * dpr;
     canvas.style.height = `${height}px`;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, width, height);
 
@@ -61,7 +97,10 @@
     const rangeY = Math.max((maxY - minY) * 1.2, rangeX * 0.18);
     const centerX = (minX + maxX) / 2;
     const centerY = (minY + maxY) / 2;
-    const scale = Math.min((width - padding * 2) / rangeX, (height - padding * 2) / rangeY);
+    const scale = Math.min(
+      (width - padding * 2) / rangeX,
+      (height - padding * 2) / rangeY,
+    );
 
     function toCanvas(x, y) {
       const [rx, ry] = rotXY(x, y);
@@ -71,21 +110,14 @@
       ];
     }
 
-    ctx.beginPath();
-    ctx.strokeStyle = 'rgba(79,195,247,0.12)';
-    ctx.lineWidth = 1.5;
-    TRAJ_SC.forEach((point, index) => {
-      const [x, y] = toCanvas(point[0], point[1]);
-      if (index === 0) ctx.moveTo(x, y);
-      else ctx.lineTo(x, y);
-    });
-    ctx.stroke();
+    const fullPathPoints = buildCanvasPoints(TRAJ_SC, toCanvas);
+    strokeSmoothPath(ctx, fullPathPoints, "rgba(79,195,247,0.12)", 1.5);
 
     const completedIndex = Math.floor(getTrajIndex(timestamp));
     if (completedIndex > 0) {
-      for (let index = 1; index < Math.min(completedIndex + 1, TRAJ_SC.length); index += 1) {
-        const [x0, y0] = toCanvas(TRAJ_SC[index - 1][0], TRAJ_SC[index - 1][1]);
-        const [x1, y1] = toCanvas(TRAJ_SC[index][0], TRAJ_SC[index][1]);
+      const maxIndex = Math.min(completedIndex + 1, TRAJ_SC.length);
+
+      for (let index = 1; index < maxIndex; index += 1) {
         const fraction = index / TRAJ_SC.length;
         let red;
         let green;
@@ -103,11 +135,27 @@
           blue = Math.round(255 - (255 - 60) * t);
         }
 
+        const start = TRAJ_SC[index - 1];
+        const current = TRAJ_SC[index];
+        const next = TRAJ_SC[Math.min(index + 1, TRAJ_SC.length - 1)];
+
+        const [startX, startY] = toCanvas(start[0], start[1]);
+        const [currentX, currentY] = toCanvas(current[0], current[1]);
+        const [nextX, nextY] = toCanvas(next[0], next[1]);
+
+        const startMidX = (startX + currentX) / 2;
+        const startMidY = (startY + currentY) / 2;
+        const endMidX = (currentX + nextX) / 2;
+        const endMidY = (currentY + nextY) / 2;
+
         ctx.beginPath();
-        ctx.moveTo(x0, y0);
-        ctx.lineTo(x1, y1);
+        if (index === 1) ctx.moveTo(startX, startY);
+        else ctx.moveTo(startMidX, startMidY);
+        ctx.quadraticCurveTo(currentX, currentY, endMidX, endMidY);
         ctx.strokeStyle = `rgba(${red},${green},${blue},0.7)`;
         ctx.lineWidth = 2;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
         ctx.stroke();
       }
     }
@@ -115,74 +163,87 @@
     const [earthX, earthY] = toCanvas(0, 0);
     ctx.beginPath();
     ctx.arc(earthX, earthY, 4, 0, Math.PI * 2);
-    ctx.fillStyle = '#4488cc';
+    ctx.fillStyle = "#4488cc";
     ctx.fill();
     ctx.beginPath();
     ctx.arc(earthX, earthY, 6, 0, Math.PI * 2);
-    ctx.strokeStyle = 'rgba(68,136,204,0.3)';
+    ctx.strokeStyle = "rgba(68,136,204,0.3)";
     ctx.lineWidth = 1;
     ctx.stroke();
-    ctx.fillStyle = '#6699bb';
-    ctx.font = '8px Inter, sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText('Earth', earthX, earthY - 8);
+    ctx.fillStyle = "#6699bb";
+    ctx.font = "8px Inter, sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText("Earth", earthX, earthY - 8);
 
     const moonPosition = interpTraj(TRAJ_MOON, TRAJ_STEP_MOON, timestamp);
     const [moonX, moonY] = toCanvas(moonPosition[0], moonPosition[1]);
-    if (moonX > -20 && moonX < width + 20 && moonY > -20 && moonY < height + 20) {
+    if (
+      moonX > -20 &&
+      moonX < width + 20 &&
+      moonY > -20 &&
+      moonY < height + 20
+    ) {
       ctx.beginPath();
       ctx.arc(moonX, moonY, 3, 0, Math.PI * 2);
-      ctx.fillStyle = '#888';
+      ctx.fillStyle = "#888";
       ctx.fill();
-      ctx.fillStyle = '#666';
-      ctx.font = '7px Inter, sans-serif';
-      ctx.fillText('Moon', moonX, moonY - 7);
+      ctx.fillStyle = "#666";
+      ctx.font = "7px Inter, sans-serif";
+      ctx.fillText("Moon", moonX, moonY - 7);
     }
 
-    const spacecraft = timestamp < TRAJ_START ? [0, 0] : interpTraj(TRAJ_SC, TRAJ_STEP_SC, timestamp);
+    const spacecraft =
+      timestamp < TRAJ_START
+        ? [0, 0]
+        : interpTraj(TRAJ_SC, TRAJ_STEP_SC, timestamp);
     const [sx, sy] = toCanvas(spacecraft[0], spacecraft[1]);
     const glow = ctx.createRadialGradient(sx, sy, 0, sx, sy, 10);
-    glow.addColorStop(0, 'rgba(79,195,247,0.6)');
-    glow.addColorStop(1, 'rgba(79,195,247,0)');
+    glow.addColorStop(0, "rgba(79,195,247,0.6)");
+    glow.addColorStop(1, "rgba(79,195,247,0)");
     ctx.beginPath();
     ctx.arc(sx, sy, 10, 0, Math.PI * 2);
     ctx.fillStyle = glow;
     ctx.fill();
     ctx.beginPath();
     ctx.arc(sx, sy, 3, 0, Math.PI * 2);
-    ctx.fillStyle = '#4FC3F7';
+    ctx.fillStyle = "#4FC3F7";
     ctx.fill();
-    ctx.strokeStyle = '#fff';
+    ctx.strokeStyle = "#fff";
     ctx.lineWidth = 0.8;
     ctx.stroke();
-    ctx.fillStyle = '#4FC3F7';
-    ctx.font = 'bold 7px Inter, sans-serif';
-    ctx.fillText('Orion', sx, sy > height / 2 ? sy - 8 : sy + 12);
+    ctx.fillStyle = "#4FC3F7";
+    ctx.font = "bold 7px Inter, sans-serif";
+    ctx.fillText("Orion", sx, sy > height / 2 ? sy - 8 : sy + 12);
 
     const [flybyX, flybyY] = toCanvas(TRAJ_SC[117][0], TRAJ_SC[117][1]);
-    ctx.fillStyle = 'rgba(255,255,255,0.3)';
-    ctx.font = '7px Inter, sans-serif';
-    ctx.fillText('Flyby', flybyX, flybyY - 7);
+    ctx.fillStyle = "rgba(255,255,255,0.3)";
+    ctx.font = "7px Inter, sans-serif";
+    ctx.fillText("Flyby", flybyX, flybyY - 7);
 
-    if (timestamp < TRAJ_START || timestamp > TRAJ_START + TRAJ_SC.length * TRAJ_STEP_SC) {
-      label = 'Trajectory · JPL Horizons data';
+    if (
+      timestamp < TRAJ_START ||
+      timestamp > TRAJ_START + TRAJ_SC.length * TRAJ_STEP_SC
+    ) {
+      label = "Trajectory · JPL Horizons data";
       return;
     }
 
     const earthDistance = getDisplayDistance(timestamp);
     const moonDistance = getMoonDistKm(timestamp) - MOON_RADIUS_KM;
-    const earthLabel = earthDistance === -1
-      ? 'Liftoff'
-      : earthDistance < 1
-        ? 'Near Earth'
+    const earthLabel =
+      earthDistance === -1
+        ? "Liftoff"
+        : earthDistance < 1
+          ? "Near Earth"
+          : useMetric
+            ? `${Math.round(earthDistance * 1.60934).toLocaleString()} km from Earth`
+            : `${Math.round(earthDistance).toLocaleString()} mi from Earth`;
+    const moonLabel =
+      moonDistance <= 0
+        ? "At the Moon"
         : useMetric
-          ? `${Math.round(earthDistance * 1.60934).toLocaleString()} km from Earth`
-          : `${Math.round(earthDistance).toLocaleString()} mi from Earth`;
-    const moonLabel = moonDistance <= 0
-      ? 'At the Moon'
-      : useMetric
-        ? `${Math.round(moonDistance).toLocaleString()} km from Moon`
-        : `${Math.round(moonDistance * KM_TO_MI).toLocaleString()} mi from Moon`;
+          ? `${Math.round(moonDistance).toLocaleString()} km from Moon`
+          : `${Math.round(moonDistance * KM_TO_MI).toLocaleString()} mi from Moon`;
 
     label = `${earthLabel}  ·  ${moonLabel}`;
   }
@@ -199,6 +260,6 @@
 <svelte:window on:resize={handleResize} />
 
 <div class="traj-section">
-  <canvas bind:this={canvas} width="400" height="200"></canvas>
-  <div class="traj-label">{label}</div>
+  <canvas bind:this={canvas} id="trajCanvas" width="400" height="200"></canvas>
+  <div class="traj-label" id="trajLabel">{label}</div>
 </div>

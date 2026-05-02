@@ -1,7 +1,12 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
-  import { ACTIVITY_COLORS, ACTIVITY_LABELS, SCHEDULE, getActivityAt } from '../lib/mission-data.js';
-  import { formatTimeShort } from '../lib/time.js';
+  import { createEventDispatcher } from "svelte";
+  import {
+    ACTIVITY_COLORS,
+    ACTIVITY_LABELS,
+    SCHEDULE,
+    getActivityAt,
+  } from "../lib/mission-data.js";
+  import { formatTimeShort } from "../lib/time.js";
 
   export let photos = [];
   export let audio = [];
@@ -18,9 +23,9 @@
   let trackEl;
   let hoverVisible = false;
   let hoverLeft = 0;
-  let hoverTime = '';
-  let hoverActivity = '';
-  let hoverColor = '#555';
+  let hoverTime = "";
+  let hoverActivity = "";
+  let hoverColor = "#555";
   let activePointerId = null;
   let pendingPointerId = null;
   let pendingStartX = 0;
@@ -28,32 +33,134 @@
   let dragMode = null;
   let lastPanX = 0;
   let dragMoved = false;
+  let scrubbing = false;
+  let localViewStart = 0;
+  let localViewEnd = 0;
+  let suppressPropSync = false;
 
   const MIN_VIEW_SPAN = 2 * 3600000;
 
-  $: span = Math.max(1, viewEnd - viewStart);
+  $: if (
+    !suppressPropSync &&
+    (viewStart !== localViewStart || viewEnd !== localViewEnd)
+  ) {
+    localViewStart = viewStart;
+    localViewEnd = viewEnd;
+  }
+
+  $: span = Math.max(1, localViewEnd - localViewStart);
   $: fullSpan = Math.max(1, timelineEnd - timelineStart);
   $: zoomedIn = span < fullSpan * 0.95;
   $: currentPhoto = photos[currentPhotoIdx] || null;
-  $: playheadPercent = currentPhoto ? timeToViewPercent(currentPhoto.t) : 0;
-  $: labels = buildLabels();
+  $: playheadPercent = currentPhoto
+    ? Math.max(
+        -5,
+        Math.min(105, ((currentPhoto.t - localViewStart) / span) * 100),
+      )
+    : 0;
+  $: playheadStyle = `left:${playheadPercent}%`;
+  $: labels = buildLabels(localViewStart, span);
+  $: visibleActivities = SCHEDULE.map((activity) => {
+    const left = Math.max(
+      -5,
+      Math.min(105, ((activity.s - localViewStart) / span) * 100),
+    );
+    const right = Math.max(
+      -5,
+      Math.min(105, ((activity.e - localViewStart) / span) * 100),
+    );
+    return {
+      activity,
+      left,
+      width: right - left,
+    };
+  }).filter(
+    ({ left, width, activity }) =>
+      left < 100 &&
+      width > 0 &&
+      ((activity.e - localViewStart) / span) * 100 > 0,
+  );
+
+  $: visiblePhotos = photos
+    .map((photo, index) => ({
+      photo,
+      index,
+      pct: Math.max(
+        -5,
+        Math.min(105, ((photo.t - localViewStart) / span) * 100),
+      ),
+    }))
+    .filter(({ pct }) => pct >= -2 && pct <= 102);
+  $: photoDotsHtml = visiblePhotos
+    .map(({ photo, index, pct }) => {
+      const classes = ["photo-dot"];
+      if (photo.sc) classes.push("spacecraft");
+      if (index === currentPhotoIdx) classes.push("active");
+      return `<div class="${classes.join(" ")}" style="left:${pct}%" data-idx="${index}" title="${escapeHtmlAttr(photo.loc || "")}"></div>`;
+    })
+    .join("");
+
+  $: visibleAudio = audio
+    .map((clip) => ({
+      clip,
+      pct: Math.max(
+        -5,
+        Math.min(105, ((clip.t - localViewStart) / span) * 100),
+      ),
+    }))
+    .filter(({ pct }) => pct >= -2 && pct <= 102);
+  $: audioDotsHtml = visibleAudio
+    .map(({ clip, pct }) => {
+      const classes = ["audio-dot"];
+      if (currentClipFile === clip.f) classes.push("playing");
+      return `<div class="${classes.join(" ")}" style="left:${pct}%" data-audio-file="${escapeHtmlAttr(clip.f || "")}"><span class="audio-tip">🔊 ${escapeHtmlText(clip.desc || "")}</span></div>`;
+    })
+    .join("");
 
   function timeToViewPercent(time) {
-    return Math.max(-5, Math.min(105, ((time - viewStart) / span) * 100));
+    return Math.max(-5, Math.min(105, ((time - localViewStart) / span) * 100));
   }
 
-  function buildLabels() {
-    const count = window.matchMedia('(max-width: 768px)').matches ? 6 : 11;
+  function escapeHtmlText(value) {
+    return String(value)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;");
+  }
+
+  function escapeHtmlAttr(value) {
+    return escapeHtmlText(value)
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#39;");
+  }
+
+  function buildLabels(start, currentSpan) {
+    const count = window.matchMedia("(max-width: 768px)").matches ? 6 : 11;
     return Array.from({ length: count }, (_, index) => {
-      const time = viewStart + (span * index) / (count - 1);
+      const time = start + (currentSpan * index) / (count - 1);
       const date = new Date(time);
-      if (span < 24 * 3600000) {
-        return date.toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'America/New_York' });
+      if (currentSpan < 24 * 3600000) {
+        return date.toLocaleString("en-US", {
+          hour: "numeric",
+          minute: "2-digit",
+          hour12: true,
+          timeZone: "America/New_York",
+        });
       }
-      if (span < 3 * 24 * 3600000) {
-        return date.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', hour12: true, timeZone: 'America/New_York' });
+      if (currentSpan < 3 * 24 * 3600000) {
+        return date.toLocaleString("en-US", {
+          month: "short",
+          day: "numeric",
+          hour: "numeric",
+          hour12: true,
+          timeZone: "America/New_York",
+        });
       }
-      return date.toLocaleString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
+      return date.toLocaleString("en-US", {
+        month: "short",
+        day: "numeric",
+        timeZone: "America/New_York",
+      });
     });
   }
 
@@ -74,13 +181,27 @@
 
   function emitView(start, end) {
     const next = clampRange(start, end);
-    dispatch('viewchange', { viewStart: next.start, viewEnd: next.end });
+    suppressPropSync = true;
+    localViewStart = next.start;
+    localViewEnd = next.end;
+    dispatch("viewchange", { viewStart: next.start, viewEnd: next.end });
+    queueMicrotask(() => {
+      suppressPropSync = false;
+    });
+  }
+
+  function setScrubbing(active) {
+    scrubbing = active;
+    if (!active) hoverVisible = false;
   }
 
   function getTimeFromClientX(clientX) {
     const rect = trackEl.getBoundingClientRect();
-    const fraction = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
-    return viewStart + span * fraction;
+    const fraction = Math.max(
+      0,
+      Math.min(1, (clientX - rect.left) / rect.width),
+    );
+    return localViewStart + span * fraction;
   }
 
   function selectNearestPhotoFromTime(time, ensureInView = false) {
@@ -94,7 +215,49 @@
         bestIndex = index;
       }
     });
-    dispatch('selectphoto', { index: bestIndex, ensureInView });
+    dispatch("selectphoto", { index: bestIndex, ensureInView });
+  }
+
+  function jumpToNearestPhotoForClientX(clientX) {
+    if (!photos.length) return;
+    const time = getTimeFromClientX(clientX);
+
+    let bestIndex = 0;
+    let bestDistance = Infinity;
+    photos.forEach((photo, index) => {
+      const distance = Math.abs(photo.t - time);
+      if (distance < bestDistance) {
+        bestDistance = distance;
+        bestIndex = index;
+      }
+    });
+
+    if (currentPhotoIdx !== bestIndex) {
+      dispatch("selectphoto", { index: bestIndex, ensureInView: false });
+
+      if (zoomedIn) {
+        const photoTime = photos[bestIndex].t;
+        const margin = span * 0.15;
+        if (
+          photoTime < localViewStart + margin ||
+          photoTime > localViewEnd - margin
+        ) {
+          const start = photoTime - span / 2;
+          emitView(start, start + span);
+        }
+      }
+      return;
+    }
+
+    dispatch("selectphoto", { index: bestIndex, ensureInView: false });
+  }
+
+  function zoomTimeline(factor, anchorFraction) {
+    const clampedAnchor = Math.max(0, Math.min(1, anchorFraction));
+    const newSpan = Math.max(MIN_VIEW_SPAN, Math.min(fullSpan, span * factor));
+    const anchor = localViewStart + span * clampedAnchor;
+    const start = anchor - newSpan * clampedAnchor;
+    emitView(start, start + newSpan);
   }
 
   function handleWheel(event) {
@@ -105,31 +268,35 @@
     if (event.shiftKey || Math.abs(event.deltaX) > Math.abs(event.deltaY)) {
       const deltaX = event.shiftKey ? event.deltaY * 0.5 : event.deltaX;
       const shift = (deltaX / rect.width) * span;
-      emitView(viewStart + shift, viewEnd + shift);
+      emitView(localViewStart + shift, localViewEnd + shift);
+      updateHover(event);
       return;
     }
 
     const factor = event.deltaY > 0 ? 1.15 : 0.87;
-    const newSpan = Math.max(MIN_VIEW_SPAN, Math.min(fullSpan, span * factor));
-    const anchor = viewStart + span * anchorFraction;
-    const start = anchor - newSpan * anchorFraction;
-    emitView(start, start + newSpan);
+    zoomTimeline(factor, anchorFraction);
   }
 
   function handlePointerDown(event) {
     if (event.button !== 0) return;
-    if (event.target.closest('.photo-dot, .audio-dot, .zoom-btn')) return;
+    if (event.target.closest(".photo-dot, .audio-dot, .zoom-btn")) return;
 
     hoverVisible = false;
     dragMoved = false;
 
-    if (event.pointerType === 'mouse') {
+    if (event.pointerType === "mouse") {
       activePointerId = event.pointerId;
-      trackEl.setPointerCapture(event.pointerId);
+      try {
+        trackEl.setPointerCapture(event.pointerId);
+      } catch {
+        activePointerId = null;
+        return;
+      }
       lastPanX = event.clientX;
-      dragMode = zoomedIn ? 'pan' : 'scrub';
-      if (dragMode === 'scrub') {
-        selectNearestPhotoFromTime(getTimeFromClientX(event.clientX), true);
+      dragMode = zoomedIn ? "pan" : "scrub";
+      if (dragMode === "scrub") {
+        setScrubbing(true);
+        jumpToNearestPhotoForClientX(event.clientX);
       }
       event.preventDefault();
       return;
@@ -142,16 +309,16 @@
 
   function handlePointerMove(event) {
     if (activePointerId === event.pointerId) {
-      if (dragMode === 'pan') {
+      if (dragMode === "pan") {
         const deltaX = event.clientX - lastPanX;
         if (Math.abs(deltaX) >= 2) dragMoved = true;
         const rect = trackEl.getBoundingClientRect();
         const shift = -(deltaX / rect.width) * span;
-        emitView(viewStart + shift, viewEnd + shift);
+        emitView(localViewStart + shift, localViewEnd + shift);
         lastPanX = event.clientX;
-      } else if (dragMode === 'scrub') {
+      } else if (dragMode === "scrub") {
         dragMoved = true;
-        selectNearestPhotoFromTime(getTimeFromClientX(event.clientX), true);
+        jumpToNearestPhotoForClientX(event.clientX);
       }
       event.preventDefault();
       return;
@@ -165,12 +332,18 @@
     if (Math.abs(dx) >= Math.abs(dy)) {
       activePointerId = event.pointerId;
       pendingPointerId = null;
-      trackEl.setPointerCapture(event.pointerId);
+      try {
+        trackEl.setPointerCapture(event.pointerId);
+      } catch {
+        activePointerId = null;
+        return;
+      }
       lastPanX = event.clientX;
       dragMoved = true;
-      dragMode = zoomedIn ? 'pan' : 'scrub';
-      if (dragMode === 'scrub') {
-        selectNearestPhotoFromTime(getTimeFromClientX(event.clientX), true);
+      dragMode = zoomedIn ? "pan" : "scrub";
+      if (dragMode === "scrub") {
+        setScrubbing(true);
+        jumpToNearestPhotoForClientX(event.clientX);
       }
       event.preventDefault();
     } else {
@@ -180,23 +353,24 @@
 
   function finishPointer(event) {
     if (activePointerId === event.pointerId) {
-      if (dragMode === 'pan' && !dragMoved) {
-        selectNearestPhotoFromTime(getTimeFromClientX(event.clientX), true);
+      if (dragMode === "pan" && !dragMoved) {
+        jumpToNearestPhotoForClientX(event.clientX);
       }
-      if (dragMode === 'scrub') {
-        selectNearestPhotoFromTime(getTimeFromClientX(event.clientX), true);
+      if (dragMode === "scrub") {
+        jumpToNearestPhotoForClientX(event.clientX);
       }
       if (trackEl.hasPointerCapture(event.pointerId)) {
         trackEl.releasePointerCapture(event.pointerId);
       }
       activePointerId = null;
       dragMode = null;
+      setScrubbing(false);
       return;
     }
 
     if (pendingPointerId === event.pointerId) {
       pendingPointerId = null;
-      selectNearestPhotoFromTime(getTimeFromClientX(event.clientX), true);
+      jumpToNearestPhotoForClientX(event.clientX);
     }
   }
 
@@ -218,68 +392,113 @@
     hoverVisible = true;
     hoverLeft = Math.max(60, Math.min(rect.width - 120, left));
     hoverTime = formatTimeShort(time);
-    hoverActivity = activity ? activity.l : 'No scheduled activity';
-    hoverColor = activity ? ACTIVITY_COLORS[activity.a] : '#555';
+    hoverActivity = activity ? activity.l : "No scheduled activity";
+    hoverColor = activity ? ACTIVITY_COLORS[activity.a] : "#555";
   }
 
   function zoom(factor) {
-    const newSpan = Math.max(MIN_VIEW_SPAN, Math.min(fullSpan, span * factor));
-    const start = currentPhoto ? currentPhoto.t - newSpan / 2 : viewStart;
-    emitView(start, start + newSpan);
+    zoomTimeline(factor, 0.5);
+  }
+
+  function handlePhotoDotsClick(event) {
+    const dot = event.target.closest(".photo-dot[data-idx]");
+    if (!dot) return;
+    event.stopPropagation();
+    const index = Number(dot.getAttribute("data-idx"));
+    if (Number.isFinite(index)) {
+      dispatch("selectphoto", { index, ensureInView: false });
+    }
+  }
+
+  function handleAudioDotsClick(event) {
+    const dot = event.target.closest(".audio-dot[data-audio-file]");
+    if (!dot) return;
+    event.stopPropagation();
+    const file = dot.getAttribute("data-audio-file");
+    const clip = audio.find((entry) => entry.f === file);
+    if (clip) {
+      selectNearestPhotoFromTime(clip.t, true);
+    }
   }
 </script>
 
 <div class="timeline-bar">
-  <div aria-label="Mission timeline scrubber" bind:this={trackEl} class:zoomed={zoomedIn} class="timeline-track" role="application" on:mousemove={updateHover} on:mouseleave={() => (hoverVisible = false)} on:pointerdown={handlePointerDown} on:pointermove={handlePointerMove} on:pointerup={finishPointer} on:pointercancel={finishPointer} on:wheel={handleWheel}>
+  <div
+    aria-label="Mission timeline scrubber"
+    bind:this={trackEl}
+    class:zoomed={zoomedIn}
+    class:scrubbing
+    class="timeline-track"
+    role="application"
+    on:mousemove={updateHover}
+    on:mouseleave={() => (hoverVisible = false)}
+    on:pointerdown={handlePointerDown}
+    on:pointermove={handlePointerMove}
+    on:pointerup={finishPointer}
+    on:pointercancel={finishPointer}
+    on:wheel={handleWheel}
+  >
     <div class="timeline-activity-bars">
-      {#each SCHEDULE as activity}
-        {@const left = Math.max(0, timeToViewPercent(activity.s))}
-        {@const right = Math.min(100, timeToViewPercent(activity.e))}
-        {#if right > 0 && left < 100 && right - left > 0}
-          <div class:observation-bar={activity.a === 'observation'} class:observation-bar-plain={activity.a === 'deep-obs'} class="timeline-activity-bar" style={`left:${left}%;width:${right - left}%;background:${ACTIVITY_COLORS[activity.a]}`} title={activity.l}>
-            {#if right - left > 8}
-              {ACTIVITY_LABELS[activity.a]}
-            {/if}
-          </div>
-        {/if}
+      {#each visibleActivities as { activity, left, width }}
+        <div
+          class:observation-bar={activity.a === "observation"}
+          class:observation-bar-plain={activity.a === "deep-obs"}
+          class="timeline-activity-bar"
+          style={`left:${left}%;width:${width}%;background:${ACTIVITY_COLORS[activity.a]}`}
+          title={activity.l}
+        >
+          {#if width > 8}
+            {ACTIVITY_LABELS[activity.a]}
+          {/if}
+        </div>
       {/each}
     </div>
 
-    <div class="timeline-photo-dots">
-      {#each photos as photo, index}
-        {@const pct = timeToViewPercent(photo.t)}
-        {#if pct >= -2 && pct <= 102}
-          <button class:active={index === currentPhotoIdx} class:spacecraft={photo.sc} class="photo-dot" style={`left:${pct}%`} title={photo.loc} type="button" on:click|stopPropagation={() => dispatch('selectphoto', { index, ensureInView: false })}></button>
-        {/if}
-      {/each}
+    <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
+    <div class="timeline-photo-dots" on:click={handlePhotoDotsClick}>
+      {@html photoDotsHtml}
     </div>
 
     {#if showAudioDots}
-      <div class="timeline-audio-dots">
-        {#each audio as clip}
-          {@const pct = timeToViewPercent(clip.t)}
-          {#if pct >= -2 && pct <= 102}
-            <button class:playing={currentClipFile === clip.f} class="audio-dot" style={`left:${pct}%`} type="button" on:click|stopPropagation={() => selectNearestPhotoFromTime(clip.t, true)}>
-              <span class="audio-tip">🔊 {clip.desc}</span>
-            </button>
-          {/if}
-        {/each}
+      <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
+      <div class="timeline-audio-dots" on:click={handleAudioDotsClick}>
+        {@html audioDotsHtml}
       </div>
     {/if}
 
-    <div class="timeline-playhead" style={`left:${playheadPercent}%`}></div>
+    <div class="timeline-playhead" style={playheadStyle}></div>
 
     {#if hoverVisible}
       <div class="timeline-hover-tip" style={`left:${hoverLeft}px`}>
         <div class="tip-time">{hoverTime}</div>
-        <div class="tip-activity"><span class="tip-dot" style={`background:${hoverColor}`}></span><span class="tip-label">{hoverActivity}</span></div>
+        <div class="tip-activity">
+          <span class="tip-dot" style={`background:${hoverColor}`}></span><span
+            class="tip-label">{hoverActivity}</span
+          >
+        </div>
       </div>
     {/if}
 
     <div class="zoom-controls">
-      <button class="zoom-btn" title="Zoom in" type="button" on:click|stopPropagation={() => zoom(0.5)}>+</button>
-      <button class="zoom-btn" title="Zoom out" type="button" on:click|stopPropagation={() => zoom(2)}>−</button>
-      <button class="zoom-btn" title="Reset zoom" type="button" on:click|stopPropagation={() => emitView(timelineStart, timelineEnd)}>⊙</button>
+      <button
+        class="zoom-btn"
+        title="Zoom in"
+        type="button"
+        on:click|stopPropagation={() => zoom(0.5)}>+</button
+      >
+      <button
+        class="zoom-btn"
+        title="Zoom out"
+        type="button"
+        on:click|stopPropagation={() => zoom(2)}>−</button
+      >
+      <button
+        class="zoom-btn"
+        title="Reset zoom"
+        type="button"
+        on:click|stopPropagation={() => emitView(timelineStart, timelineEnd)}
+        >⊙</button
+      >
     </div>
   </div>
 
