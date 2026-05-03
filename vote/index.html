@@ -394,7 +394,15 @@
   const BATCH_SIZE = 50;
   const PICK_LIMIT = 5;
   const UNLOCK_AT = 5;     // ballots required before the leaderboard link appears
-  const MANIFEST_URL = "manifest.json";
+  // Compute manifest URL robustly so it works whether the page is served from
+  // /vote/, /vote, or /vote/index.html (Vercel canonicalizes inconsistently).
+  const _docDir = (() => {
+    const p = location.pathname;
+    if (p.endsWith("/")) return p;
+    if (/\.[^/]+$/.test(p)) return p.replace(/[^/]+$/, "");
+    return p + "/";
+  })();
+  const MANIFEST_URL = _docDir + "manifest.json";
 
   // ====== STATE ======
   let manifest = null;
