@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Artemis II Photo Voter — Leaderboard</title>
+<meta name="description" content="The top-voted Artemis II photos, ranked by audience picks.">
+<meta property="og:title" content="Artemis II Photo Voter — Leaderboard">
+<meta property="og:description" content="The top-voted Artemis II photos, ranked by audience picks.">
+<style>
+  :root {
+    --bg: #07090d;
+    --bg-2: #0e131a;
+    --fg: #e7eef7;
+    --muted: #8a96a6;
+    --accent: #ff8a3d;
+    --accent-2: #4cc8ff;
+    --gold: #ffd166;
+    --silver: #cfd6df;
+    --bronze: #d97a4a;
+    --border: #1d2632;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--fg);
+               font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+               -webkit-font-smoothing: antialiased; }
+  a { color: var(--accent-2); }
+
+  header {
+    padding: 28px 20px 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+  header .tag {
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 11px;
+    margin: 0 0 8px;
+  }
+  header h1 {
+    font-size: clamp(22px, 4vw, 34px);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+  }
+  header p {
+    color: var(--muted);
+    margin: 0;
+    font-size: 14px;
+  }
+  header .stats {
+    margin-top: 14px;
+    display: inline-flex; gap: 18px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  header .stats em {
+    color: var(--fg);
+    font-style: normal;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  header .actions {
+    margin-top: 14px;
+    display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+  }
+
+  main { padding: 20px 16px 80px; max-width: 1400px; margin: 0 auto; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+  }
+  @media (min-width: 1024px) {
+    .grid { grid-template-columns: repeat(5, 1fr); gap: 14px; }
+  }
+
+  .card {
+    position: relative;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: zoom-in;
+  }
+  .card .photo {
+    aspect-ratio: 1 / 1;
+    background: #060a10;
+    overflow: hidden;
+  }
+  .card img {
+    width: 100%; height: 100%; object-fit: cover;
+    display: block;
+    opacity: 0;
+    transition: opacity 200ms ease;
+  }
+  .card img.loaded { opacity: 1; }
+  .card .meta {
+    padding: 9px 12px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px;
+    border-top: 1px solid var(--border);
+  }
+  .card .rank {
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .card .frame {
+    color: var(--muted);
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 11px;
+  }
+  .card .votes {
+    color: var(--fg);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    font-size: 14px;
+  }
+  .card .votes small { color: var(--muted); font-weight: 500; font-size: 11px; margin-left: 3px; }
+
+  .card.podium .rank { font-size: 18px; }
+  .card.gold   { box-shadow: 0 0 0 2px var(--gold); }
+  .card.silver { box-shadow: 0 0 0 2px var(--silver); }
+  .card.bronze { box-shadow: 0 0 0 2px var(--bronze); }
+  .card.gold   .rank { color: var(--gold); }
+  .card.silver .rank { color: var(--silver); }
+  .card.bronze .rank { color: var(--bronze); }
+
+  .btn {
+    border: 1px solid var(--border);
+    background: var(--bg-2);
+    color: var(--fg);
+    padding: 9px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+    transition: transform 80ms ease;
+    font-family: inherit;
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .btn:hover { background: #14202c; border-color: #2a3947; }
+  .btn:active { transform: scale(0.98); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #1a0d00; }
+
+  .lightbox {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.92);
+    display: none;
+    z-index: 100;
+    align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: 95vw; max-height: 80vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 10px 40px rgba(0,0,0,.5);
+  }
+  .lightbox .lb-close {
+    position: absolute; top: 14px; right: 14px;
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.2);
+    color: #fff;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  .lightbox .lb-info {
+    position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+    text-align: center;
+    color: var(--muted);
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12px;
+  }
+  .lightbox .lb-info a { margin-left: 12px; color: var(--accent-2); }
+
+  .loading, .error, .empty {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--muted);
+  }
+  .error b { color: #ff5466; }
+
+  footer {
+    color: var(--muted);
+    font-size: 12px;
+    text-align: center;
+    padding: 24px 16px 40px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+  footer a { color: var(--accent-2); }
+
+  .spin {
+    display: inline-block; width: 14px; height: 14px;
+    border: 2px solid rgba(255,255,255,.25);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: sp 0.7s linear infinite;
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+  @keyframes sp { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="tag">Leaderboard</p>
+  <h1>The Artemis II Photo Top 50</h1>
+  <p>The 50 photos that y'all picked the most often. Updated live as votes come in.</p>
+  <div class="stats">
+    <span>Total votes: <em id="stat-votes">—</em></span>
+    <span>Photos with picks: <em id="stat-photos">—</em></span>
+  </div>
+  <div class="actions">
+    <button class="btn" id="btn-refresh">↻ Refresh</button>
+    <a class="btn primary" href="index.html">+ Cast your votes</a>
+  </div>
+</header>
+
+<main>
+  <div id="stage-loading" class="loading">
+    <span class="spin"></span> Loading leaderboard…
+  </div>
+  <div id="stage-empty" class="empty" style="display:none">
+    No votes yet. <a href="index.html">Be the first.</a>
+  </div>
+  <div id="stage-error" class="error" style="display:none">
+    <b>Couldn't load leaderboard.</b>
+    <p id="err-msg" style="margin-top:10px"></p>
+  </div>
+  <div id="grid" class="grid" style="display:none"></div>
+</main>
+
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true">
+  <button class="lb-close" id="lb-close" aria-label="Close">✕</button>
+  <div>
+    <img id="lb-img" alt="">
+    <div class="lb-info">
+      <span id="lb-id"></span>
+      <a id="lb-nasa" target="_blank" rel="noopener">View on NASA →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Photos: <a href="https://eol.jsc.nasa.gov/" target="_blank" rel="noopener">NASA Gateway to Astronaut Photography</a> · Mission ART002 (Artemis II) · Not affiliated with NASA.
+</footer>
+
+<script>
+(() => {
+  const API = "https://photovote-api.hankmt.workers.dev";
+  const R2  = "https://pub-1f1ce68455c0432ea65ac3155a6b2409.r2.dev";
+  const NASA_DETAIL = "https://eol.jsc.nasa.gov/SearchPhotos/photo.pl?";
+  const NASA_FULL   = "https://eol.jsc.nasa.gov/DatabaseImages/ESC/large/ART002";
+  const TOP_N = 50;
+
+  const $ = s => document.querySelector(s);
+
+  function show(id) {
+    ["stage-loading", "stage-empty", "stage-error", "grid"].forEach(s => {
+      const el = document.getElementById(s);
+      if (!el) return;
+      el.style.display = (s === id) ? (s === "grid" ? "" : "") : "none";
+    });
+  }
+
+  function thumbUrl(guid) { return `${R2}/thumbs/${guid}.jpg`; }
+  function fullUrl(guid)  { return `${NASA_FULL}/${guid}.JPG`; }
+  function nasaDetailUrl(guid) {
+    // GUID format: ART002-E-30001 → mission=ART002&roll=E&frame=30001
+    const m = guid.match(/^(ART\d+)-([A-Z])-(\d+)$/);
+    if (!m) return NASA_DETAIL;
+    return `${NASA_DETAIL}mission=${m[1]}&roll=${m[2]}&frame=${m[3]}`;
+  }
+
+  function rankClass(i) {
+    if (i === 0) return "card podium gold";
+    if (i === 1) return "card podium silver";
+    if (i === 2) return "card podium bronze";
+    return "card";
+  }
+
+  function render(results, totalVotes) {
+    if (!results.length) {
+      show("stage-empty");
+      return;
+    }
+    const grid = $("#grid");
+    grid.innerHTML = "";
+    results.forEach((row, i) => {
+      const card = document.createElement("div");
+      card.className = rankClass(i);
+      card.dataset.guid = row.guid;
+      card.innerHTML = `
+        <div class="photo">
+          <img src="${thumbUrl(row.guid)}" alt="" loading="lazy" decoding="async">
+        </div>
+        <div class="meta">
+          <span class="rank">#${i + 1}</span>
+          <span class="frame">${row.guid.replace("ART002-E-","#")}</span>
+          <span class="votes">${row.picks}<small>${row.picks === 1 ? "vote" : "votes"}</small></span>
+        </div>
+      `;
+      const img = card.querySelector("img");
+      img.addEventListener("load", () => img.classList.add("loaded"));
+      card.addEventListener("click", () => openLightbox(row.guid));
+      grid.appendChild(card);
+    });
+    $("#stat-photos").textContent = results.length.toString();
+    show("grid");
+  }
+
+  function openLightbox(guid) {
+    $("#lb-img").src = fullUrl(guid);
+    $("#lb-img").alt = guid;
+    $("#lb-id").textContent = guid;
+    $("#lb-nasa").href = nasaDetailUrl(guid);
+    $("#lightbox").classList.add("open");
+  }
+  function closeLightbox() {
+    $("#lightbox").classList.remove("open");
+    $("#lb-img").src = "";
+  }
+  $("#lb-close").addEventListener("click", closeLightbox);
+  $("#lightbox").addEventListener("click", e => { if (e.target === $("#lightbox")) closeLightbox(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeLightbox(); });
+
+  async function load() {
+    show("stage-loading");
+    try {
+      const [topRes, countRes] = await Promise.all([
+        fetch(`${API}/top?n=${TOP_N}`, { cache: "no-cache" }).then(r => r.json()),
+        fetch(`${API}/count`, { cache: "no-cache" }).then(r => r.json()),
+      ]);
+      if (!topRes.ok) throw new Error(topRes.error || "Top fetch failed");
+      if (!countRes.ok) throw new Error(countRes.error || "Count fetch failed");
+      $("#stat-votes").textContent = countRes.count.toLocaleString();
+      render(topRes.results || [], countRes.count);
+    } catch (err) {
+      $("#err-msg").textContent = err.message || String(err);
+      show("stage-error");
+    }
+  }
+
+  $("#btn-refresh").addEventListener("click", load);
+  load();
+})();
+</script>
+</body>
+</html>

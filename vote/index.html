@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pick Your 5 Favorite Artemis II Photos</title>
+<meta name="description" content="NASA released ~12,000 photos from Artemis II. Help surface the best ones — pick your 5 favorites from a random batch of 50.">
+<meta property="og:title" content="Pick Your 5 Favorite Artemis II Photos">
+<meta property="og:description" content="NASA released ~12,000 photos from Artemis II. Help surface the best ones — pick your 5 favorites from a random batch of 50.">
+<meta property="og:type" content="website">
+<style>
+  :root {
+    --bg: #07090d;
+    --bg-2: #0e131a;
+    --fg: #e7eef7;
+    --muted: #8a96a6;
+    --accent: #ff8a3d;       /* Artemis-y orange */
+    --accent-2: #4cc8ff;     /* picks-you-up cyan */
+    --bad: #ff5466;
+    --border: #1d2632;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--fg);
+               font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+               -webkit-font-smoothing: antialiased; }
+  a { color: var(--accent-2); }
+
+  header {
+    padding: 56px 24px 40px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    background:
+      radial-gradient(ellipse 60% 55% at 50% 30%, rgba(255,138,61,0.10), transparent 65%),
+      linear-gradient(180deg, #0c1622 0%, var(--bg) 100%);
+  }
+  header > * { max-width: 720px; margin-left: auto; margin-right: auto; }
+  header h1 {
+    font-size: clamp(30px, 5.4vw, 48px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0 auto 14px;
+    text-shadow: 0 2px 18px rgba(0,0,0,0.6);
+  }
+  header .subhead {
+    font-size: clamp(17px, 2.4vw, 22px);
+    color: var(--fg);
+    font-weight: 600;
+    line-height: 1.35;
+    margin: 0 auto 20px;
+    text-shadow: 0 1px 10px rgba(0,0,0,0.5);
+  }
+  header .description {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0 auto 18px;
+  }
+  header .description a {
+    color: var(--accent-2);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  header .instructions {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+    padding: 14px 18px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  main { padding: 20px 16px 140px; max-width: 1400px; margin: 0 auto; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 8px;
+  }
+  @media (min-width: 640px) {
+    .grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+  }
+  @media (min-width: 1024px) {
+    .grid { grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  }
+
+  .tile {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: var(--bg-2);
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .tile img {
+    width: 100%; height: 100%; object-fit: cover;
+    display: block;
+    opacity: 0;
+    transition: opacity 200ms ease;
+  }
+  .tile img.loaded { opacity: 1; }
+  .tile.selected {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent), 0 6px 18px rgba(255,138,61,.18);
+    transform: translateY(-1px);
+  }
+  .tile .badge {
+    position: absolute; top: 6px; right: 6px;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: rgba(0,0,0,.55);
+    border: 1.5px solid rgba(255,255,255,.4);
+    display: grid; place-items: center;
+    color: #fff; font-size: 13px; font-weight: 700;
+    backdrop-filter: blur(6px);
+    transition: background 120ms ease, transform 120ms ease;
+  }
+  .tile.selected .badge {
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: scale(1.05);
+  }
+  .tile .zoom {
+    position: absolute; bottom: 6px; right: 6px;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: rgba(0,0,0,.55);
+    border: 1.5px solid rgba(255,255,255,.25);
+    display: grid; place-items: center;
+    color: #fff;
+    font-size: 14px;
+    cursor: zoom-in;
+    opacity: 0;
+    transition: opacity 120ms ease;
+  }
+  .tile:hover .zoom { opacity: 1; }
+  @media (hover: none) { .tile .zoom { opacity: .85; } }
+  .tile .frame {
+    position: absolute; bottom: 6px; left: 8px;
+    font-size: 10px; color: rgba(255,255,255,.55);
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    pointer-events: none;
+    text-shadow: 0 1px 2px rgba(0,0,0,.7);
+  }
+
+  .actionbar {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    background: rgba(7,9,13,.92);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--border);
+    padding: 14px 16px max(20px, env(safe-area-inset-bottom));
+    display: flex; gap: 12px; align-items: center;
+    z-index: 50;
+  }
+  .actionbar .count {
+    font-size: 15px;
+    font-weight: 600;
+    margin-right: auto;
+  }
+  .actionbar .count em {
+    color: var(--accent);
+    font-style: normal;
+    font-variant-numeric: tabular-nums;
+  }
+  .btn {
+    border: 1px solid var(--border);
+    background: var(--bg-2);
+    color: var(--fg);
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: transform 80ms ease;
+    font-family: inherit;
+  }
+  .btn:hover { background: #14202c; border-color: #2a3947; }
+  .btn:active { transform: scale(0.98); }
+  .btn.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #1a0d00;
+  }
+  .btn.primary:hover { background: #ff9b54; border-color: #ff9b54; }
+  .btn.primary[disabled] {
+    opacity: .35; cursor: not-allowed; transform: none;
+  }
+  .btn.ghost {
+    background: transparent;
+  }
+
+  .lightbox {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.92);
+    display: none;
+    z-index: 100;
+    align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: 95vw; max-height: 80vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 10px 40px rgba(0,0,0,.5);
+  }
+  .lightbox .lb-close {
+    position: absolute; top: 14px; right: 14px;
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.2);
+    color: #fff;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    display: grid; place-items: center;
+  }
+  .lightbox .lb-info {
+    position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+    text-align: center;
+    color: var(--muted);
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12px;
+  }
+  .lightbox .lb-info a { margin-left: 12px; color: var(--accent-2); }
+  .lightbox .lb-info button {
+    margin-top: 10px;
+    display: block; margin-left: auto; margin-right: auto;
+  }
+
+  .stage { display: none; }
+  .stage.active { display: block; }
+
+  .thanks {
+    text-align: center;
+    padding: 80px 20px;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+  .thanks h2 { font-size: 28px; margin: 0 0 12px; }
+  .thanks p { color: var(--muted); line-height: 1.6; margin: 0 0 24px; }
+  .thanks .picks {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 8px; margin: 24px 0 32px;
+  }
+  .thanks .picks img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 6px; }
+  .thanks .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .thanks .progress {
+    margin: 8px 0 24px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .thanks .progress em {
+    font-style: normal;
+    color: var(--accent);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  .thanks .progress.unlocked {
+    color: var(--fg);
+    font-weight: 600;
+  }
+  .thanks .progress-bar {
+    margin: 12px auto 24px;
+    width: 240px;
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .thanks .progress-bar > div {
+    height: 100%;
+    background: var(--accent);
+    transition: width 400ms ease;
+  }
+  .btn.cta-leaderboard {
+    background: var(--accent-2);
+    border-color: var(--accent-2);
+    color: #001b27;
+  }
+  .btn.cta-leaderboard:hover {
+    background: #6ad4ff;
+    border-color: #6ad4ff;
+  }
+
+  .loading, .error {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--muted);
+  }
+  .error b { color: var(--bad); }
+
+  footer {
+    color: var(--muted);
+    font-size: 12px;
+    text-align: center;
+    padding: 24px 16px 100px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+  footer a { color: var(--accent-2); }
+
+  /* spinner */
+  .spin {
+    display: inline-block; width: 14px; height: 14px;
+    border: 2px solid rgba(255,255,255,.25);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: sp 0.7s linear infinite;
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+  @keyframes sp { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Artemis II Photo Voter</h1>
+  <p class="subhead">NASA just dropped 12,000 photos from the Artemis II mission. But which ones are the best ones???</p>
+  <p class="description">Better than one person picking is a BUNCH of people voting. This way <a href="https://hankgreen.com" target="_blank" rel="noopener">I</a> can figure out which images to add to the <a href="https://artemistimeline.com" target="_blank" rel="noopener">ArtemisTimeline.com</a> tool.</p>
+  <p class="instructions">Below are 50 pictures. Pick your five favorites and we can surface the best ones together. Once you've done your first fifty, you can do more! If you sort 5 pages of 50, you'll be rewarded with a chance to check out the leaderboard.</p>
+</header>
+
+<main>
+  <div id="stage-loading" class="stage active loading">
+    <span class="spin"></span> loading manifest…
+  </div>
+
+  <div id="stage-vote" class="stage">
+    <div id="grid" class="grid"></div>
+  </div>
+
+  <div id="stage-thanks" class="stage">
+    <div class="thanks">
+      <h2>Thank you!</h2>
+      <p>Your 5 picks have been submitted. You can, of course, rate more! More Votes &rarr; Better Signal</p>
+      <div id="thanks-picks" class="picks"></div>
+      <div class="progress-bar"><div id="thanks-progress-bar" style="width:0%"></div></div>
+      <p id="thanks-progress" class="progress"></p>
+      <div class="actions">
+        <button class="btn primary" id="btn-again">Vote on another 50</button>
+        <a class="btn cta-leaderboard" id="btn-leaderboard" href="leaderboard.html" style="display:none">See the leaderboard →</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="stage-error" class="stage">
+    <div class="error">
+      <b>Something went wrong.</b>
+      <p id="err-msg" style="margin-top:10px"></p>
+      <button class="btn" onclick="location.reload()">Try again</button>
+    </div>
+  </div>
+</main>
+
+<div id="actionbar" class="actionbar" style="display:none">
+  <div class="count">Selected <em id="count">0</em> / 5</div>
+  <button class="btn ghost" id="btn-shuffle" title="Show me a different 50">↻ New 50</button>
+  <button class="btn primary" id="btn-submit" disabled>Submit my picks</button>
+</div>
+
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true">
+  <button class="lb-close" id="lb-close" aria-label="Close">✕</button>
+  <div>
+    <img id="lb-img" alt="">
+    <div class="lb-info">
+      <span id="lb-id"></span>
+      <a id="lb-nasa" target="_blank" rel="noopener">View on NASA →</a>
+      <button class="btn primary" id="lb-pick">Pick this one</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Photos: <a href="https://eol.jsc.nasa.gov/" target="_blank" rel="noopener">NASA Gateway to Astronaut Photography</a> · Mission ART002 (Artemis II) · Not affiliated with NASA.
+</footer>
+
+<script>
+(() => {
+  // ====== CONFIG ======
+  // Cloudflare Worker /vote endpoint. After `wrangler deploy` in api/,
+  // paste the deploy URL here with /vote appended, e.g.
+  //   https://photovote-api.your-subdomain.workers.dev/vote
+  const VOTE_ENDPOINT = "https://photovote-api.hankmt.workers.dev/vote";
+
+  const BATCH_SIZE = 50;
+  const PICK_LIMIT = 5;
+  const UNLOCK_AT = 5;     // ballots required before the leaderboard link appears
+  const MANIFEST_URL = "manifest.json";
+
+  // ====== STATE ======
+  let manifest = null;
+  let batch = [];           // current 50 items
+  let selected = new Set(); // GUIDs
+
+  // Persistent voter id (anonymous, stable per-browser, used to dedupe casual reloads)
+  function voterId() {
+    try {
+      let v = localStorage.getItem("av_voter");
+      if (!v) {
+        v = "v_" + Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
+        localStorage.setItem("av_voter", v);
+      }
+      return v;
+    } catch (_) { return "v_anon_" + Math.random().toString(36).slice(2, 10); }
+  }
+
+  // Track how many ballots this browser has submitted.
+  function getBallots() {
+    try { return parseInt(localStorage.getItem("av_ballots") || "0", 10) || 0; }
+    catch (_) { return 0; }
+  }
+  function bumpBallots() {
+    const n = getBallots() + 1;
+    try { localStorage.setItem("av_ballots", String(n)); } catch (_) {}
+    return n;
+  }
+  function renderProgress(n) {
+    const pe  = $("#thanks-progress");
+    const bar = $("#thanks-progress-bar");
+    const cta = $("#btn-leaderboard");
+    const pct = Math.min(100, Math.round((n / UNLOCK_AT) * 100));
+    bar.style.width = pct + "%";
+    if (n >= UNLOCK_AT) {
+      pe.classList.add("unlocked");
+      pe.innerHTML = `You've voted <em>${n}</em> rounds — leaderboard unlocked!`;
+      cta.style.display = "";
+    } else {
+      pe.classList.remove("unlocked");
+      const left = UNLOCK_AT - n;
+      pe.innerHTML = `Round <em>${n}</em> of <em>${UNLOCK_AT}</em> — vote <em>${left}</em> more time${left === 1 ? "" : "s"} to unlock the leaderboard.`;
+      cta.style.display = "none";
+    }
+  }
+
+  // ====== DOM helpers ======
+  const $ = sel => document.querySelector(sel);
+  function show(stageId) {
+    document.querySelectorAll(".stage").forEach(s => s.classList.remove("active"));
+    $(stageId).classList.add("active");
+    $("#actionbar").style.display = (stageId === "#stage-vote") ? "" : "none";
+  }
+  function thumbUrl(item) {
+    return manifest.r2_base + "/" + manifest.thumb_path + "/" + item.guid + ".jpg";
+  }
+  function fullUrl(item) {
+    return manifest.nasa_full_base + "/" + item.guid + ".JPG";
+  }
+  function nasaDetailUrl(item) {
+    return manifest.nasa_detail_base + item.link;
+  }
+
+  // ====== Sampling ======
+  function pickBatch() {
+    const items = manifest.items;
+    const n = items.length;
+    const k = Math.min(BATCH_SIZE, n);
+    const seen = new Set();
+    const out = [];
+    while (out.length < k) {
+      const i = Math.floor(Math.random() * n);
+      if (seen.has(i)) continue;
+      seen.add(i);
+      out.push(items[i]);
+    }
+    return out;
+  }
+
+  // ====== Render ======
+  function render() {
+    const grid = $("#grid");
+    grid.innerHTML = "";
+    selected.clear();
+    updateCount();
+    for (const item of batch) {
+      const tile = document.createElement("div");
+      tile.className = "tile";
+      tile.dataset.guid = item.guid;
+      tile.innerHTML = `
+        <img src="${thumbUrl(item)}" alt="" loading="lazy" decoding="async">
+        <span class="frame">${item.guid.replace("ART002-E-","#")}</span>
+        <span class="zoom" title="Enlarge">⤢</span>
+        <span class="badge">+</span>
+      `;
+      const img = tile.querySelector("img");
+      img.addEventListener("load", () => img.classList.add("loaded"));
+      img.addEventListener("error", () => {
+        // Fallback: try fetching directly from NASA if R2 doesn't have it (shouldn't happen)
+        if (!img.dataset.fallback) {
+          img.dataset.fallback = "1";
+          img.src = "https://eol.jsc.nasa.gov/DatabaseImages/thumb/ART002/" + item.guid + ".jpg";
+        }
+      });
+      tile.querySelector(".zoom").addEventListener("click", e => {
+        e.stopPropagation();
+        openLightbox(item);
+      });
+      tile.addEventListener("click", () => toggleSelect(item.guid, tile));
+      grid.appendChild(tile);
+    }
+  }
+
+  function toggleSelect(guid, tile) {
+    if (selected.has(guid)) {
+      selected.delete(guid);
+      tile.classList.remove("selected");
+      tile.querySelector(".badge").textContent = "+";
+    } else {
+      if (selected.size >= PICK_LIMIT) {
+        // Shake the count to indicate the limit
+        const c = $("#count");
+        c.animate(
+          [{ transform: "translateX(-3px)" }, { transform: "translateX(3px)" }, { transform: "translateX(0)" }],
+          { duration: 180, iterations: 2 }
+        );
+        return;
+      }
+      selected.add(guid);
+      tile.classList.add("selected");
+      tile.querySelector(".badge").textContent = String(orderOf(guid));
+    }
+    // Re-number badges in selection order
+    [...selected].forEach((g, i) => {
+      const t = document.querySelector(`.tile[data-guid="${g}"]`);
+      if (t) t.querySelector(".badge").textContent = String(i + 1);
+    });
+    updateCount();
+  }
+  function orderOf(guid) {
+    // Convert to array, find index, +1
+    return [...selected].indexOf(guid) + 1;
+  }
+  function updateCount() {
+    $("#count").textContent = String(selected.size);
+    $("#btn-submit").disabled = selected.size !== PICK_LIMIT;
+  }
+
+  // ====== Lightbox ======
+  let lbCurrent = null;
+  function openLightbox(item) {
+    lbCurrent = item;
+    $("#lb-img").src = fullUrl(item);
+    $("#lb-img").alt = item.guid;
+    $("#lb-id").textContent = item.guid;
+    $("#lb-nasa").href = nasaDetailUrl(item);
+    const inSet = selected.has(item.guid);
+    $("#lb-pick").textContent = inSet ? "Remove pick" : (selected.size >= PICK_LIMIT ? "Limit reached" : "Pick this one");
+    $("#lb-pick").disabled = !inSet && selected.size >= PICK_LIMIT;
+    $("#lightbox").classList.add("open");
+  }
+  function closeLightbox() {
+    $("#lightbox").classList.remove("open");
+    $("#lb-img").src = "";
+    lbCurrent = null;
+  }
+  $("#lb-close").addEventListener("click", closeLightbox);
+  $("#lightbox").addEventListener("click", e => { if (e.target === $("#lightbox")) closeLightbox(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeLightbox(); });
+  $("#lb-pick").addEventListener("click", () => {
+    if (!lbCurrent) return;
+    const tile = document.querySelector(`.tile[data-guid="${lbCurrent.guid}"]`);
+    if (tile) toggleSelect(lbCurrent.guid, tile);
+    closeLightbox();
+  });
+
+  // ====== Submit ======
+  $("#btn-submit").addEventListener("click", async () => {
+    if (selected.size !== PICK_LIMIT) return;
+    const btn = $("#btn-submit");
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spin"></span> Submitting…';
+
+    const payload = {
+      voter_id: voterId(),
+      shown: batch.map(b => b.guid),
+      selected: [...selected],
+      ts: Date.now(),
+      ua: navigator.userAgent.slice(0, 200),
+    };
+
+    try {
+      // Use text/plain to avoid CORS preflight; Apps Script reads e.postData.contents
+      const r = await fetch(VOTE_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(payload),
+      });
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      // Build thanks view with the user's 5 picks
+      const picksDiv = $("#thanks-picks");
+      picksDiv.innerHTML = "";
+      for (const g of selected) {
+        const it = batch.find(b => b.guid === g);
+        const img = document.createElement("img");
+        img.src = thumbUrl(it);
+        img.alt = g;
+        picksDiv.appendChild(img);
+      }
+      // Track the ballot and update progress / leaderboard unlock state.
+      const ballots = bumpBallots();
+      renderProgress(ballots);
+      show("#stage-thanks");
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = "Submit my picks";
+      $("#err-msg").textContent = "Vote couldn't be submitted: " + err.message + ". Your picks are saved locally — try again in a moment.";
+      // Save locally so we don't lose it
+      try {
+        const fail = JSON.parse(localStorage.getItem("av_failed") || "[]");
+        fail.push(payload);
+        localStorage.setItem("av_failed", JSON.stringify(fail).slice(0, 100000));
+      } catch (_) {}
+      show("#stage-error");
+    }
+  });
+
+  $("#btn-shuffle").addEventListener("click", () => {
+    batch = pickBatch();
+    render();
+  });
+  $("#btn-again").addEventListener("click", () => {
+    batch = pickBatch();
+    render();
+    show("#stage-vote");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  // ====== Boot ======
+  fetch(MANIFEST_URL, { cache: "force-cache" })
+    .then(r => { if (!r.ok) throw new Error("Manifest HTTP " + r.status); return r.json(); })
+    .then(m => {
+      manifest = m;
+      batch = pickBatch();
+      render();
+      show("#stage-vote");
+    })
+    .catch(err => {
+      $("#err-msg").textContent = "Couldn't load manifest: " + err.message;
+      show("#stage-error");
+    });
+})();
+</script>
+</body>
+</html>
