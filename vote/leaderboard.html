@@ -114,13 +114,18 @@
     font-family: ui-monospace, "SF Mono", Menlo, monospace;
     font-size: 11px;
   }
-  .card .votes {
+  .card .rate {
     color: var(--fg);
     font-weight: 700;
     font-variant-numeric: tabular-nums;
     font-size: 14px;
   }
-  .card .votes small { color: var(--muted); font-weight: 500; font-size: 11px; margin-left: 3px; }
+  .card .picks {
+    color: var(--muted);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    font-size: 11px;
+  }
 
   .card.podium .rank { font-size: 18px; }
   .card.gold   { box-shadow: 0 0 0 2px var(--gold); }
@@ -216,7 +221,7 @@
 <header>
   <p class="tag">Leaderboard</p>
   <h1>The Artemis II Photo Top 50</h1>
-  <p>The 50 photos that y'all picked the most often. Updated live as votes come in.</p>
+  <p>Ranked by selection rate — the fraction of voters who picked each photo when shown. Photos must have appeared at least 3 times to qualify, so we're not just showing whichever photo got lucky and was seen first.</p>
   <div class="stats">
     <span>Total votes: <em id="stat-votes">—</em></span>
     <span>Photos with picks: <em id="stat-photos">—</em></span>
@@ -266,6 +271,19 @@
 
   const $ = s => document.querySelector(s);
 
+  // Resolve the document's actual directory regardless of how Vercel
+  // canonicalizes the URL (with or without trailing slash, with or without
+  // .html). Used to fix relative hrefs that would otherwise break.
+  const _docDir = (() => {
+    const p = location.pathname;
+    if (p.endsWith("/")) return p;
+    if (/\.[^/]+$/.test(p)) return p.replace(/[^/]+$/, "");
+    return p + "/";
+  })();
+  document.querySelectorAll('a[href="index.html"]').forEach(a => {
+    a.href = _docDir + "index.html";
+  });
+
   function show(id) {
     ["stage-loading", "stage-empty", "stage-error", "grid"].forEach(s => {
       const el = document.getElementById(s);
@@ -290,6 +308,11 @@
     return "card";
   }
 
+  function fmtRate(rate) {
+    // 0.4231 → "42%"
+    return Math.round(rate * 100) + "%";
+  }
+
   function render(results, totalVotes) {
     if (!results.length) {
       show("stage-empty");
@@ -301,6 +324,9 @@
       const card = document.createElement("div");
       card.className = rankClass(i);
       card.dataset.guid = row.guid;
+      const picks = row.picks ?? 0;
+      const shown = row.shown ?? 0;
+      const rate  = (typeof row.rate === "number") ? row.rate : (shown ? picks / shown : 0);
       card.innerHTML = `
         <div class="photo">
           <img src="${thumbUrl(row.guid)}" alt="" loading="lazy" decoding="async">
@@ -308,7 +334,10 @@
         <div class="meta">
           <span class="rank">#${i + 1}</span>
           <span class="frame">${row.guid.replace("ART002-E-","#")}</span>
-          <span class="votes">${row.picks}<small>${row.picks === 1 ? "vote" : "votes"}</small></span>
+          <span style="text-align:right; line-height:1.2">
+            <span class="rate">${fmtRate(rate)}</span><br>
+            <span class="picks">${picks}/${shown}</span>
+          </span>
         </div>
       `;
       const img = card.querySelector("img");

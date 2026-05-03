@@ -404,6 +404,12 @@
   })();
   const MANIFEST_URL = _docDir + "manifest.json";
 
+  // Same fix for the leaderboard link in the thank-you stage.
+  (() => {
+    const lb = document.getElementById("btn-leaderboard");
+    if (lb) lb.href = _docDir + "leaderboard.html";
+  })();
+
   // ====== STATE ======
   let manifest = null;
   let batch = [];           // current 50 items
