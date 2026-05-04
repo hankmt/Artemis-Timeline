@@ -794,7 +794,7 @@
   @media (max-width: 768px) {
     /* Mobile bottom-sheet vars — single source of truth for snap points */
     :root {
-      --sheet-handle-h: 72px;
+      --sheet-handle-h: 84px;
       --sheet-middle-h: 192px; /* orion map flush at top + a little chrome */
       /* y-coord of the sheet's top edge; default matches the middle snap so
          pre-JS layout already reserves the right space for the photo. */
@@ -840,7 +840,7 @@
        unchanged) but visually leaves the row on mobile. */
     #photoCounter {
       position: fixed;
-      bottom: calc(var(--vh) - var(--sheet-top-y) + 18px);
+      bottom: calc(var(--vh) - var(--sheet-top-y) + 32px);
       left: 50%;
       transform: translateX(-50%);
       z-index: 4;
@@ -2237,8 +2237,7 @@ function drawTrajectory(ts) {
   ctx.clearRect(0, 0, W, H);
 
   // Bounds from spacecraft trajectory + Earth only (ignore Moon arc extent)
-  const padX = 30;
-  const padY = 18;
+  const pad = 12;
   const allPts = TRAJ_SC.concat([[0,0]]);
   let minRX = Infinity, maxRX = -Infinity, minRY = Infinity, maxRY = -Infinity;
   for (const p of allPts) {
@@ -2251,7 +2250,7 @@ function drawTrajectory(ts) {
   const ryRange = (maxRY - minRY);
   const rh = Math.max(ryRange * 1.2, rw * 0.18); // ensure minimum height
   const rcx = (minRX + maxRX) / 2, rcy = (minRY + maxRY) / 2;
-  const scaleX = (W - 2*padX) / rw, scaleY = (H - 2*padY) / rh;
+  const scaleX = (W - 2*pad) / rw, scaleY = (H - 2*pad) / rh;
   const scale = Math.min(scaleX, scaleY);
 
   function toCanvas(x, y) {
