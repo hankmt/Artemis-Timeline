@@ -10,6 +10,7 @@
 #   "pyarrow>=15",
 #   "torch>=2.3",
 #   "open-clip-torch>=2.24",
+#   "transformers>=4.44",
 #   "pillow>=10.3",
 #   "umap-learn>=0.5.7",
 #   "scikit-learn>=1.4",
@@ -58,10 +59,30 @@ ROOT = Path(__file__).resolve().parent
 MANIFEST_PATH = ROOT.parent / "vote" / "manifest.json"
 THUMBS_DIR = ROOT / "thumbs"
 OUT_DIR = ROOT / "out"
-EMBEDDINGS_PARQUET = OUT_DIR / "embeddings.parquet"
-CLUSTERS_PARQUET = OUT_DIR / "clusters.parquet"
 
 FRAME_RE = re.compile(r"ART002-E-(\d+)")
+
+DINO_DEFAULTS = {
+    "dinov2": "facebook/dinov2-large",
+    "dinov3": "facebook/dinov3-vitl16-pretrain-lvd1689m",
+}
+
+
+def embeddings_path(backbone: str) -> Path:
+    """Backbone-suffixed path; for clip, fall back to legacy un-suffixed name."""
+    p = OUT_DIR / f"embeddings_{backbone}.parquet"
+    legacy = OUT_DIR / "embeddings.parquet"
+    if not p.exists() and backbone == "clip" and legacy.exists():
+        return legacy
+    return p
+
+
+def clusters_path(backbone: str) -> Path:
+    p = OUT_DIR / f"clusters_{backbone}.parquet"
+    legacy = OUT_DIR / "clusters.parquet"
+    if not p.exists() and backbone == "clip" and legacy.exists():
+        return legacy
+    return p
 
 
 def load_manifest() -> tuple[dict, list[dict]]:
@@ -144,20 +165,73 @@ async def fetch_all(manifest: dict, items: list[dict], concurrency: int) -> list
     return paths
 
 
+def make_encoder(backbone: str, device: str, clip_model: str,
+                 clip_pretrained: str, dino_model: Optional[str]):
+    """Build (encode_fn, dim) for the chosen backbone.
+
+    encode_fn takes a list of PIL images and returns L2-normalized float32
+    embeddings of shape (len(batch), dim).
+    """
+    import torch
+
+    if backbone == "clip":
+        import open_clip
+        print(f"Loading CLIP {clip_model} ({clip_pretrained}) on {device}...")
+        model, _, preprocess = open_clip.create_model_and_transforms(
+            clip_model, pretrained=clip_pretrained
+        )
+        model = model.to(device).eval()
+        dim = model.visual.output_dim
+
+        @torch.inference_mode()
+        def encode(pils):
+            x = torch.stack([preprocess(p) for p in pils]).to(device)
+            v = model.encode_image(x)
+            v = v / v.norm(dim=-1, keepdim=True)
+            return v.float().cpu().numpy()
+
+        return encode, dim
+
+    if backbone in DINO_DEFAULTS:
+        from transformers import AutoModel, AutoImageProcessor
+        model_id = dino_model or DINO_DEFAULTS[backbone]
+        print(f"Loading {backbone} ({model_id}) on {device}...")
+        model = AutoModel.from_pretrained(model_id).to(device).eval()
+        proc = AutoImageProcessor.from_pretrained(model_id)
+        dim = model.config.hidden_size
+
+        @torch.inference_mode()
+        def encode(pils):
+            inputs = proc(images=pils, return_tensors="pt").to(device)
+            out = model(**inputs)
+            # Prefer the pooler when present, else CLS token.
+            v = getattr(out, "pooler_output", None)
+            if v is None:
+                v = out.last_hidden_state[:, 0]
+            v = v / v.norm(dim=-1, keepdim=True)
+            return v.float().cpu().numpy()
+
+        return encode, dim
+
+    raise typer.BadParameter(f"unknown --backbone {backbone!r}")
+
+
 @app.command()
 def embed(
-    model_name: Annotated[str, typer.Option("--model", "-m")] = "ViT-L-14",
-    pretrained: Annotated[str, typer.Option("--pretrained")] = "laion2b_s32b_b82k",
+    backbone: Annotated[str, typer.Option("--backbone",
+        help="clip | dinov2 | dinov3")] = "dinov3",
+    clip_model: Annotated[str, typer.Option("--clip-model")] = "ViT-L-14",
+    clip_pretrained: Annotated[str, typer.Option("--clip-pretrained")] = "laion2b_s32b_b82k",
+    dino_model: Annotated[Optional[str], typer.Option("--dino-model",
+        help="HF model ID; defaults per --backbone")] = None,
     batch_size: Annotated[int, typer.Option("-b", "--batch-size")] = 64,
     concurrency: Annotated[int, typer.Option("-j", "--concurrency")] = 8,
     device: Annotated[str, typer.Option("--device")] = "cuda",
     limit: Annotated[Optional[int], typer.Option("-n", "--limit",
         help="Only process the first N items (smoke test)")] = None,
 ):
-    """Download R2 thumbnails and write CLIP embeddings to parquet."""
-    import torch
+    """Download R2 thumbnails and write embeddings to parquet."""
     from PIL import Image
-    import open_clip
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     manifest, items = load_manifest()
@@ -165,36 +239,26 @@ def embed(
         items = items[:limit]
     paths = asyncio.run(fetch_all(manifest, items, concurrency))
 
-    print(f"Loading {model_name} ({pretrained}) on {device}...")
-    model, _, preprocess = open_clip.create_model_and_transforms(
-        model_name, pretrained=pretrained
-    )
-    model = model.to(device).eval()
-    dim = model.visual.output_dim
+    encode, dim = make_encoder(backbone, device, clip_model, clip_pretrained, dino_model)
 
     embeds = np.zeros((len(items), dim), dtype=np.float32)
     bad_mask = np.zeros(len(items), dtype=bool)
-    with torch.inference_mode():
-        for start in tqdm(range(0, len(items), batch_size), desc="embed"):
-            chunk = list(range(start, min(start + batch_size, len(items))))
-            batch_imgs = []
-            ok_idx = []
-            for i in chunk:
-                try:
-                    img = Image.open(paths[i]).convert("RGB")
-                    batch_imgs.append(preprocess(img))
-                    ok_idx.append(i)
-                except Exception as e:
-                    bad_mask[i] = True
-                    tqdm.write(f"bad image {paths[i].name}: {e}")
-            if not batch_imgs:
-                continue
-            x = torch.stack(batch_imgs).to(device)
-            v = model.encode_image(x)
-            v = v / v.norm(dim=-1, keepdim=True)
-            v_np = v.float().cpu().numpy()
-            for j, i in enumerate(ok_idx):
-                embeds[i] = v_np[j]
+    for start in tqdm(range(0, len(items), batch_size), desc="embed"):
+        chunk = list(range(start, min(start + batch_size, len(items))))
+        pils = []
+        ok_idx = []
+        for i in chunk:
+            try:
+                pils.append(Image.open(paths[i]).convert("RGB"))
+                ok_idx.append(i)
+            except Exception as e:
+                bad_mask[i] = True
+                tqdm.write(f"bad image {paths[i].name}: {e}")
+        if not pils:
+            continue
+        v_np = encode(pils)
+        for j, i in enumerate(ok_idx):
+            embeds[i] = v_np[j]
 
     if bad_mask.any():
         print(f"Skipped {int(bad_mask.sum())} unreadable images")
@@ -210,57 +274,98 @@ def embed(
         "full_url": [full_url(manifest, it["guid"]) for it in items_kept],
         "embedding": list(embeds_kept),
     })
-    df.to_parquet(EMBEDDINGS_PARQUET, index=False)
-    print(f"Wrote {len(df)} rows x {dim} dims -> {EMBEDDINGS_PARQUET}")
+    out = OUT_DIR / f"embeddings_{backbone}.parquet"
+    df.to_parquet(out, index=False)
+    print(f"Wrote {len(df)} rows x {dim} dims -> {out}")
 
 
 # ---------- stage 2: plot ----------
 
 @app.command()
 def plot(
+    backbone: Annotated[str, typer.Option("--backbone")] = "dinov3",
+    reducer: Annotated[str, typer.Option("--reducer",
+        help="umap | tsne")] = "umap",
     color_by: Annotated[str, typer.Option("--color-by",
-        help="frame | cluster | dup")] = "frame",
-    n_neighbors: Annotated[int, typer.Option("--n-neighbors")] = 30,
-    min_dist: Annotated[float, typer.Option("--min-dist")] = 0.05,
+        help="frame | cluster | dup")] = "cluster",
+    dedupe: Annotated[bool, typer.Option("--dedupe/--no-dedupe",
+        help="Keep one representative per dup_group before reducing")] = True,
+    n_neighbors: Annotated[int, typer.Option("--n-neighbors",
+        help="UMAP only")] = 30,
+    min_dist: Annotated[float, typer.Option("--min-dist",
+        help="UMAP only")] = 0.05,
+    perplexity: Annotated[float, typer.Option("--perplexity",
+        help="t-SNE only")] = 30.0,
     seed: Annotated[int, typer.Option("--seed")] = 42,
     title: Annotated[str, typer.Option("--title")] = "Artemis II Photo Map",
     sub_title: Annotated[str, typer.Option("--sub-title")] = "",
 ):
-    """UMAP + interactive datamapplot HTML."""
+    """UMAP / t-SNE + interactive datamapplot HTML."""
     import datamapplot
     import matplotlib as mpl
     import matplotlib.cm as cm
-    import umap
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    needs_clusters = color_by in ("cluster", "dup")
-    src = CLUSTERS_PARQUET if (needs_clusters and CLUSTERS_PARQUET.exists()) \
-          else EMBEDDINGS_PARQUET
-    if needs_clusters and src is EMBEDDINGS_PARQUET:
-        raise typer.BadParameter(
-            f"--color-by {color_by} requires running `cluster` first"
-        )
+    needs_clusters = dedupe or color_by in ("cluster", "dup")
+    if needs_clusters:
+        src = clusters_path(backbone)
+        if not src.exists():
+            raise typer.BadParameter(
+                f"requires `cluster --backbone {backbone}` first ({src} missing)"
+            )
+    else:
+        src = embeddings_path(backbone)
+        if not src.exists():
+            raise typer.BadParameter(
+                f"requires `embed --backbone {backbone}` first ({src} missing)"
+            )
     print(f"Loading {src}...")
     df = pd.read_parquet(src)
+
+    if dedupe:
+        n_before = len(df)
+        # Keep all singletons (-1) plus the first member of each dup group.
+        keep = (df["dup_group"] == -1) | ~df.duplicated(subset=["dup_group"])
+        df = df[keep].reset_index(drop=True)
+        print(f"Dedupe: {n_before} -> {len(df)} representative points")
+
     X = np.vstack(df["embedding"].to_list()).astype(np.float32)
     print(f"  {len(df)} rows x {X.shape[1]} dims")
 
-    print(f"Running UMAP (n_neighbors={n_neighbors}, min_dist={min_dist})...")
-    reducer = umap.UMAP(
-        n_neighbors=n_neighbors,
-        min_dist=min_dist,
-        metric="cosine",
-        random_state=seed,
-        verbose=True,
-    )
-    z = reducer.fit_transform(X)
+    if reducer == "umap":
+        import umap
+        print(f"Running UMAP (n_neighbors={n_neighbors}, min_dist={min_dist})...")
+        r = umap.UMAP(
+            n_neighbors=n_neighbors,
+            min_dist=min_dist,
+            metric="cosine",
+            random_state=seed,
+            verbose=True,
+        )
+        z = r.fit_transform(X)
+    elif reducer == "tsne":
+        from sklearn.manifold import TSNE
+        print(f"Running t-SNE (perplexity={perplexity})...")
+        # cosine metric requires init='random' (PCA init only works w/ euclidean)
+        r = TSNE(
+            n_components=2,
+            perplexity=perplexity,
+            metric="cosine",
+            init="random",
+            random_state=seed,
+            verbose=1,
+            n_jobs=-1,
+        )
+        z = r.fit_transform(X)
+    else:
+        raise typer.BadParameter(f"unknown --reducer {reducer!r}")
 
     if color_by == "frame":
         ranks = df["frame"].rank(method="dense") - 1
         norm = (ranks / max(ranks.max(), 1)).to_numpy()
         rgba = (cm.viridis(norm) * 255).astype(np.uint8)
-        sub_title = sub_title or "Color = frame number (mission-time proxy)"
+        color_line = "Color = frame number (mission-time proxy)."
     elif color_by == "cluster":
         cid = df["cluster_id"].to_numpy()
         n = int(cid.max() + 1) if (cid >= 0).any() else 0
@@ -269,7 +374,7 @@ def plot(
         rgba[:, 3] = 0xff
         m = cid >= 0
         rgba[m] = (cmap(cid[m] % cmap.N) * 255).astype(np.uint8)
-        sub_title = sub_title or f"Color = HDBSCAN cluster ({n} clusters, gray = noise)"
+        color_line = f"Color = cluster ({n} clusters, gray = noise)."
     elif color_by == "dup":
         gid = df["dup_group"].to_numpy()
         in_dup = gid >= 0
@@ -278,11 +383,26 @@ def plot(
         rgba[in_dup, 0] = 0xff
         rgba[in_dup, 1] = 0x55
         rgba[in_dup, 2] = 0x33
-        sub_title = sub_title or (
-            f"Red = part of a near-duplicate group ({int(in_dup.sum())} photos)"
+        color_line = (
+            f"Red = part of a near-duplicate group ({int(in_dup.sum())} photos)."
         )
     else:
         raise typer.BadParameter(f"unknown --color-by {color_by!r}")
+
+    backbone_label = {"clip": "CLIP", "dinov2": "DINOv2", "dinov3": "DINOv3"}.get(
+        backbone, backbone
+    )
+    reducer_label = {"umap": "UMAP", "tsne": "t-SNE"}.get(reducer, reducer)
+    if not sub_title:
+        sub_title = (
+            f"{len(df):,} photos from NASA's Artemis II mission, embedded with "
+            f"{backbone_label}, projected to 2D via {reducer_label}, and clustered."
+            f"<br>"
+            f'<a href="https://artemis-timeline.vercel.app/" target="_blank" '
+            f'style="color:#4cc8ff;">artemis-timeline.vercel.app</a> &middot; '
+            f'<a href="https://samsartor.com" target="_blank" '
+            f'style="color:#4cc8ff;">samsartor.com</a>'
+        )
 
     point_df = pd.DataFrame({
         "x": z[:, 0], "y": z[:, 1],
@@ -296,6 +416,7 @@ def plot(
         "frame": df["frame"],
         "thumb_url": df["thumb_url"],
         "detail_url": df["detail_url"],
+        "full_url": df["full_url"],
     })
     if "cluster_id" in df.columns:
         extra["cluster_id"] = df["cluster_id"]
@@ -325,8 +446,10 @@ def plot(
         enable_search=True,
         search_field="guid",
         darkmode=True,
+        on_click="window.open(`{full_url}`, '_blank')",
     )
-    out = OUT_DIR / f"map_{color_by}.html"
+    suffix = "_dedup" if dedupe else ""
+    out = OUT_DIR / f"map_{backbone}_{reducer}_{color_by}{suffix}.html"
     out.write_text(html)
     print(f"Wrote {out}")
 
@@ -335,30 +458,63 @@ def plot(
 
 @app.command()
 def cluster(
-    min_cluster_size: Annotated[int, typer.Option("--min-cluster-size")] = 10,
-    min_samples: Annotated[int, typer.Option("--min-samples")] = 5,
+    backbone: Annotated[str, typer.Option("--backbone")] = "dinov3",
+    algo: Annotated[str, typer.Option("--algo",
+        help="hdbscan | kmeans")] = "kmeans",
+    # HDBSCAN options
+    min_cluster_size: Annotated[int, typer.Option("--min-cluster-size",
+        help="HDBSCAN")] = 10,
+    min_samples: Annotated[int, typer.Option("--min-samples",
+        help="HDBSCAN")] = 5,
+    method: Annotated[str, typer.Option("--method",
+        help="HDBSCAN cluster_selection_method: eom | leaf "
+             "(leaf = many small clusters, much less noise)")] = "eom",
+    epsilon: Annotated[float, typer.Option("--epsilon",
+        help="HDBSCAN cluster_selection_epsilon (0 disables). "
+             "Try 0.05-0.15 to fold noise into nearby clusters")] = 0.0,
+    # k-means options
+    k: Annotated[int, typer.Option("--k", help="k for k-means")] = 100,
+    seed: Annotated[int, typer.Option("--seed")] = 42,
+    # near-dup options
     dup_threshold: Annotated[float, typer.Option("--dup-threshold",
-        help="cosine sim >= this collapses photos into a near-duplicate group")] = 0.92,
+        help="cosine sim >= this collapses photos into a near-duplicate group")] = 0.96,
 ):
-    """HDBSCAN clusters + greedy near-duplicate grouping."""
-    from sklearn.cluster import HDBSCAN
-
+    """Cluster (HDBSCAN or k-means) + greedy near-duplicate grouping."""
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    print(f"Loading {EMBEDDINGS_PARQUET}...")
-    df = pd.read_parquet(EMBEDDINGS_PARQUET)
+    src = embeddings_path(backbone)
+    if not src.exists():
+        raise typer.BadParameter(f"run `embed --backbone {backbone}` first ({src} missing)")
+    print(f"Loading {src}...")
+    df = pd.read_parquet(src)
     X = np.vstack(df["embedding"].to_list()).astype(np.float32)
 
     # Embeddings are L2-normalized in stage 1, so euclidean distance on X
     # is monotone in cosine distance: ||a-b||^2 = 2 - 2 cos(a,b).
-    print(f"HDBSCAN (min_cluster_size={min_cluster_size}, "
-          f"min_samples={min_samples})...")
-    hdb = HDBSCAN(
-        min_cluster_size=min_cluster_size,
-        min_samples=min_samples,
-        metric="euclidean",
-    )
-    labels = hdb.fit_predict(X)
+    if algo == "hdbscan":
+        from sklearn.cluster import HDBSCAN
+        print(f"HDBSCAN (min_cluster_size={min_cluster_size}, "
+              f"min_samples={min_samples}, method={method}, "
+              f"epsilon={epsilon})...")
+        labels = HDBSCAN(
+            min_cluster_size=min_cluster_size,
+            min_samples=min_samples,
+            metric="euclidean",
+            cluster_selection_method=method,
+            cluster_selection_epsilon=epsilon,
+        ).fit_predict(X)
+    elif algo == "kmeans":
+        from sklearn.cluster import MiniBatchKMeans
+        print(f"MiniBatchKMeans (k={k})...")
+        labels = MiniBatchKMeans(
+            n_clusters=k,
+            batch_size=1024,
+            n_init=10,
+            random_state=seed,
+        ).fit_predict(X)
+    else:
+        raise typer.BadParameter(f"unknown --algo {algo!r}")
+
     n_clusters = int(labels.max() + 1) if (labels >= 0).any() else 0
     n_noise = int((labels == -1).sum())
     print(f"  -> {n_clusters} clusters, {n_noise} noise points")
@@ -371,8 +527,9 @@ def cluster(
 
     df["cluster_id"] = labels.astype(np.int32)
     df["dup_group"] = dup_group.astype(np.int32)
-    df.to_parquet(CLUSTERS_PARQUET, index=False)
-    print(f"Wrote {CLUSTERS_PARQUET}")
+    out = OUT_DIR / f"clusters_{backbone}.parquet"
+    df.to_parquet(out, index=False)
+    print(f"Wrote {out}")
 
 
 def greedy_dup_groups(X: np.ndarray, threshold: float) -> np.ndarray:
