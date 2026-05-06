@@ -478,6 +478,8 @@
   .meta-label { color: #888; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
   .meta-value { color: #bbb; font-size: 13px; margin-top: 2px; word-break: break-word; }
   .meta-value.highlight { color: #4FC3F7; font-weight: 600; }
+  #metaSourceLink { color: #4FC3F7; text-decoration: none; font-size: 12px; }
+  #metaSourceLink:hover { text-decoration: underline; }
   .units-toggle {
     background: none; border: 1px solid #333; border-radius: 4px;
     color: #888; font-size: 10px; font-weight: 600; text-transform: uppercase;
@@ -1335,6 +1337,10 @@
         <div class="meta-label">Settings</div>
         <div class="meta-value" id="metaSettings">—</div>
       </div>
+      <div class="meta-field" id="metaSourceField" style="display:none">
+        <div class="meta-label">Source</div>
+        <div class="meta-value"><a id="metaSourceLink" href="" target="_blank" rel="noopener"></a></div>
+      </div>
       <button class="units-toggle" id="unitsToggle" onclick="toggleUnits()">Show in km</button>
     </div>
     <div class="meta-section" id="descSection" style="display:none">
@@ -1422,7 +1428,41 @@ function getFlickrId(filename) {
 }
 
 
-// --- DATA LOADING ---
+// Returns {url, label} for the source page of a given filename, or null if unknown.
+// Covers Flickr, DVIDS, NASA astronaut photography (eol.jsc.nasa.gov), and NASA Images.
+function getPhotoSource(filename) {
+  const base = filename.replace(/~(large|orig)/i, '').replace(/\.[^.]+$/, '');
+
+  // Flickr 11-digit photo ID (e.g. "55181358952_xyz_o.jpg")
+  const flickrM = filename.match(/^(\d{11})[_-]/);
+  if (flickrM) return { url: 'https://www.flickr.com/photos/nasa2explore/' + flickrM[1], label: 'View on Flickr →' };
+
+  // DVIDS 7-digit numeric (e.g. "9608699.jpg")
+  const dvidsM = filename.match(/^(\d{7})\.jpg$/i);
+  if (dvidsM) return { url: 'https://www.dvidshub.net/image/' + dvidsM[1], label: 'View on DVIDS →' };
+
+  // NASA astronaut photography — uppercase format (e.g. "ART002-E-23107.JPG")
+  const artM = filename.match(/^(ART\d+)-([A-Z])-(\d+)\./i);
+  if (artM) return { url: 'https://eol.jsc.nasa.gov/SearchPhotos/photo.pl?mission=' + artM[1].toUpperCase() + '&roll=' + artM[2].toUpperCase() + '&frame=' + artM[3], label: 'View on NASA →' };
+
+  // NASA astronaut photography — lowercase format (e.g. "art002e014256~large.jpg")
+  const artLowerM = base.match(/^art002e(\d+)$/i);
+  if (artLowerM) return { url: 'https://eol.jsc.nasa.gov/SearchPhotos/photo.pl?mission=ART002&roll=E&frame=' + artLowerM[1], label: 'View on NASA →' };
+
+  // JSC images (e.g. "jsc2026e022251~large.jpg")
+  const jscM = base.match(/^(jsc\d+e\d+)$/i);
+  if (jscM) return { url: 'https://images.nasa.gov/details/' + jscM[1].toLowerCase(), label: 'View on NASA →' };
+
+  // KSC photos (e.g. "KSC-20260401-PH-KLS01_0013.jpg")
+  if (/^KSC-/i.test(base)) return { url: 'https://images.nasa.gov/details/' + base, label: 'View on NASA →' };
+
+  // NHQ photos (e.g. "NHQ20260401_admin_0002.jpg", "nhq202604100018.jpg")
+  if (/^NHQ/i.test(base)) return { url: 'https://images.nasa.gov/details/' + base, label: 'View on NASA →' };
+
+  return null;
+}
+
+
 // These are populated by loadPhotoData() from the PHOTO_DATA global (photos.js).
 let PHOTO_TITLES = {};   // photoId → display title
 let PHOTO_DESCS = {};    // photoId → long description (for hover tooltip)
@@ -2363,6 +2403,7 @@ function updatePhoto() {
     document.getElementById('metaSettings').textContent = '—';
     document.getElementById('photoTitleRow').style.display = 'none';
     document.getElementById('descSection').style.display = 'none';
+    document.getElementById('metaSourceField').style.display = 'none';
     renderTimeline();
     return;
   }
@@ -2423,6 +2464,16 @@ function updatePhoto() {
   }
   document.getElementById('metaCamera').textContent = photo.cam;
   document.getElementById('metaSettings').textContent = photo.set;
+  const photoSrc = getPhotoSource(photo.f);
+  const srcField = document.getElementById('metaSourceField');
+  const srcLink = document.getElementById('metaSourceLink');
+  if (photoSrc) {
+    srcLink.href = photoSrc.url;
+    srcLink.textContent = photoSrc.label;
+    srcField.style.display = '';
+  } else {
+    srcField.style.display = 'none';
+  }
   document.getElementById('photoCounter').textContent = `${currentPhotoIdx + 1} / ${filteredPhotos.length}`;
   if (photo.desc) {
     document.getElementById('descSection').style.display = '';
