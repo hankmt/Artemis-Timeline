@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard — Artemis II Photo Voter</title>
+<meta name="robots" content="noindex">
+<style>
+  :root {
+    --bg: #07090d;
+    --bg-2: #0e131a;
+    --fg: #e7eef7;
+    --muted: #8a96a6;
+    --accent: #ff8a3d;
+    --accent-2: #4cc8ff;
+    --gold: #ffd166;
+    --silver: #cfd6df;
+    --bronze: #d97a4a;
+    --border: #1d2632;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--fg);
+               font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+               -webkit-font-smoothing: antialiased; }
+  a { color: var(--accent-2); }
+
+  header {
+    padding: 24px 20px 16px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, #0c1622 0%, var(--bg) 100%);
+  }
+  header .row {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; max-width: 1500px; margin: 0 auto;
+    flex-wrap: wrap;
+  }
+  header h1 {
+    font-size: 22px;
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  header .meta {
+    color: var(--muted);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+  }
+  header .meta em { color: var(--fg); font-style: normal; font-weight: 600; }
+
+  .topnav {
+    margin-top: 12px;
+    display: flex; flex-wrap: wrap; gap: 6px;
+    max-width: 1500px;
+    margin-left: auto; margin-right: auto;
+  }
+  .topnav a {
+    font-size: 12px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    color: var(--fg);
+    padding: 5px 10px;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: background 120ms ease, border-color 120ms ease;
+  }
+  .topnav a:hover { background: #14202c; border-color: #2a3947; }
+
+  main { padding: 20px 16px 60px; max-width: 1500px; margin: 0 auto; }
+
+  section.lb { margin: 0 0 36px; scroll-margin-top: 80px; }
+  section.lb h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 4px;
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  }
+  section.lb h2 .label { letter-spacing: -0.01em; }
+  section.lb h2 .count {
+    font-size: 12px;
+    background: rgba(76, 200, 255, 0.10);
+    color: var(--accent-2);
+    border: 1px solid rgba(76, 200, 255, 0.25);
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-weight: 600;
+  }
+  section.lb h2 .count.empty {
+    background: rgba(140, 150, 166, 0.06);
+    color: var(--muted);
+    border-color: var(--border);
+  }
+  section.lb h2 a.full {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--accent-2);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  section.lb h2 a.full:hover { text-decoration: underline; }
+
+  section.lb p.note {
+    color: var(--muted);
+    margin: 0 0 10px;
+    font-size: 12px;
+  }
+
+  .strip {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 6px;
+  }
+  @media (max-width: 1100px) { .strip { grid-template-columns: repeat(5, 1fr); } }
+  @media (max-width: 600px)  { .strip { grid-template-columns: repeat(3, 1fr); } }
+
+  .card {
+    position: relative;
+    background: #050810;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: zoom-in;
+  }
+  .card .photo {
+    aspect-ratio: 3 / 2;
+    background: #050810;
+    overflow: hidden;
+    position: relative;
+  }
+  .card img {
+    width: 100%; height: 100%; object-fit: contain;
+    display: block;
+    opacity: 0;
+    transition: opacity 200ms ease;
+  }
+  .card img.loaded { opacity: 1; }
+  .card .rank {
+    position: absolute;
+    top: 4px; left: 4px;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    font-weight: 800;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-variant-numeric: tabular-nums;
+  }
+  .card.podium .rank { background: var(--gold); color: #1a0d00; }
+  .card[data-pos="1"] .rank { background: var(--silver); color: #1a0d00; }
+  .card[data-pos="2"] .rank { background: var(--bronze); color: #1a0d00; }
+  .card .meta {
+    padding: 4px 6px 6px;
+    font-size: 10px;
+    color: var(--muted);
+    display: flex; justify-content: space-between; gap: 4px;
+    font-variant-numeric: tabular-nums;
+  }
+  .card .meta strong { color: var(--fg); font-weight: 700; }
+
+  .empty {
+    color: var(--muted);
+    padding: 16px 0;
+    font-size: 13px;
+    border: 1px dashed var(--border);
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  /* Lightbox */
+  .lightbox {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.94);
+    display: none;
+    z-index: 200;
+    align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: 95vw; max-height: 80vh;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+  .lightbox .lb-close {
+    position: absolute; top: 14px; right: 14px;
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.2);
+    color: #fff;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    display: grid; place-items: center;
+  }
+  .lightbox .lb-info {
+    position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+    text-align: center;
+    color: var(--muted);
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12px;
+  }
+  .lightbox .lb-info a { margin-left: 12px; color: var(--accent-2); }
+
+  .spin {
+    display: inline-block; width: 12px; height: 12px;
+    border: 2px solid rgba(255,255,255,.25);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: sp 0.7s linear infinite;
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+  @keyframes sp { to { transform: rotate(360deg); } }
+
+  .toolbar {
+    display: flex; gap: 8px; align-items: center;
+  }
+  .btn {
+    border: 1px solid var(--border);
+    background: var(--bg-2);
+    color: var(--fg);
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 12px;
+    text-decoration: none;
+    font-family: inherit;
+    transition: background 120ms ease;
+  }
+  .btn:hover { background: #14202c; border-color: #2a3947; }
+
+  footer {
+    color: var(--muted);
+    font-size: 11px;
+    text-align: center;
+    padding: 20px 16px 40px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="row">
+    <h1>Photo Voter — Dashboard</h1>
+    <div class="meta">
+      <span>Round 1: <em id="stat-r1">—</em> ballots · <em id="stat-r1u">—</em> unique</span>
+      <span style="margin-left:14px">Round 2: <em id="stat-r2">—</em> rankings</span>
+    </div>
+    <div class="toolbar">
+      <button class="btn" id="btn-refresh">↻ Refresh</button>
+      <a class="btn" href="./">← Hub</a>
+    </div>
+  </div>
+  <div class="topnav" id="topnav"></div>
+</header>
+
+<main id="main">
+  <div style="text-align:center; padding:60px 20px; color:var(--muted)"><span class="spin"></span> Loading all leaderboards…</div>
+</main>
+
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true">
+  <button class="lb-close" id="lb-close" aria-label="Close">✕</button>
+  <div>
+    <img id="lb-img" alt="">
+    <div class="lb-info">
+      <span id="lb-id"></span>
+      <a id="lb-nasa" target="_blank" rel="noopener">View on NASA →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Photos: NASA Gateway to Astronaut Photography · Mission ART002 (Artemis II) · Not affiliated with NASA.
+</footer>
+
+<script defer src="/_vercel/insights/script.js"></script>
+
+<script>
+(() => {
+  const API = "https://photovote-api.hankmt.workers.dev";
+  const R2  = "https://pub-1f1ce68455c0432ea65ac3155a6b2409.r2.dev";
+  const NASA_DETAIL = "https://eol.jsc.nasa.gov/SearchPhotos/photo.pl?";
+  const NASA_FULL   = "https://eol.jsc.nasa.gov/DatabaseImages/ESC/large/ART002";
+  const TOP_N = 20;
+
+  // Hard-coded list because the dashboard knows what categories exist.
+  const CATS = [
+    ["eclipse",       "Eclipse"],
+    ["earth-moon",    "Earth + Moon"],
+    ["earth",         "Earth"],
+    ["moon-full",     "Full Moon"],
+    ["crescent",      "Crescent Moon & Earth"],
+    ["lunar-surface", "Lunar Surface"],
+    ["stars",         "Stars & Galaxies"],
+    ["notable",       "Notable Highlights"],
+  ];
+  // Pseudo-bucket: head-to-head Elo leaderboard
+  const ELO_LABEL = "Head-to-head (Elo)";
+  // ── Feature flag: silence the head-to-head/Elo leaderboard for now.
+  //    Set to true to bring it back. All code below is preserved.
+  const SHOW_ELO = false;
+
+  const $ = s => document.querySelector(s);
+
+  function thumbUrl(g) { return `${R2}/thumbs/${g}.jpg`; }
+  function fullUrl(g)  { return `${NASA_FULL}/${g}.JPG`; }
+  function nasaDetailUrl(g) {
+    const m = g.match(/^(ART\d+)-([A-Z])-(\d+)$/);
+    return m ? `${NASA_DETAIL}mission=${m[1]}&roll=${m[2]}&frame=${m[3]}` : NASA_DETAIL;
+  }
+
+  // ====== Lightbox ======
+  function openLightbox(g) {
+    $("#lb-img").src = fullUrl(g);
+    $("#lb-img").alt = g;
+    $("#lb-id").textContent = g;
+    $("#lb-nasa").href = nasaDetailUrl(g);
+    $("#lightbox").classList.add("open");
+  }
+  function closeLightbox() {
+    $("#lightbox").classList.remove("open");
+    $("#lb-img").src = "";
+  }
+  $("#lb-close").addEventListener("click", closeLightbox);
+  $("#lightbox").addEventListener("click", e => { if (e.target === $("#lightbox")) closeLightbox(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeLightbox(); });
+
+  // ====== Render a leaderboard section ======
+  function makeCard(row, pos, mode) {
+    const card = document.createElement("div");
+    const podium = pos < 3 ? " podium" : "";
+    card.className = "card" + podium;
+    card.dataset.guid = row.guid;
+    card.dataset.pos  = String(pos);
+
+    const picks = row.picks ?? 0;
+    const shown = row.shown ?? 0;
+    let metric, sub;
+    if (mode === "rate") {
+      const rate = (typeof row.rate === "number") ? row.rate : (shown ? picks/shown : 0);
+      metric = Math.round(rate * 100) + "%";
+      sub    = `${picks}/${shown}`;
+    } else if (mode === "elo") {
+      metric = Math.round(row.elo ?? 1200);
+      sub    = `${row.wins ?? 0}W ${row.losses ?? 0}L`;
+    } else {
+      const avg = (typeof row.avg_score === "number") ? row.avg_score : 0;
+      metric = (Math.round(avg * 100) / 100).toFixed(2);
+      sub    = `${picks}/${shown}`;
+    }
+
+    card.innerHTML = `
+      <div class="photo">
+        <img src="${thumbUrl(row.guid)}" alt="" loading="lazy" decoding="async">
+        <span class="rank">#${pos + 1}</span>
+      </div>
+      <div class="meta">
+        <strong>${metric}</strong>
+        <span>${sub}</span>
+      </div>
+    `;
+    const img = card.querySelector("img");
+    img.addEventListener("load", () => img.classList.add("loaded"));
+    card.addEventListener("click", () => openLightbox(row.guid));
+    return card;
+  }
+
+  function makeSection(opts) {
+    // opts = { id, label, count, mode, results, fullHref, note }
+    const sec = document.createElement("section");
+    sec.className = "lb";
+    sec.id = opts.id;
+    const empty = !opts.results || opts.results.length === 0;
+    sec.innerHTML = `
+      <h2>
+        <span class="label">${opts.label}</span>
+        <span class="count${empty ? ' empty' : ''}">${opts.count != null ? opts.count.toLocaleString() : '—'}</span>
+        ${opts.fullHref ? `<a href="${opts.fullHref}" class="full">Open full leaderboard →</a>` : ""}
+      </h2>
+      ${opts.note ? `<p class="note">${opts.note}</p>` : ""}
+      <div class="strip"></div>
+    `;
+    const strip = sec.querySelector(".strip");
+    if (empty) {
+      strip.outerHTML = `<div class="empty">No data yet — needs voters to rank in this category</div>`;
+    } else {
+      opts.results.slice(0, TOP_N).forEach((row, i) => strip.appendChild(makeCard(row, i, opts.mode)));
+    }
+    return sec;
+  }
+
+  // ====== Build top-nav anchor pills ======
+  function renderTopnav() {
+    const nav = $("#topnav");
+    nav.innerHTML = "";
+    const pills = [
+      ["overall", "Overall"],
+      ...(SHOW_ELO ? [["elo", "Head-to-head"]] : []),
+      ...CATS,
+    ];
+    for (const [id, label] of pills) {
+      const a = document.createElement("a");
+      a.href = `#${id}`;
+      a.textContent = label;
+      nav.appendChild(a);
+    }
+  }
+
+  // ====== Load everything ======
+  async function load() {
+    renderTopnav();
+    const main = $("#main");
+    main.innerHTML = '<div style="text-align:center; padding:60px 20px; color:var(--muted)"><span class="spin"></span> Loading…</div>';
+
+    // Run all fetches in parallel
+    const fetches = {
+      overallTop: fetch(`${API}/top?n=${TOP_N}&min_shown=10&sort=rate`).then(r => r.json()),
+      count:      fetch(`${API}/count`).then(r => r.json()),
+    };
+    if (SHOW_ELO) {
+      fetches.eloTop = fetch(`${API}/elo-top?n=${TOP_N}&min_matches=1`).then(r => r.json());
+    }
+    for (const [slug] of CATS) {
+      fetches[`cat_${slug}`] = fetch(
+        `${API}/category-top?n=${TOP_N}&min_shown=2&cat=${encodeURIComponent(slug)}`
+      ).then(r => r.json());
+    }
+
+    let countData = {};
+    try {
+      const all = await Promise.all(Object.values(fetches));
+      const keys = Object.keys(fetches);
+      const data = {};
+      keys.forEach((k, i) => data[k] = all[i]);
+
+      // Headline stats
+      countData = data.count || {};
+      $("#stat-r1").textContent  = (countData.count ?? 0).toLocaleString();
+      $("#stat-r1u").textContent = (countData.unique_picked ?? 0).toLocaleString();
+      // Round 2 ballots = sum of result counts? Worker doesn't expose this directly.
+      // Approximate: shown of any one ranked result. Just leave placeholder.
+      let r2approx = 0;
+      for (const [slug] of CATS) {
+        const cat = data[`cat_${slug}`];
+        if (cat && cat.results && cat.results.length) {
+          r2approx = Math.max(r2approx, ...cat.results.map(r => r.shown || 0));
+        }
+      }
+      $("#stat-r2").textContent = r2approx ? `~${r2approx.toLocaleString()}` : "0";
+
+      // Build the page
+      main.innerHTML = "";
+
+      main.appendChild(makeSection({
+        id:       "overall",
+        label:    "Overall (Round 1: random vote)",
+        count:    (data.overallTop.results || []).length,
+        mode:     "rate",
+        results:  data.overallTop.results || [],
+        fullHref: "leaderboard.html",
+        note:     "Top photos from random voting, ranked by selection rate (% of times shown that voters picked).",
+      }));
+
+      // Head-to-head Elo leaderboard
+      if (SHOW_ELO && data.eloTop) {
+        main.appendChild(makeSection({
+          id:       "elo",
+          label:    ELO_LABEL,
+          count:    (data.eloTop.results || []).length,
+          mode:     "elo",
+          results:  data.eloTop.results || [],
+          fullHref: "leaderboard.html?lb=elo&label=Head-to-head",
+          note:     "Pairwise comparisons → Elo rating. Photos start at 1200; winners gain points from losers.",
+        }));
+      }
+
+      for (const [slug, label] of CATS) {
+        const cat = data[`cat_${slug}`] || {};
+        main.appendChild(makeSection({
+          id:       slug,
+          label:    label,
+          count:    (cat.results || []).length,
+          mode:     "borda",
+          results:  cat.results || [],
+          fullHref: `leaderboard.html?cat=${encodeURIComponent(slug)}&label=${encodeURIComponent(label)}`,
+          note:     "Borda score: 3 pts for #1, 2 for #2, 1 for #3. Higher avg = more consistently top-ranked.",
+        }));
+      }
+    } catch (err) {
+      main.innerHTML = `<div style="text-align:center; padding:60px 20px; color:#ff5466">Couldn't load: ${err.message}</div>`;
+    }
+  }
+
+  $("#btn-refresh").addEventListener("click", load);
+  load();
+})();
+</script>
+
+</body>
+</html>

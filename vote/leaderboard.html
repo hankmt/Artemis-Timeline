@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Artemis II Photo Voter — Leaderboard</title>
+<meta name="description" content="The top-voted Artemis II photos, ranked by audience picks.">
+<meta property="og:title" content="Artemis II Photo Voter — Leaderboard">
+<meta property="og:description" content="The top-voted Artemis II photos, ranked by audience picks.">
+<style>
+  :root {
+    --bg: #07090d;
+    --bg-2: #0e131a;
+    --fg: #e7eef7;
+    --muted: #8a96a6;
+    --accent: #ff8a3d;
+    --accent-2: #4cc8ff;
+    --gold: #ffd166;
+    --silver: #cfd6df;
+    --bronze: #d97a4a;
+    --border: #1d2632;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--fg);
+               font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+               -webkit-font-smoothing: antialiased; }
+  a { color: var(--accent-2); }
+
+  header {
+    padding: 28px 20px 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+  header .tag {
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 11px;
+    margin: 0 0 8px;
+  }
+  header h1 {
+    font-size: clamp(22px, 4vw, 34px);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+  }
+  header p {
+    color: var(--muted);
+    margin: 0;
+    font-size: 14px;
+  }
+  header .stats {
+    margin-top: 14px;
+    display: inline-flex; gap: 18px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  header .stats em {
+    color: var(--fg);
+    font-style: normal;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  header .actions {
+    margin-top: 14px;
+    display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+  }
+
+  main { padding: 20px 16px 80px; max-width: 1400px; margin: 0 auto; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+  }
+  @media (min-width: 1024px) {
+    .grid { grid-template-columns: repeat(5, 1fr); gap: 14px; }
+  }
+
+  .card {
+    position: relative;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: zoom-in;
+  }
+  .card .photo {
+    aspect-ratio: 3 / 2;
+    background: #050810;
+    overflow: hidden;
+  }
+  .card img {
+    width: 100%; height: 100%; object-fit: contain;
+    display: block;
+    opacity: 0;
+    transition: opacity 200ms ease;
+  }
+  .card img.loaded { opacity: 1; }
+  .card .meta {
+    padding: 9px 12px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px;
+    border-top: 1px solid var(--border);
+  }
+  .card .rank {
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .card .frame {
+    color: var(--muted);
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 11px;
+  }
+  .card .rate {
+    color: var(--fg);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    font-size: 14px;
+  }
+  .card .picks {
+    color: var(--muted);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    font-size: 11px;
+  }
+
+  .card.podium .rank { font-size: 18px; }
+  .card.gold   { box-shadow: 0 0 0 2px var(--gold); }
+  .card.silver { box-shadow: 0 0 0 2px var(--silver); }
+  .card.bronze { box-shadow: 0 0 0 2px var(--bronze); }
+  .card.gold   .rank { color: var(--gold); }
+  .card.silver .rank { color: var(--silver); }
+  .card.bronze .rank { color: var(--bronze); }
+
+  .btn {
+    border: 1px solid var(--border);
+    background: var(--bg-2);
+    color: var(--fg);
+    padding: 9px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+    transition: transform 80ms ease;
+    font-family: inherit;
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .btn:hover { background: #14202c; border-color: #2a3947; }
+  .btn:active { transform: scale(0.98); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #1a0d00; }
+
+  .lightbox {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.92);
+    display: none;
+    z-index: 100;
+    align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: 95vw; max-height: 80vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 10px 40px rgba(0,0,0,.5);
+  }
+  .lightbox .lb-close {
+    position: absolute; top: 14px; right: 14px;
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.2);
+    color: #fff;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  .lightbox .lb-info {
+    position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+    text-align: center;
+    color: var(--muted);
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12px;
+  }
+  .lightbox .lb-info a { margin-left: 12px; color: var(--accent-2); }
+
+  .loading, .error, .empty {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--muted);
+  }
+  .error b { color: #ff5466; }
+
+  footer {
+    color: var(--muted);
+    font-size: 12px;
+    text-align: center;
+    padding: 24px 16px 40px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+  footer a { color: var(--accent-2); }
+
+  .spin {
+    display: inline-block; width: 14px; height: 14px;
+    border: 2px solid rgba(255,255,255,.25);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: sp 0.7s linear infinite;
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+  @keyframes sp { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="tag">Leaderboard</p>
+  <h1>The Artemis II Photo Top 50</h1>
+  <p>Ranked by the selection rate, the fraction of voters who picked a photo when shown.</p>
+  <div class="stats">
+    <span>Ballots cast: <em id="stat-votes">—</em></span>
+    <span>Photos picked at least once: <em id="stat-photos">—</em></span>
+  </div>
+  <div class="actions">
+    <button class="btn" id="btn-refresh">↻ Refresh</button>
+    <a class="btn primary" href="index.html">+ Cast your votes</a>
+  </div>
+</header>
+
+<main>
+  <div id="stage-loading" class="loading">
+    <span class="spin"></span> Loading leaderboard…
+  </div>
+  <div id="stage-empty" class="empty" style="display:none">
+    No votes yet. <a href="index.html">Be the first.</a>
+  </div>
+  <div id="stage-error" class="error" style="display:none">
+    <b>Couldn't load leaderboard.</b>
+    <p id="err-msg" style="margin-top:10px"></p>
+  </div>
+  <div id="grid" class="grid" style="display:none"></div>
+  <div id="scroll-sentinel" style="height:80px; display:none"></div>
+  <div id="eof-marker" style="display:none; text-align:center; padding:30px 16px; color:var(--muted); font-size:13px;">
+    That's everything. Want more variety on the leaderboard? <a href="index.html">Vote on more photos.</a>
+  </div>
+</main>
+
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true">
+  <button class="lb-close" id="lb-close" aria-label="Close">✕</button>
+  <div>
+    <img id="lb-img" alt="">
+    <div class="lb-info">
+      <span id="lb-id"></span>
+      <a id="lb-nasa" target="_blank" rel="noopener">View on NASA →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Photos: <a href="https://eol.jsc.nasa.gov/" target="_blank" rel="noopener">NASA Gateway to Astronaut Photography</a> · Mission ART002 (Artemis II) · Not affiliated with NASA.
+</footer>
+
+<script defer src="/_vercel/insights/script.js"></script>
+
+<script>
+(() => {
+  const API = "https://photovote-api.hankmt.workers.dev";
+  const R2  = "https://pub-1f1ce68455c0432ea65ac3155a6b2409.r2.dev";
+  const NASA_DETAIL = "https://eol.jsc.nasa.gov/SearchPhotos/photo.pl?";
+  const NASA_FULL   = "https://eol.jsc.nasa.gov/DatabaseImages/ESC/large/ART002";
+  const FETCH_N    = 1000;  // total leaderboard depth (fetched once)
+  const PAGE_SIZE  = 50;    // cards rendered per scroll batch
+
+  // Modes:
+  //   ?cat=X        = per-category Borda leaderboard
+  //   ?lb=elo       = head-to-head Elo leaderboard
+  //   (default)     = overall rate-based leaderboard
+  const params      = new URLSearchParams(location.search);
+  const CAT_SLUG    = params.get("cat");
+  const LB_MODE     = (params.get("lb") || "").toLowerCase();
+  const CAT_LABEL   = params.get("label") || CAT_SLUG || (LB_MODE === "elo" ? "Head-to-head" : "");
+  const IS_CATEGORY = !!CAT_SLUG;
+  const IS_ELO      = LB_MODE === "elo";
+
+  // Progressive render state
+  let allResults = [];
+  let renderedCount = 0;
+  let scrollObserver = null;
+
+  const $ = s => document.querySelector(s);
+
+  // Resolve the document's actual directory regardless of how Vercel
+  // canonicalizes the URL (with or without trailing slash, with or without
+  // .html). Used to fix relative hrefs that would otherwise break.
+  const _docDir = (() => {
+    const p = location.pathname;
+    if (p.endsWith("/")) return p;
+    if (/\.[^/]+$/.test(p)) return p.replace(/[^/]+$/, "");
+    return p + "/";
+  })();
+  document.querySelectorAll('a[href="index.html"]').forEach(a => {
+    a.href = _docDir + "index.html";
+  });
+
+  function show(id) {
+    ["stage-loading", "stage-empty", "stage-error", "grid"].forEach(s => {
+      const el = document.getElementById(s);
+      if (!el) return;
+      el.style.display = (s === id) ? (s === "grid" ? "" : "") : "none";
+    });
+  }
+
+  function thumbUrl(guid) { return `${R2}/thumbs/${guid}.jpg`; }
+  function fullUrl(guid)  { return `${NASA_FULL}/${guid}.JPG`; }
+  function nasaDetailUrl(guid) {
+    // GUID format: ART002-E-30001 → mission=ART002&roll=E&frame=30001
+    const m = guid.match(/^(ART\d+)-([A-Z])-(\d+)$/);
+    if (!m) return NASA_DETAIL;
+    return `${NASA_DETAIL}mission=${m[1]}&roll=${m[2]}&frame=${m[3]}`;
+  }
+
+  function rankClass(i) {
+    if (i === 0) return "card podium gold";
+    if (i === 1) return "card podium silver";
+    if (i === 2) return "card podium bronze";
+    return "card";
+  }
+
+  function fmtRate(rate) {
+    // 0.4231 → "42%"
+    return Math.round(rate * 100) + "%";
+  }
+  function fmtScore(s) {
+    // 1.847 → "1.85"
+    return (Math.round(s * 100) / 100).toFixed(2);
+  }
+
+  function makeCard(row, rank) {
+    const card = document.createElement("div");
+    card.className = rankClass(rank);
+    card.dataset.guid = row.guid;
+    const picks = row.picks ?? 0;
+    const shown = row.shown ?? 0;
+    let primary, secondary;
+    if (IS_ELO) {
+      const elo  = Math.round(row.elo ?? 1200);
+      const wins = row.wins ?? 0;
+      const losses = row.losses ?? 0;
+      primary   = elo;
+      secondary = `${wins}W ${losses}L`;
+    } else if (IS_CATEGORY) {
+      // Borda mode: avg_score on 0–3 scale; secondary shows picks/shown
+      const avg = (typeof row.avg_score === "number") ? row.avg_score : 0;
+      primary   = fmtScore(avg);
+      secondary = `${picks}/${shown}`;
+    } else {
+      const rate = (typeof row.rate === "number") ? row.rate : (shown ? picks / shown : 0);
+      primary   = fmtRate(rate);
+      secondary = `${picks}/${shown}`;
+    }
+    card.innerHTML = `
+      <div class="photo">
+        <img src="${thumbUrl(row.guid)}" alt="" loading="lazy" decoding="async">
+      </div>
+      <div class="meta">
+        <span class="rank">#${rank + 1}</span>
+        <span class="frame">${row.guid.replace("ART002-E-","#")}</span>
+        <span style="text-align:right; line-height:1.2">
+          <span class="rate">${primary}</span><br>
+          <span class="picks">${secondary}</span>
+        </span>
+      </div>
+    `;
+    const img = card.querySelector("img");
+    img.addEventListener("load", () => img.classList.add("loaded"));
+    card.addEventListener("click", () => openLightbox(row.guid));
+    return card;
+  }
+
+  function renderNextBatch() {
+    const grid = $("#grid");
+    const slice = allResults.slice(renderedCount, renderedCount + PAGE_SIZE);
+    for (let i = 0; i < slice.length; i++) {
+      grid.appendChild(makeCard(slice[i], renderedCount + i));
+    }
+    renderedCount += slice.length;
+    updateSentinel();
+  }
+
+  function updateSentinel() {
+    const s = $("#scroll-sentinel");
+    const eof = $("#eof-marker");
+    if (renderedCount >= allResults.length) {
+      // Stop observing; show end-of-list marker if we rendered anything substantial
+      if (scrollObserver) scrollObserver.disconnect();
+      s.style.display = "none";
+      eof.style.display = renderedCount > PAGE_SIZE ? "" : "none";
+    } else {
+      s.style.display = "";
+      eof.style.display = "none";
+    }
+  }
+
+  function setupScrollObserver() {
+    if (scrollObserver) scrollObserver.disconnect();
+    scrollObserver = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && renderedCount < allResults.length) {
+        renderNextBatch();
+      }
+    }, { rootMargin: "600px 0px" });   // start loading well before visible
+    scrollObserver.observe($("#scroll-sentinel"));
+  }
+
+  function render(results) {
+    allResults = results || [];
+    renderedCount = 0;
+    const grid = $("#grid");
+    grid.innerHTML = "";
+    if (!allResults.length) {
+      show("stage-empty");
+      return;
+    }
+    show("grid");
+    renderNextBatch();
+    setupScrollObserver();
+  }
+
+  function openLightbox(guid) {
+    $("#lb-img").src = fullUrl(guid);
+    $("#lb-img").alt = guid;
+    $("#lb-id").textContent = guid;
+    $("#lb-nasa").href = nasaDetailUrl(guid);
+    $("#lightbox").classList.add("open");
+  }
+  function closeLightbox() {
+    $("#lightbox").classList.remove("open");
+    $("#lb-img").src = "";
+  }
+  $("#lb-close").addEventListener("click", closeLightbox);
+  $("#lightbox").addEventListener("click", e => { if (e.target === $("#lightbox")) closeLightbox(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeLightbox(); });
+
+  async function load() {
+    show("stage-loading");
+
+    // Tweak headers for non-default modes
+    const titleEl = document.querySelector("header h1");
+    const sub     = document.querySelector("header > p");
+    if (IS_ELO) {
+      if (titleEl) titleEl.textContent = `Head-to-head: top photos by Elo`;
+      document.title = `Head-to-head leaderboard · Artemis II Photo Voter`;
+      if (sub) sub.textContent = "Ranked by Elo rating from pairwise comparisons. Photos start at 1200; winners gain points from losers.";
+      const lbl1 = document.querySelector(".stats span:nth-child(1)");
+      const lbl2 = document.querySelector(".stats span:nth-child(2)");
+      if (lbl1) lbl1.innerHTML = `Photos rated: <em id="stat-votes">—</em>`;
+      if (lbl2) lbl2.innerHTML = `Total comparisons: <em id="stat-photos">—</em>`;
+    } else if (IS_CATEGORY) {
+      if (titleEl) titleEl.textContent = `${CAT_LABEL} — top photos`;
+      document.title = `${CAT_LABEL} — top photos · Artemis II Photo Voter`;
+      if (sub) sub.textContent = "Ranked by Borda score (3 pts for #1, 2 for #2, 1 for #3) averaged over how many times each photo appeared.";
+      const lbl1 = document.querySelector(".stats span:nth-child(1)");
+      const lbl2 = document.querySelector(".stats span:nth-child(2)");
+      if (lbl1) lbl1.innerHTML = `Rankings: <em id="stat-votes">—</em>`;
+      if (lbl2) lbl2.innerHTML = `Photos ranked: <em id="stat-photos">—</em>`;
+    }
+
+    try {
+      let topUrl, countUrl;
+      if (IS_ELO) {
+        topUrl   = `${API}/elo-top?n=${FETCH_N}&min_matches=1`;
+        countUrl = null;
+      } else if (IS_CATEGORY) {
+        topUrl   = `${API}/category-top?n=${FETCH_N}&min_shown=2&cat=${encodeURIComponent(CAT_SLUG)}`;
+        countUrl = null;
+      } else {
+        topUrl   = `${API}/top?n=${FETCH_N}&min_shown=10&sort=rate`;
+        countUrl = `${API}/count`;
+      }
+
+      const topRes   = await fetch(topUrl, { cache: "no-cache" }).then(r => r.json());
+      const countRes = countUrl
+        ? await fetch(countUrl, { cache: "no-cache" }).then(r => r.json())
+        : null;
+
+      if (!topRes.ok) throw new Error(topRes.error || "Top fetch failed");
+
+      if (IS_ELO) {
+        const rows = topRes.results || [];
+        const totalMatches = rows.reduce((s, r) => s + ((r.wins || 0) + (r.losses || 0)), 0) / 2;
+        $("#stat-votes").textContent  = rows.length.toLocaleString();
+        $("#stat-photos").textContent = Math.round(totalMatches).toLocaleString();
+      } else if (IS_CATEGORY) {
+        $("#stat-votes").textContent  = (topRes.results || []).length.toLocaleString();
+        $("#stat-photos").textContent = (topRes.results || []).length.toLocaleString();
+      } else {
+        if (!countRes.ok) throw new Error(countRes.error || "Count fetch failed");
+        $("#stat-votes").textContent  = countRes.count.toLocaleString();
+        $("#stat-photos").textContent = (countRes.unique_picked ?? 0).toLocaleString();
+      }
+      render(topRes.results || []);
+    } catch (err) {
+      $("#err-msg").textContent = err.message || String(err);
+      show("stage-error");
+    }
+  }
+
+  $("#btn-refresh").addEventListener("click", load);
+  load();
+})();
+</script>
+</body>
+</html>

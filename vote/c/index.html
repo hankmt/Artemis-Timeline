@@ -1,0 +1,981 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rank your top 3 — Artemis II Photo Voter</title>
+<meta name="description" content="Rank your top three Artemis II photos in this category.">
+<style>
+  :root {
+    --bg: #07090d;
+    --bg-2: #0e131a;
+    --fg: #e7eef7;
+    --muted: #8a96a6;
+    --accent: #ff8a3d;
+    --accent-2: #4cc8ff;
+    --border: #1d2632;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--fg);
+               font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+               -webkit-font-smoothing: antialiased; }
+  a { color: var(--accent-2); }
+
+  header {
+    padding: 32px 20px 18px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+  header > * { max-width: 720px; margin-left: auto; margin-right: auto; }
+  header h1 {
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0 auto 8px;
+  }
+  header .desc { color: var(--muted); font-size: 14px; line-height: 1.5; margin: 0; }
+  header .crumb { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+  header .crumb a { color: var(--muted); text-decoration: underline; }
+
+  main { padding: 20px 16px 100px; max-width: 1100px; margin: 0 auto; }
+
+  /* Rank zone (top 3) */
+  .rank-zone-wrapper {
+    margin: 12px 0 28px;
+  }
+  .rank-zone {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    min-height: 180px;
+    padding: 12px;
+    background: linear-gradient(135deg, rgba(255,138,61,0.06), rgba(76,200,255,0.04));
+    border: 2px dashed #2a3a4a;
+    border-radius: 12px;
+    transition: border-color 200ms ease, background 200ms ease;
+  }
+  .rank-zone.filled {
+    border-style: solid;
+    border-color: var(--accent);
+  }
+  .rank-zone .slot-placeholder {
+    border: 1px dashed #2a3a4a;
+    border-radius: 8px;
+    display: grid; place-items: center;
+    color: var(--muted);
+    font-size: 13px;
+    aspect-ratio: 1;
+  }
+  .rank-zone-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    font-weight: 700;
+    margin: 0 0 8px;
+    text-align: center;
+  }
+  .rank-zone-label.filled { color: var(--fg); }
+
+  /* Pool zone (10 photos) */
+  .pool-label {
+    margin: 28px 0 8px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    font-weight: 700;
+  }
+  .pool-zone {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    min-height: 60px;
+  }
+  @media (max-width: 720px) {
+    .pool-zone { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* Card (image + Wrong Category button) */
+  .card {
+    position: relative;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 120ms ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .card .photo {
+    position: relative;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    background: #050810;
+    cursor: grab;
+  }
+  .card .photo:active { cursor: grabbing; }
+  .card .photo img {
+    width: 100%; height: 100%; object-fit: contain;
+    display: block;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 200ms ease;
+  }
+  .card .photo img.loaded { opacity: 1; }
+  .card .wrong-cat {
+    flex: 0 0 auto;
+    width: 100%;
+    border: none;
+    border-top: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    font-size: 11px;
+    padding: 7px 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 0.02em;
+    transition: background 120ms ease, color 120ms ease;
+  }
+  .card .wrong-cat:hover {
+    background: rgba(255, 84, 102, 0.10);
+    color: #ffb3b9;
+  }
+  .card .wrong-cat:active { background: rgba(255, 84, 102, 0.18); }
+
+  /* Rank badge in rank zone */
+  .rank-zone .card[data-rank]::before {
+    content: attr(data-rank);
+    position: absolute;
+    top: 8px; left: 8px;
+    background: var(--accent);
+    color: #1a0d00;
+    font-weight: 800;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 14px;
+    z-index: 2;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  }
+
+  /* Zoom icon (overlaid on the image only) */
+  .card .icon {
+    position: absolute;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.65);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+    display: grid; place-items: center;
+    cursor: pointer;
+    z-index: 5;
+    font-size: 14px;
+    line-height: 1;
+    user-select: none;
+    transition: background 120ms ease, transform 80ms ease, opacity 120ms ease;
+    pointer-events: auto;
+  }
+  .card .icon:active { transform: scale(0.92); }
+  .card .icon:hover { background: rgba(0,0,0,0.85); }
+  .card .icon-zoom  { bottom: 6px; right: 6px; }
+  @media (hover: hover) {
+    .card .icon { opacity: 0; }
+    .card:hover .icon { opacity: 1; }
+  }
+
+  /* Lightbox */
+  .lightbox {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.94);
+    display: none;
+    z-index: 200;
+    align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: 95vw; max-height: 80vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 10px 40px rgba(0,0,0,.5);
+  }
+  .lightbox .lb-close {
+    position: absolute; top: 14px; right: 14px;
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.2);
+    color: #fff;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    display: grid; place-items: center;
+  }
+  .lightbox .lb-info {
+    position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+    text-align: center;
+    color: var(--muted);
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12px;
+  }
+  .lightbox .lb-info a { margin-left: 12px; color: var(--accent-2); }
+
+  /* Recategorize modal */
+  .recat {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.85);
+    display: none;
+    z-index: 250;
+    align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .recat.open { display: flex; }
+  .recat .panel {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    max-width: 460px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+  .recat h3 {
+    margin: 0 0 6px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .recat .sub {
+    color: var(--muted);
+    margin: 0 0 16px;
+    font-size: 13px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  .recat .opts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  @media (max-width: 480px) {
+    .recat .opts { grid-template-columns: 1fr; }
+  }
+  .recat .opt {
+    text-align: left;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--fg);
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+    font-family: inherit;
+    transition: background 120ms ease, border-color 120ms ease, transform 80ms ease;
+  }
+  .recat .opt:hover { background: #1a2632; border-color: #324355; }
+  .recat .opt:active { transform: scale(0.98); }
+  .recat .recat-cancel {
+    width: 100%;
+    margin-top: 8px;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: inherit;
+  }
+  .recat .recat-cancel:hover { color: var(--fg); }
+
+  /* SortableJS visual states */
+  .card.sortable-ghost {
+    opacity: 0.35;
+    background: var(--bg-2);
+  }
+  .card.sortable-chosen {
+    transform: scale(1.04);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    z-index: 10;
+  }
+  .card.sortable-drag { opacity: 1 !important; }
+
+  /* Leaderboards menu — re-uses .recat layout. Lock state styling: */
+  .opt.locked {
+    opacity: 0.55;
+    cursor: default;
+    color: var(--muted);
+  }
+  .opt.locked .lock-info {
+    display: block;
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 500;
+    margin-top: 2px;
+  }
+  .opt.locked:hover { background: var(--bg); border-color: var(--border); }
+  .opt.unlocked-overall {
+    border-color: rgba(255,138,61,0.4);
+  }
+  @media (max-width: 480px) {
+    .actionbar .lb-label { display: none; }
+  }
+
+  /* Action bar */
+  .actionbar {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    background: rgba(7,9,13,.94);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid var(--border);
+    padding: 14px 16px max(20px, env(safe-area-inset-bottom));
+    display: flex; gap: 10px; align-items: center;
+    z-index: 50;
+  }
+  .actionbar .status {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .actionbar .status em {
+    color: var(--accent);
+    font-style: normal;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .btn {
+    border: 1px solid var(--border);
+    background: var(--bg-2);
+    color: var(--fg);
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: transform 80ms ease;
+    font-family: inherit;
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn:hover { background: #14202c; border-color: #2a3947; }
+  .btn.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #1a0d00;
+  }
+  .btn.primary:hover { background: #ff9b54; border-color: #ff9b54; }
+  .btn.primary[disabled] { opacity: 0.35; cursor: not-allowed; transform: none; }
+  .btn.cta-leaderboard {
+    background: var(--accent-2);
+    border-color: var(--accent-2);
+    color: #001b27;
+  }
+
+  /* Stages */
+  .stage { display: none; }
+  .stage.active { display: block; }
+  .loading, .error {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--muted);
+  }
+  .error b { color: #ff5466; }
+  .spin { display: inline-block; width: 14px; height: 14px;
+          border: 2px solid rgba(255,255,255,.25); border-top-color: #fff;
+          border-radius: 50%; animation: sp 0.7s linear infinite;
+          vertical-align: middle; margin-right: 6px; }
+  @keyframes sp { to { transform: rotate(360deg); } }
+
+  /* Thanks */
+  .thanks {
+    text-align: center;
+    padding: 60px 20px;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .thanks h2 { font-size: 26px; margin: 0 0 12px; }
+  .thanks p { color: var(--muted); line-height: 1.6; margin: 0 0 20px; }
+  .thanks .picks {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 8px; margin: 18px 0 24px;
+  }
+  .thanks .picks .slot {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 8px; overflow: hidden;
+    background: var(--bg-2);
+  }
+  .thanks .picks .slot img { width: 100%; height: 100%; object-fit: cover; }
+  .thanks .picks .slot::before {
+    content: attr(data-rank);
+    position: absolute; top: 6px; left: 6px;
+    background: var(--accent); color: #1a0d00;
+    font-weight: 800; width: 24px; height: 24px; border-radius: 50%;
+    display: grid; place-items: center; font-size: 12px; z-index: 2;
+  }
+  .thanks .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+  footer {
+    color: var(--muted);
+    font-size: 12px;
+    text-align: center;
+    padding: 24px 16px 100px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+  footer a { color: var(--accent-2); }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="crumb"><a href="..">← All categories</a></p>
+  <h1 id="title">Loading…</h1>
+  <p class="desc">Drag your top 3 photos into the slots. Order matters — 1st place is the most powerful vote.</p>
+</header>
+
+<main>
+  <div id="stage-loading" class="stage active loading">
+    <span class="spin"></span> Loading category…
+  </div>
+
+  <div id="stage-error" class="stage">
+    <div class="error">
+      <b>Couldn't load this category.</b>
+      <p id="err-msg" style="margin-top:10px"></p>
+      <a href=".." class="btn">← Back to categories</a>
+    </div>
+  </div>
+
+  <div id="stage-vote" class="stage">
+    <p class="rank-zone-label" id="rank-label">Drag your top 3 here</p>
+    <div class="rank-zone-wrapper">
+      <div id="rank-zone" class="rank-zone"></div>
+    </div>
+
+    <p class="pool-label" id="pool-label">Choose from these photos</p>
+    <div id="pool-zone" class="pool-zone"></div>
+  </div>
+
+  <div id="stage-thanks" class="stage">
+    <div class="thanks">
+      <h2>Thanks for ranking!</h2>
+      <p id="thanks-line">Your top 3 picks were submitted.</p>
+      <div id="thanks-picks" class="picks"></div>
+      <div class="actions">
+        <a class="btn primary" href="..">Vote on another category</a>
+        <button class="btn" id="btn-again">Rank a different 10</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div id="actionbar" class="actionbar" style="display:none">
+  <div class="status">Selected <em id="status-count">0</em> / 3</div>
+  <button class="btn" id="btn-leaderboards" title="See leaderboards">🏆 <span class="lb-label">Leaderboards</span></button>
+  <button class="btn" id="btn-shuffle" title="Show me a different 10" style="display:none">↻ Different 10</button>
+  <button class="btn primary" id="btn-submit" disabled>Submit ranking</button>
+</div>
+
+<!-- Leaderboards menu -->
+<div id="lb-menu" class="recat" role="dialog" aria-modal="true">
+  <div class="panel">
+    <h3>Leaderboards</h3>
+    <p class="sub">See what's winning so far. Per-category leaderboards unlock after you rank 5 sets in that category.</p>
+    <div class="opts" id="lb-opts"></div>
+    <button class="recat-cancel" id="lb-cancel">Close</button>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true">
+  <button class="lb-close" id="lb-close" aria-label="Close">✕</button>
+  <div>
+    <img id="lb-img" alt="">
+    <div class="lb-info">
+      <span id="lb-id"></span>
+      <a id="lb-nasa" target="_blank" rel="noopener">View on NASA →</a>
+    </div>
+  </div>
+</div>
+
+<!-- Recategorize modal -->
+<div id="recat" class="recat" role="dialog" aria-modal="true">
+  <div class="panel">
+    <h3>Move this photo to a different category</h3>
+    <p class="sub" id="recat-guid"></p>
+    <div class="opts" id="recat-opts"></div>
+    <button class="recat-cancel" id="recat-cancel">Cancel</button>
+  </div>
+</div>
+
+<footer>
+  Photos: <a href="https://eol.jsc.nasa.gov/" target="_blank" rel="noopener">NASA Gateway to Astronaut Photography</a> · Mission ART002 (Artemis II) · Not affiliated with NASA.
+</footer>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.3/Sortable.min.js"></script>
+
+<script>
+(() => {
+  // ====== CONFIG ======
+  const API_BASE       = "https://photovote-api.hankmt.workers.dev";
+  const RANK_ENDPOINT  = `${API_BASE}/rank-vote`;
+  const RECAT_ENDPOINT = `${API_BASE}/recategorize`;
+  const OVERRIDES_URL  = `${API_BASE}/overrides`;
+  const R2 = "https://pub-1f1ce68455c0432ea65ac3155a6b2409.r2.dev";
+  const NASA_FULL = "https://eol.jsc.nasa.gov/DatabaseImages/ESC/large/ART002";
+  const NASA_DETAIL = "https://eol.jsc.nasa.gov/SearchPhotos/photo.pl?";
+  const PICK_LIMIT = 3;
+  const POOL_SIZE  = 10;
+
+  // Display labels for category slugs (used in the recategorize picker)
+  const ALL_CATS = [
+    ["eclipse",          "Eclipse"],
+    ["earth-moon",       "Earth + Moon"],
+    ["earth",            "Earth"],
+    ["moon-full",        "Full Moon"],
+    ["crescent",         "Crescent Moon & Earth"],
+    ["lunar-surface",    "Lunar Surface"],
+    ["stars",            "Stars & Galaxies"],
+    ["notable",          "Notable Highlights"],
+    ["other",            "Other / Doesn't fit"],
+    ["blurry-or-unclear","Blurry / unusable"],
+  ];
+
+  const $ = s => document.querySelector(s);
+  const params = new URLSearchParams(location.search);
+  const slug = params.get("cat");
+
+  // ====== STATE ======
+  let bucket = null;        // {slug, label, count, guids}
+  let poolPicks = [];       // current 10 GUIDs in the pool
+  let voterId = (() => {
+    try {
+      let v = localStorage.getItem("av_voter");
+      if (!v) {
+        v = "v_" + Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
+        localStorage.setItem("av_voter", v);
+      }
+      return v;
+    } catch (_) { return "v_anon_" + Math.random().toString(36).slice(2, 10); }
+  })();
+
+  function show(stageId) {
+    document.querySelectorAll(".stage").forEach(s => s.classList.remove("active"));
+    $(stageId).classList.add("active");
+    $("#actionbar").style.display = (stageId === "#stage-vote") ? "" : "none";
+  }
+
+  function thumbUrl(guid) { return `${R2}/thumbs/${guid}.jpg`; }
+
+  function sample(arr, n) {
+    const a = arr.slice();
+    const out = [];
+    n = Math.min(n, a.length);
+    for (let i = 0; i < n; i++) {
+      const idx = Math.floor(Math.random() * a.length);
+      out.push(a.splice(idx, 1)[0]);
+    }
+    return out;
+  }
+
+  function makeCard(guid) {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.dataset.guid = guid;
+    card.innerHTML = `
+      <div class="photo">
+        <img src="${thumbUrl(guid)}" alt="" loading="lazy" decoding="async">
+        <button class="icon icon-zoom" title="View larger" aria-label="View larger">⤢</button>
+      </div>
+      <button class="wrong-cat" type="button">Wrong Category?</button>
+    `;
+    const img = card.querySelector("img");
+    img.addEventListener("load", () => img.classList.add("loaded"));
+    card.querySelector(".icon-zoom").addEventListener("click", e => {
+      e.stopPropagation();
+      openLightbox(guid);
+    });
+    card.querySelector(".wrong-cat").addEventListener("click", e => {
+      e.stopPropagation();
+      openRecat(guid, card);
+    });
+    return card;
+  }
+
+  function fullUrl(guid)       { return `${NASA_FULL}/${guid}.JPG`; }
+  function nasaDetailUrl(guid) {
+    const m = guid.match(/^(ART\d+)-([A-Z])-(\d+)$/);
+    return m ? `${NASA_DETAIL}mission=${m[1]}&roll=${m[2]}&frame=${m[3]}` : NASA_DETAIL;
+  }
+
+  // ====== Lightbox ======
+  function openLightbox(guid) {
+    $("#lb-img").src = fullUrl(guid);
+    $("#lb-img").alt = guid;
+    $("#lb-id").textContent = guid;
+    $("#lb-nasa").href = nasaDetailUrl(guid);
+    $("#lightbox").classList.add("open");
+  }
+  function closeLightbox() {
+    $("#lightbox").classList.remove("open");
+    $("#lb-img").src = "";
+  }
+  $("#lb-close").addEventListener("click", closeLightbox);
+  $("#lightbox").addEventListener("click", e => { if (e.target === $("#lightbox")) closeLightbox(); });
+  document.addEventListener("keydown", e => {
+    if (e.key !== "Escape") return;
+    closeLightbox();
+    closeRecat();
+  });
+
+  // ====== Recategorize modal ======
+  let recatTarget = null;  // {guid, card}
+
+  function openRecat(guid, card) {
+    recatTarget = { guid, card };
+    $("#recat-guid").textContent = guid;
+    const opts = $("#recat-opts");
+    opts.innerHTML = "";
+    for (const [s, label] of ALL_CATS) {
+      if (s === slug) continue;  // exclude current bucket
+      const b = document.createElement("button");
+      b.className = "opt";
+      b.textContent = label;
+      b.addEventListener("click", () => submitRecat(s));
+      opts.appendChild(b);
+    }
+    $("#recat").classList.add("open");
+  }
+  function closeRecat() {
+    $("#recat").classList.remove("open");
+    recatTarget = null;
+  }
+  $("#recat-cancel").addEventListener("click", closeRecat);
+  $("#recat").addEventListener("click", e => { if (e.target === $("#recat")) closeRecat(); });
+
+  async function submitRecat(newCat) {
+    if (!recatTarget) return;
+    const { guid, card } = recatTarget;
+    closeRecat();
+    // Fade out the card immediately for snappy UX; remove from DOM after.
+    card.style.transition = "opacity 200ms ease, transform 200ms ease";
+    card.style.opacity = "0";
+    card.style.transform = "scale(0.85)";
+
+    // Drop the GUID from the in-memory bucket so the count + pool reflects it.
+    if (bucket && Array.isArray(bucket.guids)) {
+      bucket.guids = bucket.guids.filter(g => g !== guid);
+      bucket.count = bucket.guids.length;
+      // Update the pool label live
+      const labelEl = $("#pool-label");
+      if (labelEl) {
+        if (bucket.guids.length <= POOL_SIZE) {
+          labelEl.textContent = `All ${bucket.guids.length} photos in this category`;
+        } else {
+          labelEl.textContent = `Random 10 of ${bucket.count.toLocaleString()} — drag to rank`;
+        }
+      }
+    }
+
+    try {
+      await fetch(RECAT_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({
+          voter_id: voterId,
+          guid,
+          new_category: newCat,
+          old_category: slug,
+        }),
+      });
+    } catch (_) {
+      // Even if network fails, the local UI removes the card; user thinks it worked.
+      // The override won't persist. Acceptable tradeoff for now.
+    }
+
+    setTimeout(() => {
+      card.remove();
+      updateRankNumbers();
+      updateStatus();
+    }, 220);
+  }
+
+  function renderRankSlots() {
+    const rz = $("#rank-zone");
+    // We don't actually render placeholder elements — sortable manages contents.
+    // But we DO add slot placeholders if zone has fewer than 3 cards.
+    // (Strategy: keep zone children as actual cards only.)
+  }
+
+  function renderPool(guids) {
+    const pool = $("#pool-zone");
+    pool.innerHTML = "";
+    for (const g of guids) {
+      pool.appendChild(makeCard(g));
+    }
+    $("#rank-zone").innerHTML = "";
+    updateRankNumbers();
+    updateStatus();
+  }
+
+  function updateRankNumbers() {
+    const rz = $("#rank-zone");
+    const cards = [...rz.children];
+    cards.forEach((card, i) => {
+      card.dataset.rank = String(i + 1);
+    });
+    [...$("#pool-zone").children].forEach(c => delete c.dataset.rank);
+    const filled = cards.length === PICK_LIMIT;
+    rz.classList.toggle("filled", filled);
+    const label = $("#rank-label");
+    if (filled) {
+      label.textContent = "Your top 3 — drag to reorder";
+      label.classList.add("filled");
+    } else {
+      label.textContent = `Drag ${PICK_LIMIT - cards.length} more photo${PICK_LIMIT - cards.length === 1 ? "" : "s"} into the slots above`;
+      label.classList.remove("filled");
+    }
+  }
+
+  function updateStatus() {
+    const n = $("#rank-zone").children.length;
+    $("#status-count").textContent = String(n);
+    $("#btn-submit").disabled = n !== PICK_LIMIT;
+  }
+
+  function initSortable() {
+    const rz = $("#rank-zone");
+    const pz = $("#pool-zone");
+
+    const common = {
+      group: "ranking",
+      animation: 200,
+      ghostClass: "sortable-ghost",
+      chosenClass: "sortable-chosen",
+      dragClass: "sortable-drag",
+      // Drag handle is the image area only; the Wrong Category button is
+      // outside it so won't ever start a drag.
+      handle: ".photo",
+      filter: ".icon, .wrong-cat",
+      preventOnFilter: false,
+      // Slight delay on touch makes accidental drags less common
+      delay: 100,
+      delayOnTouchOnly: true,
+      touchStartThreshold: 4,
+    };
+
+    Sortable.create(rz, {
+      ...common,
+      onAdd: (evt) => {
+        if (rz.children.length > PICK_LIMIT) {
+          pz.appendChild(evt.item);
+        }
+        updateRankNumbers();
+        updateStatus();
+      },
+      onUpdate: () => { updateRankNumbers(); updateStatus(); },
+      onRemove: () => { updateRankNumbers(); updateStatus(); },
+    });
+
+    Sortable.create(pz, common);
+  }
+
+  function newPool() {
+    poolPicks = sample(bucket.guids, POOL_SIZE);
+    renderPool(poolPicks);
+  }
+
+  // ====== Submit ======
+  $("#btn-submit").addEventListener("click", async () => {
+    const rz = $("#rank-zone");
+    if (rz.children.length !== PICK_LIMIT) return;
+    const ranked = [...rz.children].map(c => c.dataset.guid);
+    const shown  = [...rz.children, ...$("#pool-zone").children].map(c => c.dataset.guid);
+
+    const btn = $("#btn-submit");
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spin"></span> Submitting…';
+
+    const payload = {
+      voter_id: voterId,
+      category: slug,
+      shown,
+      ranked,
+      ts: Date.now(),
+      ua: navigator.userAgent.slice(0, 200),
+    };
+
+    try {
+      const r = await fetch(RANK_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(payload),
+      });
+      if (!r.ok) throw new Error("HTTP " + r.status);
+
+      // Track per-category rank count for leaderboard unlock
+      bumpCatRanks(slug);
+
+      // Build thanks view
+      const picksDiv = $("#thanks-picks");
+      picksDiv.innerHTML = "";
+      ranked.forEach((g, i) => {
+        const slot = document.createElement("div");
+        slot.className = "slot";
+        slot.dataset.rank = String(i + 1);
+        slot.innerHTML = `<img src="${thumbUrl(g)}" alt="">`;
+        picksDiv.appendChild(slot);
+      });
+      $("#thanks-line").innerHTML = `Your top 3 in <strong>${bucket.label}</strong> are recorded.`;
+      show("#stage-thanks");
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = "Submit ranking";
+      alert("Couldn't submit: " + err.message);
+    }
+  });
+
+  // ====== Leaderboards menu ======
+  // Track per-category ranking counts in localStorage so we can lock/unlock.
+  function bumpCatRanks(forSlug) {
+    try {
+      const k = `av_ranks_${forSlug}`;
+      const n = (parseInt(localStorage.getItem(k) || "0", 10) || 0) + 1;
+      localStorage.setItem(k, String(n));
+      return n;
+    } catch (_) { return 1; }
+  }
+  function getCatRanks(forSlug) {
+    try { return parseInt(localStorage.getItem(`av_ranks_${forSlug}`) || "0", 10) || 0; }
+    catch (_) { return 0; }
+  }
+  const UNLOCK_AT_CATEGORY = 5;
+
+  // Static list of all leaderboard buckets to surface in the menu
+  const LB_LIST = [
+    ["eclipse",       "Eclipse"],
+    ["earth-moon",    "Earth + Moon"],
+    ["earth",         "Earth"],
+    ["moon-full",     "Full Moon"],
+    ["crescent",      "Crescent Moon & Earth"],
+    ["lunar-surface", "Lunar Surface"],
+    ["stars",         "Stars & Galaxies"],
+    ["notable",       "Notable Highlights"],
+  ];
+
+  function openLeaderboardsMenu() {
+    const opts = $("#lb-opts");
+    opts.innerHTML = "";
+
+    // Overall (always unlocked)
+    const overall = document.createElement("a");
+    overall.className = "opt unlocked-overall";
+    overall.href = "../leaderboard.html";
+    overall.textContent = "🏆 Overall (random voting)";
+    overall.style.textDecoration = "none";
+    opts.appendChild(overall);
+
+    for (const [s, label] of LB_LIST) {
+      const ranks = getCatRanks(s);
+      const unlocked = ranks >= UNLOCK_AT_CATEGORY;
+      if (unlocked) {
+        const a = document.createElement("a");
+        a.className = "opt";
+        a.style.textDecoration = "none";
+        a.href = `../leaderboard.html?cat=${encodeURIComponent(s)}&label=${encodeURIComponent(label)}`;
+        a.textContent = label;
+        opts.appendChild(a);
+      } else {
+        const remaining = UNLOCK_AT_CATEGORY - ranks;
+        const div = document.createElement("div");
+        div.className = "opt locked";
+        div.innerHTML = `🔒 ${label}<span class="lock-info">${ranks}/${UNLOCK_AT_CATEGORY} — rank ${remaining} more time${remaining === 1 ? "" : "s"} to unlock</span>`;
+        opts.appendChild(div);
+      }
+    }
+    $("#lb-menu").classList.add("open");
+  }
+  function closeLeaderboardsMenu() {
+    $("#lb-menu").classList.remove("open");
+  }
+  $("#btn-leaderboards").addEventListener("click", openLeaderboardsMenu);
+  $("#lb-cancel").addEventListener("click", closeLeaderboardsMenu);
+  $("#lb-menu").addEventListener("click", e => { if (e.target === $("#lb-menu")) closeLeaderboardsMenu(); });
+
+  $("#btn-shuffle").addEventListener("click", newPool);
+  $("#btn-again").addEventListener("click", () => {
+    newPool();
+    show("#stage-vote");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  // ====== Boot ======
+  if (!slug) {
+    $("#err-msg").textContent = "No category specified. Add ?cat=eclipse to the URL, or pick one from the home page.";
+    show("#stage-error");
+    return;
+  }
+
+  Promise.all([
+    fetch(`./data/${encodeURIComponent(slug)}.json`, { cache: "no-store" })
+      .then(r => { if (!r.ok) throw new Error("Couldn't find category data (HTTP " + r.status + ")"); return r.json(); }),
+    fetch(OVERRIDES_URL, { cache: "no-store" })
+      .then(r => r.ok ? r.json() : { overrides: {} })
+      .catch(() => ({ overrides: {} })),
+  ])
+    .then(([data, ov]) => {
+      const overrides = ov.overrides || {};
+      // Apply overrides: drop GUIDs that have been moved out of this slug,
+      // and add GUIDs that have been moved in (we don't have their static
+      // entry, but we know them from override map).
+      const stillHere = data.guids.filter(g => !overrides[g] || overrides[g] === slug);
+      const movedIn   = Object.entries(overrides)
+                              .filter(([_, c]) => c === slug)
+                              .map(([g]) => g);
+      // Prepend "moved-in" entries — likely interesting since someone manually moved them here
+      data.guids = [...new Set([...movedIn, ...stillHere])];
+      data.count = data.guids.length;
+      bucket = data;
+      $("#title").textContent = `Rank your top 3: ${bucket.label}`;
+      document.title = `${bucket.label} — Rank your top 3`;
+
+      // If category has 10 or fewer photos, show all and disable shuffle.
+      if (bucket.guids.length <= POOL_SIZE) {
+        poolPicks = bucket.guids.slice();
+        $("#btn-shuffle").style.display = "none";
+        $("#pool-label").textContent = `All ${bucket.guids.length} photos in this category`;
+      } else {
+        poolPicks = sample(bucket.guids, POOL_SIZE);
+        $("#btn-shuffle").style.display = "";
+        $("#pool-label").textContent = `Random 10 of ${bucket.count.toLocaleString()} — drag to rank`;
+      }
+
+      // If category has fewer than 3 photos, no real ranking is possible.
+      if (bucket.guids.length < PICK_LIMIT) {
+        $("#err-msg").textContent = `This category only has ${bucket.guids.length} photo(s) — not enough to rank a top 3.`;
+        show("#stage-error");
+        return;
+      }
+
+      renderPool(poolPicks);
+      initSortable();
+      show("#stage-vote");
+    })
+    .catch(err => {
+      $("#err-msg").textContent = err.message;
+      show("#stage-error");
+    });
+})();
+</script>
+
+</body>
+</html>

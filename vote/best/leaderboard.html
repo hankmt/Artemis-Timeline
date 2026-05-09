@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Best Artemis II Photo — Leaderboard</title>
+<meta name="description" content="Live Elo rankings of every photo featured on artemistimeline.com — voted on head-to-head.">
+<style>
+  :root {
+    --bg: #07090d;
+    --bg-2: #0e131a;
+    --fg: #e7eef7;
+    --muted: #8a96a6;
+    --accent: #ff8a3d;
+    --accent-2: #4cc8ff;
+    --gold: #ffd166;
+    --silver: #cfd6df;
+    --bronze: #d97a4a;
+    --border: #1d2632;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--fg);
+               font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+               -webkit-font-smoothing: antialiased; }
+  a { color: var(--accent-2); }
+
+  header {
+    padding: 22px 16px 16px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+  header > * { max-width: 760px; margin-left: auto; margin-right: auto; }
+  header .crumb { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+  header .crumb a { color: var(--muted); text-decoration: underline; }
+  header h1 {
+    font-size: clamp(22px, 4vw, 32px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0 auto 6px;
+    color: var(--fg);
+  }
+  header .desc { color: var(--muted); font-size: 13px; line-height: 1.5; margin: 0 auto; }
+  header .stats {
+    margin-top: 12px;
+    display: inline-flex; gap: 18px;
+    color: var(--muted);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    flex-wrap: wrap; justify-content: center;
+  }
+  header .stats em { color: var(--fg); font-style: normal; font-weight: 700; }
+  header .actions { margin-top: 12px; }
+
+  .btn {
+    border: 1px solid var(--border);
+    background: var(--bg-2);
+    color: var(--fg);
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 12px;
+    transition: background 120ms ease;
+    font-family: inherit;
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .btn:hover { background: #14202c; border-color: #2a3947; }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #1a0d00; }
+
+  main {
+    padding: 22px 14px 80px;
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+  }
+  @media (max-width: 1100px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 800px)  { .grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 540px)  { .grid { grid-template-columns: repeat(2, 1fr); } }
+
+  .card {
+    position: relative;
+    background: #050810;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: zoom-in;
+  }
+  .card .photo {
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    position: relative;
+    background: #050810;
+  }
+  .card img {
+    width: 100%; height: 100%; object-fit: contain;
+    display: block;
+    opacity: 0;
+    transition: opacity 250ms ease;
+  }
+  .card img.loaded { opacity: 1; }
+  .card .rank {
+    position: absolute;
+    top: 6px; left: 6px;
+    background: rgba(0,0,0,0.75);
+    color: #fff;
+    font-weight: 800;
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-variant-numeric: tabular-nums;
+  }
+  .card.podium .rank { background: var(--gold); color: #1a0d00; }
+  .card[data-pos="1"] .rank { background: var(--silver); color: #1a0d00; }
+  .card[data-pos="2"] .rank { background: var(--bronze); color: #1a0d00; }
+  .card .meta {
+    padding: 6px 8px;
+    font-size: 11px;
+    color: var(--muted);
+    display: flex; justify-content: space-between; gap: 4px;
+    font-variant-numeric: tabular-nums;
+    border-top: 1px solid var(--border);
+  }
+  .card .meta strong { color: var(--fg); font-weight: 700; }
+
+  .empty, .loading {
+    text-align: center;
+    color: var(--muted);
+    padding: 60px 20px;
+  }
+  .spin {
+    display: inline-block; width: 14px; height: 14px;
+    border: 2px solid rgba(255,255,255,.25);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: sp 0.7s linear infinite;
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+  @keyframes sp { to { transform: rotate(360deg); } }
+
+  /* Lightbox */
+  .lightbox {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.94);
+    display: none;
+    z-index: 200;
+    align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: 95vw; max-height: 85vh;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+  .lightbox .lb-close {
+    position: absolute; top: 14px; right: 14px;
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.2);
+    color: #fff;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    display: grid; place-items: center;
+  }
+  .lightbox .lb-info {
+    position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+    text-align: center;
+    color: var(--muted);
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12px;
+  }
+  .lightbox .lb-info a { margin-left: 12px; color: var(--accent-2); }
+
+  footer {
+    color: var(--muted);
+    font-size: 11px;
+    text-align: center;
+    padding: 20px 16px 40px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="crumb"><a href="..">← /vote</a> · <a href="./">← Best Artemis II Photo voting</a></p>
+  <h1>The Best Artemis II Photo — Leaderboard</h1>
+  <p class="desc">Live Elo ranking from your head-to-head votes. Photos start at 1200; winners gain points from losers. The closer two photos' ratings, the smaller the swing per match.</p>
+  <div class="stats">
+    <span><em id="stat-pool">—</em> in the running</span>
+    <span>showing the top <em id="stat-shown">—</em></span>
+    <span><em id="stat-votes">—</em> votes submitted</span>
+  </div>
+  <div class="actions">
+    <a class="btn primary" href="./">← Vote on more pairs</a>
+    <button class="btn" id="btn-refresh">↻ Refresh</button>
+  </div>
+</header>
+
+<main id="main">
+  <div class="loading"><span class="spin"></span> Loading leaderboard…</div>
+</main>
+
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true">
+  <button class="lb-close" id="lb-close" aria-label="Close">✕</button>
+  <div>
+    <img id="lb-img" alt="">
+    <div class="lb-info">
+      <span id="lb-id"></span>
+      <a id="lb-orig" target="_blank" rel="noopener">Original on artemistimeline.com →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Photos: featured on <a href="https://artemistimeline.com" target="_blank" rel="noopener">artemistimeline.com</a> · Mission ART002 (Artemis II) · Not affiliated with NASA.
+</footer>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script>
+(() => {
+  const API = "https://photovote-api.hankmt.workers.dev";
+  const R2  = "https://pub-1f1ce68455c0432ea65ac3155a6b2409.r2.dev";
+  const R2_TIMELINE = R2 + "/timeline";
+  const TIMELINE_ORIG_BASE = "https://artemistimeline.com/web";  // for "view original" link
+  const TOP_N = 200;          // how many to render
+  const FETCH_N = 1000;       // pull all ranked rows so the vote-count stat is accurate
+  const MIN_MATCHES = 1;      // show photos with ≥1 match (lower threshold = livelier early data)
+
+  const _docDir = (() => {
+    const p = location.pathname;
+    if (p.endsWith("/")) return p;
+    if (/\.[^/]+$/.test(p)) return p.replace(/[^/]+$/, "");
+    return p + "/";
+  })();
+
+  const $ = s => document.querySelector(s);
+
+  function imgUrl(id) {
+    const stem = id.replace(/\.[^.]+$/, "");
+    return `${R2_TIMELINE}/${encodeURIComponent(stem)}.jpg`;
+  }
+
+  // Lightbox
+  let lbCurrent = null;
+  function openLightbox(photo) {
+    lbCurrent = photo;
+    $("#lb-img").src = imgUrl(photo.id);
+    $("#lb-img").alt = photo.id;
+    $("#lb-id").textContent = photo.orig || photo.id;
+    $("#lb-orig").href = `${TIMELINE_ORIG_BASE}/${encodeURIComponent(photo.orig || photo.id)}`;
+    $("#lightbox").classList.add("open");
+  }
+  function closeLightbox() {
+    $("#lightbox").classList.remove("open");
+    $("#lb-img").src = "";
+    lbCurrent = null;
+  }
+  $("#lb-close").addEventListener("click", closeLightbox);
+  $("#lightbox").addEventListener("click", e => { if (e.target === $("#lightbox")) closeLightbox(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeLightbox(); });
+
+  function makeCard(row, pos, lookup) {
+    const photo = lookup.get(row.photo_id) || { id: row.photo_id, orig: row.photo_id };
+    const card = document.createElement("div");
+    const podium = pos < 3 ? " podium" : "";
+    card.className = "card" + podium;
+    card.dataset.pos = String(pos);
+    card.innerHTML = `
+      <div class="photo">
+        <img src="${imgUrl(photo.id)}" alt="" loading="lazy" decoding="async">
+        <span class="rank">#${pos + 1}</span>
+      </div>
+      <div class="meta">
+        <strong>${Math.round(row.elo)}</strong>
+        <span>${row.wins ?? 0}W ${row.losses ?? 0}L</span>
+      </div>
+    `;
+    const img = card.querySelector("img");
+    img.addEventListener("load", () => img.classList.add("loaded"));
+    card.addEventListener("click", () => openLightbox(photo));
+    return card;
+  }
+
+  async function load() {
+    const main = $("#main");
+    main.innerHTML = '<div class="loading"><span class="spin"></span> Loading…</div>';
+
+    try {
+      const [manifestRes, eloRes] = await Promise.all([
+        fetch(_docDir + "manifest.json", { cache: "no-store" }).then(r => r.json()),
+        fetch(`${API}/best-elo-top?n=${FETCH_N}&min_matches=${MIN_MATCHES}`, { cache: "no-store" })
+          .then(r => r.json()),
+      ]);
+
+      const pool = (manifestRes && manifestRes.photos) || [];
+      const lookup = new Map(pool.map(p => [p.id, p]));
+      $("#stat-pool").textContent = pool.length.toLocaleString();
+
+      const rows = (eloRes && eloRes.results) || [];
+      // Each vote produces 1 win + 1 loss across the two photos, so the total
+      // vote count is half the sum of wins+losses.
+      const totalVotes = Math.round(
+        rows.reduce((s, r) => s + (r.wins || 0) + (r.losses || 0), 0) / 2
+      );
+      $("#stat-votes").textContent = totalVotes.toLocaleString();
+      $("#stat-shown").textContent = Math.min(rows.length, TOP_N).toLocaleString();
+
+      if (rows.length === 0) {
+        main.innerHTML = '<div class="empty">No votes yet — be the first! <a href="./">Start voting →</a></div>';
+        return;
+      }
+
+      const display = rows.slice(0, TOP_N);
+      const grid = document.createElement("div");
+      grid.className = "grid";
+      display.forEach((row, i) => grid.appendChild(makeCard(row, i, lookup)));
+      main.innerHTML = "";
+      main.appendChild(grid);
+    } catch (err) {
+      main.innerHTML = `<div class="empty" style="color:#ff5466">Couldn't load: ${err.message}</div>`;
+    }
+  }
+
+  $("#btn-refresh").addEventListener("click", load);
+  load();
+})();
+</script>
+
+</body>
+</html>

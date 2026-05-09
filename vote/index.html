@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Artemis II Photo Voter</title>
+<meta name="description" content="Help surface the best photos from NASA's Artemis II mission. Vote on a random batch, or rank specific moments.">
+<meta property="og:title" content="Artemis II Photo Voter">
+<meta property="og:description" content="Help surface the best photos from NASA's Artemis II mission. Vote on a random batch, or rank specific moments.">
+<style>
+  :root {
+    --bg: #07090d;
+    --bg-2: #0e131a;
+    --fg: #e7eef7;
+    --muted: #8a96a6;
+    --accent: #ff8a3d;
+    --accent-2: #4cc8ff;
+    --border: #1d2632;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--fg);
+               font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+               -webkit-font-smoothing: antialiased; }
+  a { color: var(--accent-2); }
+
+  header {
+    padding: 56px 24px 32px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    background:
+      radial-gradient(ellipse 60% 55% at 50% 30%, rgba(255,138,61,0.10), transparent 65%),
+      linear-gradient(180deg, #0c1622 0%, var(--bg) 100%);
+  }
+  header > * { max-width: 720px; margin-left: auto; margin-right: auto; }
+  header h1 {
+    font-size: clamp(30px, 5.4vw, 48px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0 auto 14px;
+    text-shadow: 0 2px 18px rgba(0,0,0,0.6);
+  }
+  header .sub {
+    color: var(--muted);
+    font-size: clamp(15px, 2vw, 18px);
+    line-height: 1.5;
+    margin: 0 auto 8px;
+  }
+  header .sub a { color: var(--accent-2); text-decoration: underline; text-underline-offset: 3px; }
+
+  main { padding: 32px 16px 80px; max-width: 1100px; margin: 0 auto; }
+
+  section { margin: 0 0 48px; }
+  section h2 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    font-weight: 700;
+    margin: 0 0 12px;
+  }
+  section p.intro {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0 0 20px;
+  }
+
+  /* Featured card — the random voting CTA */
+  .featured {
+    display: flex; align-items: center; gap: 24px;
+    padding: 24px 28px;
+    background: linear-gradient(135deg, rgba(255,138,61,0.10), rgba(76,200,255,0.06));
+    border: 1px solid var(--border);
+    border-radius: 14px;
+  }
+  .featured .body { flex: 1; }
+  .featured h3 {
+    margin: 0 0 6px;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .featured p {
+    color: var(--muted);
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .featured .cta {
+    flex: 0 0 auto;
+  }
+
+  /* Categories grid */
+  .cats {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+  }
+  @media (min-width: 720px) {
+    .cats { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .cats { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .cat {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 120ms ease, border-color 120ms ease;
+    position: relative;
+  }
+  .cat:hover { transform: translateY(-2px); border-color: #324355; }
+  .cat .photo {
+    aspect-ratio: 4/3;
+    background-size: cover;
+    background-position: center;
+    background-color: #060a10;
+  }
+  .cat .meta {
+    padding: 11px 14px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px;
+  }
+  .cat .label {
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .cat .count {
+    font-size: 12px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .cat.notable {
+    border-color: rgba(255,138,61,0.35);
+  }
+  .cat.notable .label::before {
+    content: "★ ";
+    color: var(--accent);
+  }
+
+  /* Leaderboard CTA */
+  .lb-cta {
+    text-align: center;
+    padding: 32px 20px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .lb-cta h3 {
+    margin: 0 0 8px;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .lb-cta p {
+    color: var(--muted);
+    margin: 0 0 14px;
+    font-size: 14px;
+  }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    border: 1px solid var(--border);
+    background: var(--bg-2);
+    color: var(--fg);
+    padding: 11px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    transition: transform 80ms ease;
+    font-family: inherit;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn:hover { background: #14202c; border-color: #2a3947; }
+  .btn.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #1a0d00;
+  }
+  .btn.primary:hover { background: #ff9b54; border-color: #ff9b54; }
+
+  .loading { text-align: center; padding: 40px 20px; color: var(--muted); }
+  .spin { display: inline-block; width: 14px; height: 14px;
+          border: 2px solid rgba(255,255,255,.25); border-top-color: #fff;
+          border-radius: 50%; animation: sp 0.7s linear infinite;
+          vertical-align: middle; margin-right: 6px; }
+  @keyframes sp { to { transform: rotate(360deg); } }
+
+  footer {
+    color: var(--muted);
+    font-size: 12px;
+    text-align: center;
+    padding: 24px 16px 40px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+  footer a { color: var(--accent-2); }
+
+  /* Best-of hero card */
+  .hero-best {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 22px 18px;
+    background: var(--bg-2);
+    margin: 0 0 28px;
+  }
+  .hero-best .eyebrow {
+    color: var(--muted);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    margin: 0 0 6px;
+  }
+  .hero-best h2 {
+    font-size: clamp(20px, 3.5vw, 28px);
+    margin: 0 0 6px;
+    color: var(--fg);
+  }
+  .hero-best p { color: var(--muted); margin: 0 0 14px; font-size: 14px; line-height: 1.5; }
+  .hero-best .cta { display: flex; gap: 10px; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Artemis II Photo Voter</h1>
+  <p class="sub">NASA dropped 12,000 photos from the Artemis II mission. But which ones are the <em>best</em> ones??? Better than one person picking is a BUNCH of people voting. This way <a href="https://hankgreen.com" target="_blank" rel="noopener">I</a> can figure out which to add to the <a href="https://artemistimeline.com" target="_blank" rel="noopener">ArtemisTimeline.com</a> tool.</p>
+</header>
+
+<main>
+
+  <!-- Best-of hero — head-to-head over every photo on artemistimeline.com -->
+  <section class="hero-best">
+    <p class="eyebrow">New</p>
+    <h2>Find the best Artemis II photo</h2>
+    <p>Every photo featured on <a href="https://artemistimeline.com" target="_blank" rel="noopener">artemistimeline.com</a> goes head-to-head. Click your favorite from each pair, and the running Elo leaderboard ranks the single best image of the mission.</p>
+    <div class="cta">
+      <a class="btn primary" id="cta-best" href="best/">Start voting →</a>
+      <a class="btn" id="cta-best-lb" href="best/leaderboard.html">Current rankings</a>
+    </div>
+  </section>
+
+  <!-- Random voting (the original) -->
+  <section>
+    <h2>Random batch</h2>
+    <div class="featured">
+      <div class="body">
+        <h3>Vote on 50 random photos</h3>
+        <p>See a random batch of 50, pick your 5 favorites. Best for casting a wide net across all 7,000+ usable frames.</p>
+      </div>
+      <div class="cta">
+        <a class="btn primary" id="cta-random" href="random/">Start voting →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Head-to-head — TEMPORARILY HIDDEN; un-comment to restore
+  <section>
+    <h2>Head-to-head</h2>
+    <div class="featured">
+      <div class="body">
+        <h3>This one or that one?</h3>
+        <p>Snap-decision pairwise comparisons drawn from the top 200. Faster decisions, sharper signal — separate Elo leaderboard.</p>
+      </div>
+      <div class="cta">
+        <a class="btn primary" id="cta-vs" href="vs/">Start comparing →</a>
+      </div>
+    </div>
+  </section>
+  -->
+
+  <!-- Category-specific ranking -->
+  <section>
+    <h2>Or rank specific moments</h2>
+    <p class="intro">Drag your top 3 photos in each category. Smaller batches, more focused decisions, better signal.</p>
+    <div id="cats" class="cats">
+      <div class="loading"><span class="spin"></span> Loading categories…</div>
+    </div>
+  </section>
+
+  <!-- Leaderboards -->
+  <section>
+    <h2>Leaderboards</h2>
+    <div class="lb-cta">
+      <h3>See what's winning so far</h3>
+      <p>Live rankings update with every vote.</p>
+      <a class="btn" id="cta-lb" href="leaderboard.html">View overall leaderboard →</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Photos: <a href="https://eol.jsc.nasa.gov/" target="_blank" rel="noopener">NASA Gateway to Astronaut Photography</a> · Mission ART002 (Artemis II) · Not affiliated with NASA.
+</footer>
+
+<script defer src="/_vercel/insights/script.js"></script>
+
+<script>
+(() => {
+  const R2 = "https://pub-1f1ce68455c0432ea65ac3155a6b2409.r2.dev";
+
+  // Compute the doc's directory so relative URLs work whether the page is
+  // served from /vote/, /vote, or /vote/index.html.
+  const _docDir = (() => {
+    const p = location.pathname;
+    if (p.endsWith("/")) return p;
+    if (/\.[^/]+$/.test(p)) return p.replace(/[^/]+$/, "");
+    return p + "/";
+  })();
+
+  // Fix the static CTA hrefs so they always point to the right place
+  const ctaR = document.getElementById("cta-random");
+  if (ctaR) ctaR.href = _docDir + "random/";
+  const ctaV = document.getElementById("cta-vs");
+  if (ctaV) ctaV.href = _docDir + "vs/";
+  const ctaL = document.getElementById("cta-lb");
+  if (ctaL) ctaL.href = _docDir + "leaderboard.html";
+  const ctaBest = document.getElementById("cta-best");
+  if (ctaBest) ctaBest.href = _docDir + "best/";
+  const ctaBestLb = document.getElementById("cta-best-lb");
+  if (ctaBestLb) ctaBestLb.href = _docDir + "best/leaderboard.html";
+
+  fetch(_docDir + "c/index.json", { cache: "no-store" })
+    .then(r => r.json())
+    .then(idx => {
+      const grid = document.getElementById("cats");
+      grid.innerHTML = "";
+      for (const b of idx.buckets) {
+        const a = document.createElement("a");
+        a.className = "cat" + (b.slug === "notable" ? " notable" : "");
+        a.href = _docDir + `c/?cat=${encodeURIComponent(b.slug)}`;
+        a.innerHTML = `
+          <div class="photo" style="background-image:url('${R2}/thumbs/${b.showcase}.jpg')"></div>
+          <div class="meta">
+            <span class="label">${b.label}</span>
+            <span class="count">${b.count.toLocaleString()}</span>
+          </div>
+        `;
+        grid.appendChild(a);
+      }
+    })
+    .catch(err => {
+      document.getElementById("cats").innerHTML =
+        `<div class="loading">Couldn't load categories: ${err.message}</div>`;
+    });
+})();
+</script>
+
+</body>
+</html>
