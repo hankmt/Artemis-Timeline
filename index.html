@@ -325,6 +325,7 @@
     min-height: 0;
     overflow: hidden;
     position: relative;
+    touch-action: pan-y;
   }
   .photo-img {
     max-width: 100%;
@@ -334,14 +335,16 @@
   }
   .photo-img.fullscreen {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 50;
-    width: 100%;
-    height: 100%;
+    inset: 0;
+    z-index: 1300;
+    width: 100vw;
+    height: var(--vh);
+    max-width: none;
+    max-height: none;
     object-fit: contain;
     background-color: #0d0d1a;
+    border-radius: 0;
+    cursor: zoom-out;
   }
   /* Prev/Next arrow overlays on photo */
   .nav-arrow {
@@ -794,7 +797,7 @@
   @media (max-width: 768px) {
     /* Mobile bottom-sheet vars — single source of truth for snap points */
     :root {
-      --sheet-handle-h: 44px;
+      --sheet-handle-h: 84px;
       --sheet-middle-h: 192px; /* orion map flush at top + a little chrome */
       /* y-coord of the sheet's top edge; default matches the middle snap so
          pre-JS layout already reserves the right space for the photo. */
@@ -840,7 +843,7 @@
        unchanged) but visually leaves the row on mobile. */
     #photoCounter {
       position: fixed;
-      bottom: calc(var(--vh) - var(--sheet-top-y) + 10px);
+      bottom: calc(var(--vh) - var(--sheet-top-y) + 32px);
       left: 50%;
       transform: translateX(-50%);
       z-index: 4;
@@ -857,6 +860,10 @@
       text-transform: uppercase;
       pointer-events: none;
       transition: bottom 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+    body.sheet-state-open #photoCounter,
+    body.sheet-state-middle #photoCounter {
+      display: none;
     }
     .filter-dropdown-trigger {
       display: flex;
@@ -1021,12 +1028,12 @@
       padding: 0;
       gap: 0;
       overflow: hidden;
-      padding-bottom: calc(min(var(--vh) - var(--sheet-top-y), var(--sheet-middle-h)) + 4px);
+      padding-bottom: calc(var(--vh) - var(--sheet-top-y) + 4px);
     }
     /* Middle snap: let the photo extend slightly past the sheet's top edge
        so a sliver of image peeks through the rounded sheet corners. */
     body.sheet-state-middle .viewer {
-      padding-bottom: calc(var(--sheet-middle-h) - 24px);
+      padding-bottom: calc(var(--sheet-middle-h) + 4px);
     }
     .photo-side {
       flex: 1;
@@ -1044,6 +1051,11 @@
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
+    }
+    body.photo-fullscreen-active .photo-desc-btn,
+    body.photo-fullscreen-active #photoCounter,
+    body.photo-fullscreen-active .meta-panel {
+      display: none !important;
     }
     /* descHover lives inside the bottom sheet on mobile (moved by JS) */
     .photo-side .photo-links { display: none; }
@@ -1072,8 +1084,7 @@
       -webkit-overflow-scrolling: touch;
       overscroll-behavior: contain;
       transition: top 0.32s cubic-bezier(0.32, 0.72, 0, 1);
-      /* default = middle */
-      top: calc(var(--vh) - var(--sheet-middle-h));
+      top: calc(var(--vh) - var(--sheet-handle-h) - var(--safe-bottom));
     }
     .meta-panel.sheet-open    { top: 35vh; }
     .meta-panel.sheet-middle  { top: calc(var(--vh) - var(--sheet-middle-h)); }
@@ -1101,6 +1112,14 @@
       -webkit-tap-highlight-color: transparent;
       touch-action: none;
       background: transparent;
+    }
+    .meta-panel:not(.sheet-closed) .bottom-sheet-handle {
+      position: sticky;
+      order: 0;
+      top: 0;
+      flex-shrink: 0;
+      background: #0a0a14;
+      padding: 8px 16px 10px;
     }
     .meta-panel.sheet-dragging .bottom-sheet-handle { cursor: grabbing; }
     .sheet-handle-bar {
@@ -1132,23 +1151,22 @@
        on top of it. */
     .traj-section {
       order: 1;
-      margin: 0;
-      padding: 0;
-      border: none;
-      border-radius: 14px 14px 0 0;
+      margin: 8px 6px 0;
+      padding: 6px;
+      border: 1px solid #1a1a2e;
+      border-radius: 8px;
       background: rgba(0,0,0,0.35);
       flex-shrink: 0;
-      max-height: 140px;
-      overflow: hidden;
+      max-height: none;
+      overflow: visible;
     }
     .traj-section canvas {
-      border-radius: 14px 14px 0 0;
+      border-radius: 0;
       width: 100%;
-      height: 122px; /* leaves room for the trajectory label, total ≤140px */
-      object-fit: contain;
+      height: auto;
       display: block;
     }
-    .traj-label { padding-bottom: 4px; }
+    .traj-label { padding-bottom: 0; }
     .meta-panel > .calendar-promo { order: 2; margin: 10px 12px 0; flex-shrink: 0; }
     .desc-hover { order: 3; margin: 10px 12px 0; width: auto; flex-shrink: 0; }
     .meta-panel > .meta-section:not(#descSection) { order: 4; margin: 10px 12px 0; flex-shrink: 0; }
@@ -2225,7 +2243,7 @@ function drawTrajectory(ts) {
   const dpr = window.devicePixelRatio || 1;
   const rect = canvas.getBoundingClientRect();
   const W = rect.width;
-  const H = Math.round(W * 0.32); // wide & short
+  const H = Math.round(W * 0.32);
   canvas.width = W * dpr;
   canvas.height = H * dpr;
   canvas.style.height = H + 'px';
@@ -2372,6 +2390,8 @@ function updatePhoto() {
   const nasaTitle = flickrId ? PHOTO_TITLES[flickrId] || '' : '';
   const imgEl = document.getElementById('currentPhoto');
   const vidEl = document.getElementById('currentVideo');
+  imgEl.classList.remove('fullscreen');
+  document.body.classList.remove('photo-fullscreen-active');
   if (photo.v) {
     imgEl.style.display = 'none';
     vidEl.pause();
@@ -2761,10 +2781,96 @@ function ensurePhotoInView() {
 
 function goPrev() { if (currentPhotoIdx > 0) { currentPhotoIdx--; updatePhoto(); ensurePhotoInView(); } }
 function goNext() { if (currentPhotoIdx < filteredPhotos.length - 1) { currentPhotoIdx++; updatePhoto(); ensurePhotoInView(); } }
-function toggleFullscreenPhoto() { const currentPhoto = document.getElementById("currentPhoto"); currentPhoto.classList.toggle("fullscreen"); }
+function toggleFullscreenPhoto() {
+  const currentPhoto = document.getElementById("currentPhoto");
+  currentPhoto.classList.toggle("fullscreen");
+  document.body.classList.toggle('photo-fullscreen-active', currentPhoto.classList.contains('fullscreen'));
+}
+let photoSwipeStartX = 0;
+let photoSwipeStartY = 0;
+let photoSwipePointerId = null;
+let photoSwipeMoved = false;
+let photoSwipeNavigated = false;
+let photoWheelLastAt = 0;
+function handlePhotoSwipe(dx, dy) {
+  if (Math.abs(dx) < 45 || Math.abs(dx) < Math.abs(dy) * 1.4) return false;
+  if (dx < 0) goNext();
+  else goPrev();
+  return true;
+}
+function onPhotoPointerDown(e) {
+  if (!e.isPrimary || (e.pointerType === 'mouse' && e.button !== 0)) return;
+  if (e.target.closest && e.target.closest('button, video')) return;
+  photoSwipePointerId = e.pointerId;
+  photoSwipeStartX = e.clientX;
+  photoSwipeStartY = e.clientY;
+  photoSwipeMoved = false;
+  photoSwipeNavigated = false;
+  if (photoContainerEl && photoContainerEl.setPointerCapture) {
+    photoContainerEl.setPointerCapture(e.pointerId);
+  }
+}
+function onPhotoPointerMove(e) {
+  if (!e.isPrimary || e.pointerId !== photoSwipePointerId || photoSwipeNavigated) return;
+  const dx = e.clientX - photoSwipeStartX;
+  const dy = e.clientY - photoSwipeStartY;
+  if (Math.abs(dx) > 8 || Math.abs(dy) > 8) photoSwipeMoved = true;
+  if (handlePhotoSwipe(dx, dy)) {
+    photoSwipeMoved = true;
+    photoSwipeNavigated = true;
+  }
+}
+function onPhotoPointerUp(e) {
+  if (!e.isPrimary || e.pointerId !== photoSwipePointerId) return;
+  const dx = e.clientX - photoSwipeStartX;
+  const dy = e.clientY - photoSwipeStartY;
+  if (!photoSwipeNavigated && handlePhotoSwipe(dx, dy)) {
+    photoSwipeMoved = true;
+    photoSwipeNavigated = true;
+  }
+  if (photoContainerEl && photoContainerEl.hasPointerCapture && photoContainerEl.hasPointerCapture(e.pointerId)) {
+    photoContainerEl.releasePointerCapture(e.pointerId);
+  }
+  photoSwipePointerId = null;
+}
+function cancelPhotoPointer(e) {
+  if (photoContainerEl && photoContainerEl.hasPointerCapture && photoContainerEl.hasPointerCapture(e.pointerId)) {
+    photoContainerEl.releasePointerCapture(e.pointerId);
+  }
+  photoSwipePointerId = null;
+  photoSwipeMoved = false;
+  photoSwipeNavigated = false;
+}
+function onPhotoWheel(e) {
+  const horizontal = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
+  if (Math.abs(horizontal) < 35) return;
+  const now = Date.now();
+  if (now - photoWheelLastAt < 450) return;
+  photoWheelLastAt = now;
+  if (horizontal > 0) goNext();
+  else goPrev();
+  e.preventDefault();
+}
 document.getElementById('prevBtn').addEventListener('click', goPrev);
 document.getElementById('nextBtn').addEventListener('click', goNext);
-document.getElementById("currentPhoto").addEventListener("click", toggleFullscreenPhoto);
+const photoContainerEl = document.querySelector('.photo-container');
+if (photoContainerEl) {
+  photoContainerEl.addEventListener('pointerdown', onPhotoPointerDown, true);
+  photoContainerEl.addEventListener('pointermove', onPhotoPointerMove, true);
+  photoContainerEl.addEventListener('pointerup', onPhotoPointerUp, true);
+  photoContainerEl.addEventListener('pointercancel', cancelPhotoPointer, true);
+  photoContainerEl.addEventListener('wheel', onPhotoWheel, { passive: false, capture: true });
+  photoContainerEl.addEventListener('click', e => {
+    if (e.target.closest && e.target.closest('button, video')) return;
+    if (document.getElementById("currentPhoto").style.display === 'none') return;
+    if (photoSwipeMoved) {
+      e.preventDefault();
+      photoSwipeMoved = false;
+      return;
+    }
+    toggleFullscreenPhoto();
+  });
+}
 
 
 // --- FILTERS ---
@@ -2823,6 +2929,11 @@ document.querySelectorAll('[data-cam]').forEach(btn => {
 });
 
 document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    const currentPhoto = document.getElementById("currentPhoto");
+    currentPhoto.classList.remove('fullscreen');
+    document.body.classList.remove('photo-fullscreen-active');
+  }
   if (e.key === 'ArrowLeft' && currentPhotoIdx > 0) { currentPhotoIdx--; updatePhoto(); ensurePhotoInView(); }
   if (e.key === 'ArrowRight' && currentPhotoIdx < filteredPhotos.length - 1) { currentPhotoIdx++; updatePhoto(); ensurePhotoInView(); }
 });
