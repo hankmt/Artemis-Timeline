@@ -1,0 +1,4 @@
+thumbs/
+out/
+__pycache__/
+*.pyc
