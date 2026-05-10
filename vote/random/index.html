@@ -590,7 +590,7 @@
 
   // ====== Submit ======
   $("#btn-submit").addEventListener("click", async () => {
-    if (selected.size !== PICK_LIMIT) return;
+    if (selected.size === 0 || selected.size > PICK_LIMIT) return;
     const btn = $("#btn-submit");
     btn.disabled = true;
     btn.innerHTML = '<span class="spin"></span> Submitting…';
