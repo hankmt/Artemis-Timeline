@@ -1251,6 +1251,13 @@
   <button class="filter-btn cam-filter" data-cam="gopro" title="GoPro exterior camera mounted on Orion">GoPro</button>
   <button class="filter-btn cam-filter" data-cam="iphone" title="Crew iPhone 17 Pro Max on Orion">iPhone</button>
   <span class="filter-sep">|</span>
+  <button class="filter-btn center-filter" data-center="KSC"  title="Kennedy Space Center">KSC</button>
+  <button class="filter-btn center-filter" data-center="JSC"  title="Johnson Space Center">JSC</button>
+  <button class="filter-btn center-filter" data-center="MSFC" title="Marshall Space Flight Center">MSFC</button>
+  <button class="filter-btn center-filter" data-center="SSC"  title="Stennis Space Center">SSC</button>
+  <button class="filter-btn center-filter" data-center="MAF"  title="Michoud Assembly Facility">MAF</button>
+  <button class="filter-btn center-filter" data-center="HQ"   title="NASA Headquarters">HQ</button>
+  <span class="filter-sep">|</span>
   <button class="filter-btn" data-filter="videos">Videos</button>
   <span class="filter-sep">|</span>
   <button class="filter-btn" id="muteBtn" title="Toggle mission audio"><span class="audio-checkbox" aria-hidden="true"></span><span>PLAY AUDIO</span></button>
@@ -1434,7 +1441,7 @@ let AUDIO = [];
 function loadPhotoData() {
   const data = PHOTO_DATA;
   data.photos.filter(p => p.enabled !== false).forEach(p => {
-    const entry = {t:edt(p.time),f:p.file,p:p.photographer,loc:p.location,cam:p.camera,set:p.settings,sc:!!p.spacecraft,b:p.batch||0};
+    const entry = {t:edt(p.time),f:p.file,p:p.photographer,loc:p.location,cam:p.camera,set:p.settings,sc:!!p.spacecraft,b:p.batch||0,center:p.center||''};
     // Camera ID for filter buttons — use explicit camera_id from data if present,
     // otherwise derive from camera string (z9, gopro, iphone)
     if (p.camera_id) entry.cid = p.camera_id;
@@ -2773,20 +2780,33 @@ function clearAllFilters() {
   document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('[data-crew]').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('[data-cam]').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('[data-center]').forEach(b => b.classList.remove('active'));
 }
 
-// Apply camera multi-select filter (union of selected camera types).
-// Returns true if any filter is active.
+// Apply multi-select filters (camera + NASA center).
+// Within each group: OR. Across groups: AND.
+// Returns true if any multi-select filter is active.
 function applyMultiFilter() {
   const activeCams = Array.from(document.querySelectorAll('[data-cam].active')).map(b => b.dataset.cam);
-  if (activeCams.length === 0) return false;
+  const activeCenters = Array.from(document.querySelectorAll('[data-center].active')).map(b => b.dataset.center);
+  if (activeCams.length === 0 && activeCenters.length === 0) return false;
+
   filteredPhotos = PHOTOS.filter(p => {
-    for (const c of activeCams) {
-      if (c === 'gopro' && p.cam && p.cam.includes('HERO')) return true;
-      if (c === 'iphone' && p.cam && p.cam.includes('iPhone')) return true;
-      if (c !== 'gopro' && c !== 'iphone' && p.cid === c) return true;
+    // Camera group (OR within group)
+    if (activeCams.length > 0) {
+      let camMatch = false;
+      for (const c of activeCams) {
+        if (c === 'gopro' && p.cam && p.cam.includes('HERO'))   { camMatch = true; break; }
+        if (c === 'iphone' && p.cam && p.cam.includes('iPhone')) { camMatch = true; break; }
+        if (c !== 'gopro' && c !== 'iphone' && p.cid === c)      { camMatch = true; break; }
+      }
+      if (!camMatch) return false;
     }
-    return false;
+    // Center group (OR within group)
+    if (activeCenters.length > 0) {
+      if (!activeCenters.includes(p.center)) return false;
+    }
+    return true;
   });
   return true;
 }
@@ -2810,6 +2830,24 @@ document.querySelectorAll('[data-cam]').forEach(btn => {
     // Clear non-multi-select filters
     document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
       // Toggle this camera filter
+    this.classList.toggle('active');
+    const anyActive = applyMultiFilter();
+    if (!anyActive) {
+      document.querySelector('[data-filter="all"]').classList.add('active');
+      filteredPhotos = PHOTOS;
+    }
+    currentPhotoIdx = 0;
+    viewStart = T_START; viewEnd = T_END;
+    updatePhoto();
+  });
+});
+
+// NASA center filters: multi-select among themselves. Same interaction model
+// as camera filters — clicking one clears the exclusive "data-filter" group
+// and stacks (AND) with any active camera filters via applyMultiFilter.
+document.querySelectorAll('[data-center]').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
     this.classList.toggle('active');
     const anyActive = applyMultiFilter();
     if (!anyActive) {
@@ -2950,6 +2988,11 @@ function syncFilterPopupState() {
     const btn = document.querySelector('[data-cam="' + input.dataset.camInput + '"]');
     input.checked = !!(btn && btn.classList.contains('active'));
   });
+  // NASA CENTERS
+  document.querySelectorAll('input[data-center-input]').forEach(input => {
+    const btn = document.querySelector('[data-center="' + input.dataset.centerInput + '"]');
+    input.checked = !!(btn && btn.classList.contains('active'));
+  });
   // MEDIA TYPE
   const videosBox = document.getElementById('filterVideosOnly');
   if (videosBox) videosBox.checked = (dfValue === 'videos');
@@ -2969,6 +3012,16 @@ function updateFilterDropdownLabel() {
   if (activeCams.length) {
     parts.push(activeCams.length + ' Camera' + (activeCams.length > 1 ? 's' : ''));
   }
+  const activeCenters = Array.from(document.querySelectorAll('[data-center].active'));
+  if (activeCenters.length) {
+    // For 1–3 selected centers show their codes inline (e.g. "KSC/JSC");
+    // otherwise abbreviate to "4 Centers" to keep the label short.
+    if (activeCenters.length <= 3) {
+      parts.push(activeCenters.map(b => b.dataset.center).join('/'));
+    } else {
+      parts.push(activeCenters.length + ' Centers');
+    }
+  }
   label.textContent = parts.length ? ('Showing ' + parts.join(' • ')) : 'Showing All Photos and Videos';
 }
 
@@ -2984,6 +3037,8 @@ document.addEventListener('change', e => {
     btn = document.querySelector('[data-filter="' + t.value + '"]');
   } else if (t.matches('input[data-cam-input]')) {
     btn = document.querySelector('[data-cam="' + t.dataset.camInput + '"]');
+  } else if (t.matches('input[data-center-input]')) {
+    btn = document.querySelector('[data-center="' + t.dataset.centerInput + '"]');
   } else if (t.id === 'filterVideosOnly') {
     btn = document.querySelector(t.checked ? '[data-filter="videos"]' : '[data-filter="all"]');
   } else {
@@ -3227,6 +3282,33 @@ window.addEventListener('resize', syncMobileLayout);
       <label class="filter-option">
         <input type="checkbox" data-cam-input="iphone">
         <span>iPhone <em>crew iPhone 17 Pro Max</em></span>
+      </label>
+    </div>
+    <div class="filter-section">
+      <h4>NASA Center</h4>
+      <label class="filter-option">
+        <input type="checkbox" data-center-input="KSC">
+        <span>KSC <em>Kennedy Space Center</em></span>
+      </label>
+      <label class="filter-option">
+        <input type="checkbox" data-center-input="JSC">
+        <span>JSC <em>Johnson Space Center</em></span>
+      </label>
+      <label class="filter-option">
+        <input type="checkbox" data-center-input="MSFC">
+        <span>MSFC <em>Marshall Space Flight Center</em></span>
+      </label>
+      <label class="filter-option">
+        <input type="checkbox" data-center-input="SSC">
+        <span>SSC <em>Stennis Space Center</em></span>
+      </label>
+      <label class="filter-option">
+        <input type="checkbox" data-center-input="MAF">
+        <span>MAF <em>Michoud Assembly Facility</em></span>
+      </label>
+      <label class="filter-option">
+        <input type="checkbox" data-center-input="HQ">
+        <span>HQ <em>NASA Headquarters</em></span>
       </label>
     </div>
     <div class="filter-section">
