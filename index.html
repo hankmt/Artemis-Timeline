@@ -1251,6 +1251,11 @@
   <button class="filter-btn cam-filter" data-cam="gopro" title="GoPro exterior camera mounted on Orion">GoPro</button>
   <button class="filter-btn cam-filter" data-cam="iphone" title="Crew iPhone 17 Pro Max on Orion">iPhone</button>
   <span class="filter-sep">|</span>
+  <button class="filter-btn era-filter" data-era="pre-flight-hardware" title="Flight hardware development — SLS, Orion, integration, pad ops">Hardware</button>
+  <button class="filter-btn era-filter" data-era="pre-flight-training" title="Crew training — NBL, simulators, T-38, geology, suit fit">Training</button>
+  <button class="filter-btn era-filter" data-era="mission"             title="Mission week — March 27 to April 11, 2026">Mission</button>
+  <button class="filter-btn era-filter" data-era="post-mission"        title="Post-flight — recovery, debrief, welcome home">Post-Mission</button>
+  <span class="filter-sep">|</span>
   <button class="filter-btn center-filter" data-center="KSC"  title="Kennedy Space Center">KSC</button>
   <button class="filter-btn center-filter" data-center="JSC"  title="Johnson Space Center">JSC</button>
   <button class="filter-btn center-filter" data-center="MSFC" title="Marshall Space Flight Center">MSFC</button>
@@ -1441,7 +1446,7 @@ let AUDIO = [];
 function loadPhotoData() {
   const data = PHOTO_DATA;
   data.photos.filter(p => p.enabled !== false).forEach(p => {
-    const entry = {t:edt(p.time),f:p.file,p:p.photographer,loc:p.location,cam:p.camera,set:p.settings,sc:!!p.spacecraft,b:p.batch||0,center:p.center||''};
+    const entry = {t:edt(p.time),f:p.file,p:p.photographer,loc:p.location,cam:p.camera,set:p.settings,sc:!!p.spacecraft,b:p.batch||0,center:p.center||'',era:p.era||'unknown'};
     // Camera ID for filter buttons — use explicit camera_id from data if present,
     // otherwise derive from camera string (z9, gopro, iphone)
     if (p.camera_id) entry.cid = p.camera_id;
@@ -2781,15 +2786,17 @@ function clearAllFilters() {
   document.querySelectorAll('[data-crew]').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('[data-cam]').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('[data-center]').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('[data-era]').forEach(b => b.classList.remove('active'));
 }
 
-// Apply multi-select filters (camera + NASA center).
+// Apply multi-select filters (camera + NASA center + era).
 // Within each group: OR. Across groups: AND.
 // Returns true if any multi-select filter is active.
 function applyMultiFilter() {
   const activeCams = Array.from(document.querySelectorAll('[data-cam].active')).map(b => b.dataset.cam);
   const activeCenters = Array.from(document.querySelectorAll('[data-center].active')).map(b => b.dataset.center);
-  if (activeCams.length === 0 && activeCenters.length === 0) return false;
+  const activeEras = Array.from(document.querySelectorAll('[data-era].active')).map(b => b.dataset.era);
+  if (activeCams.length === 0 && activeCenters.length === 0 && activeEras.length === 0) return false;
 
   filteredPhotos = PHOTOS.filter(p => {
     // Camera group (OR within group)
@@ -2805,6 +2812,10 @@ function applyMultiFilter() {
     // Center group (OR within group)
     if (activeCenters.length > 0) {
       if (!activeCenters.includes(p.center)) return false;
+    }
+    // Era group (OR within group)
+    if (activeEras.length > 0) {
+      if (!activeEras.includes(p.era)) return false;
     }
     return true;
   });
@@ -2846,6 +2857,24 @@ document.querySelectorAll('[data-cam]').forEach(btn => {
 // as camera filters — clicking one clears the exclusive "data-filter" group
 // and stacks (AND) with any active camera filters via applyMultiFilter.
 document.querySelectorAll('[data-center]').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
+    this.classList.toggle('active');
+    const anyActive = applyMultiFilter();
+    if (!anyActive) {
+      document.querySelector('[data-filter="all"]').classList.add('active');
+      filteredPhotos = PHOTOS;
+    }
+    currentPhotoIdx = 0;
+    viewStart = T_START; viewEnd = T_END;
+    updatePhoto();
+  });
+});
+
+// Era filters: same pattern. Hardware / Training / Mission / Post-Mission.
+// All multi-select; ANDs with camera and center filters; clears the
+// exclusive data-filter group when clicked.
+document.querySelectorAll('[data-era]').forEach(btn => {
   btn.addEventListener('click', function() {
     document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
     this.classList.toggle('active');
@@ -2993,6 +3022,11 @@ function syncFilterPopupState() {
     const btn = document.querySelector('[data-center="' + input.dataset.centerInput + '"]');
     input.checked = !!(btn && btn.classList.contains('active'));
   });
+  // ERAS
+  document.querySelectorAll('input[data-era-input]').forEach(input => {
+    const btn = document.querySelector('[data-era="' + input.dataset.eraInput + '"]');
+    input.checked = !!(btn && btn.classList.contains('active'));
+  });
   // MEDIA TYPE
   const videosBox = document.getElementById('filterVideosOnly');
   if (videosBox) videosBox.checked = (dfValue === 'videos');
@@ -3022,6 +3056,21 @@ function updateFilterDropdownLabel() {
       parts.push(activeCenters.length + ' Centers');
     }
   }
+  const activeEras = Array.from(document.querySelectorAll('[data-era].active'));
+  if (activeEras.length) {
+    // Compact era labels for the dropdown — Hardware / Training / Mission / Post
+    const ERA_SHORT = {
+      'pre-flight-hardware': 'Hardware',
+      'pre-flight-training': 'Training',
+      'mission': 'Mission',
+      'post-mission': 'Post',
+    };
+    if (activeEras.length <= 3) {
+      parts.push(activeEras.map(b => ERA_SHORT[b.dataset.era] || b.dataset.era).join('/'));
+    } else {
+      parts.push(activeEras.length + ' Eras');
+    }
+  }
   label.textContent = parts.length ? ('Showing ' + parts.join(' • ')) : 'Showing All Photos and Videos';
 }
 
@@ -3039,6 +3088,8 @@ document.addEventListener('change', e => {
     btn = document.querySelector('[data-cam="' + t.dataset.camInput + '"]');
   } else if (t.matches('input[data-center-input]')) {
     btn = document.querySelector('[data-center="' + t.dataset.centerInput + '"]');
+  } else if (t.matches('input[data-era-input]')) {
+    btn = document.querySelector('[data-era="' + t.dataset.eraInput + '"]');
   } else if (t.id === 'filterVideosOnly') {
     btn = document.querySelector(t.checked ? '[data-filter="videos"]' : '[data-filter="all"]');
   } else {
@@ -3309,6 +3360,25 @@ window.addEventListener('resize', syncMobileLayout);
       <label class="filter-option">
         <input type="checkbox" data-center-input="HQ">
         <span>HQ <em>NASA Headquarters</em></span>
+      </label>
+    </div>
+    <div class="filter-section">
+      <h4>Mission Era</h4>
+      <label class="filter-option">
+        <input type="checkbox" data-era-input="pre-flight-hardware">
+        <span>Hardware <em>SLS, Orion, integration, pad ops</em></span>
+      </label>
+      <label class="filter-option">
+        <input type="checkbox" data-era-input="pre-flight-training">
+        <span>Training <em>NBL, simulators, T-38, geology, suit fit</em></span>
+      </label>
+      <label class="filter-option">
+        <input type="checkbox" data-era-input="mission">
+        <span>Mission <em>March 27 to April 11, 2026</em></span>
+      </label>
+      <label class="filter-option">
+        <input type="checkbox" data-era-input="post-mission">
+        <span>Post-Mission <em>Recovery, debrief, welcome home</em></span>
       </label>
     </div>
     <div class="filter-section">
