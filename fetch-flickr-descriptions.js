@@ -1,17 +1,28 @@
 #!/usr/bin/env node
 /**
- * Fetch missing photo descriptions from Flickr API
+ * Fetch missing photo descriptions from Flickr API.
  *
  * Usage:
  *   node fetch-flickr-descriptions.js
  *
- * This will output a JSON object mapping Flickr photo IDs to their
- * titles and descriptions, ready to paste into photos.js.
+ * Outputs a JSON object mapping Flickr photo IDs to their titles and
+ * descriptions, ready to paste into photos.js (or to feed into the
+ * acquisition pipeline's admin Pending tab).
  *
- * No API key needed — uses the public endpoint.
+ * Requires a Flickr API key. Set it in tools/import/.env.local:
+ *
+ *   FLICKR_API_KEY=your_key_here
+ *
+ * Get a free non-commercial key at
+ * https://www.flickr.com/services/apps/create/apply/
+ *
+ * NOTE: the original version of this script had the API key hardcoded
+ * in this committed file. That key was revoked by Flickr after appearing
+ * in a public repo. Don't put keys in tracked files.
  */
 
 const https = require('https');
+const { requireCredential } = require('./tools/import/shared/env');
 
 const FLICKR_IDS = [
   '55186319833',
@@ -44,8 +55,9 @@ const FLICKR_IDS = [
   '55201423841',
 ];
 
-// Flickr public API key (non-commercial, rate-limited)
-const API_KEY = '0407a2e71f8e025e73a050e6c7a1edf6';
+// Flickr API key loaded from tools/import/.env.local (gitignored). The
+// previous in-file key was revoked after this repo went public.
+const API_KEY = requireCredential('FLICKR_API_KEY');
 
 function fetchPhotoInfo(photoId) {
   return new Promise((resolve, reject) => {
