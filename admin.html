@@ -378,6 +378,274 @@ a:hover { text-decoration: underline; }
   padding: 20px 24px;
 }
 
+/* -----------------------------------------------------------
+   Pending tab (acquisition pipeline inbox)
+   ----------------------------------------------------------- */
+.pending-pane.hidden { display: none; }
+
+.pending-banner {
+  margin: 12px 24px;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  background: rgba(239, 83, 80, 0.1);
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.pending-banner code {
+  background: rgba(0,0,0,0.3);
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: #ffb;
+  font-size: 12px;
+}
+
+.pending-toolbar {
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.pending-sync, .pending-bulk {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pending-card {
+  display: flex;
+  gap: 14px;
+  padding: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  align-items: flex-start;
+  transition: background 0.15s, border-color 0.15s;
+  position: relative;
+}
+.pending-card:hover { background: var(--bg-card-hover); }
+.pending-card.quality-red    { border-left: 4px solid var(--danger); }
+.pending-card.quality-yellow { border-left: 4px solid var(--warning); }
+.pending-card.quality-green  { border-left: 4px solid var(--enabled); }
+
+.pending-thumb {
+  width: 200px;
+  min-width: 200px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 4px;
+  background: #1a1a2e;
+  cursor: pointer;
+}
+
+.pending-select {
+  display: flex;
+  align-items: flex-start;
+  padding-top: 6px;
+}
+.pending-select input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.pending-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pending-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pending-title-row input {
+  flex: 1;
+  background: var(--bg-input);
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: var(--text-bright);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  padding: 4px 8px;
+  outline: none;
+}
+.pending-title-row input:focus,
+.pending-title-row input:hover { border-color: var(--accent); }
+
+.pending-badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+.pending-badge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+.pending-badge.conf-high   { background: rgba(76,175,80,0.2); color: #81c784; }
+.pending-badge.conf-medium { background: rgba(255,179,0,0.2); color: #ffd54f; }
+.pending-badge.conf-low    { background: rgba(120,120,120,0.2); color: #aaa; }
+.pending-badge.qual-green  { background: rgba(76,175,80,0.15); color: #81c784; }
+.pending-badge.qual-yellow { background: rgba(255,179,0,0.15); color: #ffd54f; }
+.pending-badge.qual-red    { background: rgba(239,83,80,0.18); color: #ef9a9a; }
+.pending-badge.source      { background: rgba(79,195,247,0.15); color: var(--accent); }
+.pending-badge.center      { background: rgba(123,104,238,0.18); color: #b0a0ff; }
+
+.pending-meta-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.pending-field {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+}
+.pending-field label {
+  color: var(--text-dim);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+.pending-field input,
+.pending-field select {
+  background: var(--bg-input);
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 12px;
+  padding: 3px 6px;
+  outline: none;
+}
+.pending-field input:hover,
+.pending-field input:focus,
+.pending-field select:hover,
+.pending-field select:focus { border-color: var(--accent); }
+.pending-field input.short { width: 150px; }
+.pending-field input.med   { width: 200px; }
+.pending-field input.time-input { width: 200px; color-scheme: dark; }
+.pending-field select { width: 170px; }
+
+.pending-desc {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  max-height: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+.pending-desc.expanded { max-height: none; }
+
+.pending-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.pending-actions button {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  background: var(--bg-input);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 600;
+  font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+.pending-actions button.promote  { background: var(--enabled); color: #000; }
+.pending-actions button.reject   { background: var(--danger);  color: #fff; }
+.pending-actions button.view     { background: transparent;    border-color: var(--border); }
+.pending-actions button.promote:hover { background: #66bb6a; }
+.pending-actions button.reject:hover  { background: #c62828; }
+
+.pending-empty {
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 13px;
+  padding: 40px 24px;
+  font-style: italic;
+}
+
+/* Era-colored highlights for classifier matches inside text. */
+.pending-desc mark,
+.pending-title-matches mark {
+  padding: 0 3px;
+  border-radius: 3px;
+  font-weight: 600;
+  cursor: help;
+  background: rgba(255, 235, 100, 0.25);   /* fallback color */
+  color: inherit;
+}
+.pending-desc mark.era-pre-flight-hardware,
+.pending-title-matches mark.era-pre-flight-hardware {
+  background: rgba(123, 104, 238, 0.32);
+  color: #d0c0ff;
+}
+.pending-desc mark.era-pre-flight-training,
+.pending-title-matches mark.era-pre-flight-training {
+  background: rgba(76, 175, 80, 0.32);
+  color: #c8e6c9;
+}
+.pending-desc mark.era-mission,
+.pending-title-matches mark.era-mission {
+  background: rgba(255, 179, 0, 0.32);
+  color: #ffe082;
+}
+.pending-desc mark.era-post-mission,
+.pending-title-matches mark.era-post-mission {
+  background: rgba(239, 83, 80, 0.32);
+  color: #ffcdd2;
+}
+
+.pending-title-matches {
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.pending-title-matches strong {
+  color: var(--text-dim);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-right: 4px;
+}
+
+.pending-quality-detail {
+  font-size: 10px;
+  color: var(--warning);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+.pending-quality-detail strong { color: var(--text-dim); margin-right: 4px; }
+.pending-card.quality-red .pending-quality-detail { color: var(--danger); }
+
 /* Responsive */
 @media (max-width: 700px) {
   .header { padding: 12px 14px; }
@@ -409,6 +677,7 @@ a:hover { text-decoration: underline; }
   <div class="tabs">
     <button class="tab-btn active" data-tab="photos" onclick="switchTab('photos')">Photos / Videos</button>
     <button class="tab-btn" data-tab="audio" onclick="switchTab('audio')">Audio</button>
+    <button class="tab-btn" data-tab="pending" onclick="switchTab('pending')">Pending <span id="pending-tab-count" style="opacity:0.7"></span></button>
   </div>
   <input type="text" class="search-input" id="search" placeholder="Search title, filename, photographer, location...">
   <div class="filters" id="filters">
@@ -424,6 +693,28 @@ a:hover { text-decoration: underline; }
 
 <div class="card-list" id="photo-list"></div>
 <div class="card-list hidden" id="audio-list"></div>
+
+<!-- Pending tab: review queue from the acquisition pipeline's inbox.json,
+     served via the local sidecar (node tools/import/server.js). -->
+<div class="pending-pane hidden" id="pending-pane">
+  <div class="pending-banner" id="pending-banner" style="display:none"></div>
+  <div class="pending-toolbar">
+    <div class="pending-sync">
+      <input type="text" class="search-input" id="pending-query" placeholder='Optional query — e.g. "Artemis II SLS"' style="min-width:260px">
+      <input type="text" class="search-input" id="pending-centers" placeholder="Centers (e.g. KSC,JSC)" style="max-width:180px">
+      <input type="number" class="search-input" id="pending-limit" value="20" min="1" max="500" style="max-width:80px" title="Max new candidates this run">
+      <button class="save-btn" onclick="runSync()" id="pending-run-btn">Run Sync</button>
+    </div>
+    <div class="pending-bulk">
+      <button class="save-btn" style="background:var(--enabled)" onclick="promoteSelected()" id="pending-promote-btn">Promote Selected (<span id="pending-promote-count">0</span>)</button>
+      <button class="save-btn" style="background:var(--danger);color:#fff" onclick="rejectSelected()" id="pending-reject-btn">Reject Selected (<span id="pending-reject-count">0</span>)</button>
+      <button class="save-btn" style="background:transparent;color:var(--text);border:1px solid var(--border)" onclick="loadPending()">Refresh</button>
+      <a class="back-link" href="tools/import/EDITORIAL.md" target="_blank" rel="noopener" style="margin-left:auto">Editorial principles ↗</a>
+    </div>
+  </div>
+  <div class="card-list" id="pending-list" style="padding-top:0"></div>
+</div>
+
 <div class="count-label" id="count-label"></div>
 
 <script>
@@ -481,7 +772,9 @@ function switchTab(tab) {
     b.classList.toggle('active', b.dataset.tab === tab));
   document.getElementById('photo-list').classList.toggle('hidden', tab !== 'photos');
   document.getElementById('audio-list').classList.toggle('hidden', tab !== 'audio');
+  document.getElementById('pending-pane').classList.toggle('hidden', tab !== 'pending');
   updateCountLabel();
+  if (tab === 'pending') loadPending();
 }
 
 // Filters
@@ -791,6 +1084,357 @@ function esc(s) {
   const d = document.createElement('div');
   d.textContent = s;
   return d.innerHTML.replace(/"/g, '&quot;');
+}
+
+// ============================================================================
+// PENDING TAB — talks to the local sidecar (tools/import/server.js) for the
+// acquisition pipeline's review queue. Sidecar runs on 127.0.0.1:8001 by
+// default; if it isn't running we show a banner explaining how to start it.
+// ============================================================================
+
+const SIDECAR_URL = 'http://127.0.0.1:8001';
+let pendingCandidates = [];                  // last-loaded inbox snapshot
+const pendingSelected = new Set();           // source_ids checked for bulk ops
+const pendingEdits = new Map();              // source_id -> { title, time, ... }
+
+async function sidecarFetch(pathname, options) {
+  const res = await fetch(SIDECAR_URL + pathname, options);
+  if (!res.ok) {
+    let body = null;
+    try { body = await res.json(); } catch (e) { /* */ }
+    const msg = body && body.error
+        ? `${res.status} ${body.error}${body.detail ? ' — ' + body.detail : ''}`
+        : `${res.status} ${res.statusText}`;
+    throw new Error(msg);
+  }
+  return res.json();
+}
+
+function showPendingBanner(html) {
+  const b = document.getElementById('pending-banner');
+  b.innerHTML = html;
+  b.style.display = html ? 'block' : 'none';
+}
+
+function clearPendingBanner() {
+  showPendingBanner('');
+}
+
+async function loadPending() {
+  pendingSelected.clear();
+  pendingEdits.clear();
+  document.getElementById('pending-list').innerHTML =
+      '<div class="pending-empty">Loading from sidecar…</div>';
+  try {
+    const data = await sidecarFetch('/inbox');
+    pendingCandidates = data.candidates || [];
+    clearPendingBanner();
+    renderPending();
+  } catch (err) {
+    pendingCandidates = [];
+    document.getElementById('pending-list').innerHTML = '';
+    showPendingBanner(
+      'Sidecar offline. Start it with: <code>node tools/import/server.js</code> ' +
+      '<br>Then click <strong>Refresh</strong> above. ' +
+      '<br><br>Reason: ' + esc(err.message)
+    );
+    updatePendingCount();
+  }
+}
+
+function updatePendingCount() {
+  document.getElementById('pending-tab-count').textContent =
+      pendingCandidates.length ? `(${pendingCandidates.length})` : '';
+  document.getElementById('pending-promote-count').textContent = pendingSelected.size;
+  document.getElementById('pending-reject-count').textContent  = pendingSelected.size;
+}
+
+function renderPending() {
+  const list = document.getElementById('pending-list');
+  if (pendingCandidates.length === 0) {
+    list.innerHTML =
+        '<div class="pending-empty">Inbox is empty. Use <strong>Run Sync</strong> above to discover new candidates.</div>';
+    updatePendingCount();
+    return;
+  }
+  list.innerHTML = pendingCandidates.map(renderPendingCard).join('');
+  updatePendingCount();
+}
+
+// Wrap classifier-matched substrings inside one of the candidate's text
+// fields with <mark> elements. The returned string is HTML-escaped except
+// for the mark wrappers; safe to inject via innerHTML.
+//
+// Overlapping matches are resolved by "first one wins" — sort by start
+// index, skip anything whose start lies inside the previous mark.
+function highlightField(text, evidence, sourceField) {
+  if (!text) return '';
+  const matches = ((evidence && evidence.era_matches) || [])
+      .filter(m => m.kind === 'keyword' && m.sourceField === sourceField && typeof m.index === 'number')
+      .sort((a, b) => a.index - b.index || (b.excerpt || '').length - (a.excerpt || '').length);
+
+  if (matches.length === 0) return esc(text);
+
+  let out = '';
+  let cursor = 0;
+  for (const m of matches) {
+    const start = m.index;
+    const end = start + (m.excerpt || '').length;
+    if (start < cursor) continue;                  // overlap with prior mark — skip
+    if (start > cursor) out += esc(text.slice(cursor, start));
+    const matched = text.slice(start, end);
+    const title = `matched pattern: ${m.pattern || m.excerpt}  ·  era: ${m.era}`;
+    out += `<mark class="era-${esc(m.era)}" title="${esc(title)}">${esc(matched)}</mark>`;
+    cursor = end;
+  }
+  if (cursor < text.length) out += esc(text.slice(cursor));
+  return out;
+}
+
+// Collect the unique matched keywords for a given field, with their era.
+// Used for the "matched in title:" chip strip.
+function uniqueMatchesForField(evidence, sourceField) {
+  const seen = new Set();
+  const out = [];
+  for (const m of ((evidence && evidence.era_matches) || [])) {
+    if (m.kind !== 'keyword' || m.sourceField !== sourceField) continue;
+    const key = m.era + '|' + m.excerpt.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(m);
+  }
+  return out;
+}
+
+function renderPendingCard(c) {
+  const id = c.source_id;
+  const cls = c.classified || {};
+  const conf = cls.confidence || 'low';
+  const quality = c.quality || 'red';
+  const era = cls.era || 'unknown';
+  const isSelected = pendingSelected.has(id);
+  const evidence = c.evidence || {};
+
+  // Pull from any edits the user has typed locally so their work survives a
+  // re-render (e.g., after another card is rejected and the list refreshes).
+  const edits = pendingEdits.get(id) || {};
+  const title    = edits.title    !== undefined ? edits.title    : (c.title || '');
+  const takenAt  = edits.taken_at !== undefined ? edits.taken_at : (c.taken_at || '');
+  const photog   = edits.photographer !== undefined ? edits.photographer : (c.photographer || '');
+  const location = edits.location !== undefined ? edits.location : (c.location || '');
+  const center   = edits.center   !== undefined ? edits.center   : (c.center || '');
+  const eraVal   = edits.era      !== undefined ? edits.era      : era;
+
+  const eraOptions = ['pre-flight-hardware','pre-flight-training','mission','post-mission','unknown']
+      .map(e => `<option value="${e}"${e === eraVal ? ' selected' : ''}>${e}</option>`)
+      .join('');
+
+  return `<div class="pending-card quality-${esc(quality)}" data-id="${esc(id)}">
+    <div class="pending-select">
+      <input type="checkbox" ${isSelected ? 'checked' : ''}
+             onchange="togglePendingSelect(this, '${esc(id)}')">
+    </div>
+    <img class="pending-thumb"
+         src="${esc(c.thumb_url || c.image_url || '')}"
+         alt=""
+         onclick="window.open('${esc(c.source_url || c.image_url || '#')}','_blank')"
+         onerror="this.style.background='#3a1a1a'; this.alt='thumbnail failed';">
+    <div class="pending-body">
+      <div class="pending-title-row">
+        <input value="${esc(title)}" placeholder="Title"
+               onchange="editPending('${esc(id)}','title',this.value)">
+        <div class="pending-badges">
+          <span class="pending-badge conf-${esc(conf)}" title="${esc(buildConfidenceTooltip(cls, evidence))}">${esc(conf)} conf</span>
+          <span class="pending-badge qual-${esc(quality)}" title="${esc(buildQualityTooltip(evidence))}">${esc(quality)}</span>
+          ${c.source ? `<span class="pending-badge source">${esc(c.source)}</span>` : ''}
+          ${center ? `<span class="pending-badge center" title="${esc((evidence.center_source && evidence.center_source.note) || '')}">${esc(center)}</span>` : ''}
+        </div>
+      </div>
+      ${renderTitleMatches(evidence)}
+      ${renderQualityFailures(evidence)}
+      <div class="pending-meta-row">
+        <div class="pending-field">
+          <label>Time</label>
+          <input type="datetime-local" class="time-input" step="1"
+                 value="${esc(takenAt.replace(' ', 'T'))}"
+                 onchange="editPending('${esc(id)}','taken_at',this.value.replace('T',' '))">
+        </div>
+        <div class="pending-field">
+          <label>Era</label>
+          <select onchange="editPending('${esc(id)}','era',this.value)">${eraOptions}</select>
+        </div>
+        <div class="pending-field">
+          <label>Photographer</label>
+          <input class="short" value="${esc(photog)}"
+                 onchange="editPending('${esc(id)}','photographer',this.value)">
+        </div>
+        <div class="pending-field">
+          <label>Location</label>
+          <input class="med" value="${esc(location)}"
+                 onchange="editPending('${esc(id)}','location',this.value)">
+        </div>
+        <div class="pending-field">
+          <label>Center</label>
+          <input class="short" style="width:80px;text-transform:uppercase" value="${esc(center)}"
+                 onchange="editPending('${esc(id)}','center',this.value.toUpperCase())">
+        </div>
+      </div>
+      ${c.description ? `<div class="pending-desc" onclick="this.classList.toggle('expanded')">${highlightField(c.description, evidence, 'description')}</div>` : ''}
+      <div class="pending-actions">
+        <button class="promote" onclick="promoteOne('${esc(id)}')">Promote</button>
+        <button class="reject"  onclick="rejectOne('${esc(id)}')">Reject</button>
+        <button class="view"    onclick="window.open('${esc(c.source_url || c.image_url || '#')}','_blank')">View source ↗</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+// Render "Matched in title:" as small colored chips. Title is editable so
+// we can't use inline <mark>, but we can still surface the matches here.
+function renderTitleMatches(evidence) {
+  const matches = uniqueMatchesForField(evidence, 'title');
+  if (matches.length === 0) return '';
+  const chips = matches
+      .map(m => `<mark class="era-${esc(m.era)}" title="${esc('matched pattern: ' + (m.pattern || m.excerpt) + '  ·  era: ' + m.era)}">${esc(m.excerpt)}</mark>`)
+      .join(' ');
+  return `<div class="pending-title-matches"><strong>Matched in title:</strong> ${chips}</div>`;
+}
+
+// Render quality-score failures below the badges so the reviewer sees
+// why a card is yellow/red without hovering.
+function renderQualityFailures(evidence) {
+  const fails = (evidence && evidence.quality_failures) || [];
+  if (fails.length === 0) return '';
+  const lines = fails.map(f => `${esc(f.field)}: ${esc(f.reason)}`).join(' · ');
+  return `<div class="pending-quality-detail"><strong>Quality:</strong> ${lines}</div>`;
+}
+
+function buildConfidenceTooltip(cls, evidence) {
+  const reason = cls.reason || 'no reason recorded';
+  const matches = ((evidence && evidence.era_matches) || []).filter(m => m.kind === 'keyword');
+  const counts = {};
+  for (const m of matches) counts[m.era] = (counts[m.era] || 0) + 1;
+  const breakdown = Object.entries(counts).map(([e, n]) => `${n}× ${e}`).join(', ');
+  return breakdown ? `${reason}  ·  keywords: ${breakdown}` : reason;
+}
+
+function buildQualityTooltip(evidence) {
+  const fails = (evidence && evidence.quality_failures) || [];
+  if (fails.length === 0) return 'all editorial must-haves present';
+  return fails.map(f => `${f.field}: ${f.reason}`).join('\n');
+}
+
+window.togglePendingSelect = function(checkbox, id) {
+  if (checkbox.checked) pendingSelected.add(id);
+  else pendingSelected.delete(id);
+  updatePendingCount();
+};
+
+window.editPending = function(id, field, value) {
+  const cur = pendingEdits.get(id) || {};
+  cur[field] = value;
+  pendingEdits.set(id, cur);
+};
+
+async function rejectOne(id) {
+  if (!confirm(`Reject candidate "${id}"? It will not reappear on future syncs.`)) return;
+  try {
+    await sidecarFetch('/reject', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ source_ids: [id] }),
+    });
+    pendingSelected.delete(id);
+    pendingEdits.delete(id);
+    await loadPending();
+  } catch (err) {
+    alert('Reject failed: ' + err.message);
+  }
+}
+
+async function rejectSelected() {
+  if (pendingSelected.size === 0) { alert('No candidates selected.'); return; }
+  if (!confirm(`Reject ${pendingSelected.size} candidate(s)? They will not reappear.`)) return;
+  const ids = Array.from(pendingSelected);
+  try {
+    await sidecarFetch('/reject', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ source_ids: ids }),
+    });
+    for (const id of ids) { pendingSelected.delete(id); pendingEdits.delete(id); }
+    await loadPending();
+  } catch (err) {
+    alert('Reject failed: ' + err.message);
+  }
+}
+
+async function promoteOne(id) {
+  const edits = pendingEdits.get(id) || {};
+  if (!confirm(`Promote candidate "${id}" to photos.js? Image will be downloaded to web/.`)) return;
+  await doPromote([{ source_id: id, edits }]);
+}
+
+async function promoteSelected() {
+  if (pendingSelected.size === 0) { alert('No candidates selected.'); return; }
+  const items = Array.from(pendingSelected).map(id => ({
+    source_id: id,
+    edits: pendingEdits.get(id) || {},
+  }));
+  if (!confirm(`Promote ${items.length} candidate(s) to photos.js? Each image will be downloaded to web/.`)) return;
+  await doPromote(items);
+}
+
+async function doPromote(items) {
+  const btnPromote = document.getElementById('pending-promote-btn');
+  const orig = btnPromote.textContent;
+  btnPromote.disabled = true;
+  btnPromote.textContent = 'Downloading…';
+  try {
+    const result = await sidecarFetch('/promote', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items, curator: 'johnmknight' }),
+    });
+    // The sidecar mutated photos.js on disk. Reload the page so the in-memory
+    // PHOTO_DATA picks up the new entries — admin.html currently doesn't
+    // hot-reload data and the simplest correctness story is a fresh load.
+    alert(`Promoted ${result.promoted} candidate(s). Reloading admin to refresh PHOTO_DATA.`);
+    window.location.reload();
+  } catch (err) {
+    alert('Promote failed: ' + err.message);
+    btnPromote.disabled = false;
+    btnPromote.textContent = orig;
+  }
+}
+
+async function runSync() {
+  const query   = document.getElementById('pending-query').value.trim();
+  const centers = document.getElementById('pending-centers').value.trim();
+  const limit   = parseInt(document.getElementById('pending-limit').value, 10) || 20;
+  const body = { limit };
+  if (query)   body.query = query;
+  if (centers) body.centers = centers.split(/[,\s]+/).filter(Boolean);
+
+  const btn = document.getElementById('pending-run-btn');
+  const orig = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Running sync…';
+  try {
+    const result = await sidecarFetch('/sync', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    if (!result.ok) {
+      alert('Sync failed (exit ' + result.exitCode + '):\n\n' + (result.stderr || result.stdout));
+    }
+    await loadPending();
+  } catch (err) {
+    alert('Sync failed: ' + err.message);
+  }
+  btn.disabled = false;
+  btn.textContent = orig;
 }
 </script>
 </body>

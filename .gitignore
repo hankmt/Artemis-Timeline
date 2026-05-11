@@ -53,6 +53,16 @@ photos.json
 photos2.js
 photos22.js
 
+# Local meta-doc tracking files added by John to this fork (not for upstream)
+NEW_FILES_LOCAL.md
+
+# tools/import/ run output — state, queue, staged files, logs
+# (source files in tools/import/ ARE tracked; only run-output is ignored)
+tools/import/state.json
+tools/import/inbox.json
+tools/import/staging/
+tools/import/log/
+
 # Source reference materials (not part of the site)
 artemis-ii-overview-timeline-public-final.pdf
 artemis-ii-timeline.jsx
