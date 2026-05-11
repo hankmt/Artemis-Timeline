@@ -11,7 +11,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "SLS Glows at Sunset on Pad 39B",
       "flickr_desc": "NASA's Space Launch System rocket with the Orion spacecraft atop stands on Launch Pad 39B at Kennedy Space Center, bathed in golden sunset light five days before launch.",
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "NHQ202603270002",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-03-27 19:15:00",
@@ -24,7 +30,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "SLS and Orion on the Pad With Palm Trees",
       "flickr_desc": "A wide view of NASA's Space Launch System rocket on Launch Pad 39B at Kennedy Space Center, framed by Florida palm trees in the foreground at dusk.",
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "NHQ202603270008",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 13:04:32",
@@ -37,7 +49,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Jeremy Hansen Suited Up and Ready",
       "flickr_desc": "Canadian Space Agency astronaut Jeremy Hansen gives a thumbs-up in the suit-up room at Kennedy Space Center, wearing his orange Orion crew survival suit on launch day.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "KSC-20260401-PH-KLS01_0013",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 13:08:40",
@@ -50,7 +68,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Helmet Check in the Suit-Up Room",
       "flickr_desc": "A technician assists an Artemis II crew member with a helmet fitting in the suit-up room at Kennedy Space Center. The astronaut sits in the crew chair wearing the orange Orion suit with visor raised.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "KSC-20260401-PH-KLS01_0040",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 13:09:24",
@@ -63,7 +87,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Victor Glover Gets Final Suit Adjustments",
       "flickr_desc": "NASA astronaut Victor Glover receives final suit adjustments from a technician in the suit-up room at Kennedy Space Center, his helmet on and visor raised.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "KSC-20260401-PH-KLS01_0045",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 13:13:54",
@@ -76,7 +106,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Victor Glover Waves From the Suit-Up Room",
       "flickr_desc": "NASA astronaut Victor Glover waves from the crew chair in the suit-up room at Kennedy Space Center, fully suited in his orange Orion crew survival suit with helmet on.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "KSC-20260401-PH-KLS01_0061",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 13:21:01",
@@ -89,7 +125,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Christina Koch Adjusts Her Communications Cap",
       "flickr_desc": "A close-up of NASA astronaut Christina Koch adjusting her communications cap before donning her helmet in the suit-up room at Kennedy Space Center on launch day.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "KSC-20260401-PH-KLS01_0101",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 13:21:14",
@@ -102,7 +144,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Victor Glover Adjusts His Communications Cap",
       "flickr_desc": "A close-up of NASA astronaut Victor Glover adjusting his communications cap in the suit-up room at Kennedy Space Center on launch day.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "KSC-20260401-PH-KLS01_0106",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 13:35:39",
@@ -115,7 +163,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Artemis II Crew Portrait in the Suit-Up Room",
       "flickr_desc": "The Artemis II crew poses in the suit-up room at Kennedy Space Center: Christina Koch, Reid Wiseman, Victor Glover, and Jeremy Hansen, all wearing their orange Orion crew survival suits.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "KSC-20260401-PH-KLS01_0198",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 13:36:09",
@@ -128,7 +182,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Christina Koch Smiles Before Launch",
       "flickr_desc": "NASA astronaut Christina Koch smiles in the suit-up room at Kennedy Space Center, wearing her orange Orion crew survival suit on launch day.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "KSC-20260401-PH-KLS01_0207",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 13:47:25",
@@ -141,7 +201,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Crew Rides the Elevator to the Transfer Van",
       "flickr_desc": "The Artemis II crew rides the elevator in the Neil Armstrong Operations and Checkout Building at Kennedy Space Center, standing beneath a crew poster and surrounded by the signatures of previous astronaut crews.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "KSC-20260401-PH-KLS01_0270",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 13:49:20",
@@ -154,7 +220,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Crew Walkout From the O&C Building",
       "flickr_desc": "The Artemis II crew walks out of the Neil Armstrong Operations and Checkout Building at Kennedy Space Center, heading toward the crew transport vehicle on launch day.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "NHQ20260401_admin_0002",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 13:49:20",
@@ -167,7 +239,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Crew Walkout Wide View",
       "flickr_desc": "The Artemis II crew walks down the ramp from the Neil Armstrong Operations and Checkout Building at Kennedy Space Center, with the crew names banner visible above the doorway.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "KSC-20260401-PH-KLS02_0093",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 13:51:24",
@@ -182,7 +260,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Walkout (NHQ202604010003)",
       "flickr_desc": "NASA astronauts Reid Wiseman, commander, front right; Victor Glover, pilot, front left; Christina Koch, mission specialist, back right; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist are seen as they depart the Neil A. Armstrong Operations and Checkout Building to board their Orion spacecraft atop NASA’s Space Launch System (SLS) rocket at Launch Complex 39B, Wednesday, April 1, 2026, at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard their Orion spacecraft from Launch Complex 39B, with a two hour launch window opening at 6:24pm. Photo Credit: (NASA/Aubrey Gemignani)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55182417729",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 13:51:57",
@@ -197,7 +281,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Walkout (NHQ202604010009)",
       "flickr_desc": "From right to left, NASA astronauts Christina Koch, mission specialist; Reid Wiseman, commander; Victor Glover, pilot; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist are seen as they depart the Neil A. Armstrong Operations and Checkout Building to board their Orion spacecraft atop NASA’s Space Launch System (SLS) rocket at Launch Complex 39B, Wednesday, April 1, 2026, at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard their Orion spacecraft from Launch Complex 39B, with a two hour launch window opening at 6:24pm. Photo Credit: (NASA/Aubrey Gemignani)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55182419584",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 13:53:11",
@@ -212,7 +302,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Walkout (NHQ202604010011)",
       "flickr_desc": "From right to left, NASA astronauts Reid Wiseman, commander (not pictured); Christina Koch, mission specialist; Victor Glover, pilot; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist are seen as they depart the Neil A. Armstrong Operations and Checkout Building to board their Orion spacecraft atop NASA’s Space Launch System (SLS) rocket at Launch Complex 39B, Wednesday, April 1, 2026, at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard their Orion spacecraft from Launch Complex 39B, with a two hour launch window opening at 6:24pm. Photo Credit: (NASA/Aubrey Gemignani)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55182420389",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 13:54:05",
@@ -227,7 +323,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Walkout (NHQ202604010014)",
       "flickr_desc": "From right to left, NASA astronauts Reid Wiseman, commander; Christina Koch, mission specialist; Victor Glover, pilot; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist (not pictured) are seen as they depart the Neil A. Armstrong Operations and Checkout Building to board their Orion spacecraft atop NASA’s Space Launch System (SLS) rocket at Launch Complex 39B, Wednesday, April 1, 2026, at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard their Orion spacecraft from Launch Complex 39B, with a two hour launch window opening at 6:24pm. Photo Credit: (NASA/Aubrey Gemignani)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55182564820",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 13:54:50",
@@ -242,7 +344,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Walkout (NHQ202604010019)",
       "flickr_desc": "From right to left, NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist gesture to family and friends as they depart the Neil A. Armstrong Operations and Checkout Building to board their Orion spacecraft atop NASA’s Space Launch System (SLS) rocket at Launch Complex 39B, Wednesday, April 1, 2026, at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard their Orion spacecraft from Launch Complex 39B, with a two hour launch window opening at 6:24pm. Photo Credit: (NASA/Aubrey Gemignani)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55182566490",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 13:55:08",
@@ -257,7 +365,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Walkout (NHQ202604010021)",
       "flickr_desc": "From right to left, NASA astronauts Reid Wiseman, commander; Christina Koch, mission specialist; Victor Glover, pilot; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist wave to family and friends as they prepare to depart the Neil A. Armstrong Operations and Checkout Building to board their Orion spacecraft atop NASA’s Space Launch System (SLS) rocket at Launch Complex 39B, Wednesday, April 1, 2026, at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard their Orion spacecraft from Launch Complex 39B, with a two hour launch window opening at 6:24pm. Photo Credit: (NASA/Aubrey Gemignani)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55182566975",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 14:06:10",
@@ -272,7 +386,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Preflight (NHQ202604010202)",
       "flickr_desc": "The astrovan with NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist, drives by the Vehicle Assembly Building towards Launch Complex 39B ahead of the crew boarding their Orion spacecraft atop NASA’s Space Launch System (SLS) rocket, Wednesday, April 1, 2026, at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard SLS rocket and Orion spacecraft from Launch Complex 39B, with a two hour launch window opening at 6:24 p.m. EDT. Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55182399029",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 14:20:56",
@@ -287,7 +407,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Preflight (NHQ202604010205)",
       "flickr_desc": "NASA’s Space Launch System (SLS) rocket with the Orion spacecraft aboard is seen atop the mobile launcher after the arrival of NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist at Launch Complex 39B, Wednesday, April 1, 2026, as the launch countdown progresses at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard SLS rocket and Orion spacecraft from Launch Complex 39B, with a two hour launch window opening at 6:24 p.m. EDT. Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55182336933",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 15:05:27",
@@ -302,7 +428,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Preparing for Liftoff",
       "flickr_desc": "jsc2026e019363 (April 1, 2026) – Public Affairs Officer Gary Jordan prepares for the Artemis II launch in the White Flight Control Room in the Mission Control Center at NASA’s Johnson Space Center. NASA’s Artemis II SLS (Space Launch System) rocket, with the Orion spacecraft atop carrying NASA astronauts Reid Wiseman, Victor Glover, and Christina Koch, along with CSA (Canadian Space Agency) astronaut Jeremy Hansen, lifted off from Kennedy Space Center’s Launch Complex 39B in Florida at 6:35 p.m. ET to begin its journey to deep space. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55196404298",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-01 15:08:51",
@@ -315,7 +447,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Crew Walks to the Launch Pad",
       "flickr_desc": "Victor Glover and Jeremy Hansen lead the Artemis II crew out of the Operations and Checkout building, walking toward the crew transport vehicle at Kennedy Space Center.",
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "KSC-20260401-PH-KLS02_0009",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 15:34:08",
@@ -330,7 +468,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Preflight (NHQ202604010117)",
       "flickr_desc": "Lucas Ye, designer of zero gravity indicator “Rise,” participates in an interview with members of the NASA Broadcast team at the Banana Creek viewing site as the countdown progresses for the launch of NASA’s Space Launch System (SLS) rocket and Orion spacecraft with Commander Reid Wiseman, Pilot Victor Glover, and Mission Specialist Christina Koch from NASA, and Mission Specialist Jeremy Hansen from the CSA (Canadian Space Agency) on the Artemis II mission, Wednesday, April 1, 2026, at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard SLS rocket and Orion spacecraft from Launch Complex 39B with launch window opening at 6:24 p.m. EDT. Photo Credit: (NASA/Keegan Barber)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55186418959",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 15:45:12",
@@ -345,7 +489,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Launch",
       "flickr_desc": "Launch of NASA’s Space Launch System rocket carrying the Orion spacecraft with NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on NASA’s Artemis II mission, Wednesday, April 1, 2026, from Operations and Support Building II at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard SLS rocket and Orion spacecraft launched at from Launch Complex 39B. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55182525528",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2025-01-30 12:00:00",
@@ -360,7 +510,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "NASA astronaut and Artemis II Pilot Victor Glover inside of the Orion spacecraft mockup during Post Insertion and Deorbit Preparation Training",
       "flickr_desc": "jsc2025e004071 (Jan. 30, 2025) --- NASA astronaut and Artemis II Pilot Victor Glover inside of the Orion spacecraft mockup during Post Insertion and Deorbit Preparation training at the Space Vehicle Mockup Facility in Houston, Texas. The crew practiced getting the Orion spacecraft configured once in orbit, how to make it habitable, and suited up in their entry pressure suits to prepare for their return from the Moon. Credit: NASA/Mark Sowa",
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "54424847440",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-01 16:13:42",
@@ -375,7 +531,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Launch (NHQ202604010025)",
       "flickr_desc": "Teams monitor the countdown of the launch of NASA’s Space Launch System (SLS) rocket and Orion spacecraft with NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist onboard on the Artemis II mission from Firing Room 2 of the Rocco A. Petrone Launch Control Center, Wednesday, April 1, 2026, at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard SLS rocket and Orion spacecraft from Launch Complex 39B. The quartet launched at 6:35pm EDT. Photo Credit: (NASA/Aubrey Gemignani)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55183849497",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 16:19:32",
@@ -390,7 +552,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Launch (NHQ202604010025)",
       "flickr_desc": "NASA Chief Health and Medical Officer Dr. J.D. Polk monitors the countdown of the launch of NASA’s Space Launch System (SLS) rocket and Orion spacecraft with NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist onboard on the Artemis II mission from Firing Room 2 of the Rocco A. Petrone Launch Control Center, Wednesday, April 1, 2026, at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard SLS rocket and Orion spacecraft from Launch Complex 39B. The quartet launched at 6:35pm EDT. Photo Credit: (NASA/Aubrey Gemignani)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55184740196",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 17:05:12",
@@ -405,7 +573,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Launch (NHQ202604010025)",
       "flickr_desc": "Director of NASA's Kennedy Space Center, Janet Petro, left, and Director of NASA's Johnson Space Center, Vanessa Wyche, monitor the countdown of the launch of NASA’s Space Launch System (SLS) rocket and Orion spacecraft with NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist onboard on the Artemis II mission from Firing Room 2 of the Rocco A. Petrone Launch Control Center, Wednesday, April 1, 2026, at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard SLS rocket and Orion spacecraft from Launch Complex 39B. The quartet launched at 6:35pm EDT. Photo Credit: (NASA/Aubrey Gemignani)",
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55183854612",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 18:03",
@@ -420,7 +594,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Launch (NHQ202604010213)",
       "flickr_desc": "NASA’s Space Launch System rocket carrying the Orion spacecraft with NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist onboard launches on the Artemis II mission, Wednesday, April 1, 2026, from Launch Complex 39B at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard their Orion spacecraft. The quartet launched at 6:35 p.m. EDT, from Launch Complex 39B at the Kennedy Space Center. Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55182788563",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 18:34:30",
@@ -435,7 +615,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Launch (NHQ202604010257)",
       "flickr_desc": "NASA’s Space Launch System rocket carrying the Orion spacecraft with NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist onboard launches on the Artemis II mission, Wednesday, April 1, 2026, from Launch Complex 39B at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard their Orion spacecraft. The quartet launched at 6:35 p.m. EDT, from Launch Complex 39B at the Kennedy Space Center. Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55184539204",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 18:34:30",
@@ -450,7 +636,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Launch (NHQ202604010263)",
       "flickr_desc": "NASA’s Space Launch System rocket carrying the Orion spacecraft with NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist onboard launches on the Artemis II mission, Wednesday, April 1, 2026, from Launch Complex 39B at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard their Orion spacecraft. The quartet launched at 6:35 p.m. EDT, from Launch Complex 39B at the Kennedy Space Center. Photo Credit: (NASA/Aubrey Gemignani)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55184537894",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 18:34:30",
@@ -465,7 +657,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Launch",
       "flickr_desc": "NASA’s Space Launch System rocket launches carrying the Orion spacecraft with NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on NASA’s Artemis II mission, Wednesday, April 1, 2026, from Operations and Support Building II at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard SLS rocket and Orion spacecraft launched at 6:35pm EDT from Launch Complex 39B. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55182696113",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 18:34:40",
@@ -480,7 +678,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Launch (NHQ202604010224)",
       "flickr_desc": "NASA’s Space Launch System rocket carrying the Orion spacecraft with NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist onboard launches on the Artemis II mission, Wednesday, April 1, 2026, from Launch Complex 39B at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard their Orion spacecraft. The quartet launched at 6:35 p.m. EDT, from Launch Complex 39B at the Kennedy Space Center. Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55182918876",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 18:34:40",
@@ -495,7 +699,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "SLS Twin Boosters Ignite",
       "flickr_desc": "The twin solid rocket boosters of NASA's Space Launch System roar to life, producing massive plumes of flame and smoke as Artemis II lifts off from Kennedy Space Center on April 1, 2026. The close-up shot captures the raw power of the four RS-25 engines and two boosters generating 8.8 million pounds of thrust.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55186319833",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 18:34:40",
@@ -510,7 +720,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Launch",
       "flickr_desc": "NASA’s Space Launch System rocket carrying the Orion spacecraft with NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist onboard launches on the Artemis II mission, Wednesday, April 1, 2026, from Launch Complex 39B at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard their Orion spacecraft. The quartet launched at 6:35 p.m. EDT, from Launch Complex 39B at the Kennedy Space Center. Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55182789108",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 18:34:40",
@@ -525,7 +741,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Launch",
       "flickr_desc": "NASA’s Space Launch System rocket carrying the Orion spacecraft with NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist onboard launches on the Artemis II mission, Wednesday, April 1, 2026, from Launch Complex 39B at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard their Orion spacecraft. The quartet launched at 6:35 p.m. EDT, from Launch Complex 39B at the Kennedy Space Center. Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55183079963",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 18:34:41",
@@ -540,7 +762,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Launch (NHQ202604010224)",
       "flickr_desc": "NASA’s Space Launch System rocket carrying the Orion spacecraft with NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist onboard launches on the Artemis II mission, Wednesday, April 1, 2026, from Launch Complex 39B at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard their Orion spacecraft. The quartet launched at 6:35 p.m. EDT, from Launch Complex 39B at the Kennedy Space Center. Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55182911249",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 18:34:41",
@@ -555,7 +783,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Launch (NHQ202604010226)",
       "flickr_desc": "NASA’s Space Launch System rocket carrying the Orion spacecraft with NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist onboard launches on the Artemis II mission, Wednesday, April 1, 2026, from Launch Complex 39B at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard their Orion spacecraft. The quartet launched at 6:35 p.m. EDT, from Launch Complex 39B at the Kennedy Space Center. Photo Credit: (NASA/Aubrey Gemignani)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55181836272",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 18:34:41",
@@ -570,7 +804,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Launch",
       "flickr_desc": "NASA’s Space Launch System rocket carrying the Orion spacecraft with NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist onboard launches on the Artemis II mission, Wednesday, April 1, 2026, from Launch Complex 39B at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard their Orion spacecraft. The quartet launched at 6:35 p.m. EDT, from Launch Complex 39B at the Kennedy Space Center. Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55183089523",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 18:35:17",
@@ -585,7 +825,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Launch (NHQ202604010107)",
       "flickr_desc": "Guests at the Banana Creek viewing site watch the launch of NASA’s Space Launch System (SLS) rocket and Orion spacecraft with Commander Reid Wiseman, Pilot Victor Glover, and Mission Specialist Christina Koch from NASA, and Mission Specialist Jeremy Hansen from the CSA (Canadian Space Agency) on the Artemis II mission, Wednesday, April 1, 2026, at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard SLS rocket and Orion spacecraft. The quartet launched at 6:35 p.m. EDT from Launch Complex 39B. Photo Credit: (NASA/Keegan Barber)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55181691437",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 18:35:37",
@@ -600,7 +846,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Launch (NHQ202604010225)",
       "flickr_desc": "Crawler Transporter 2 is seen as NASA’s Space Launch System rocket carrying the Orion spacecraft with NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist onboard launches on the Artemis II mission, Wednesday, April 1, 2026, from Launch Complex 39B at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard their Orion spacecraft. The quartet launched at 6:35 p.m. EDT, from Launch Complex 39B at the Kennedy Space Center. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55183122230",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 18:35:57",
@@ -615,7 +867,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Launch (NHQ202604010309)",
       "flickr_desc": "Employees and invited guest, including Eric Trump family, left, and Donald Trump Jr. family, right, watch the launch of NASA’s Space Launch System rocket carrying the Orion spacecraft with NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on NASA’s Artemis II mission,, Wednesday, April 1, 2026, from Operations and Support Building II at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard SLS rocket and Orion spacecraft launched at 6:35pm EDT from Launch Complex 39B. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55181712417",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 18:36:32",
@@ -630,7 +888,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Launch (NHQ202604010310)",
       "flickr_desc": "Guests watch the launch of NASA’s Space Launch System rocket carrying the Orion spacecraft with NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on NASA’s Artemis II mission,, Wednesday, April 1, 2026, from Operations and Support Building II at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard SLS rocket and Orion spacecraft launched at 6:35pm EDT, from Launch Complex 39B. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55182858034",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 18:36:51",
@@ -645,7 +909,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Launch (NHQ202604010216)",
       "flickr_desc": "NASA’s Space Launch System rocket carrying the Orion spacecraft with NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist onboard launches on the Artemis II mission, Wednesday, April 1, 2026, from Launch Complex 39B at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard their Orion spacecraft. The quartet launched at 6:35 p.m. EDT, from Launch Complex 39B at the Kennedy Space Center. Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55181733197",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 18:37:05",
@@ -660,7 +930,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Launch",
       "flickr_desc": "NASA’s Space Launch System rocket carrying the Orion spacecraft with NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist onboard launches on the Artemis II mission, Wednesday, April 1, 2026, from Launch Complex 39B at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard their Orion spacecraft. The quartet launched at 6:35 p.m. EDT, from Launch Complex 39B at the Kennedy Space Center. Photo Credit: (NASA/Keegan Barber)",
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55182980490",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 18:37:10",
@@ -675,7 +951,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Launch",
       "flickr_desc": "NASA’s Space Launch System rocket carrying the Orion spacecraft with NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist onboard launches on the Artemis II mission, Wednesday, April 1, 2026, from Launch Complex 39B at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard their Orion spacecraft. The quartet launched at 6:35 p.m. EDT, from Launch Complex 39B at the Kennedy Space Center. Photo Credit: (NASA/Keegan Barber)",
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55182992165",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 18:37:30",
@@ -690,7 +972,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Launch",
       "flickr_desc": "The solid rocket boosters are seen as they fall away after separating from NASA’s Space Launch System (SLS) rocket carrying the Orion spacecraft with NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist onboard as it continues toward orbit on the Artemis II mission, Wednesday, April 1, 2026, from Launch Complex 39B at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard their Orion spacecraft. The quartet launched at 6:35 p.m. EDT, from Launch Complex 39B at the Kennedy Space Center. Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55181746722",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 18:37:30",
@@ -703,7 +991,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Solid Rocket Boosters Separate",
       "flickr_desc": "An infrared camera captures the two solid rocket boosters separating from the SLS core stage approximately two minutes after liftoff, with the Orion spacecraft visible below.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "KSC-20260401-PH-SFL01_0002",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-01 18:44:11",
@@ -718,7 +1012,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Launch (NHQ202604010050)",
       "flickr_desc": "Teams celebrate after the launch of NASA’s Space Launch System (SLS) rocket and Orion spacecraft with NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist onboard the Artemis II mission in Firing Room 2 of the Rocco A. Petrone Launch Control Center, Wednesday, April 1, 2026, at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard SLS rocket and Orion spacecraft from Launch Complex 39B. The quartet launched at 6:35pm EDT. Photo Credit: (NASA/Aubrey Gemignani)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55184745301",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 18:44:19",
@@ -733,7 +1033,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Launch (NHQ202604010051)",
       "flickr_desc": "Teams celebrate after the launch of NASA’s Space Launch System (SLS) rocket and Orion spacecraft with NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist onboard the Artemis II mission in Firing Room 2 of the Rocco A. Petrone Launch Control Center, Wednesday, April 1, 2026, at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard SLS rocket and Orion spacecraft from Launch Complex 39B. The quartet launched at 6:35pm EDT. Photo Credit: (NASA/Aubrey Gemignani)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55185003259",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 18:49:10",
@@ -748,7 +1054,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Launch (NHQ202604010054)",
       "flickr_desc": "Teams review images of launch complex 39B after the launch of NASA’s Space Launch System (SLS) rocket and Orion spacecraft with NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist onboard on the Artemis II mission in Firing Room 2 of the Rocco A. Petrone Launch Control Center, Wednesday, April 1, 2026, at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard the SLS rocket and Orion spacecraft. The quartet launched at 6:35pm EDT . Photo Credit: (NASA/Aubrey Gemignani) NOTE - Portions of this image have been blurred for security reasons.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55185144555",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 19:37:21",
@@ -763,7 +1075,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Launch (NHQ202604010059)",
       "flickr_desc": "Artemis II mission teams pose for a selfie with NASA Administrator Jared Isaacman after monitor the launch of NASA’s Space Launch System (SLS) rocket and Orion spacecraft with NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist onboard on the Artemis II mission in Firing Room 2 of the Rocco A. Petrone Launch Control Center, Wednesday, April 1, 2026, at NASA’s Kennedy Space Center in Florida. NASA’s Artemis II mission will take Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back aboard SLS rocket and Orion spacecraft from Launch Complex 39B. The quartet launched at 6:35pm EDT. Photo Credit: (NASA/Aubrey Gemignani) NOTE - Portions of this image have been blurred for security reasons.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55186154951",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "KSC"
     },
     {
       "time": "2026-04-01 21:27:22",
@@ -778,7 +1096,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Proximity Operations Demonstration from Mission Control",
       "flickr_desc": "jsc2026e019217 (April 1, 2026) – Lead Artemis II Flight Director Jeff Radigan in the White Flight Control Room at the Mission Control Center at NASA’s Johnson Space Center in Houston. At the time of this photograph, a little over three hours into the mission, the Artemis II crew was conducting a manual piloting test called the proximity operations demonstration. During the demonstration, mission controllers monitored Orion as the astronauts transitioned the spacecraft to manual mode and piloted its flight path and orientation. This demonstration will provide performance data and operational experience that cannot be readily gained on the ground in preparation for critical rendezvous, proximity operations, docking, and undocking for future Artemis missions. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55196507489",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-01 21:37:00",
@@ -793,7 +1117,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Email Trouble",
       "flickr_desc": "The Artemis II crew discovers they have two Microsoft Outlooks open and neither microphone is working — a familiar IT moment, 3,300 miles from Earth. — via YouTube Shorts",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "yt-mic-trouble",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-01 21:45:05",
@@ -808,7 +1138,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Lead Flight Director Jeff Radigan During Prox Ops Demo",
       "flickr_desc": "jsc2026e019242 (April 1, 2026) – Lead Artemis II Flight Director Jeff Radigan in the White Flight Control Room at the Mission Control Center at NASA’s Johnson Space Center in Houston. At the time of this photograph, a little over three hours into the mission, the Artemis II crew began a manual piloting test called the proximity operations demonstration. During the demonstration, mission controllers monitored Orion as the astronauts transitioned the spacecraft to manual mode and piloted its flight path and orientation. This demonstration will provide performance data and operational experience that cannot be readily gained on the ground in preparation for critical rendezvous, proximity operations, docking, and undocking for future Artemis missions. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55196663265",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-01 22:21:15",
@@ -823,7 +1159,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Manual Piloting NASA's Orion Spacecraft",
       "flickr_desc": "jsc2026e019255 (April 1, 2026) – Lead Artemis II Flight Director Jeff Radigan (left) and capsule communicator (capcom) Amy Dill (right) in the White Flight Control Room at the Mission Control Center at NASA’s Johnson Space Center in Houston. At the time of this photograph, a little over three hours into the mission, the Artemis II crew conducting a manual piloting test called the proximity operations demonstration. During the demonstration, mission controllers monitored Orion as the astronauts transitioned the spacecraft to manual mode and piloted its flight path and orientation. This demonstration will provide performance data and operational experience that cannot be readily gained on the ground in preparation for critical rendezvous, proximity operations, docking, and undocking for future Artemis missions. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55196252006",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-02 08:15:52",
@@ -839,7 +1181,13 @@ const PHOTO_DATA = {
       "title": "A Crescent View of Home",
       "flickr_desc": "A crescent Earth photographed from the Orion spacecraft during the early hours of the Artemis II mission. The planet's sunlit edge reveals swirling cloud patterns and blue ocean, while the rest falls into shadow against the blackness of space.",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55224434205",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 08:26:45",
@@ -855,7 +1203,13 @@ const PHOTO_DATA = {
       "title": "Earth Up Close from Orbit",
       "flickr_desc": "A close-up view of Earth's curved horizon from low orbit, showing detailed cloud formations, ocean, and landmass. Taken with a 400mm telephoto lens during the crew's initial orbits before the translunar injection burn.",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55223125677",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 14:45:18",
@@ -871,7 +1225,13 @@ const PHOTO_DATA = {
       "title": "Watching Earth Shrink",
       "flickr_desc": "Earth appears as a half-lit sphere receding into the distance as Orion coasts toward the Moon. Sunlight illuminates swirling storm systems and the planet's thin blue atmosphere against the void of space.",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55224434210",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 14:53:12",
@@ -887,7 +1247,13 @@ const PHOTO_DATA = {
       "title": "Artemis II Looking Back at Earth",
       "flickr_desc": "art002e000191 (April 3, 2026) - A view of Earth taken by NASA astronaut and Artemis II commander Reid Wiseman from one of the Orion spacecraft's four main windows after completing the translunar injection burn on April 2, 2026. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5b"
+      "camera_id": "d5b",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55184586022",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 16:55:15",
@@ -903,7 +1269,13 @@ const PHOTO_DATA = {
       "title": "Artemis II Captures the Terminator Line",
       "flickr_desc": "art002e000190 (April 3, 2026) - A view of Earth taken by NASA astronaut and Artemis II Commander Reid Wiseman from one of the Orion spacecraft's four windows after completing the translunar injection burn on April 2, 2026. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55184731952",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 17:05:29",
@@ -919,7 +1291,13 @@ const PHOTO_DATA = {
       "title": "Earth from the Outbound Coast",
       "flickr_desc": "A telephoto view of Earth's curved horizon during the outbound coast to the Moon, showing cloud bands and the thin blue line of the atmosphere. The spacecraft is now tens of thousands of miles from home.",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55224434240",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 18:24:11",
@@ -934,7 +1312,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Capsule Communicator",
       "flickr_desc": "jsc2026e020046 (April 2, 2026) – CSA (Canadian Space Agency) astronaut and backup Artemis II crew member Jenni Gibbons serves as capsule communicator (capcom) during the mission’s translunar injection burn, which sent the crew in Orion out of Earth orbit and on a trajectory toward the Moon. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55196698385",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-02 18:27:51",
@@ -949,7 +1333,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Communicating with the Crew from Console",
       "flickr_desc": "jsc2026e019614 (April 2, 2026) – NASA astronaut Chris Birch serves as capsule communicator (capcom) in the Mission Control Center at NASA’s Johnson Space Center during the mission’s translunar injection burn, which sent the crew in Orion out of Earth orbit and on a trajectory toward the Moon. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55196534939",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-02 18:28:00",
@@ -964,7 +1354,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Setting the Course",
       "flickr_desc": "jsc2026e020048 (April 2, 2026) – Flight Dynamics Officer Natasha Peake in Mission Control during Artemis II’s translunar injection burn on April 2, 2026, which not only sent the crew in Orion out of Earth orbit and on a trajectory toward the Moon, but also set them on the course that will ultimately bring them home for a splashdown in the Pacific Ocean. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55195674427",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-02 18:41:23",
@@ -979,7 +1375,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Thinking of You, Earth",
       "flickr_desc": "NASA astronaut and Artemis II Commander Reid Wiseman peers out of one of the Orion spacecraft's main cabin windows, looking back at Earth, as the crew travels towards the Moon. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55187684915",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 18:42:35",
@@ -994,7 +1396,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Home, Seen from Orion.",
       "flickr_desc": "art002e009007 (April 4, 2026) - NASA astronaut and Artemis II Commander Reid Wiseman peers out of one of the Orion spacecraft's main cabin windows, looking back at Earth, as the crew travels towards the Moon. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55187189317",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 18:44:38",
@@ -1009,7 +1417,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Spaceship Earth",
       "flickr_desc": "NASA astronaut and Artemis II mission specialist Christina Koch peers out of one of the Orion spacecraft's main cabin windows, looking back at Earth, as the crew travels towards the Moon. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55187293546",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 18:45:00",
@@ -1024,7 +1438,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Earthshine",
       "flickr_desc": "Earthshine. Artemis II astronaut Christina Koch captured this video of Earth outside the Orion spacecraft windows during the lunar flyby. — Christina Koch via Instagram",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ig-earthshine-koch",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 19:44:40",
@@ -1040,7 +1460,13 @@ const PHOTO_DATA = {
       "title": "Earth Through Orion's Window",
       "flickr_desc": "Earth's cloud-covered surface seen through one of Orion's crew cabin windows, with the window frame visible around the edges. The wide-angle lens captures the full window view as the crew looks back at their home planet during the outbound transit.",
       "enabled": true,
-      "camera_id": "d5b"
+      "camera_id": "d5b",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55224193193",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 19:45:21",
@@ -1055,7 +1481,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "The Artemis II Flight Control Team Monitoring the TLI Burn",
       "flickr_desc": "jsc2026e019618 (April 2, 2026) – The Artemis II flight control team pictured at the White Flight Control Room in the Mission Control Center at NASA’s Johnson Space Center monitors mission operations during the translunar injection (TLI) burn, which sent the crew in Orion out of Earth orbit and on a trajectory toward the Moon. After the mission management team polled “Go” for the operation, NASA’s Orion spacecraft fired its main engine for five minutes and 50 seconds beginning at 7:49 p.m. ET, to successfully complete the TLI burn. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55196543334",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-02 20:00:03",
@@ -1070,7 +1502,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Monitoring the Mission",
       "flickr_desc": "Artemis II Flight Control Team in White Flight Control Room (WFCR) during Trans Lunar Insertion Burn. Location: Bldg. 30 MCC WFCR. Date: 4/2/2026. Photo credit: NASA/Helen Arase Vargas",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55195410937",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-02 20:27:20",
@@ -1086,7 +1524,13 @@ const PHOTO_DATA = {
       "title": "Artemis II Captures Dark Side of the Earth",
       "flickr_desc": "art002e000193 (April 3, 2026) - A view of a backlit Earth taken by NASA astronaut and Artemis II Commander Reid Wiseman from one of the Orion spacecraft's window after completing the translunar injection burn on April 2, 2026. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5b"
+      "camera_id": "d5b",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55185622941",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 20:27:39",
@@ -1102,7 +1546,13 @@ const PHOTO_DATA = {
       "title": "Hello, World",
       "flickr_desc": "art002e000192 (April 3, 2026) - A view of Earth taken by NASA astronaut and Artemis II Commander Reid Wiseman from one of the Orion spacecraft's window after completing the translunar injection burn on April 2, 2026. The image features two auroras (top right and bottom left) and zodiacal light (bottom right) is visible as the Earth eclipses the Sun. Venus is shown on the bottom right of the image. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5b"
+      "camera_id": "d5b",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55185633398",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 20:28:00",
@@ -1117,7 +1567,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Earth Rotating From Deep Space",
       "flickr_desc": "A looping time-lapse of Earth slowly rotating as seen from the Orion spacecraft during the outbound translunar coast, compiled from crew photographs by Reddit user u/ResponsibilityNo2097.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "loop",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-03 08:48:33",
@@ -1132,7 +1588,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Orion Snaps a Selfie During External Inspection",
       "flickr_desc": "art002e004411 (April 3, 2026) - Orion snapped this high-resolution selfie in space with a camera mounted on one of its solar array wings during a routine external inspection of the spacecraft on the second day into the Artemis II mission. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55186615484",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-03 10:12:38",
@@ -1147,7 +1609,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Hello, Moon",
       "flickr_desc": "art002e004411 (April 3, 2026) - The Artemis II crew is en route to the Moon on the second flight day of the mission. This photo shows the Orion spacecraft with the Moon in the distance, as captured by a camera on the tip of one of its solar array wings. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55186454418",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-03 10:21:47",
@@ -1162,7 +1630,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Orion and the Moon on Flight Day 2",
       "flickr_desc": "art002e004429 (April 3, 2026) - The Artemis II crew is en route to the Moon on the second flight day of the mission. This photo shows the Orion spacecraft with the Moon in the distance, as captured by a camera on the tip of one of its solar array wings. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55186770575",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-03 19:30:32",
@@ -1177,7 +1651,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "A Crescent Earth",
       "flickr_desc": "art002e00444 (April 3, 2026) - An illuminated sliver of Earth set against the blackness of space is seen through the window of the Orion spacecraft in this photograph from the Artemis II crew on the third day of their journey to the Moon. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55187172560",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-03 19:32:38",
@@ -1193,7 +1673,13 @@ const PHOTO_DATA = {
       "title": "Eyes on Earth",
       "flickr_desc": "art002e009166 (April 3, 2026) - A sliver of Earth is illuminated against the blackness of space in this photo taken by an Artemis II crew member through an Orion spacecraft window on the third day of the mission. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55188864542",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-03 19:38:22",
@@ -1209,7 +1695,13 @@ const PHOTO_DATA = {
       "title": "A Peek at Earth",
       "flickr_desc": "art002e009174 (April 3, 2026) - Peering out the window of the Orion spacecraft at a sliver of the Earth illuminated by the blackness of space. This image was taken by an Artemis II crew member on the third day of the mission. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5b"
+      "camera_id": "d5b",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55189799111",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-03 19:38:59",
@@ -1225,7 +1717,13 @@ const PHOTO_DATA = {
       "title": "Crescent Earth",
       "flickr_desc": "art002e004437 (April 3, 2026) - A sliver of Earth is illuminated against the blackness of space in this photo taken by an Artemis II crew member through an Orion spacecraft window on the third day of the mission. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55187298155",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-03 19:44:47",
@@ -1241,7 +1739,13 @@ const PHOTO_DATA = {
       "title": "To the Moon",
       "flickr_desc": "art002e004438 (April 3, 2026) - A view of the Moon taken by an Artemis II crewmember through the window of the Orion spacecraft on the third day of the mission. The image includes a portion of the Orientale basin (far left), a first for humans and human eyes. Until today, only robotic imagers have seen this region of our Moon. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55186902076",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-03 19:48:56",
@@ -1257,7 +1761,13 @@ const PHOTO_DATA = {
       "title": "CSA Astronaut Jeremy Hansen Takes a Look Through Orion's Window",
       "flickr_desc": "art002e004439 (April 3, 2026) - CSA (Canadian Space Agency) astronaut Jeremy Hansen – in the center of the image – peers out the window of the Orion spacecraft on day 3 of NASA's Artemis II mission. The controls over the commander and pilot seats are illuminated in the foreground, but the cabin is otherwise dark to avoid unnecessary glares on the windows. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5b"
+      "camera_id": "d5b",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55186933788",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-03 19:49:20",
@@ -1273,7 +1783,13 @@ const PHOTO_DATA = {
       "title": "Illuminated in Orion",
       "flickr_desc": "art002e004440 (April 3, 2026) - NASA astronaut Christina Koch is illuminated by a screen inside the darkened Orion spacecraft on the third day of the agency's Artemis II mission. To the right of the image's center, CSA (Canadian Space Agency) astronaut Jeremy Hansen is seen in profile peering out of one of Orion's windows. Lights are turned off to avoid glare on the windows. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5b"
+      "camera_id": "d5b",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55187055368",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-03 22:03:18",
@@ -1289,7 +1805,13 @@ const PHOTO_DATA = {
       "title": "Closing in on the Moon",
       "flickr_desc": "art002e009006 (April 4, 2026) - The Artemis II crew took this photo on day 4 of their journey to the Moon. In it, the Moon is oriented with the South Pole at the top and are beginning to see parts of the lunar far side. Orientale basin is on the right edge of the lunar disk in this image. Artemis II marks the first time that humans have seen the entire basin. The Artemis II crew will continue to observe Orientale from multiple angles as they approach the Moon and throughout the lunar flyby. Orientale is the textbook multi-ring impact basin used as a baseline to compare other impact craters on rocky worlds from Mercury to Pluto. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55187348577",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-04 00:34:19",
@@ -1305,7 +1827,13 @@ const PHOTO_DATA = {
       "title": "A Unique Perspective of Home",
       "flickr_desc": "art002e004450 (April 4, 2026) - Earth is illuminated against the blackness of space in this photo taken by an Artemis II crew member through an Orion spacecraft window. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55190036409",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-04 01:06:49",
@@ -1321,7 +1849,13 @@ const PHOTO_DATA = {
       "title": "Our Home Planet",
       "flickr_desc": "art002e004462 (April 4, 2026) - A sliver of Earth is illuminated against the blackness of space in this photo taken by an Artemis II crew member through an Orion spacecraft window. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55189767696",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-04 03:45:00",
@@ -1336,7 +1870,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Artemis II streaks through the stars",
       "flickr_desc": "Time-lapse of Artemis II spacecraft as seen from the ground, streaking through the star field. Captured by Scott Ferguson, PhD of Astronomy Live.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "4-4-26_07_45UT",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-04 11:35:00",
@@ -1351,7 +1891,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Pink Pony Club Morning",
       "flickr_desc": "What really happened on Pink Pony Club morning. Wake-up songs are a tradition at NASA, and this crew got Chappell Roan’s Pink Pony Club on Flight Day 4. Sound on! — via Instagram",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ig-pink-pony-club",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-04 12:20:54",
@@ -1366,7 +1912,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Rest Before Lunar Flyby",
       "flickr_desc": "art002e009215 (April 6, 2026) - Artemis II crewmember sleeping bags are illuminated inside the Orion spacecraft on Flight Day 5 of the mission and ahead of the crew's lunar flyby on April 6, 2026. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55190303117",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-04 19:23:11",
@@ -1381,7 +1933,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Jeremy Hansen Takes a Selfie in Orion",
       "flickr_desc": "art002e009008 (April 4, 2026) - Artemis II Mission Specialist Jeremy Hansen is seen through a window of the Orion spacecraft while on his way to the Moon. This selfie-style photo was taken using a camera on the end of one of Orion's solar array wings on flight day 4 of the approximately 10-day test flight, when Orion was more than halfway to the Moon. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55195961058",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-04 19:23:14",
@@ -1396,7 +1954,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "A Crew Selfie with Rise in Orion",
       "flickr_desc": "art002e009013 (April 4, 2026) - Artemis II Mission Specialist Christina Koch is seen through a window of the Orion spacecraft while on her way to the Moon. This selfie-style photo was taken using a camera on the end of one of Orion's solar array wings on flight day 4 of the approximately 10-day test flight, when Orion was more than halfway to the Moon. Koch is holding &quot;Rise&quot;, the zero gravity indicator that launched with the crew after being selected from more than 2,600 original designs that were submitted from countries around the world. A zero gravity indicator is a small plush item that typically rides with a crew to visually indicate when they are in space. “Rise” was inspired by the iconic Earthrise moment from the Apollo 8 mission. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55194920227",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-04 19:23:41",
@@ -1411,7 +1975,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Christina Koch and Reid Wiseman Take a Selfie in Orion",
       "flickr_desc": "art002e009014 (April 4, 2026) - Artemis II Mission Specialist Christina Koch (center) and Commander Reid Wiseman (top) are seen through windows of the Orion spacecraft while on their way to the Moon. This selfie-style photo was taken using a camera on the end of one of Orion's solar array wings on flight day 4 of the approximately 10-day test flight, when Orion was more than halfway to the Moon. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55194920222",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-04 20:30:40",
@@ -1426,7 +1996,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Smiles in Mission Control",
       "flickr_desc": "A flight controller smiles at her console in the White Flight Control Room at NASA's Johnson Space Center during the Artemis II mission. The room buzzes with activity as teams monitor the spacecraft's trajectory toward the Moon.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55206257809",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-04 23:49:45",
@@ -1441,7 +2017,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "All in a Day's Work",
       "flickr_desc": "art002e009206 (April 4, 2026) - NASA astronaut and Artemis II mission specialist Christina Koch, seen here on the fourth day of the mission, prepping for lunar flyby activities after completing aerobic exercise on the flywheel device. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55190613700",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-05 00:02:50",
@@ -1456,7 +2038,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "The Nearside of the Moon",
       "flickr_desc": "art002e009057 (April 4, 2026) - A view of the nearside of the Moon, the side we always see from Earth. Some of the far side is visible, as well, on the left edge, just beyond the black patch that is Orientale basin, a nearly 600-mile-wide crater that straddles the Moon’s near and far sides and is partly visible from Earth. The dark areas in the center and right side of the disk are ancient lava flows, which are unique to the near side of the Moon. The white dot at the bottom of the disk, with white rays shooting out from it, is Tycho crater, one of the younger craters on the Moon at 108 million years old. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55190158269",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-05 02:35:18",
@@ -1472,7 +2060,13 @@ const PHOTO_DATA = {
       "title": "One Day Closer to the Moon",
       "flickr_desc": "art002e009186 (April 5, 2026) - Peering out one of the four windows near the display console on the Orion spacecraft, the Earth is illuminated by the blackness of space and grows smaller as the crew journeys closer to the Moon. This image was taken by an Artemis II crew member on the fourth day of the mission. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5b"
+      "camera_id": "d5b",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55189687036",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-05 02:39:36",
@@ -1488,7 +2082,13 @@ const PHOTO_DATA = {
       "title": "Mother Earth",
       "flickr_desc": "art002e009205 (April 4, 2026) - A thin arc glowing in the darkness of space. Sunlight traces the curves of the ocean and clouds, while the rest of the planet fades into shadow. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55190200376",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-05 13:23:47",
@@ -1504,7 +2104,13 @@ const PHOTO_DATA = {
       "title": "A Quick Shave Before Lunar Flyby",
       "flickr_desc": "art002e009211 (April 6, 2026) - Artemis II mission specialist and CSA (Canadian Space Agency) astronaut Jeremy Hansen enjoys a shave inside the Orion spacecraft during Flight Day 5 and ahead of the crew's lunar flyby on April 6, 2026. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5b"
+      "camera_id": "d5b",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55191185696",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-05 22:10:46",
@@ -1519,7 +2125,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Lunar Science Team – Amber Turner",
       "flickr_desc": "Artemis II lunar science team member, foreground, Amber Turner, and David Hollibaugh-Baker, and Cherie Achilles, background, participate in the team’s analysis of crew observations during the lunar flyby on April 6, 2026. The team worked in the Science Evaluation Room (SER) in Mission Control at NASA’s Johnson Space Center in Houston. Built specifically for Artemis missions with these science priorities in mind, the SER is equipped to support rapid data interpretation, collaborative analysis, real-time decision making, and seamless coordination between the science and operations teams. Credits: NASA/ Robert Markowitz",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55198608122",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-05 23:28:49",
@@ -1534,7 +2146,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Orientale on Display",
       "flickr_desc": "art002e009212 (April 6, 2026) In this fully illuminated view of the Moon, the near side (the hemisphere we see from Earth), is visible on the right. It is identifiable by the dark splotches that cover its surface. These are ancient lava flows from a time early in the Moon’s history when it was volcanically active. The large crater west of the lava flows is Orientale basin, a nearly 600-mile-wide crater that straddles the Moon’s near and far sides. Orientale's left half is not visible from Earth, but in this image we have a full view of the crater. Everything to the left of the crater is the far side, the hemisphere we don’t get to see from Earth because the Moon rotates on its axis at the same rate that it orbits round us. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55191439024",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-05 23:42:16",
@@ -1550,7 +2168,13 @@ const PHOTO_DATA = {
       "title": "Jeremy Hansen Looks Back Home",
       "flickr_desc": "art002e009272 (April 6, 2026) - Artemis II mission specialist and CSA (Canadian Space Agency) astronaut Jeremy Hansen peers out one of the Orion spacecraft's windows looking back at Earth ahead of the crew's lunar flyby on April 6, 2026. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55191180896",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-05 23:43:29",
@@ -1566,7 +2190,13 @@ const PHOTO_DATA = {
       "title": "Reflections of Earth with Victor Glover",
       "flickr_desc": "art002e009273 (April 6, 2026) - Artemis II pilot and NASA astronaut Victor Glover peers out one of the Orion spacecraft's windows looking back at Earth ahead of the crew's lunar flyby on April 6, 2026. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55191585995",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-05 23:45:53",
@@ -1582,7 +2212,13 @@ const PHOTO_DATA = {
       "title": "Home, Sweet Home",
       "flickr_desc": "art002e009274 (April 6, 2026) - Artemis II mission specialist and NASA astronaut Christina Koch looks out one of the Orion spacecraft's windows back at Earth ahead of the crew's lunar flyby on April 6, 2026. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55190298147",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-05 23:48:55",
@@ -1598,7 +2234,13 @@ const PHOTO_DATA = {
       "title": "Lunar Looking",
       "flickr_desc": "art002e009275 (April 6, 2026) - Artemis II commander and NASA astronaut Reid Wiseman looks out one of the Orion spacecraft's main cabin windows at the Moon ahead of the crew's lunar flyby on April 6, 2026. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55191331293",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 01:45:17",
@@ -1614,7 +2256,13 @@ const PHOTO_DATA = {
       "title": "Goodnight Moon",
       "flickr_desc": "art002e009210 (April 6, 2026) - Before going to sleep on flight day 5, the Artemis II crew snapped one more photo of the Moon, as it drew close in the window of the Orion spacecraft. Orion and the four humans aboard entered the lunar sphere of influence at 12:37 a.m. EDT on April 6, at the tail end of the fifth day of their mission. That marked the point at which the Moon's gravity had a stronger pull on the spacecraft than the Earth's. Artemis II's closest approach to the Moon will come on flight day 6, as they swing around the far side before beginning their journey back to Earth. About an hour after entering the lunar sphere of influence, Artemis II Mission Specialist Christina Koch said, &quot;We are now falling to the Moon rather than rising away from Earth. It is an amazing milestone!&quot; Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55189594357",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 11:25:36",
@@ -1630,7 +2278,13 @@ const PHOTO_DATA = {
       "title": "Even Closer Now",
       "flickr_desc": "art002e009276 (April 6, 2026) - In this view of the Moon, the near side (the hemisphere we see from Earth), is visible at the top half of the Moon disk. It is identifiable by the dark splotches. These are ancient lava flows from a time early in the Moon’s history when it was volcanically active. The large crater that appears below the lava flows, dark in the center, is Orientale basin, a nearly 600-mile-wide crater that straddles the Moon’s near and far sides as is partly visible from Earth on the edge of the Moon. In this image, we have a full view of the crater. Everything below the crater is the far side, the hemisphere we don’t get to see from Earth because the Moon rotates on its axis at the same rate that it orbits round us. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5b"
+      "camera_id": "d5b",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55191470911",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 13:13:00",
@@ -1645,7 +2299,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Playing with Earth-Moon Gravity",
       "flickr_desc": "Out here playing with Earth-Moon gravity like it is a toy and seeing things that are beautiful beyond words. 215,010 miles from Earth. 12,787 miles from the Moon. — via Instagram",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ig-gravity-flyby",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 13:13:31",
@@ -1660,7 +2320,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Final Flyby Preparations",
       "flickr_desc": "art002e009294 (April 6, 2026) – Artemis II Pilot Victor Glover (Left), Commander Reid Wiseman (Center), and Mission Specialist Jeremy Hansen (Right) prepare for their journey around the far side of the Moon by configuring their camera equipment shortly before beginning their lunar flyby observations. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55193462360",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 13:33:24",
@@ -1675,7 +2341,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Critical Observations with the Lunar Science Team",
       "flickr_desc": "Crew lunar observations team member, Sara Schmidt, left, asset manager, Luke McSherry, and Artemis deputy lunar science lead, Jacob Richardson work in the Science Evaluation Room (SER). Built specifically for Artemis missions with these science priorities in mind, the SER is equipped to support rapid data interpretation, collaborative analysis, real-time decision making, and seamless coordination between the science and operations teams. Credits: NASA/Luna Posadas Nava",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199650003",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-06 13:54:00",
@@ -1690,7 +2362,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Nutella in Zero-G",
       "flickr_desc": "Nutella flying away in zero gravity, about four minutes before the Artemis II crew broke Apollo 13’s record for the farthest distance from Earth by humans. Behind the far side of the Moon, 252,000+ miles from home. — via Reddit/Instagram",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ig-nutella",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 14:15:12",
@@ -1706,7 +2384,13 @@ const PHOTO_DATA = {
       "title": "A Mesmerizing Moon",
       "flickr_desc": "art002e014195 (April 6, 2026) – NASA astronaut and Artemis II Commander Reid Wiseman pictured here in the Orion spacecraft during the Artemis II lunar flyby. Wiseman and his fellow crewmates spent approximately seven hours taking turns at the Orion windows capturing science data to share with their team back on Earth. At closest approach, they came within 4,067 miles of the Moon’s surface. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5b"
+      "camera_id": "d5b",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55195796542",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 14:15:22",
@@ -1722,7 +2406,13 @@ const PHOTO_DATA = {
       "title": "Window Seat for the Flyby",
       "flickr_desc": "art002e014198 (April 6, 2026) – NASA astronaut and Artemis II Commander Reid Wiseman taking a moment during the seven-hour lunar observation period where the crew reported to the ground team their observations including color nuances, which will help enhance scientific understandings of the Moon. At the beginning of the window, as Orion approaches the Moon on the near side, the side we can see from Earth, people in parts of the eastern hemisphere can view some of the same features the astronauts will observe. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5b"
+      "camera_id": "d5b",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55195796552",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 14:19:17",
@@ -1738,7 +2428,13 @@ const PHOTO_DATA = {
       "title": "Overexposed Moon for Analysis",
       "flickr_desc": "art002e009582 (April 6, 2026) – In this view, most of the Moon’s surface is illuminated as captured by the Artemis II crew during their flyby. To support scientific analysis, the lunar science team requested a series of images of the same scene using different exposure settings—including overexposed, underexposed, and standard images. Each variation highlights different aspects of the surface: brighter exposures can reveal faint features in shadowed regions, while darker exposures help preserve detail in highly reflective areas. Together, these images provide complementary data that allow scientists to better analyze the Moon’s surface composition, texture, and geologic features. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199404085",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 14:19:35",
@@ -1754,7 +2450,13 @@ const PHOTO_DATA = {
       "title": "A Moment with the Moon",
       "flickr_desc": "art002e009277 (April 6, 2026) - In this view of the Moon, taken by the Artemis II crew at 2:19 p.m. EDT, just before the crew began their observation period, Orientale basin is visible in the center, with a black patch of ancient lava in the center that punched through the Moon’s crust in an eruption billions of years ago. This 600-mile-wide impact crater lies along the transition between the near and far sides and is sometimes partly visible from Earth. The small, bright crater to its left is Byrgius, which has 250-mile rays extending out from its basin. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55193049251",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 14:22:45",
@@ -1770,7 +2472,13 @@ const PHOTO_DATA = {
       "title": "A Distant Crescent of Home",
       "flickr_desc": "art002e014211 (April 6, 2026) - Seen side by side from deep space, the Moon and Earth share the frame—yet Earth appears as a small, delicate crescent against the blackness beyond. At this stage, Orion is approaching the Moon’s farside, placing the image earlier in the flyby, before closest approach during Artemis II. Though both worlds are visible, the scale and distance between them become immediately clear, offering a powerful perspective of how far the crew has traveled from home. Even in its reduced size, Earth’s soft glow stands out, a reminder of the only world we’ve ever known. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5b"
+      "camera_id": "d5b",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55195413602",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 14:41:43",
@@ -1786,7 +2494,13 @@ const PHOTO_DATA = {
       "title": "Distant Waning Crescent Earth",
       "flickr_desc": "art002e014225 (April 6, 2026) – Seen from afar, Earth appears as a small, delicate waning crescent suspended in the darkness of space, captured by the crew during the Artemis II mission. Only a thin sliver of the planet is illuminated, resembling the familiar crescent phases often seen when observing the Moon from Earth. Despite its distance, faint hints of Earth’s blue tones and cloud patterns are visible, offering a striking perspective of our home planet from deep space. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5b"
+      "camera_id": "d5b",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199312161",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 14:43:49",
@@ -1802,7 +2516,13 @@ const PHOTO_DATA = {
       "title": "A Quiet Moment for Observations",
       "flickr_desc": "art002e014231 (April 6, 2026) – NASA astronaut and Artemis II Commander Reid Wiseman taking a moment during the seven-hour lunar observation period where the crew reported to the ground team their observations including color nuances, which will help enhance scientific understandings of the Moon. At the beginning of the window, as Orion approaches the Moon on the near side, the side we can see from Earth, people in parts of the eastern hemisphere can view some of the same features the astronauts will observe. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5b"
+      "camera_id": "d5b",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55196937384",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 14:44:25",
@@ -1818,7 +2538,13 @@ const PHOTO_DATA = {
       "title": "Crew Scientist",
       "flickr_desc": "art002e009290 (April 6, 2026) – Artemis II Commander Reid Wiseman peers out the window of the Orion spacecraft just as his first lunar observation period of the day begins. Throughout the course of the sixth day of the mission, Wiseman and his crewmates took turns at the windows, capturing images and video of the Moon, along with recorded observations. The astronauts are members of the science team, and the data they collect will shape the future of lunar science. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5b"
+      "camera_id": "d5b",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55192164982",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 14:45:19",
@@ -1833,7 +2559,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Observing the Features of the Moon",
       "flickr_desc": "art002e016130 (April 6, 2026) – NASA astronaut and Artemis II Commander Reid Wiseman pictured here in the Orion spacecraft during the Artemis II lunar flyby. Wiseman and his fellow crewmates spent approximately seven hours taking turns at the Orion windows capturing science data to share with their team back on Earth. At closest approach, they came within 4,067 miles of the Moon’s surface. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55197095290",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 14:48:09",
@@ -1849,7 +2581,13 @@ const PHOTO_DATA = {
       "title": "Capturing the Lunar Flyby from Orion",
       "flickr_desc": "art002e014235 (April 6, 2026) – CSA (Canadian Space Agency) astronaut and Artemis II Mission Specialist Jeremy Hansen is seen taking images through the Orion spacecraft window during the Artemis II lunar flyby. Hansen and his fellow crewmates spent approximately seven hours taking turns at the Orion windows capturing science data to share with their team back on Earth. At closest approach, they came within 4,067 miles of the Moon’s surface. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5b"
+      "camera_id": "d5b",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55197095240",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 14:55:26",
@@ -1864,7 +2602,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Framing the Shot",
       "flickr_desc": "art002e009292 (April 6, 2026) – CSA (Canadian Space Agency) astronaut and Artemis II Mission Specialist Jeremy Hansen is seen taking images through the Orion spacecraft window early in the Artemis II lunar flyby. Hansen and his fellow crewmates spent approximately seven hours taking turns at the Orion windows capturing science data to share with their team back on Earth. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55193194643",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 15:02:00",
@@ -1880,7 +2624,13 @@ const PHOTO_DATA = {
       "title": "A \"Handprint\" on the Moon",
       "flickr_desc": "art002e012010 (April 6, 2026) - Resembling a “handprint” to the Artemis II crew, this view highlights contrasting dark and light features on the Moon’s surface. From top to bottom, the darker regions include Oceanus Procellarum, Mare Humorum—known as the “Sea of Moisture”—and the crater Byrgius A. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55194627304",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 15:04:00",
@@ -1896,7 +2646,13 @@ const PHOTO_DATA = {
       "title": "Ancient Lava on the Moon",
       "flickr_desc": "art002e012028 (April 6, 2026) - The Artemis II crew captured a close-up snapshot of the near side of the Moon as NASA’s Orion spacecraft approached for the lunar flyby. The near side, characterized by the dark patches of ancient lava, is visible on the top third of the lunar disk. Aristarchus crater is the bright white dot in the midst of a dark grey lava flow at the top of the image. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55194619544",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 15:05:44",
@@ -1912,7 +2668,13 @@ const PHOTO_DATA = {
       "title": "Keeper of the Night Sky",
       "flickr_desc": "art002e009278 (April 6, 2026) - Just over half of the Moon fills the left half of the image. The near side, characterized by the dark patches of ancient lava, is visible on the top third of the lunar disk. Orientale basin, a round crater in the center with a black patch of ancient lava in the center, is wrapped in rings of mountains. The round black spot northeast of Orientale is Grimaldi crater, and Aristarchus crater is the bright white dot in the midst of a dark grey lava flow at the top of the image. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55193053886",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 15:06:26",
@@ -1928,7 +2690,13 @@ const PHOTO_DATA = {
       "title": "The Rings of the Orientale Basin",
       "flickr_desc": "art002e012090 (April 6, 2026) - In this view of the Moon, the Artemis II crew captured an intricate snapshot of the rings of the Orientale basin, one of the Moon’s youngest and best-preserved large impact craters on his first shift during the lunar flyby observation period. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55194762480",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 15:06:43",
@@ -1944,7 +2712,13 @@ const PHOTO_DATA = {
       "title": "Vavilov Crater Along the Hertzsprung Basin Rim",
       "flickr_desc": "art002e012093 (April 6, 2026) - Hertzsprung Basin comes into view with its distinctive two concentric rings of mountains, revealing the scale of this ancient impact structure. Near the lower left, Vavilov crater—identified by its central peak—stands out, a feature often described by the Artemis II crew during their lunar flyby. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55194361976",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 15:07:44",
@@ -1960,7 +2734,13 @@ const PHOTO_DATA = {
       "title": "A Cross Section of Lunar Geology",
       "flickr_desc": "A diverse set of lunar features is visible in this view, including the brightly colored Aristarchus crater, whose high reflectivity stands out against the surrounding terrain. Nearby, the Marius Hills region reveals a field of volcanic domes and cones, evidence of past lunar volcanism. The sinuous Reiner Gamma swirl contrasts with the darker mare surface, while rays from Glushko crater streak across the plains. At the bottom of the frame, the dark-floored Grimaldi crater anchors the scene. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55194639639",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 15:08:18",
@@ -1976,7 +2756,13 @@ const PHOTO_DATA = {
       "title": "Seriously Moonstruck",
       "flickr_desc": "art002e012129 (April 6, 2026) - The lower half of the Moon hangs suspended in time in this photograph from the Artemis II crew during the lunar flyby observation period. In the upper center of the photo, the Orientale basin is the prominent feature, with a black patch of ancient lava in the center that punched through the Moon’s crust in an eruption billions of years ago. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55194598974",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 15:09:26",
@@ -1992,7 +2778,13 @@ const PHOTO_DATA = {
       "title": "A Crater of Remembrance",
       "flickr_desc": "art002e012153 (April 6, 2026) - The small, bright spot in the center of the image is the crater that the Artemis II crew have proposed as Carroll, after Commander Reid Wiseman’s late wife. About 3.5 miles across (5.6 km in diameter), the proposed Carroll crater is on the nearside of the lunar surface on the western edge and would be visible from Earth with powerful telescopes. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55195894708",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 15:11:52",
@@ -2008,7 +2800,13 @@ const PHOTO_DATA = {
       "title": "A Moodier Moon",
       "flickr_desc": "art002e012178 (April 7, 2026) - A shot from early in the Artemis II lunar flyby, taken with a smaller aperture setting, shows a moodier version of the Moon than some of the other flyby images with more typical lighting settings. The four crew members spent about 7 hours photographing and recording observations of the Moon as they flew around the far side on April 6, 2026.",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55194768276",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 15:12:00",
@@ -2023,7 +2821,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Sharing a Unique Perspective",
       "flickr_desc": "art002e014256 (April 6, 2026) – CSA (Canadian Space Agency) astronaut and Artemis II Mission Specialist Jeremy Hansen is seen making observations through the window of the Orion spacecraft early in the Artemis II lunar flyby. Hansen and his fellow crewmates spent approximately seven hours taking turns at the Orion windows capturing science data to share with their team back on Earth. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "art002e014256",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 15:12:02",
@@ -2039,7 +2843,13 @@ const PHOTO_DATA = {
       "title": "Capture My Good Side – The Moon",
       "flickr_desc": "art002e012183 (April 6, 2026) - On the first shift during the lunar flyby observation period, the Artemis II crew captured more than two-thirds of the Moon showcasing the intricate features of the nearside. The 600-mile-wide impact crater, Orientale basin, lies along the transition between the near and far sides and is sometimes partly visible from Earth. The round black spot northeast of Orientale is Grimaldi crater, known for its exceptionally dark mare lava floor and heavily degraded rim. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55194334756",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 15:18:24",
@@ -2054,7 +2864,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Drawn by the Moon",
       "flickr_desc": "art002e009562 (April 6, 2026) - The Orion spacecraft is seen in the foreground lit up by the Sun. A waxing gibbous Moon is visible in the background. Orientale basin, a 600-mile-wide impact crater ringed by mountains, is visible toward the center bottom of the Moon. This basin straddles the Moon’s near and far sides. To the left of Orientale, which has a patch of ancient lava in its basin, is the far side; this is the hemisphere we don’t get to see from Earth. To the right of Orientale is the near side, the hemisphere we see every day from Earth. The nearside is notable for giant, dark patches of ancient lave flows that cover its surface. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55193784989",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 15:25:21",
@@ -2070,7 +2886,13 @@ const PHOTO_DATA = {
       "title": "A Tapestry of Lunar Landmarks",
       "flickr_desc": "art002e012261 (April 6, 2026) - Multiple lunar landmarks come into view in this image, many of which were highlighted during the Artemis II crew’s observation call. Visible features include Ohm crater, Oceanus Procellarum, Grimaldi crater, Pierazzo crater, the newly proposed Carroll crater, and the expansive Hertzsprung Basin—together illustrating a range of geologic terrains, from dark volcanic plains to heavily cratered highlands and the remnants of ancient impact basins.",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55194529188",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 15:28:57",
@@ -2086,7 +2908,13 @@ const PHOTO_DATA = {
       "title": "Swoon at the Moon",
       "flickr_desc": "art002e012273 (April 6, 2026) - This view of the southwest portion of Orientale Basin highlights its prominent annular ring—a sweeping arc of mountainous terrain formed by the immense energy of an ancient impact. The ring structure rises above the surrounding surface, tracing the basin’s outer boundary and revealing the layered, multi-ring nature of one of the Moon’s most well-preserved impact features. Apollo-era observers nicknamed this formation “the kiss,” reflecting its distinctive, curved shape. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55194627309",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 15:34:27",
@@ -2102,7 +2930,13 @@ const PHOTO_DATA = {
       "title": "Dark Craters, Bright Views",
       "flickr_desc": "art002e009627 (April 6, 2026) – During the first shift of the lunar flyby observation period, the Artemis II crew captured more than two-thirds of the Moon, highlighting surface details on the nearside, including the 600-mile-wide impact crater, Orientale basin, along the boundary between the near and far sides. They also captured the Grimaldi crater, a dark, round feature northeast of Orientale, known for its dark mare lava floor and heavily worn rim. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55196010752",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 15:41:45",
@@ -2118,7 +2952,13 @@ const PHOTO_DATA = {
       "title": "It's All in the Details",
       "flickr_desc": "art002e009279 (April 6, 2026) – During their lunar flyby observation period, the Artemis II crew captured this image at 3:41 p.m. EDT, showing the rings of the Orientale basin, one of the Moon’s youngest and best-preserved large impact craters. These concentric rings offer scientists a rare window into how massive impacts shape planetary surfaces, helping refine models of crater formation and the Moon’s geologic history. At the 10 o’clock position of the Orientale basin, the two smaller craters – which the Artemis II crew has suggested be named Integrity and Carroll – are visible. These features highlight how crew observations can directly support surface feature identification and real-time science. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55193206753",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 15:46:20",
@@ -2134,7 +2974,13 @@ const PHOTO_DATA = {
       "title": "Crossing into the Lunar Farside",
       "flickr_desc": "art002e010014 (April 6, 2026) – A bright portion of the Moon is visible in this image. If you look closely, you can see linear, pitted features known as “crater chains” radiating from the Orientale basin, an impact crater with a patch of ancient lava at its center, visible in the bottom center of the image. These crater chains formed about 3.8 billion years ago, when rocks spewed from the collision that formed Orientale landed in lines extending away from the crater. These chains are found near other large craters on the Moon, but we don’t get to see them on Earth because our planet’s crust has been turned over so many times through plate tectonics and largely erased by rain, wind, and ice. In the upper left corner of the Moon disk is a line called the terminator, the boundary between lunar day and night. Here, low-angle sunlight skims the surface, casting dramatic shadows that expose the area’s topography — or the shape of its surface. Glushko crater is the bright spot just to the left of the dark mare, or “sea” of ancient lava flows on the near side of the Moon. It’s identifiable by the bright rays that shoot across the mare, some hundreds of miles away. These rays are made of ejected material after the collision that formed Glushko. Glushko and its rays are brighter than the surrounding area because that younger has experienced less weathering from radiation and impacts. Oceanus Procellarum, the largest lava-filled region on the Moon, spans the horizon. The Aristarchus crater, the bright spot in the sea of lava, creeps toward the right edge of the Moon. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55197995935",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 15:57:39",
@@ -2149,7 +2995,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Lunar Flyby Observations – Victor Glover and Christina Koch",
       "flickr_desc": "art002e016195 (April 6, 2026) – Artemis II Pilot Victor Glover, on the left, and Mission Specialist Christina Koch, on the right, gather images and observations of the lunar surface to share with the world during the lunar flyby on the sixth day of the mission. The crew spent approximately seven hours taking turns at the windows of the Orion spacecraft as they flew around the far side of the Moon. At closest approach, they came within 4,067 miles of the Moon’s surface. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55196704886",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 15:59:12",
@@ -2164,7 +3016,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Lunar Flyby Observations – Victor Glover",
       "flickr_desc": "art002e016204 (April 6, 2026) – NASA astronaut and Artemis II Pilot Victor Glover pictured here in the Orion spacecraft during the Artemis II lunar flyby. Glover and his fellow crewmates spent approximately seven hours taking turns at the Orion windows capturing science data to share with their team back on Earth. At closest approach, they came within 4,067 miles of the Moon’s surface. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55196961359",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 16:05:00",
@@ -2179,7 +3037,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Lunar Flyby Observations – Reid Wiseman",
       "flickr_desc": "art002e016165 (April 6, 2026) – NASA astronaut and Artemis II Commander Reid Wiseman pictured here in the Orion spacecraft during the Artemis II lunar flyby. Wiseman and his fellow crewmates spent approximately seven hours taking turns at the Orion windows capturing science data to share with their team back on Earth. At closest approach, they came within 4,067 miles of the Moon’s surface. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "art002e016165",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 16:10:00",
@@ -2194,7 +3058,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Lunar Flyby Observations – Jeremy Hansen",
       "flickr_desc": "art002e016171 (April 6, 2026) – CSA (Canadian Space Agency) astronaut and Artemis II Mission Specialist Jeremy Hansen pictured here in the Orion spacecraft during the Artemis II lunar flyby. Hansen and his fellow crewmates spent approximately seven hours taking turns at the Orion windows capturing science data to share with their team back on Earth. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "art002e016171",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 16:15:00",
@@ -2209,7 +3079,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Lunar Flyby Observations – Christina Koch",
       "flickr_desc": "art002e016172 (April 6, 2026) – NASA astronaut and Artemis II Mission Specialist Christina Koch pictured here in the Orion spacecraft during the Artemis II lunar flyby. Koch and her fellow crewmates spent approximately seven hours taking turns at the Orion windows capturing science data to share with their team back on Earth. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "art002e016172",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 16:25:43",
@@ -2224,7 +3100,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Choreographed Camera Work",
       "flickr_desc": "art002e009293 (April 6, 2026) – Artemis II Pilot Victor Glover, on the left, and Mission Specialist Christina Koch, on the right, gather images and observations of the lunar surface to share with the world during the lunar flyby on the sixth day of the mission. The crew spent approximately seven hours taking turns at the windows of the Orion spacecraft as they flew around the far side of the Moon. At closest approach, they came within 4,067 miles of the Moon’s surface. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55193069001",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 16:32:20",
@@ -2239,7 +3121,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Fist Pump at the CAPCOM Console",
       "flickr_desc": "A flight controller pumps his fist in celebration at his console in Mission Control during the Artemis II lunar flyby. The gesture captures a moment of triumph as the crew approaches the Moon.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55209951780",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-06 17:11:22",
@@ -2254,7 +3142,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "A Moment of Awe in Mission Control",
       "flickr_desc": "A member of the mission support team looks up with quiet emotion during the Artemis II lunar flyby, the Moon visible on a screen behind him. His expression captures the profound significance of humanity's return to the Moon.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55207655441",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-06 17:27:20",
@@ -2270,7 +3164,13 @@ const PHOTO_DATA = {
       "title": "The Moon's Cratered Southern Highlands",
       "flickr_desc": "A black-and-white view of the Moon's heavily cratered southern hemisphere, photographed from the Orion spacecraft during the Artemis II flyby. The stark lighting reveals the depth and texture of ancient impact craters across the lunar highlands.",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55207935871",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 17:30:00",
@@ -2285,7 +3185,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Photographer at Work",
       "flickr_desc": "art002e009295 (April 6, 2026) – Astronaut Jeremy Hansen captures an image through the camera shroud covering window 2 of the Orion spacecraft. The camera shroud, essentially a curtain with a hole for the lens to pass through, is used to prevent light from the cabin from reflecting on the windowpanes. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55193337359",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 17:44:27",
@@ -2301,7 +3207,13 @@ const PHOTO_DATA = {
       "title": "The Edge of Darkness",
       "flickr_desc": "art002e010208 (April 6, 2026) - As the Artemis II crew flew over the terminator, the astronauts described this boundary between day and night as &quot;anything but a straight line.&quot; Crater rims along the terminator stand out as &quot;islands&quot; in the night. Giant chains of craters emanating from the 3.7-billion-year-old Orientale basin can be seen scouring the surface, stretching almost to the terminator. This tells a geologic story: these crater chains produced by the Orientale impact event mar the surface of the relatively flat Hertzsprung Basin (center of this image), which means that Hertzsprung Basin must be even older than Orientale! Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55196075694",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 17:45:04",
@@ -2317,7 +3229,13 @@ const PHOTO_DATA = {
       "title": "The Moon's Great Scar",
       "flickr_desc": "art002e010232 (April 6, 2026) – During the lunar flyby observation period, the Artemis II crew captures a detailed image of the Orientale basin, a 600-mile-wide impact crater marked by a dark patch of ancient lava that erupted through the Moon’s crust billions of years ago. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55197007576",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 17:46:35",
@@ -2333,7 +3251,13 @@ const PHOTO_DATA = {
       "title": "Shadows at the Edge of Lunar Day",
       "flickr_desc": "art002e009281 (April 6, 2026) – The Artemis II crew captures a portion of the Moon coming into view along the terminator – the boundary between lunar day and night – where low-angle sunlight casts long, dramatic shadows across the surface. This grazing light accentuates the Moon’s rugged topography, revealing craters, ridges, and basin structures in striking detail. Features along the terminator such as Jule Crater, Birkhoff Crater, Stebbins Crater, and surrounding highlands stand out. From this perspective, the interplay of light and shadow highlights the complexity of the lunar surface in ways not visible under full illumination. The image was captured about three hours into the crew’s lunar observation period, as they flew around the far side of the Moon on the sixth day of the mission. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55193137293",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 17:49:02",
@@ -2349,7 +3273,13 @@ const PHOTO_DATA = {
       "title": "Craters of Time",
       "flickr_desc": "art002e010399 (April 6, 2026) – During a lunar flyby observation period, the Artemis II crew captures craters dotting the surface of the Moon, revealing its rugged, ancient surface. This scarred landscape reflects a long history of cosmic collisions. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55197552725",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 17:49:43",
@@ -2365,7 +3295,13 @@ const PHOTO_DATA = {
       "title": "Shadows Across Vavilov Crater",
       "flickr_desc": "A close-up view taken by the Artemis II crew of Vavilov Crater on the rim of the older and larger Hertzsprung basin. The right portion of the image shows the transition from smooth material within an inner ring of mountains to more rugged terrain around the rim. Vavilov and other craters and their ejecta are accentuated by long shadows at the terminator, the boundary between lunar day and night. The image was captured with a handheld camera at a focal length of 400 mm, as the crew flew around the far side of the Moon. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55193002296",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 17:50:25",
@@ -2380,7 +3316,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Orion in the Spotlight",
       "flickr_desc": "art002e009566 (April 6, 2026) - NASA’s Orion spacecraft is seen in the foreground, lit up by the Sun. A first quarter Moon is visible behind it, with sunlight coming from the right. Near the bottom right edge of the Moon, Orientale basin stands out with a black patch of ancient lava in its center. A 600-mile-wide impact crater ringed by mountains, Orientale straddles the near and far sides of the Moon. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55193946135",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 17:58:14",
@@ -2396,7 +3338,13 @@ const PHOTO_DATA = {
       "title": "Ready for a Close Up",
       "flickr_desc": "art002e009283 (April 6, 2026) – Captured by the Artemis II crew, the heavily cratered terrain of the eastern edge of the South Pole-Aitken basin is seen with the shadowed terminator – the boundary between lunar day and night – at the top of the image. The South Pole-Aitken basin is the largest and oldest basin on the Moon, providing a glimpse into an ancient geologic history built up over billions of years. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55193149063",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:02:22",
@@ -2411,7 +3359,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Lunar Selfie",
       "flickr_desc": "art002e009296 (April 6, 2026) – Midway through their lunar observation period, the Artemis II crew members, seen here (From left to right: Victor Glover, Jeremy Hansen, Reid Wiseman, and Christina Koch), pause to turn the camera around for a selfie inside the Orion spacecraft. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55193071311",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:05:33",
@@ -2427,7 +3381,13 @@ const PHOTO_DATA = {
       "title": "Earthset Over the Lunar Limb",
       "flickr_desc": "Earth appears tiny as the Moon looms large in this photo taken by the Artemis II crew during their lunar flyby on April 6, 2026. Taken 36 minutes before Earthset, our home planet is visible in the blackness of space off the limb of the illuminated Moon. Earth is in a crescent phase, with sunlight coming from the right. Orientale mare basin, with its dark floor of cooled lava and outer rings of mountains, covers nearly the lower third of the imaged lunar surface. Different colors in the mare hint at its mineral composition. The lines of small indentations above Orientale are secondary crater chains, formed by material ejected during a violent primary impact. Both of the new craters that the Artemis II crew has suggested names for – Integrity and Carroll – are in full view. The edge of the visible surface of the Moon is called the “lunar limb.” Seen from afar, it almost looks like a circular arc – except when backlit, as in other images captured by the Artemis II crew. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55193414680",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:10:17",
@@ -2442,7 +3402,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Still Life",
       "flickr_desc": "art002e012278 (April 6, 2026) - The Moon seen peeking above the window sill of the Orion spacecraft during the Artemis II lunar flyby on April 6, 2026. The Artemis II crew spent about 7 hours at the Orion windows during the flyby, taking photos and recording observations on the Moon to share with scientists on the ground.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55194917013",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:32:05",
@@ -2457,7 +3423,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "A Room With a View",
       "flickr_desc": "art002e012279 (April 6, 2026) - A view from the window of the Orion spacecraft approximately 9 minutes before Earthset during the Artemis II lunar flyby on April 6, 2026.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55195026049",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:33:15",
@@ -2473,7 +3445,13 @@ const PHOTO_DATA = {
       "title": "Lunar Horizon at an Angle",
       "flickr_desc": "The cratered lunar surface stretches diagonally across the frame, with the horizon cutting from lower-left to upper-right. Taken during the closest approach phase of the Artemis II flyby, the image shows the rugged far side terrain in sharp detail.",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55206722770",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:33:35",
@@ -2488,7 +3466,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Moon's Farside in the Foreground, Earth Beyond",
       "flickr_desc": "Seen from behind the Moon during Artemis II, the Moon and Earth align in the same frame, each partially illuminated by the Sun. The Moon’s surface appears in sharp detail in the foreground, while Earth sits much farther away, smaller and softly lit in the background. A faint reflection in the spacecraft window is also visible, subtly overlaying the scene. Though their phases differ, both are shaped by the same sunlight, revealing the geometry of the Sun–Earth–Moon system from deep space. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55196453768",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:33:44",
@@ -2503,7 +3487,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Crescent Earth Over Lunar Horizon",
       "flickr_desc": "art002e015231 (April 6, 2026) – The Artemis II crew captures a faint view of a crescent Earth above the horizon on the Moon’s far side. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55197737178",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:35:54",
@@ -2519,7 +3509,13 @@ const PHOTO_DATA = {
       "title": "The Edge of Two Worlds",
       "flickr_desc": "art002e009285 (April 6, 2026) – Our planet draws closer to passing behind the Moon in this image captured by the Artemis II crew during their lunar flyby, about six minutes before Earthset. Earth is in a crescent phase, with sunlight coming from the right. The dark portion of Earth is experiencing nighttime. On Earth’s day side, swirling clouds are visible over muted blue in the Australia and Oceania region. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55192123432",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:35:56",
@@ -2534,7 +3530,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Science Officers in Mission Control",
       "flickr_desc": "jsc2026e020490 (April 6, 2026) - Pictured from left to right, Angela Garcia, Dr. Kelsey Young, and Dr. Trevor Graff, the first science officers of the Artemis program in the White Flight Control Room in the Christopher C. Kraft Jr. Mission Control Center at NASA’s Johnson Space Center. Seen here about ten minutes before Earthset during Artemis II, these science officers are seen monitoring mission data in real-time from the Science console. They support flight controllers by analyzing scientific measurements and system performance. Their work helps ensure mission objectives are achieved safely and efficiently. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55193368072",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-06 18:39:44",
@@ -2549,7 +3551,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Orion Selfie with Crescent Moon and Earth",
       "flickr_desc": "A GoPro camera mounted on Orion's solar array wing captures the spacecraft's service module in the foreground with a crescent Moon and a tiny crescent Earth visible in the background. The NASA logo is clearly visible on the spacecraft's exterior.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55206394005",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:40:29",
@@ -2565,7 +3573,13 @@ const PHOTO_DATA = {
       "title": "Earthrise Behind the Lunar Limb",
       "flickr_desc": "A crescent Earth peeks out from behind the Moon's cratered limb in this stunning telephoto image from the Artemis II flyby. The Moon's surface fills most of the frame, its craters and highlands sharply rendered, while Earth's familiar blue-and-white crescent hangs just beyond the horizon.",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55208655682",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:40:47",
@@ -2581,7 +3595,13 @@ const PHOTO_DATA = {
       "title": "Peeking at the Earth",
       "flickr_desc": "art002e009286 (April 6, 2026) – As the Artemis II crew came close to passing behind the Moon and experiencing a planned loss of signal, they captured this image of a crescent Earth setting on the Moon’s limb. The edge of the visible surface of the Moon is called the “lunar limb.” Seen from afar, it almost looks like a circular arc – except when backlit, as in other images captured by the Artemis II crew. In this photo, the dark portion of Earth is experiencing nighttime, while Australia and Oceania are in the daylight. In the foreground, the Ohm crater is visible, with terraced edges and a flat floor interrupted by central peaks—formed when the surface rebounded upward during the impact that created the crater. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55193180468",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:41:22",
@@ -2597,7 +3617,13 @@ const PHOTO_DATA = {
       "title": "A New View of the Moon",
       "flickr_desc": "art002e009287 (April 6, 2026) – Earth sets at 6:41 p.m. EDT, April 6, 2026, over the Moon’s curved limb in this photo captured by the Artemis II crew during their journey around the far side of the Moon. Orientale basin is perched on the edge of the visible lunar surface. Hertzsprung Basin appears as two subtle concentric rings, which are interrupted by Vavilov, a younger crater superimposed over the older structure. The lines of indentations are secondary crater chains formed by ejecta from the massive impact that created Orientale. The dark portion of Earth is experiencing nighttime. On Earth’s day side, swirling clouds are visible over the Australia and Oceania region. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55192132107",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:41:37",
@@ -2613,7 +3639,13 @@ const PHOTO_DATA = {
       "title": "Earthset",
       "flickr_desc": "art002e009288 (April 6, 2026) – Earthset captured through the Orion spacecraft window at 6:41 p.m. EDT, April 6, 2026, during the Artemis II crew’s flyby of the Moon. A muted blue Earth with bright white clouds sets behind the cratered lunar surface. The dark portion of Earth is experiencing nighttime. On Earth’s day side, swirling clouds are visible over the Australia and Oceania region. In the foreground, Ohm crater has terraced edges and a flat floor interrupted by central peaks—formed when the surface rebounded upward during the impact that created the crater. Image Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55192084847",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:41:58",
@@ -2629,7 +3661,13 @@ const PHOTO_DATA = {
       "title": "Earthrise Over the Lunar Far Side",
       "flickr_desc": "Earth rises above the Moon's far side horizon, appearing as a small blue-white crescent above the grey expanse of the lunar surface. The image captures one of the most iconic views in spaceflight — our home planet seen from the vicinity of another world.",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55208327975",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:41:58",
@@ -2645,7 +3683,13 @@ const PHOTO_DATA = {
       "title": "A Setting Earth",
       "flickr_desc": "art002e009289 (April 6, 2026) – The lunar surface fills the frame in sharp detail, as seen during the Artemis II lunar flyby, while a distant Earth sets in the background. This image was captured at 6:41 p.m. EDT, on April 6, 2026, just three minutes before the Orion spacecraft and its crew went behind the Moon and lost contact with Earth for 40 minutes before emerging on the other side. In this image, the dark portion of Earth is experiencing nighttime, while on its day side, swirling clouds are visible over the Australia and Oceania region. In the foreground, Ohm crater shows terraced edges and a relatively flat floor marked by central peaks — formed when the surface rebounded upward during the impact that created the crater. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55193178333",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:42:14",
@@ -2660,7 +3704,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Orion POV: Destination and Home",
       "flickr_desc": "art002e009567 (April 6, 2026) - NASA’s Orion spacecraft captures the Moon and the Earth in one frame during the Artemis II crew’s deep space journey at 6:42 p.m. ET on the sixth day of the mission. The right side of NASA’s Orion spacecraft is seen lit up by the Sun. A waxing crescent Moon is visible behind it. And then, a crescent Earth, tiny compared to the Moon, is about to set below the Moon’s horizon on the right. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55192657082",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:42:30",
@@ -2675,7 +3725,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Only One Chance in This Lifetime",
       "flickr_desc": "Only one chance in this lifetime… Like watching sunset at the beach from the most foreign seat in the house. This video captures Earth setting behind the Moon during the Artemis II lunar flyby. — Reid Wiseman via Instagram",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ig-earthset-wiseman",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:42:42",
@@ -2691,7 +3747,13 @@ const PHOTO_DATA = {
       "title": "A Breathtaking Earthset from Orion",
       "flickr_desc": "art002e021278 (April 6, 2026) – Echoing the iconic Earthrise photo captured by the Apollo 8 astronauts in 1968, during the lunar flyby, the Artemis II crew captured a shot of Earthset as they passed behind the Moon’s far side. It is one of many photos taken during the seven-hour lunar flyby by the Artemis II crew on the Orion spacecraft. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55198598917",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:42:45",
@@ -2707,7 +3769,13 @@ const PHOTO_DATA = {
       "title": "Taking a Peek at Earth from the Far Side of the Moon",
       "flickr_desc": "art002e021283 (April 6, 2026) – The Earth appears to be peeking out over the horizon of the Moon,but pictured here is actually an Earthset. During an Earthset, the planet appears to sink below the lunar horizon. In this scene, a partially lit crescent Earth drops behind the Moon as seen by crew on the Orion spacecraft. The image also shows the vast canvas of the Moon’s surface with its overlapping craters and basins. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55198687567",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:42:52",
@@ -2723,7 +3791,13 @@ const PHOTO_DATA = {
       "title": "Hertzsprung in Light and Shadow",
       "flickr_desc": "art002e021296 (April 6, 2026) – As the Artemis II crew flew around the far side of the Moon, they captured key scientific observations, photographs, videos, and records documenting critical observations to help scientists on the ground understand the composition and history of the lunar surface. Near the center of the view lies Hertzsprung basin, an ancient and expansive impact feature described by the Artemis II crew as darker in overall tone compared to surrounding terrain. Crew observations highlight a striking contrast in texture: the interior of Hertzsprung appears unusually smooth, “like a paved road,” while the outer regions transition into rougher, more jagged terrain. Subtle variations in brightness and color across the basin create a patchwork of lighter and darker areas, offering clues to its complex geologic history. Surrounding regions show evidence of ejecta and crater rays, with faint brownish and gray tones radiating across the highlands. Together, these features provide a dynamic view of one of the Moon’s oldest and most intriguing basins. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199984595",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 19:01:17",
@@ -2739,7 +3813,13 @@ const PHOTO_DATA = {
       "title": "Over the Moon, Bea",
       "flickr_desc": "art002e012632 (April 6, 2026) - The Artemis II crew captures the Moon's curved limb during their journey around the far side of the Moon. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55196710272",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 19:02:32",
@@ -2755,7 +3835,13 @@ const PHOTO_DATA = {
       "title": "A Terrain of Ancient Impacts",
       "flickr_desc": "art002e012673 (April 6, 2026) – As the Artemis II crew passes the Moon during an observation period, the lunar landscape sharpens into focus: a terrain scattered with craters and shadows stretching beneath the black expanse of space. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199774765",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 19:03:06",
@@ -2771,7 +3857,13 @@ const PHOTO_DATA = {
       "title": "Poynting and Keeler Craters on the Lunar Far Side",
       "flickr_desc": "art002e012702 (April 6, 2026) – Poynting crater and Keeler crater are visible side by side in the lower right portion of this image of the Moon’s far side highlands. Poynting, positioned above, is a large impact crater with a well-defined rim and relatively smooth interior, indicative of material that has settled following the initial impact. Just below it, Keeler crater appears slightly smaller, with a sharply outlined rim and a more textured interior shaped by subsequent impacts and ejecta. Both features lie within the densely cratered far side highlands, preserving a record of ancient impacts that have shaped the lunar surface over billions of years. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55198362617",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 19:03:30",
@@ -2787,7 +3879,13 @@ const PHOTO_DATA = {
       "title": "Birkhoff Crater in Low-Light Detail",
       "flickr_desc": "art002e012723 (April 6, 2026) – A close-up view of the Birkhoff crater on the Moon’s far side, captured by the Artemis II crew, shows the surface under low-light conditions. Located within the lunar highlands, Birkhoff is an impact crater shaped by billions of years of collisions. In this underexposed image, reduced brightness reveals subtle variations in texture and topography that are often less visible in brighter views. The lighting emphasizes differences in surface roughness and ejecta patterns, providing a clearer look at the crater’s structure and the surrounding terrain. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199141754",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 19:09:19",
@@ -2803,7 +3901,13 @@ const PHOTO_DATA = {
       "title": "The Lunar Terminator at Close Range",
       "flickr_desc": "The boundary between day and night on the Moon's surface — the terminator — cuts diagonally across the frame, with crater rims catching the last rays of sunlight while the rest falls into deep shadow. Taken at close range during the Artemis II flyby.",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55204753657",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 19:09:30",
@@ -2819,7 +3923,13 @@ const PHOTO_DATA = {
       "title": "Craters Along the Lunar Terminator",
       "flickr_desc": "art002e014055 (April 6, 2026) - A close-up view of the Moon along the terminator—the boundary between lunar day and night—captured by the crew during the Artemis II mission. The low-angle sunlight on this specific day casts long shadows across the surface, revealing the shape and depth of craters in striking detail. Since the early days of the telescope, astronomers used observations along the terminator to map the Moon’s terrain, taking advantage of the contrast between light and shadow to distinguish surface features. While modern imaging has advanced significantly, this lighting still provides valuable insight into the Moon’s topography. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55198256277",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 19:22:30",
@@ -2835,7 +3945,13 @@ const PHOTO_DATA = {
       "title": "Artemis Era Earthrise",
       "flickr_desc": "art002e009280 (April 6, 2026) – Earthrise captured through the Orion spacecraft window at 7:22 p.m. ET during the Artemis II crew’s flyby of the Moon’s far side. Earth appears as a delicate crescent, with only its upper edge illuminated. The planet’s soft blue hue and scattered white cloud systems stand out against the blackness of space, while the lower portion fades into night. Taken with a 400 mm lens, the image, Earthrise, reveals a striking alignment of Earth and Moon, with the Moon in the top foreground and the Earth below. Along the lunar horizon, rugged terrain is silhouetted against the bright crescent Earth. Both bodies are oriented with their north poles to the left and south poles to the right, offering a unique perspective of our home planet from deep space. This photo was rotated 90 degrees clockwise for standard viewing orientation. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55193054686",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 19:22:44",
@@ -2850,7 +3966,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Orion, Earth, and Moon from the Solar Array",
       "flickr_desc": "A GoPro mounted on Orion's solar array captures the spacecraft's service module in the foreground with a tiny crescent Earth visible in the distance and the faintly lit lunar surface at the edge of the frame. The NASA worm logo is visible on the adapter ring.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55207839868",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 19:23:16",
@@ -2866,7 +3988,13 @@ const PHOTO_DATA = {
       "title": "Earth's Crescent from Lunar Orbit",
       "flickr_desc": "art002e014066 (April 6, 2026) – The Artemis II crew captures an image of a crescent Earth on their journey around the Moon. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199812540",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 20:35:31",
@@ -2882,7 +4010,13 @@ const PHOTO_DATA = {
       "title": "A Solar Eclipse Like No Other",
       "flickr_desc": "art002e010782 (April 6, 2026) - In this view captured by the Artemis II crew on the Orion spacecraft, a wedge of the Moon in nighttime is visible in the foreground, as the Sun is setting on the opposite side. This image captures the beginning of a total solar eclipse that astronauts were able to observe at the end of their lunar observation period during Orion’s closest approach to the Moon on April 6, 2026. Unlike minutes-long eclipses as viewed from Earth, the Artemis II crew witnessed the Sun hide behind the Moon for nearly an hour. Because the astronauts were so near the Moon, it appeared much larger than the Sun; because of this, it took longer for the Sun to make its transit across the Moon and peek out the other side. From Earth, in contrast, the Moon and Sun appear about the same size, so even small changes in their alignment quickly bring the Sun back into view, making totality much shorter. The bright rays of light, or streamers, that are running outward towards the bottom of the Moon disk are part of the Sun's corona. The corona is the outermost layer of the Sun's atmosphere and is only visible during a total solar eclipse. It is normally hidden by the bright light of the Sun's surface. In addition, the jagged edge of the Moon visible in this image reveals the topography of backlit mountains on the horizon. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55197506830",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 20:40:54",
@@ -2897,7 +4031,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Solar Eclipse from the Far Side",
       "flickr_desc": "The Sun is fully eclipsed by the Moon as seen from the Orion spacecraft during the Artemis II flyby. The Moon's dark disk is surrounded by a brilliant halo of light — the Sun's corona and possibly zodiacal light — with stars visible in the background. The crew witnessed nearly 54 minutes of totality from this vantage point.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55207787628",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 21:01:20",
@@ -2913,7 +4053,13 @@ const PHOTO_DATA = {
       "title": "Artemis II Total Solar Eclipse, Partial Frame",
       "flickr_desc": "art002e009298 (April 6, 2026) – A close-up view from the Orion spacecraft during the Artemis II crew’s lunar flyby on April 6, 2026, captures a total solar eclipse, with only part of the Moon visible in the frame as it fully obscures the Sun. We see a glowing halo around the dark lunar disk. The science community is investigating whether this effect is due to the corona, zodiacal light, or a combination of the two. From this deep-space vantage point, the Moon appeared large enough to sustain nearly 54 minutes of totality, far longer than total solar eclipses typically seen from Earth. The bright silver glint on the left edge of the image is the planet Venus. The round, dark gray feature visible along the Moon’s horizon between the 9 and 10 o’clock positions is Mare Crisium, a feature visible from Earth. We see faint lunar features because light reflected off of Earth provides a source of illumination. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55192173787",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 21:05:29",
@@ -2928,7 +4074,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Eclipsed Moon with Corona Glow",
       "flickr_desc": "The Moon's full disk appears in silhouette against the Sun's glowing corona during the total solar eclipse witnessed by the Artemis II crew. The corona's ethereal light radiates outward from behind the Moon, with faint surface features visible through Earthshine. Stars dot the surrounding darkness.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55208682757",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 21:06:19",
@@ -2943,7 +4095,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II in Eclipse",
       "flickr_desc": "art002e009301 (April 6, 2026) – Captured by the Artemis II crew during their lunar flyby on April 6, 2026, this image shows the Moon fully eclipsing the Sun. From the crew’s perspective, the Moon appears large enough to completely block the Sun, creating nearly 54 minutes of totality and extending the view far beyond what is possible from Earth. We see a glowing halo around the dark lunar disk. The science community is investigating whether this effect is due to the corona, zodiacal light, or a combination of the two. Also visible are stars, typically too faint to see when imaging the Moon, but with the Moon in darkness stars are readily imaged. This unique vantage point provides both a striking visual and a valuable opportunity for astronauts to document their observations during humanity’s return to deep space. The faint glow of the nearside of the Moon is visible in this image, having been illuminated by light reflected off the Earth. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55193054741",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 21:10:44",
@@ -2958,7 +4116,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Eclipsed: A View from Orion",
       "flickr_desc": "art002e009571 (April 6, 2026) - The Moon, backlit by the Sun during a solar eclipse, is photographed by NASA’s Orion spacecraft on April 6, 2026, during the Artemis II mission. Orion is visible in the foreground on the left. Earth is reflecting sunlight at the left edge of the Moon, which is slightly brighter than the rest of the disk. The bright spot visible just below the Moon’s bottom right edge is Saturn. Beyond that, the bright spot at the right edge of the image is Mars. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55193566011",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 21:11:49",
@@ -2973,7 +4137,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Solar Eclipse of the Heart",
       "flickr_desc": "art002e009573 (April 6, 2026) - The Moon, seen here backlit by the Sun during a solar eclipse on April 6, 2026, is photographed by one of the cameras on the Orion spacecraft’s solar array wings. Orion is visible in the foreground on the left. Earth is reflecting sunlight at the left edge of the Moon, which is slightly brighter than the rest of the disk. The bright spot visible just below the Moon’s bottom right edge is Saturn. Beyond that, the bright spot at the right edge of the image is Mars. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55192683067",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 21:28:36",
@@ -2989,7 +4159,13 @@ const PHOTO_DATA = {
       "title": "Solar Eclipse Emergence from Orion",
       "flickr_desc": "art002e009299 (April 6, 2026) – Captured from the Orion spacecraft near the end of the Artemis II lunar flyby on April 6, this image shows the Sun beginning to peek out from behind the Moon as the eclipse transitions out of totality. Only a portion of the Moon is visible in frame, its curved edge revealing a bright sliver of sunlight returning after nearly an hour of darkness. In final moments of the eclipse observed by the crew, the reemerging light creates a sharp contrast against the Moon’s silhouette and reveals lunar topography not usually visible along the lunar limb. This fleeting phase captures the dynamic alignment of the Sun, Moon, and spacecraft as Orion continues its journey back from the far side of the Moon. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55193207303",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 21:28:39",
@@ -3004,7 +4180,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "A Sunrise for Orion",
       "flickr_desc": "art002e009575 (April 6, 2026) - The Sun is rising at the left edge of the Moon, ending a nearly one-hour total solar eclipse on April 6, 2026. While the Sun hid behind the Moon, the crew aboard the Orion spacecraft, pictured in the forefront, saw a Moon shrouded in night. This offered a perfect opportunity to look for rarely seen phenomena. And the moment delivered. Calling down to Earth at 9 p.m. ET the crew reported seeing six impact flashes, which are light flashes that are created when meteoroids, traveling many thousands of miles per hour, smash into the Moon’s surface. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55193828029",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 21:32:01",
@@ -3019,7 +4201,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Eclipse Safety First",
       "flickr_desc": "art002e009302 (April 6, 2026) – The Artemis II crew – Mission Specialist Christina Koch (top left), Mission Specialist Jeremy Hansen (bottom left), Commander Reid Wiseman (bottom right), and Pilot Victor Glover (top right) – uses eclipse viewers, identical to what NASA produced for the 2023 annular eclipse and 2024 total solar eclipse, to protect their eyes at key moments during the solar eclipse they experienced during their lunar flyby. This was the first use of eclipse glasses at the Moon to safely view a solar eclipse. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55193207308",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 21:44:32",
@@ -3034,7 +4222,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Lunar Flyby in Mission Control",
       "flickr_desc": "jsc2026e020501 (April 6, 2026) - NASA Flight Directors Diane Dailey, Pooja Jesrani, and Paul Konyha pictured in the White Flight Control Room during the Artemis II crew’s lunar flyby. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55194399918",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-06 22:38:25",
@@ -3049,7 +4243,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Presidential Call",
       "flickr_desc": "jsc2026e020504 (April 6, 2026) - The Artemis II crew – CSA (Canadian Space Agency) Astronaut Jeremy Hansen (far left) and NASA astronauts Christina Koch (center left), Reid Wiseman (center right), and Victor Glover (right) – pauses to wave after a live conversation with President Donald J. Trump following their historic lunar flyby during Flight Day 6. They are pictured on the screens of the White Flight Control room at NASA’s Mission Control Center at the agency’s Johnson Space Center in Houston. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55194659885",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-07 08:27:53",
@@ -3064,7 +4264,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Details of Orion",
       "flickr_desc": "art002e012476 (April 7, 2026) - Solar array wing-mounted cameras capture close-up images of NASA’s Orion spacecraft during a routine external inspection on the sixth day into the Artemis II mission. At the time this photo was taken at 8:27 a.m. ET, the crew was in a sleep period ahead of beginning their seventh day into the mission. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55194494274",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-07 08:33:23",
@@ -3079,7 +4285,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Rise and Shine",
       "flickr_desc": "art002e012487 (April 7, 2026) - NASA’s Orion spacecraft is pictured here from one of the cameras mounted on its solar array wings. At the time this photo was taken at 8:33 a.m. ET, the Artemis II crew was in a sleep period ahead of beginning their seventh day into the mission. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55193360877",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-07 08:58:03",
@@ -3094,7 +4306,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "NASA's Orion Spacecraft",
       "flickr_desc": "art002e012489 (April 7, 2026) - NASA’s Orion spacecraft is pictured here from one of the cameras mounted on its solar array wings. At the time this photo was taken at 8:58 a.m. ET, the Artemis II crew was in a sleep period ahead of beginning their seventh day into the mission. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55194789840",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-07 09:03:43",
@@ -3109,7 +4327,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Orion in Flight",
       "flickr_desc": "art002e012495 (April 7, 2026) - NASA’s Orion spacecraft is pictured here from one of the cameras mounted on its solar array wings. At the time this photo was taken at 9:03 a.m. ET, the Artemis II crew was in a sleep period ahead of beginning their seventh day into the mission. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55194789845",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-07 09:37:06",
@@ -3124,7 +4348,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis Lunar Science Team – Aaron Regberg",
       "flickr_desc": "Artemis lunar science team member, Aaron Regberg, works in the Science Mission Operations Room, where scientists analyzed imagery and audio recordings of lunar observations captured by the Artemis II astronauts during their lunar flyby on April 6, 2026. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199492819",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-07 09:40:25",
@@ -3139,7 +4369,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Guiding the Journey",
       "flickr_desc": "art002e012495 (April 7, 2026) - The engines on the Orion spacecraft’s service module are prominently featured in this image from flight day six of the Artemis II mission. Taken from a camera mounted on a solar array wing, the largest is the orbital maneuvering system engine, surrounded by eight smaller auxiliary thrusters. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55194459003",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-07 09:40:26",
@@ -3154,7 +4390,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis Lunar Science Team",
       "flickr_desc": "Artemis lunar science team members, from left, Alexandra Constantinou, and David Hollibaugh-Baker, work in the Science Mission Operations Room at NASA’s Johnson Space Center in Houston. They are analyzing imagery and audio recordings of lunar observations captured by the Artemis II astronauts during their lunar flyby on April 6, 2026. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199492814",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-07 09:41:45",
@@ -3169,7 +4411,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "The Powerhouse of the Orion Spacecraft",
       "flickr_desc": "art002e012584 (April 7, 2026) - NASA’s Orion spacecraft pictured from one of the cameras mounted on its solar array wings. The service module is prominently featured in this image showing a portion of the orbital maneuvering system engine and three of eight auxiliary thrusters. Also pictured is one of the four solar array wings. Each of Orion’s four solar array wings are made of three panels that provide enough electricity to power two three-bedroom homes. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55194517308",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-07 10:06:59",
@@ -3184,7 +4432,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis Lunar Science Team – Alexandra Constantinou",
       "flickr_desc": "Artemis lunar science team member, Alexandra Constantinou, works in the Science Mission Operations Room at NASA’s Johnson Space Center in Houston, where scientists analyzed imagery and audio recordings of lunar observations captured by the Artemis II astronauts during their lunar flyby on April 6, 2026. Credits: NASA/Helen Arase Vargas",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199243981",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-07 10:17:27",
@@ -3199,7 +4453,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Science Team in the Mission Operations Room",
       "flickr_desc": "Artemis lunar science team members, work in the Science Mission Operations Room at NASA’s Johnson Space Center in Houston, analyzing imagery and audio recordings of lunar observations captured by the Artemis II astronauts during their lunar flyby on April 6, 2026. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199649540",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-07 14:30:02",
@@ -3214,7 +4474,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery Director (NHQ202604070020)",
       "flickr_desc": "Lilian Villarreal, Artemis II landing and recovery director for Exploration Ground Systems at NASA's Kennedy Space Center, poses for a portrait onboard USS John P. Murtha, Tuesday, April 7, 2026, in the Pacific Ocean off the coast of California. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55194365312",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-07 14:40:13",
@@ -3229,7 +4495,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Long Distance Call",
       "flickr_desc": "sc2026e021201 (April 7, 2026) - Members of the International Space Station Expedition 74 (left) and Artemis II (right) crews are seen at once on the screens inside the International Space Station flight control room in Mission Control at NASA's Johnson Space Center in Houston. The two crews connected in a 15-minute ship-to-ship call on April 7, 2026, while the Artemis II crew was on its way back from the Moon. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55195952067",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-07 14:42:13",
@@ -3244,7 +4516,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Long Distance Chat with Friends",
       "flickr_desc": "jsc2026e021206 (April 7, 2026) - Members of the International Space Station Expedition 74 (left) and Artemis II (right) crews are seen at once on the screens inside the International Space Station flight control room in Mission Control at NASA's Johnson Space Center in Houston. The two crews connected in a 15-minute ship-to-ship call on April 7, 2026, while the Artemis II crew was on its way back from the Moon. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55195952087",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-07 15:04:59",
@@ -3259,7 +4537,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Science Officers – Trevor Graff and Kelsey Young",
       "flickr_desc": "Artemis II science officers, Trevor Graff, background, and Kelsey Young are seen monitoring mission data in real-time from the Science console in the White Flight Control Room in Mission Control at NASA's Johnson Space Center in Houston. Science officers are the senior flight controllers responsible for lunar science and geology objectives during Artemis missions. Credits: NASA/Robert Markowitz",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199789389",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-07 15:44:31",
@@ -3275,7 +4559,13 @@ const PHOTO_DATA = {
       "title": "Waning Crescent Moon on the Return",
       "flickr_desc": "A slender crescent Moon photographed from the Orion spacecraft during the return coast to Earth. The sunlit portion reveals cratered terrain while the rest of the disk fades into darkness, a farewell view as the crew heads home.",
       "enabled": true,
-      "camera_id": "d5a"
+      "camera_id": "d5a",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55208397810",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-07 17:32:35",
@@ -3290,7 +4580,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Starstruck",
       "flickr_desc": "art002e012588 (April 7, 2026) - A stunning snapshot in time. The Artemis II crew captured this breathtaking photo of our galaxy, the Milky Way. The Milky Way’s elegant spiral structure is dominated by just two arms wrapping off the ends of a central bar of stars. Spanning more than 100,000 light-years, Earth is located along one of the galaxy’s spiral arms, about halfway from the center. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55194523579",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-07 18:34:49",
@@ -3306,7 +4602,13 @@ const PHOTO_DATA = {
       "title": "Four Thumbs Up",
       "flickr_desc": "art002e013356 (April 7, 2026) – The Artemis II crew – (from left) Mission Specialist Christina Koch, Mission Specialist Jeremy Hansen, Pilot Victor Glover, and Commander Reid Wiseman – pause for a group photo inside the Orion spacecraft on their way home. Following a swing around the far side of the Moon on April 6, 2026, the crew exited the lunar sphere of influence (the point at which the Moon's gravity has a stronger pull on Orion than the Earth's) on April 7, and are headed back to Earth for a splashdown in the Pacific Ocean on April 10. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5b"
+      "camera_id": "d5b",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55195066435",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-07 18:35:09",
@@ -3322,7 +4624,13 @@ const PHOTO_DATA = {
       "title": "Artemis II Group Shoot",
       "flickr_desc": "art002e013361 (April 7, 2026) – The Artemis II crew – (clockwise from left) Mission Specialist Christina Koch, Mission Specialist Jeremy Hansen, Commander Reid Wiseman, and Pilot Victor Glover – pause for a group photo inside the Orion spacecraft on their way home. Following a swing around the far side of the Moon on April 6, 2026, the crew exited the lunar sphere of influence (the point at which the Moon's gravity has a stronger pull on Orion than the Earth's) on April 7, and are headed back to Earth for a splashdown in the Pacific Ocean on April 10. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5b"
+      "camera_id": "d5b",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55194658516",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-07 18:35:25",
@@ -3338,7 +4646,13 @@ const PHOTO_DATA = {
       "title": "Artemis II Crew \"Rise-ing\" To the Occasion",
       "flickr_desc": "art002e013365 (April 7, 2026) – The Artemis II crew – (clockwise from left) Mission Specialist Christina Koch, Mission Specialist Jeremy Hansen, Commander Reid Wiseman, and Pilot Victor Glover – pause for a group photo with their zero gravity indicator &quot;Rise,&quot; inside the Orion spacecraft on their way home. Following a swing around the far side of the Moon on April 6, 2026, the crew exited the lunar sphere of influence (the point at which the Moon's gravity has a stronger pull on Orion than the Earth's) on April 7, and are headed back to Earth for a splashdown in the Pacific Ocean on April 10. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5b"
+      "camera_id": "d5b",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55193772547",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-07 18:35:33",
@@ -3354,7 +4668,13 @@ const PHOTO_DATA = {
       "title": "Moon Joy",
       "flickr_desc": "art002e013367 (April 7, 2026) – The Artemis II crew – (clockwise from left) Mission Specialist Christina Koch, Mission Specialist Jeremy Hansen, Commander Reid Wiseman, and Pilot Victor Glover – take time out for a group hug inside the Orion spacecraft on their way home. Following a swing around the far side of the Moon on April 6, 2026, the crew exited the lunar sphere of influence (the point at which the Moon's gravity has a stronger pull on Orion than the Earth's) on April 7, and are headed back to Earth for a splashdown in the Pacific Ocean on April 10. The crew was selected in April 2023, and have been training together for their mission for the past three years. Credit: NASA",
       "enabled": true,
-      "camera_id": "d5b"
+      "camera_id": "d5b",
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55193772552",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-07 19:30:48",
@@ -3369,7 +4689,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery Preparations (NHQ202604070017)",
       "flickr_desc": "U.S. Navy MH-60 Seahawks from Helicopter Sea Combat Squadron (HSC) 23 depart USS John P. Murtha as they conduct air operations training as NASA, U.S. Navy, and U.S. Air Force teams prepare for the the return of the Artemis II crewmembers to Earth, Tuesday, April 7, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission is taking NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a 10-day journey around the Moon and back aboard their Orion spacecraft. Wiseman, Glover, Koch, and Hansen are scheduled to splash down off the coast of San Diego at approximately 5:07 p.m. PDT (8:07 p.m. EDT) on Friday, April 10. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55194733465",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-08 03:49:00",
@@ -3384,7 +4710,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Artemis II streaks through the stars — April 8",
       "flickr_desc": "Time-lapse of Artemis II spacecraft as seen from the ground, streaking through the star field. Captured by Scott Ferguson, PhD of Astronomy Live.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "4-8-26_7_49UT",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-08 12:00:00",
@@ -3399,7 +4731,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Lunar Crescent View",
       "flickr_desc": "art002e016354 (April 8, 2026) The Artemis II crew captures a thin lunar crescent as they travel back to Earth. Credit: NASA",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199431156",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-08 17:14:12",
@@ -3414,7 +4752,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery Preparations (NHQ202604080008)",
       "flickr_desc": "Lisa Mazzuca, mission manager for the Search and Rescue Office at NASA’s Goddard Space Flight Center, poses for a portrait on the bridge of USS John P. Murtha as teams prepare for the the return of the Artemis II crewmembers to Earth, Wednesday, April 8, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission is taking NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a 10-day journey around the Moon and back aboard their Orion spacecraft. Wiseman, Glover, Koch, and Hansen are scheduled to splash down off the coast of San Diego at approximately 5:07 p.m. PDT (8:07 p.m. EDT) on Friday, April 10. Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55197019103",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-08 20:00:00",
@@ -3429,7 +4773,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Flight Day 8 Evening Vibes",
       "flickr_desc": "Flight Day 8 evening vibes. This day was so fun and productive because we had gotten our sea legs and were executing like a well-oiled machine. Sound on! — via Instagram",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ig-fd8-evening-vibes",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-08 21:30:00",
@@ -3444,7 +4794,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Flight Day 8 Press Conference",
       "flickr_desc": "Flight Day 8 evening, before bed — the Artemis II crew during a press conference on their return journey to Earth. — via Instagram",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ig-fd8-press-conference",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-08 21:47:48",
@@ -3459,7 +4815,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Crew Video Call from Orion",
       "flickr_desc": "The four Artemis II crew members wave and smile during a video call from inside the Orion spacecraft, displayed on a large screen at an Artemis event. American and Canadian flags and an America 250 banner float above them in microgravity.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55207851286",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-09 11:34:59",
@@ -3474,7 +4836,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Assistant NASA Recovery Director (NHQ202604090001)",
       "flickr_desc": "Paul Sierpinski, assistant NASA Recovery Director, poses for a portrait onboard USS John P. Murtha, Thursday, April 9, 2026, in the Pacific Ocean off the coast of California. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55197162528",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-09 13:12:59",
@@ -3489,7 +4857,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery Preparations (NHQ202604090003)",
       "flickr_desc": "Support buoys are seen onboard USS John P. Murtha ahead of the return of the Artemis II crewmembers to Earth, Thursday, April 9, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission is taking NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a 10-day journey around the Moon and back aboard their Orion spacecraft. Wiseman, Glover, Koch, and Hansen are scheduled to splash down off the coast of San Diego at approximately 5:07 p.m. PDT (8:07 p.m. EDT) on Friday, April 10. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55197806006",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-09 13:45:35",
@@ -3504,7 +4878,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery Preparations (NHQ202604090006)",
       "flickr_desc": "View of the USS John P. Murtha flight deck is seen from the air boss tower ahead of the return of the Artemis II crewmembers to Earth, Thursday, April 9, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission is taking NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a 10-day journey around the Moon and back aboard their Orion spacecraft. Wiseman, Glover, Koch, and Hansen are scheduled to splash down off the coast of San Diego at approximately 5:07 p.m. PDT (8:07 p.m. EDT) on Friday, April 10. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55196918247",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-09 16:06:34",
@@ -3519,7 +4899,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery Preparations (NHQ202604090010)",
       "flickr_desc": "A support boat is seen along side USS John P. Murtha as teams prepare for the return of the Artemis II crewmembers to Earth, Thursday, April 9, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission is taking NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a 10-day journey around the Moon and back aboard their Orion spacecraft. Wiseman, Glover, Koch, and Hansen are scheduled to splash down off the coast of San Diego at approximately 5:07 p.m. PDT (8:07 p.m. EDT) on Friday, April 10. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55196921082",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 12:37",
@@ -3532,7 +4918,13 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": false,
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55206199989",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 15:36:40",
@@ -3547,7 +4939,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery Preparations (NHQ202604100066)",
       "flickr_desc": "U.S. Navy MH-60 Seahawks from Helicopter Sea Combat Squadron (HSC) 23 are seen on the flight deck of USS John P. Murtha as NASA, U.S. Navy, and U.S. Air Force teams prepare for the the return of the Artemis II crewmembers to Earth, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission is taking NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a nearly 10-day journey around the Moon and back aboard their Orion spacecraft. Wiseman, Glover, Koch, and Hansen are scheduled to splash down off the coast of San Diego at approximately 5:07 p.m. PDT (8:07 p.m. EDT) on Friday, April 10. Photo Credit: (NASA/Bill Ingalls/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201073550",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 16:05:51",
@@ -3562,7 +4960,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery Preparations (NHQ202604100001)",
       "flickr_desc": "A U.S. Navy CMV-22 Osprey is seen as it approaches the flight deck of USS John P. Murtha with NASA Administrator Jared Isaacman, U.S. Navy Rear Adm. Brent DeVore, Commander, Expeditionary Strike Group Three, and U.S. Air Force Maj. Gen. Michael A. Valle, Deputy Commander, First Air Force, as NASA and U.S. military teams prepare for the the return of the Artemis II crewmembers to Earth, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission is taking NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a 10-day journey around the Moon and back aboard their Orion spacecraft. Wiseman, Glover, Koch, and Hansen are scheduled to splash down off the coast of San Diego at approximately 5:07 p.m. PDT (8:07 p.m. EDT). Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199318256",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 16:11:05",
@@ -3577,7 +4981,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery Preparations",
       "flickr_desc": "NASA Administrator Jared Isaacman, left, is greeted by Capt. Erik Kenny, commanding officer, USS John P. Murtha (LPD, after a U.S. Navy CMV-22 Osprey landed on the flight deck of USS John P. Murtha with U.S. Navy Rear Adm. Brent DeVore, Commander, Expeditionary Strike Group Three, Michael Altenhofen, senior advisor to the NASA Administrator, and U.S. Air Force Maj. Gen. Michael A. Valle, Deputy Commander, First Air Force, as NASA and U.S. military teams prepare for the the return of the Artemis II crew members to Earth, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission is taking NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a 10-day journey around the Moon and back aboard their Orion spacecraft. Wiseman, Glover, Koch, and Hansen are scheduled to splash down off the coast of San Diego at approximately 5:07 p.m. PDT (8:07 p.m. EDT). Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199324306",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 16:11:33",
@@ -3592,7 +5002,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery Preparations",
       "flickr_desc": "NASA Administrator Jared Isaacman, center, is greeted by Capt. Erik Kenny, commanding officer, USS John P. Murtha (LPD), right, after Isaacman arrived on a U.S. Navy CMV-22 Osprey with Michael Altenhofen, senior advisor to the NASA Administrator, U.S. Navy Rear Adm. Brent DeVore, Commander, Expeditionary Strike Group Three, Michael Altenhofen, senior advisor to the NASA Administrator, and U.S. Air Force Maj. Gen. Michael A. Valle, Deputy Commander, First Air Force, as NASA and U.S. military teams prepare for the the return of the Artemis II crew members to Earth, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission is taking NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a 10-day journey around the Moon and back aboard their Orion spacecraft. Wiseman, Glover, Koch, and Hansen are scheduled to splash down off the coast of San Diego at approximately 5:07 p.m. PDT (8:07 p.m. EDT). Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199507598",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 17:52:06",
@@ -3607,7 +5023,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "Small boats are seen alongside USS John P. Murtha as teams prepare to recover \\\\mission\\\\ crewmembers \\\\crew\\\\ and NASA’s Orion spacecraft in the Pacific Ocean off the coast of California, Friday, April 10, 2026. NASA’s \\\\mission\\\\ mission took \\\\crewln\\\\ on a 10-day journey around the Moon and back to Earth. The quartet is scheduled to splash down off the coast of San Diego at approximately 5:07 p.m. PDT (8:07 p.m. EDT). Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199520466",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 18:16:47",
@@ -3622,7 +5044,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604100012)",
       "flickr_desc": "U.S. Navy divers prepare to deploy in small boats from the well deck of USS John P. Murtha to recover Artemis II crewmembers NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist and NASA’s Orion spacecraft in the Pacific Ocean off the coast of California, Friday, April 10, 2026. NASA’s Artemis II mission took Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back to Earth. Following a splashdown at , NASA and U.S. military teams are working to bring the crewmembers and Orion spacecraft aboard USS John P. Murtha. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55198634897",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 18:17:00",
@@ -3637,7 +5065,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "U.S. Navy divers deploy in small boats from the well deck of USS John P. Murtha to recover Artemis II crewmembers NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist and NASA’s Orion spacecraft in the Pacific Ocean off the coast of California, Friday, April 10, 2026. NASA’s Artemis II mission took Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back to Earth. Following a splashdown at , NASA and U.S. military teams are working to bring the crewmembers and Orion spacecraft aboard USS John P. Murtha. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199526571",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 18:17:41",
@@ -3652,7 +5086,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604100014)",
       "flickr_desc": "U.S. Navy divers deploy in small boats from the well deck of USS John P. Murtha to recover Artemis II crewmembers NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist and NASA’s Orion spacecraft in the Pacific Ocean off the coast of California, Friday, April 10, 2026. NASA’s Artemis II mission took Wiseman, Glover, Koch, and Hansen on a 10-day journey around the Moon and back to Earth. Following a splashdown at , NASA and U.S. military teams are working to bring the crewmembers and Orion spacecraft aboard USS John P. Murtha. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199775909",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 19:04:07",
@@ -3667,7 +5107,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "A U.S. Navy MH-60 Seahawk from Helicopter Sea Combat Squadron (HSC) 23 departs from the flight deck of USS John P. Murtha as NASA and U.S. military teams deploy in preparation for the the return of the Artemis II crewmembers to Earth, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission is taking NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a 10-day journey around the Moon and back aboard their Orion spacecraft. Wiseman, Glover, Koch, and Hansen are scheduled to splash down off the coast of San Diego at approximately 5:07 p.m. PDT (8:07 p.m. EDT). Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199709323",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 19:11:46",
@@ -3682,7 +5128,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "NASA Administrator Jared Isaacman launches a weather balloon for the 45th Weather Squadron from USS John P. Murtha as NASA and U.S. military teams prepare for the return of the Artemis II crewmembers to Earth, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission is taking NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a 10-day journey around the Moon and back aboard their Orion spacecraft. Wiseman, Glover, Koch, and Hansen are scheduled to splash down off the coast of San Diego at approximately 5:07 p.m. PDT (8:07 p.m. EDT). Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199558901",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:04:30",
@@ -3697,7 +5149,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "NASA’s Orion spacecraft with Artemis II crewmembers NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist aboard is seen under drogue parachutes as it lands in the Pacific Ocean off the coast of California, Friday, April 10, 2026. NASA’s Artemis II mission took Wiseman, Glover, Koch, and Hansen on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the crewmembers and Orion spacecraft aboard USS John P. Murtha. Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200049934",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:04:32",
@@ -3712,7 +5170,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "NASA’s Orion spacecraft with Artemis II crewmembers NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist aboard is seen as the main parachutes begin to deploy as it lands in the Pacific Ocean off the coast of California, Friday, April 10, 2026. NASA’s Artemis II mission took Wiseman, Glover, Koch, and Hansen on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the crewmembers and Orion spacecraft aboard USS John P. Murtha. Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55198907367",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:04:34",
@@ -3727,7 +5191,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "NASA’s Orion spacecraft with Artemis II crewmembers NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist aboard is seen as the main parachutes begin to deploy as it lands in the Pacific Ocean off the coast of California, Friday, April 10, 2026. NASA’s Artemis II mission took Wiseman, Glover, Koch, and Hansen on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the crewmembers and Orion spacecraft aboard USS John P. Murtha. Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200207020",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:04:36",
@@ -3742,7 +5212,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "NASA’s Orion spacecraft with Artemis II crewmembers NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist aboard is seen as the main parachutes begin to deploy as it lands in the Pacific Ocean off the coast of California, Friday, April 10, 2026. NASA’s Artemis II mission took Wiseman, Glover, Koch, and Hansen on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the crewmembers and Orion spacecraft aboard USS John P. Murtha. Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200207390",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:04:56",
@@ -3757,7 +5233,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "NASA’s Orion spacecraft with Artemis II crewmembers NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist aboard is seen under parachutes as it lands in the Pacific Ocean off the coast of California, Friday, April 10, 2026. NASA’s Artemis II mission took Wiseman, Glover, Koch, and Hansen on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the crewmembers and Orion spacecraft aboard USS John P. Murtha. Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199953168",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:06:20",
@@ -3772,7 +5254,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Splashdown",
       "flickr_desc": "jsc2026e022262 (April 10, 2026) - NASA's Orion spacecraft carrying Artemis II Commander Reid Wiseman, Pilot Victor Glover, and Mission Specialist Christina Koch from NASA, along with Mission Specialist Jeremy Hansen from the CSA (Canadian Space Agency), splashes down in the Pacific Ocean near San Diego, California, at 5:07 p.m. PDT, (8:07 p.m. EDT) on Friday, April 10, 2026. The Artemis II test flight launched on Wednesday, April 1, from NASA’s Kennedy Space Center in Florida to begin its 10-day journey around the Moon for scientific discovery, economic benefits, and to build on our foundation for the first crewed missions to Mars. NASA’s Landing and Recovery team and the U.S. military are coordinating efforts to extract the Artemis II crew from the Orion spacecraft. Credit: NASA/Josh Valcarcel",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201553518",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:06:39",
@@ -3787,7 +5275,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Flight Control Team During Splashdown",
       "flickr_desc": "jsc2026e022251(April 10, 2026) - Artemis II Flight Control Team pictured at consoles within the White Flight Control Room in the Mission Control Center at NASA’s Johnson Space Center for the splashdown and recovery of the Artemis II crew as it landed in the Pacific Ocean off the coast of California, Friday, April 10, 2026 at 7:07 p.m. CDT. NASA’s Artemis II mission took NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen on a nearly 10-day journey around the Moon and back to Earth. Credit: NASA/Robert Markowitz",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200077344",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-10 20:06:56",
@@ -3802,7 +5296,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Splashdown",
       "flickr_desc": "jsc2026e022263 (April 10, 2026) - NASA's Orion spacecraft carrying Artemis II Commander Reid Wiseman, Pilot Victor Glover, and Mission Specialist Christina Koch from NASA, along with Mission Specialist Jeremy Hansen from the CSA (Canadian Space Agency), splashes down in the Pacific Ocean near San Diego, California, at 5:07 p.m. PDT, (8:07 p.m. EDT) on Friday, April 10, 2026. The Artemis II test flight launched on Wednesday, April 1, from NASA’s Kennedy Space Center in Florida to begin its 10-day journey around the Moon for scientific discovery, economic benefits, and to build on our foundation for the first crewed missions to Mars. NASA’s Landing and Recovery team and the U.S. military are coordinating efforts to extract the Artemis II crew from the Orion spacecraft. Credit: NASA/Josh Valcarcel",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201805415",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:07:00",
@@ -3815,7 +5315,13 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": false,
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "jsc2026e022251",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-10 20:07:17",
@@ -3830,7 +5336,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "NASA’s Orion spacecraft with Artemis II crewmembers NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist aboard is seen under parachutes as it lands in the Pacific Ocean off the coast of California, Friday, April 10, 2026. NASA’s Artemis II mission took Wiseman, Glover, Koch, and Hansen on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 8:07 p.m. EDT, NASA, U.S. Navy, and U.S. Air Force teams are working to bring the crewmembers and Orion spacecraft aboard USS John P. Murtha. Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199878864",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:07:18",
@@ -3843,7 +5355,13 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": true,
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "nhq202604100018",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:07:24",
@@ -3858,7 +5376,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "NASA’s Orion spacecraft with Artemis II crewmembers NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist aboard is seen as it lands in the Pacific Ocean off the coast of California, Friday, April 10, 2026. NASA’s Artemis II mission took Wiseman, Glover, Koch, and Hansen on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 8:07 p.m. EDT, NASA, U.S. Navy, and U.S. Air Force teams are working to bring the crewmembers and Orion spacecraft aboard USS John P. Murtha. Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199878669",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:07:26",
@@ -3873,7 +5397,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Splashdown",
       "flickr_desc": "jsc2026e022246 (April 10, 2026) - NASA's Orion spacecraft carrying Artemis II Commander Reid Wiseman, Pilot Victor Glover, and Mission Specialist Christina Koch from NASA, along with Mission Specialist Jeremy Hansen from the CSA (Canadian Space Agency), splashes down in the Pacific Ocean near San Diego, California, at 5:07 p.m. PDT, (8:07 p.m. EDT) on Friday, April 10, 2026. The Artemis II test flight launched on Wednesday, April 1, from NASA’s Kennedy Space Center in Florida to begin its 10-day journey around the Moon for scientific discovery, economic benefits, and to build on our foundation for the first crewed missions to Mars. NASA’s Landing and Recovery team and the U.S. military are coordinating efforts to extract the Artemis II crew from the Orion spacecraft. Credit: NASA/Josh Valcarcel",
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199856343",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:07:26",
@@ -3886,7 +5416,13 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": true,
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "dsc-3398",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:07:29",
@@ -3900,7 +5436,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Orion Parachutes Toward the Pacific",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9609103",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:07:29",
@@ -3915,7 +5457,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Splashdown",
       "flickr_desc": "jsc2026e022247 (April 10, 2026) - NASA's Orion spacecraft carrying Artemis II Commander Reid Wiseman, Pilot Victor Glover, and Mission Specialist Christina Koch from NASA, along with Mission Specialist Jeremy Hansen from the CSA (Canadian Space Agency), splashes down in the Pacific Ocean near San Diego, California, at 5:07 p.m. PDT, (8:07 p.m. EDT) on Friday, April 10, 2026. The Artemis II test flight launched on Wednesday, April 1, from NASA’s Kennedy Space Center in Florida to begin its 10-day journey around the Moon for scientific discovery, economic benefits, and to build on our foundation for the first crewed missions to Mars. NASA’s Landing and Recovery team and the U.S. military are coordinating efforts to extract the Artemis II crew from the Orion spacecraft. Credit: NASA/Josh Valcarcel",
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199856318",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:07:29",
@@ -3928,7 +5476,13 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": true,
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "dsc-3427",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:07:36",
@@ -3943,7 +5497,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "NASA’s Orion spacecraft with Artemis II crewmembers NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist aboard is seen as it lands in the Pacific Ocean off the coast of California, Friday, April 10, 2026. NASA’s Artemis II mission took Wiseman, Glover, Koch, and Hansen on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 8:07p.m. EDT, NASA, U.S. Navy, and U.S. Air Force teams are working to bring the crewmembers and Orion spacecraft aboard USS John P. Murtha. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199685771",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:07:43",
@@ -3958,7 +5518,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "NASA’s Orion spacecraft with Artemis II crewmembers NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist aboard is seen as it lands in the Pacific Ocean off the coast of California, Friday, April 10, 2026. NASA’s Artemis II mission took Wiseman, Glover, Koch, and Hansen on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 8:07p.m. EDT, NASA, U.S. Navy, and U.S. Air Force teams are working to bring the crewmembers and Orion spacecraft aboard USS John P. Murtha. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200091055",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:07:47",
@@ -3973,7 +5539,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "NASA’s Orion spacecraft with Artemis II crewmembers NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist aboard is seen as it lands in the Pacific Ocean off the coast of California, Friday, April 10, 2026. NASA’s Artemis II mission took Wiseman, Glover, Koch, and Hansen on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 8:07p.m. EDT, NASA, U.S. Navy, and U.S. Air Force teams are working to bring the crewmembers and Orion spacecraft aboard USS John P. Murtha. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199935584",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:15:00",
@@ -3986,7 +5558,13 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": true,
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "JB5_0746",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:17:00",
@@ -3999,7 +5577,13 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": true,
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "JB5_0814",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:19:00",
@@ -4012,7 +5596,13 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": true,
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "JB5_0855",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:22:02",
@@ -4027,7 +5617,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "A U.S. Navy MH-60 Seahawks from Helicopter Sea Combat Squadron (HSC) 23 flies overhead as small boats approach NASA’s Orion spacecraft with Artemis II crewmembers NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist aboard is seen after landing as recovery teams as NASA’s Landing and Recovery team, along with U.S. Navy personnel in small boats begin to approach the spacecraft in the Pacific Ocean off the coast of California, Friday, April 10, 2026. NASA’s Artemis II mission took Wiseman, Glover, Koch, and Hansen on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA and U.S. military teams are working to bring the crewmembers and Orion spacecraft aboard USS John P. Murtha. Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200100035",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:26:25",
@@ -4042,7 +5638,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "Three U.S. Navy MH-60 Seahawks from Helicopter Sea Combat Squadron (HSC) 23 flies overhead as small boats approach NASA’s Orion spacecraft with Artemis II crewmembers NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist aboard is seen after landing as recovery teams as NASA’s Landing and Recovery team, along with U.S. Navy personnel in small boats begin to approach the spacecraft in the Pacific Ocean off the coast of California, Friday, April 10, 2026. NASA’s Artemis II mission took Wiseman, Glover, Koch, and Hansen on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA and U.S. military teams are working to bring the crewmembers and Orion spacecraft aboard USS John P. Murtha. Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55198801842",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:28:43",
@@ -4057,7 +5659,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Splashdown",
       "flickr_desc": "jsc2026e022266 (April 10, 2026) - NASA's Orion spacecraft carrying Artemis II Commander Reid Wiseman, Pilot Victor Glover, and Mission Specialist Christina Koch from NASA, along with Mission Specialist Jeremy Hansen from the CSA (Canadian Space Agency), splashes down in the Pacific Ocean near San Diego, California, at 5:07 p.m. PDT, (8:07 p.m. EDT) on Friday, April 10, 2026. The Artemis II test flight launched on Wednesday, April 1, from NASA’s Kennedy Space Center in Florida to begin its 10-day journey around the Moon for scientific discovery, economic benefits, and to build on our foundation for the first crewed missions to Mars. NASA’s Landing and Recovery team and the U.S. military are coordinating efforts to extract the Artemis II crew from the Orion spacecraft. Credit: NASA/James Blair",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201813860",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:29:32",
@@ -4072,7 +5680,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "Two U.S. Navy MH-60 Seahawks from Helicopter Sea Combat Squadron (HSC) 23 flies overhead as small boats approach NASA’s Orion spacecraft with Artemis II crewmembers NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist aboard is seen after landing as recovery teams as NASA’s Landing and Recovery team, along with U.S. Navy personnel in small boats begin to approach the spacecraft in the Pacific Ocean off the coast of California, Friday, April 10, 2026. NASA’s Artemis II mission took Wiseman, Glover, Koch, and Hansen on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA and U.S. military teams are working to bring the crewmembers and Orion spacecraft aboard USS John P. Murtha. Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199695466",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:37:18",
@@ -4087,7 +5701,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "A U.S. Navy MH-60 Seahawks from Helicopter Sea Combat Squadron (HSC) 23 flies overhead as small boats approach NASA’s Orion spacecraft with Artemis II crewmembers NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist aboard is seen after landing as recovery teams as NASA’s Landing and Recovery team, along with U.S. Navy personnel in small boats begin to approach the spacecraft in the Pacific Ocean off the coast of California, Friday, April 10, 2026. NASA’s Artemis II mission took Wiseman, Glover, Koch, and Hansen on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA and U.S. military teams are working to bring the crewmembers and Orion spacecraft aboard USS John P. Murtha. Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199695136",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:40:47",
@@ -4101,7 +5721,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Navy Divers Prep Hazmat Sweep",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9609114",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:42:54",
@@ -4115,7 +5741,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Hazardous Material Detection Sweep",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9609116",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:50:10",
@@ -4128,7 +5760,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Navy Divers Approach Orion in the Pacific",
       "flickr_desc": "U.S. Navy divers in a rigid-hull inflatable boat approach the Orion spacecraft floating in the Pacific Ocean with its five flotation bags deployed after splashdown.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "KSC-20260411-KED01-0249",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:50:11",
@@ -4143,7 +5781,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Welcome Aboard Integrity",
       "flickr_desc": "Jesse, Steve, Laddy, and Vlad… such an incredible feeling to welcome you aboard Integrity after your journey around the Moon. The recovery team opens the Orion capsule hatch aboard USS John P. Murtha. — via Instagram",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ig-welcome-aboard",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:56:18",
@@ -4156,7 +5800,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Navy Divers Work at the Orion Hatch",
       "flickr_desc": "U.S. Navy divers work at the hatch of the Orion spacecraft in the Pacific Ocean, with inflatable boats alongside and flotation bags visible above.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "KSC-20260411-KED01-0267",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:57:31",
@@ -4169,7 +5819,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Close-Up of Orion's Heat Shield and Hatch",
       "flickr_desc": "A close-up view of the Orion spacecraft's charred heat shield tiles and open hatch, with a yellow hazmat covering being positioned by a Navy diver during post-splashdown operations.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "KSC-20260411-KED01-0285",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:58:05",
@@ -4182,7 +5838,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Wide View of Orion Recovery Operations",
       "flickr_desc": "A wide view of the Orion spacecraft in the Pacific Ocean surrounded by Navy rigid-hull inflatable boats and divers, with flotation bags keeping the capsule upright.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "KSC-20260411-KED01-0287",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:58:13",
@@ -4196,7 +5858,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Divers Approach the Crew Module",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9609122",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:58:43",
@@ -4211,7 +5879,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Coming Home",
       "flickr_desc": "The moments just after the capsule is opened — the Artemis II crew exits the Orion spacecraft aboard USS John P. Murtha following splashdown. — via Instagram",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ig-capsule-egress",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 20:58:50",
@@ -4225,7 +5899,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Divers Enter the Crew Module",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9609124",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 21:13:25",
@@ -4240,7 +5920,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "NASA’s Orion spacecraft is seen as recovery teams work to secure the spacecraft ahead of transferring Artemis II crewmembers NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist to USS John P. Murtha in the Pacific Ocean off the coast of California, Friday, April 10, 2026. NASA’s Artemis II mission took Wiseman, Glover, Koch, and Hansen on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT(8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the crewmembers and Orion spacecraft aboard USS John P. Murtha. Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55198811582",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 21:14:04",
@@ -4255,7 +5941,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "NASA’s Orion spacecraft is seen as recovery teams work to secure the spacecraft ahead of transferring Artemis II crewmembers NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist to USS John P. Murtha in the Pacific Ocean off the coast of California, Friday, April 10, 2026. NASA’s Artemis II mission took Wiseman, Glover, Koch, and Hansen on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT(8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the crewmembers and Orion spacecraft aboard USS John P. Murtha. Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199854793",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 21:16:33",
@@ -4269,7 +5961,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Splashdown Near USS John P. Murtha",
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9608786",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 21:31:04",
@@ -4282,7 +5980,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Crew Extraction on the Front Porch",
       "flickr_desc": "Navy divers assist an Artemis II crew member in an orange suit on the front porch life raft next to the Orion spacecraft during crew extraction operations in the Pacific Ocean.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "KSC-20260411-KED01-0384",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 21:33:00",
@@ -4295,7 +5999,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Divers Secure Orion After Crew Extraction",
       "flickr_desc": "Navy divers work alongside the Orion capsule and its flotation bags after the crew has been extracted, with inflatable boats surrounding the spacecraft.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "KSC-20260411-KED01-0425",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 21:37:02",
@@ -4309,7 +6019,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Wiseman Exits Onto the Front Porch",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9609077",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 21:37:20",
@@ -4323,7 +6039,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Commander Wiseman on the Front Porch",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9609126",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 21:40:58",
@@ -4337,7 +6059,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "All Four Crew on the Front Porch",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9609128",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 21:52:36",
@@ -4352,7 +6080,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "A Navy MH-60 Seahawk from Helicopter Sea Combat Squadron (HSC) 23 is seen as it lifts NASA astronaut Victor Glover, Artemis II pilot as teams work to bring the crewmembers aboard USS John P. Murtha, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took Glover, NASA astronauts Reid Wiseman, commander; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the crewmembers and Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200008149",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 21:54:13",
@@ -4365,7 +6099,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Astronaut Hoisted to the Helicopter",
       "flickr_desc": "A U.S. Navy MH-60S Seahawk helicopter hoists an Artemis II crew member in their orange suit from the ocean surface during recovery operations at sunset.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "KSC-20260411-KED01-0652",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 21:55:29",
@@ -4379,7 +6119,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Hoisted to the Seahawk",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9609139",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 21:59:00",
@@ -4394,7 +6140,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604100211)",
       "flickr_desc": "A Navy MH-60 Seahawk from Helicopter Sea Combat Squadron (HSC) 23 with NASA astronaut Reid Wiseman, Artemis II commander and CSA (Canadian Space Agency) astronaut Jeremy Hansen, Artemis II mission specialist, approaches the flight deck of USS John P. Murtha, Friday, April 10, 2026, in the Pacific Ocean off the coast of California as teams work to bring the crewmembers aboard. NASA’s Artemis II mission took Wiseman, Hansen, and NASA astronauts Victor Glover, pilot; and Christina Koch, mission specialist; on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the crewmembers and Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55198865542",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:00:07",
@@ -4408,7 +6160,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Hansen Celebrates in the Helicopter",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9608699",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:00:41",
@@ -4422,7 +6180,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Wiseman and Hansen After Extraction",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9608700",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:01:00",
@@ -4437,7 +6201,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604100046)",
       "flickr_desc": "NASA astronaut Christina Koch, Artemis II mission specialist is assisted off the flight deck after arriving aboard USS John P. Murtha after she and fellow crewmates NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a 10-day journey around the Moon and back to Earth. Following a splashdown at , NASA and U.S. military teams are working to bring the crewmembers and Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200111364",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:01:20",
@@ -4452,7 +6222,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604100047)",
       "flickr_desc": "NASA astronaut Christina Koch, Artemis II mission specialist is assisted off the flight deck after arriving aboard USS John P. Murtha after she and fellow crewmates NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a 10-day journey around the Moon and back to Earth. Following a splashdown at , NASA and U.S. military teams are working to bring the crewmembers and Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199863796",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:01:40",
@@ -4467,7 +6243,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604100048)",
       "flickr_desc": "NASA astronaut Christina Koch, Artemis II mission specialist is assisted off the flight deck after arriving aboard USS John P. Murtha after she and fellow crewmates NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a 10-day journey around the Moon and back to Earth. Following a splashdown at , NASA and U.S. military teams are working to bring the crewmembers and Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200013283",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:02:00",
@@ -4482,7 +6264,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604100051)",
       "flickr_desc": "NASA astronaut Victor Glover, Artemis II pilot shakes hands with Scott Tingle, Chief of the Astronaut Office as he is assisted from a Navy MH-60 Seahawk from Helicopter Sea Combat Squadron (HSC) 23 on the flight deck of USS John P. Murtha after he and fellow crewmates NASA Astronauts Reid Wiseman, Christina Koch, and CSA (Canadian Space Agency) astronaut Jeremy Hansen, Artemis II mission specialist were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199868461",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:02:20",
@@ -4497,7 +6285,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604100052)",
       "flickr_desc": "NASA astronaut Victor Glover, Artemis II pilot is assisted off the flight deck after arriving aboard USS John P. Murtha after he and fellow crewmates NASA astronauts Reid Wiseman, commander; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a 10-day journey around the Moon and back to Earth. Following a splashdown at , NASA and U.S. military teams are working to bring the crewmembers and Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199869846",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:02:40",
@@ -4512,7 +6306,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604100053)",
       "flickr_desc": "NASA astronaut Victor Glover, Artemis II pilot is assisted off the flight deck after arriving aboard USS John P. Murtha after he and fellow crewmates NASA astronauts Reid Wiseman, commander; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a 10-day journey around the Moon and back to Earth. Following a splashdown at , NASA and U.S. military teams are working to bring the crewmembers and Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200119619",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:03:00",
@@ -4527,7 +6327,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604100054)",
       "flickr_desc": "NASA astronaut Victor Glover, Artemis II pilot is assisted off the flight deck after arriving aboard USS John P. Murtha after he and fellow crewmates NASA astronauts Reid Wiseman, commander; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a 10-day journey around the Moon and back to Earth. Following a splashdown at , NASA and U.S. military teams are working to bring the crewmembers and Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199872986",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:03:20",
@@ -4542,7 +6348,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604100055)",
       "flickr_desc": "NASA astronaut Reid Wiseman, Artemis II commander is seen sitting in a Navy MH-60 Seahawk from Helicopter Sea Combat Squadron (HSC) 23 on the flight deck of USS John P. Murtha after he and fellow crewmates NASA Astronauts Victor Glover, Christina Koch, and CSA (Canadian Space Agency) astronaut Jeremy Hansen, were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200122669",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:03:40",
@@ -4557,7 +6369,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604100056)",
       "flickr_desc": "NASA astronaut Reid Wiseman, Artemis II commander is assisted off the flight deck after arriving aboard USS John P. Murtha after he and fellow crewmates NASA Astronauts Victor Glover, Christina Koch, and CSA (Canadian Space Agency) astronaut Jeremy Hansen, were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a 10-day journey around the Moon and back to Earth. Following a splashdown at , NASA and U.S. military teams are working to bring the crewmembers and Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55198981287",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:04:00",
@@ -4572,7 +6390,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604100058)",
       "flickr_desc": "NASA astronaut Reid Wiseman, Artemis II commander is assisted off the flight deck after arriving aboard USS John P. Murtha after he and fellow crewmates NASA Astronauts Victor Glover, Christina Koch, and CSA (Canadian Space Agency) astronaut Jeremy Hansen, were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a 10-day journey around the Moon and back to Earth. Following a splashdown at , NASA and U.S. military teams are working to bring the crewmembers and Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55198982147",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:04:14",
@@ -4586,7 +6410,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Wiseman and Hansen on the Flight Deck",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9608622",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:04:59",
@@ -4600,7 +6430,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Wiseman and Hansen – Portrait",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9608623",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:05:57",
@@ -4615,7 +6451,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "NASA astronaut Reid Wiseman, Artemis II commander, left, and CSA (Canadian Space Agency) astronaut Jeremy Hansen, Artemis II mission specialist, are seen sitting on a Navy MH-60 Seahawk from Helicopter Sea Combat Squadron (HSC) 23 on the flight deck of USS John P. Murtha after they and fellow crewmates NASA astronaut Christina Koch, Artemis II mission specialist, and NASA astronaut Victor Glover, Artemis II pilot, were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55198951957",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:06:00",
@@ -4629,7 +6471,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Glover and Koch in the Seahawk",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9608624",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:06:02",
@@ -4644,7 +6492,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "NASA astronaut Victor Glover, Artemis II pilot, left, and NASA astronaut Christina Koch, Artemis II mission specialist are seen sitting on a Navy MH-60 Seahawk from Helicopter Sea Combat Squadron (HSC) 23 on the flight deck of USS John P. Murtha after they and fellow crewmates CSA (Canadian Space Agency) astronaut Jeremy Hansen, Artemis II mission specialist, and NASA astronaut Reid Wiseman, Artemis II commander, were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55198952237",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:06:08",
@@ -4659,7 +6513,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "NASA astronaut Reid Wiseman, Artemis II commander, gives NASA Flight Surgeon Richard Scheuring a hug next to a Navy MH-60 Seahawk from Helicopter Sea Combat Squadron (HSC) 23 on the flight deck of USS John P. Murtha after he and fellow crewmates NASA Astronauts Victor Glover, Christina Koch, and CSA (Canadian Space Agency) astronaut Jeremy Hansen, were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199996653",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:06:21",
@@ -4673,7 +6533,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Glover and Koch After Landing",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9608625",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:06:30",
@@ -4688,7 +6554,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "NASA astronaut Reid Wiseman, Artemis II commander, left, and CSA (Canadian Space Agency) astronaut Jeremy Hansen, Artemis II mission specialist, talk with NASA Flight Surgeon Richard Scheuring at their Navy MH-60 Seahawk from Helicopter Sea Combat Squadron (HSC) 23 on the flight deck of USS John P. Murtha after they and fellow crewmates NASA Astronauts Victor Glover, and Christina Koch were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200096939",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:06:34",
@@ -4703,7 +6575,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "NASA astronaut Reid Wiseman, Artemis II commander is seen sitting in a Navy MH-60 Seahawk from Helicopter Sea Combat Squadron (HSC) 23 on the flight deck of USS John P. Murtha after he and fellow crewmates NASA Astronauts Victor Glover, Christina Koch, and CSA (Canadian Space Agency) astronaut Jeremy Hansen, were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199997948",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:06:37",
@@ -4718,7 +6596,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "CSA (Canadian Space Agency) astronaut Jeremy Hansen, Artemis II mission specialist is seen sitting in a Navy MH-60 Seahawk from Helicopter Sea Combat Squadron (HSC) 23 on the flight deck of USS John P. Murtha after he and fellow crewmates NASA Astronauts Reid Wiseman, Victor Glover, and Christina Koch, were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199998298",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:06:51",
@@ -4733,7 +6617,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "NASA astronaut Victor Glover, Artemis II pilot, left, and NASA astronaut Christina Koch, Artemis II mission specialist are seen sitting on a Navy MH-60 Seahawk from Helicopter Sea Combat Squadron (HSC) 23 on the flight deck of USS John P. Murtha after they and fellow crewmates CSA (Canadian Space Agency) astronaut Jeremy Hansen, Artemis II mission specialist, and NASA astronaut Reid Wiseman, Artemis II commander, were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199999093",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:06:52",
@@ -4748,7 +6638,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "NASA astronaut Victor Glover, Artemis II pilot, left, and NASA astronaut Christina Koch, Artemis II mission specialist are seen sitting on a Navy MH-60 Seahawk from Helicopter Sea Combat Squadron (HSC) 23 on the flight deck of USS John P. Murtha after they and fellow crewmates CSA (Canadian Space Agency) astronaut Jeremy Hansen, Artemis II mission specialist, and NASA astronaut Reid Wiseman, Artemis II commander, were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200099409",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:07:20",
@@ -4762,7 +6658,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Koch in the Seahawk",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9608626",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:07:21",
@@ -4776,7 +6678,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Christina Koch – Portrait",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9608627",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:07:29",
@@ -4791,7 +6699,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "NASA astronaut Victor Glover, Artemis II pilot, left, and CSA (Canadian Space Agency) astronaut Jeremy Hansen, Artemis II mission specialist, talk with NASA Administrator Jared Isaacman at their Navy MH-60 Seahawk from Helicopter Sea Combat Squadron (HSC) 23 on the flight deck of USS John P. Murtha after they and fellow crewmates NASA Astronauts Victor Glover, and Christina Koch were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200000228",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:07:29",
@@ -4804,7 +6718,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Hansen and Wiseman Arrive on the Flight Deck",
       "flickr_desc": "Astronauts Jeremy Hansen and Reid Wiseman in their orange suits exit a Navy Seahawk helicopter on the flight deck of USS John P. Murtha, greeted by Jared Isaacman and recovery team members at sunset.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "NHQ202604100032",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:08:01",
@@ -4818,7 +6738,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Glover Salutes the Sailors",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9608701",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:08:09",
@@ -4833,7 +6759,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "NASA astronaut Reid Wiseman, Artemis II commander is seen sitting in a Navy MH-60 Seahawk from Helicopter Sea Combat Squadron (HSC) 23 on the flight deck of USS John P. Murtha after he and fellow crewmates NASA Astronauts Victor Glover, Christina Koch, and CSA (Canadian Space Agency) astronaut Jeremy Hansen, were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200255400",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:08:11",
@@ -4848,7 +6780,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "CSA (Canadian Space Agency) astronaut Jeremy Hansen, Artemis II mission specialist is seen sitting in a Navy MH-60 Seahawk from Helicopter Sea Combat Squadron (HSC) 23 on the flight deck of USS John P. Murtha after he and fellow crewmates NASA Astronauts Reid Wiseman, Victor Glover, and Christina Koch, were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200256115",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:08:13",
@@ -4862,7 +6800,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Glover Claps for the Ship’s Crew",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9608702",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:08:16",
@@ -4876,7 +6820,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Glover and Koch Receive Ship Hats",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9608628",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:08:19",
@@ -4891,7 +6841,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "NASA astronaut Reid Wiseman, Artemis II commander, left, and CSA (Canadian Space Agency) astronaut Jeremy Hansen, Artemis II mission specialist, talk with NASA Flight Surgeon Richard Scheuring at their Navy MH-60 Seahawk from Helicopter Sea Combat Squadron (HSC) 23 on the flight deck of USS John P. Murtha after they and fellow crewmates NASA Astronauts Victor Glover, and Christina Koch were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200101349",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:08:27",
@@ -4905,7 +6861,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Putting On Ship Hats",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9608629",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:08:38",
@@ -4920,7 +6882,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "NASA astronaut Victor Glover, Artemis II pilot, left, and NASA astronaut Christina Koch, Artemis II mission specialist, talk with NASA Administrator Jared Isaacman at their Navy MH-60 Seahawk from Helicopter Sea Combat Squadron (HSC) 23 on the flight deck of USS John P. Murtha after they and fellow crewmates NASA Astronauts Victor Glover, and Christina Koch were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200002168",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:08:47",
@@ -4935,7 +6903,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "NASA astronaut Victor Glover, Artemis II pilot, left, and NASA astronaut Christina Koch, Artemis II mission specialist, talk with NASA Administrator Jared Isaacman at their Navy MH-60 Seahawk from Helicopter Sea Combat Squadron (HSC) 23 on the flight deck of USS John P. Murtha after they and fellow crewmates NASA Astronauts Victor Glover, and Christina Koch were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199853946",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:08:47",
@@ -4948,7 +6922,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Glover and Koch Exit the Helicopter",
       "flickr_desc": "NASA astronauts Victor Glover and Christina Koch sit in the doorway of a Navy Seahawk helicopter on the flight deck of USS John P. Murtha, talking with recovery team members.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "NHQ202604100037",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:08:55",
@@ -4963,7 +6943,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "NASA astronaut Victor Glover, Artemis II pilot is seen sitting in a Navy MH-60 Seahawk from Helicopter Sea Combat Squadron (HSC) 23 on the flight deck of USS John P. Murtha after he and fellow crewmates NASA Astronauts Reid Wiseman, Christina Koch, and CSA (Canadian Space Agency) astronaut Jeremy Hansen, Artemis II mission specialist were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200103109",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:09:27",
@@ -4978,7 +6964,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "CSA (Canadian Space Agency) astronaut Jeremy Hansen, Artemis II mission specialist is assisted off the flight deck after arriving aboard USS John P. Murtha after he and fellow crewmates NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; and Christina Koch, mission specialist were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199854926",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:09:35",
@@ -4993,7 +6985,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "CSA (Canadian Space Agency) astronaut Jeremy Hansen, Artemis II mission specialist is assisted off the flight deck after arriving aboard USS John P. Murtha with fellow crewmates NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; and Christina Koch, mission specialist were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55198960402",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:09:43",
@@ -5007,7 +7005,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Wiseman Talks to NASA Personnel",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9608630",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:09:51",
@@ -5022,7 +7026,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "NASA astronaut Victor Glover, Artemis II pilot, left, and NASA astronaut Christina Koch, Artemis II mission specialist are seen sitting on a Navy MH-60 Seahawk from Helicopter Sea Combat Squadron (HSC) 23 on the flight deck of USS John P. Murtha after they and fellow crewmates CSA (Canadian Space Agency) astronaut Jeremy Hansen, Artemis II mission specialist, and NASA astronaut Reid Wiseman, Artemis II commander, were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200004673",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:10:00",
@@ -5037,7 +7047,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery",
       "flickr_desc": "NASA astronaut Victor Glover, Artemis II pilot, left, and NASA astronaut Christina Koch, Artemis II mission specialist are seen sitting on a Navy MH-60 Seahawk from Helicopter Sea Combat Squadron (HSC) 23 on the flight deck of USS John P. Murtha after they and fellow crewmates CSA (Canadian Space Agency) astronaut Jeremy Hansen, Artemis II mission specialist, and NASA astronaut Reid Wiseman, Artemis II commander, were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a nearly 10-day journey around the Moon and back to Earth. Following a splashdown at 5:07 p.m. PDT (8:07 p.m. EDT), NASA, U.S. Navy, and U.S. Air Force teams are working to bring the Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199857746",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:10:00",
@@ -5050,7 +7066,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Glover and Koch Laugh on the Flight Deck",
       "flickr_desc": "NASA astronauts Victor Glover and Christina Koch laugh next to the Navy helicopter on the flight deck of USS John P. Murtha, wearing NASA caps over their orange suits.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "NHQ202604100043",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:10:16",
@@ -5063,7 +7085,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Glover and Koch With the Ship's Captain",
       "flickr_desc": "NASA astronauts Victor Glover and Christina Koch chat with recovery officials next to the helicopter on the flight deck of USS John P. Murtha. Koch wears a ship's cap reading 'USS John P. Murtha - Astronaut Recovery - Artemis II'.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "NHQ202604100044",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:10:34",
@@ -5077,7 +7105,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Wiseman and Hansen Don Navy Ballcaps",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9608682",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:10:54",
@@ -5091,7 +7125,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Glover Celebrates on the Flight Deck",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9608631",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:10:55",
@@ -5105,7 +7145,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Glover Points to Crew Members",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9608632",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:11:02",
@@ -5119,7 +7165,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Glover Claps with the Crew",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9608633",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:12:27",
@@ -5133,7 +7185,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Glover and Koch Embrace Scott Tingle",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9608687",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:12:51",
@@ -5146,7 +7204,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Reid Wiseman Walks the Flight Deck",
       "flickr_desc": "NASA astronaut Reid Wiseman walks across the flight deck of USS John P. Murtha alongside a military crew member, with helicopters and the sunset visible in the background.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "NHQ202604100057",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:13:00",
@@ -5160,7 +7224,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Koch Walks Across the Flight Deck",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9608689",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:13:03",
@@ -5174,7 +7244,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Koch on the Flight Deck",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9608690",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-10 22:13:34",
@@ -5189,7 +7265,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604100059)",
       "flickr_desc": "NASA astronaut Reid Wiseman, Artemis II commander is assisted off the flight deck after arriving aboard USS John P. Murtha after he and fellow crewmates NASA Astronauts Victor Glover, Christina Koch, and CSA (Canadian Space Agency) astronaut Jeremy Hansen, were extracted from their Orion spacecraft after splashdown, Friday, April 10, 2026, in the Pacific Ocean off the coast of California. NASA’s Artemis II mission took the quartet on a 10-day journey around the Moon and back to Earth. Following a splashdown at , NASA and U.S. military teams are working to bring the crewmembers and Orion spacecraft aboard the recovery ship. Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200126804",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 01:57:47",
@@ -5204,7 +7286,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604100082)",
       "flickr_desc": "Teams prepare to recover NASA’s Orion spacecraft into the well deck of USS John P. Murtha in the Pacific Ocean off the coast of California, Friday, April 10, 2026. NASA’s Artemis II mission, which took NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a nearly 10-day journey around the Moon and back to Earth, splashed down at 5:07 p.m. PDT (8:07 p.m. EDT). Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200289498",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 02:36:26",
@@ -5219,7 +7307,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604100076)",
       "flickr_desc": "NASA’s Orion spacecraft is seen as the agency’s Landing and Recovery team, along with U.S. Navy personnel are seen as they prepare to recover the spacecraft into the well deck of USS John P. Murtha in the Pacific Ocean off the coast of California, Friday, April 10, 2026. NASA’s Artemis II mission, which took NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a nearly 10-day journey around the Moon and back to Earth, splashed down at 5:07 p.m. PDT (8:07 p.m. EDT). Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200118501",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 02:46:24",
@@ -5234,7 +7328,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604100084)",
       "flickr_desc": "NASA’s Orion spacecraft is seen as the agency’s Landing and Recovery team, along with U.S. Navy personnel work to recover the spacecraft into the well deck of USS John P. Murtha in the Pacific Ocean off the coast of California, Friday, April 10, 2026. NASA’s Artemis II mission, which took NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a nearly 10-day journey around the Moon and back to Earth, splashed down at 5:07 p.m. PDT (8:07 p.m. EDT). Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199224857",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 02:50:41",
@@ -5249,7 +7349,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604100083)",
       "flickr_desc": "NASA’s Landing and Recovery team, along with U.S. Navy personnel work to recover the spacecraft into the well deck of USS John P. Murtha in the Pacific Ocean off the coast of California, Friday, April 10, 2026. NASA’s Artemis II mission, which took NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a 10-day journey around the Moon and back to Earth, splashed down at at 5:07 p.m. PDT (8:07 p.m. EDT). Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200548925",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 02:52:59",
@@ -5264,7 +7370,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604100086)",
       "flickr_desc": "NASA’s Orion spacecraft is seen as the agency’s Landing and Recovery team, along with U.S. Navy personnel work to recover the spacecraft into the well deck of USS John P. Murtha in the Pacific Ocean off the coast of California, Friday, April 10, 2026. NASA’s Artemis II mission, which took NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a nearly 10-day journey around the Moon and back to Earth, splashed down at 5:07 p.m. PDT (8:07 p.m. EDT). Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199225947",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 03:02:52",
@@ -5279,7 +7391,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604110001)",
       "flickr_desc": "U.S. Navy personnel work alongside NASA’s Landing and Recovery team to connect lines to the agency’s Orion spacecraft is seen as they work to recover the spacecraft into the well deck of USS John P. Murtha in the Pacific Ocean off the coast of California, Saturday, April 11, 2026. NASA’s Artemis II mission, which took NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a nearly 10-day journey around the Moon and back to Earth, splashed down at 5:07 p.m. PDT (8:07 p.m. EDT). Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200369004",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 03:22:37",
@@ -5294,7 +7412,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604110013)",
       "flickr_desc": "NASA’s Orion spacecraft is seen as the agency’s Landing and Recovery team, along with U.S. Navy personnel work to recover the spacecraft into the well deck of USS John P. Murtha in the Pacific Ocean off the coast of California, Saturday, April 11, 2026. NASA’s Artemis II mission, which took NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a 10-day journey around the Moon and back to Earth, splashed down at at 5:07 p.m. PDT (8:07 p.m. EDT). Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200550355",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 03:23:42",
@@ -5309,7 +7433,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604110003)",
       "flickr_desc": "NASA’s Orion spacecraft is seen as the agency’s Landing and Recovery team, along with U.S. Navy personnel work to recover the spacecraft into the well deck of USS John P. Murtha in the Pacific Ocean off the coast of California, Saturday, April 11, 2026. NASA’s Artemis II mission, which took NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a nearly 10-day journey around the Moon and back to Earth, splashed down at 5:07 p.m. PDT (8:07 p.m. EDT). Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200122336",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 03:23:53",
@@ -5324,7 +7454,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604110004)",
       "flickr_desc": "NASA’s Orion spacecraft is seen as the agency’s Landing and Recovery team, along with U.S. Navy personnel work to recover the spacecraft into the well deck of USS John P. Murtha in the Pacific Ocean off the coast of California, Saturday, April 11, 2026. NASA’s Artemis II mission, which took NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a nearly 10-day journey around the Moon and back to Earth, splashed down at 5:07 p.m. PDT (8:07 p.m. EDT). Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200123351",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 03:24:28",
@@ -5339,7 +7475,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604110006)",
       "flickr_desc": "3]NASA’s Orion spacecraft is seen as the agency’s Landing and Recovery team, along with U.S. Navy personnel work to recover the spacecraft into the well deck of USS John P. Murtha in the Pacific Ocean off the coast of California, Saturday, April 11, 2026. NASA’s Artemis II mission, which took NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a nearly 10-day journey around the Moon and back to Earth, splashed down at 5:07 p.m. PDT (8:07 p.m. EDT). Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200125776",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 03:24:58",
@@ -5352,7 +7494,13 @@ const PHOTO_DATA = {
       "batch": 0,
       "title": "Orion Enters the Well Deck",
       "flickr_desc": "The Orion spacecraft, still wearing its red flotation bags, floats into the well deck of USS John P. Murtha at night as crew members watch from the railings above.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "KSC-20260411-KED01-0732",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 03:25:25",
@@ -5366,7 +7514,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Orion Winched Into the Well Deck",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9609061",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 03:25:42",
@@ -5381,7 +7535,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604110007)",
       "flickr_desc": "NASA’s Orion spacecraft is seen as the agency’s Landing and Recovery team, along with U.S. Navy personnel work to recover the spacecraft into the well deck of USS John P. Murtha in the Pacific Ocean off the coast of California, Saturday, April 11, 2026. NASA’s Artemis II mission, which took NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a nearly 10-day journey around the Moon and back to Earth, splashed down at 5:07 p.m. PDT (8:07 p.m. EDT). Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200126486",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 03:34:18",
@@ -5396,7 +7556,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604110018)",
       "flickr_desc": "NASA’s Orion spacecraft is seen as the agency’s Landing and Recovery team, along with U.S. Navy personnel work to securethe spacecraft into the well deck of USS John P. Murtha in the Pacific Ocean off the coast of California, Saturday, April 11, 2026. NASA’s Artemis II mission, which took NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a 10-day journey around the Moon and back to Earth, splashed down at , Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200304123",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 03:53:32",
@@ -5411,7 +7577,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604110010)",
       "flickr_desc": "NASA’s Orion spacecraft is seen as the agency’s Landing and Recovery team, along with U.S. Navy personnel work to recover the spacecraft into the well deck of USS John P. Murtha in the Pacific Ocean off the coast of California, Saturday, April 11, 2026. NASA’s Artemis II mission, which took NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a nearly 10-day journey around the Moon and back to Earth, splashed down at 5:07 p.m. PDT (8:07 p.m. EDT). Photo Credit: (NASA/Joel Kowsky)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200377684",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 06:00:55",
@@ -5426,7 +7598,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Crew Inspects the Heat Shield",
       "flickr_desc": "The Artemis II crew, wearing blue flight suits, examines the Orion capsule's charred heat shield aboard the USS John P. Murtha after recovery. A technician points out details of the thermal protection system, which endured temperatures of nearly 5,000 degrees Fahrenheit during reentry.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55203738393",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 06:09:41",
@@ -5441,7 +7619,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Hansen Beside the Returned Capsule",
       "flickr_desc": "Canadian Space Agency astronaut Jeremy Hansen stands beside the recovered Orion crew module aboard the USS John P. Murtha, placing his hand on the scorched exterior. The heat shield's ablative tiles show the intense effects of atmospheric reentry.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55203592291",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 06:23:29",
@@ -5456,7 +7640,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Hansen Signs the Ship's Banner",
       "flickr_desc": "Astronaut Jeremy Hansen signs a commemorative Artemis II banner aboard the USS John P. Murtha after the crew's recovery from the Pacific Ocean. The banner features the mission's insignia and signatures from the ship's crew.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55203585621",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 06:24:19",
@@ -5471,7 +7661,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Koch and Hansen Sign the Banner",
       "flickr_desc": "Astronauts Christina Koch and Jeremy Hansen lean over a large Artemis II mission banner, adding their signatures aboard the USS John P. Murtha. Both wear blue flight suits covered in mission patches.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55203833379",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 06:24:32",
@@ -5486,7 +7682,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Hansen Signs the Artemis II Banner",
       "flickr_desc": "A close-up of Canadian Space Agency astronaut Jeremy Hansen carefully signing the Artemis II mission banner aboard the recovery ship. His blue flight suit displays the Canadian flag and Artemis II mission patch.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55203586701",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 06:25:21",
@@ -5501,7 +7703,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Glover Signs the Mission Banner",
       "flickr_desc": "NASA astronaut Victor Glover adds his signature to the Artemis II mission banner aboard the USS John P. Murtha. Wearing his blue flight suit adorned with mission patches, he concentrates on adding his mark alongside those of the ship's crew.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55203981890",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 06:28:35",
@@ -5516,7 +7724,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Wiseman Gears Up Below Deck",
       "flickr_desc": "Commander Reid Wiseman wears a flight deck cranial helmet and gives a shaka sign aboard the USS John P. Murtha, with astronaut Christina Koch visible behind him. Both wear blue flight suits over flight deck safety gear as they prepare for helicopter operations.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55203734853",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 06:33:56",
@@ -5530,7 +7744,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "NASA Administrator Isaacman Addresses the Crew",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9608647",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 09:11:07",
@@ -5545,7 +7765,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604110022)",
       "flickr_desc": "NASA astronauts Reid Wiseman, commander; left, Christina Koch, mission specialist; CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist; and NASA astronaut Victor Glover, Artemis II pilot, right, pose for a group photo after viewing the Orion spacecraft in the well deck of USS John P. Murtha, Saturday, April 11, 2026, in the Pacific Ocean off the coast of California. The quartet splashed down Friday, April 10 at 5:07 p.m. PDT (8:07p.m. EDT). Photo Credit: (NASA/Bill Ingalls)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55199636042",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 10:08:03",
@@ -5560,7 +7786,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604110114)",
       "flickr_desc": "Navy MH-60 Seahawks from Helicopter Sea Combat Squadron (HSC) 23 are seen as they arrive at Naval Air Station North Island, Calif. after flying from USS John P. Murtha with Artemis II NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist onboard, Saturday, April 11, 2026, following a splashdown in the Pacific Ocean off the coast of California at 5:07 p.m. PDT (8:07 p.m. EDT) on April 10. NASA’s Artemis II mission took the quartet on a nearly ten day journey around the Moon and back to Earth. Photo Credit: (NASA/Keegan Barber)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201805059",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 10:09:41",
@@ -5575,7 +7807,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604110104)",
       "flickr_desc": "Artemis II NASA astronaut Victor Glover, pilot, is seen after being flown from USS John P. Murtha to Naval Air Station North Island on Navy MH-60 Seahawks from Helicopter Sea Combat Squadron (HSC) 23, Saturday, April 11, 2026, following a splashdown in the Pacific Ocean off the coast of California at 5:07 p.m. PDT (8:07 p.m. EDT) on April 10. NASA’s Artemis II mission took NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a nearly ten day journey around the Moon and back to Earth. Photo Credit: (NASA/Keegan Barber)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200884574",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 10:09:53",
@@ -5590,7 +7828,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604110106)",
       "flickr_desc": "Artemis II NASA astronaut Reid Wiseman, commander, is seen after being flown from USS John P. Murtha to Naval Air Station North Island on Navy MH-60 Seahawks from Helicopter Sea Combat Squadron (HSC) 23, Saturday, April 11, 2026, following a splashdown in the Pacific Ocean off the coast of California at 5:07 p.m. PDT (8:07 p.m. EDT) on April 10. NASA’s Artemis II mission took NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a 10-day journey around the Moon and back to Earth. Photo Credit: (NASA/Keegan Barber)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200885704",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 10:10:12",
@@ -5605,7 +7849,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604110108)",
       "flickr_desc": "Artemis II NASA astronaut Reid Wiseman, commander, greets NASA team members after being flown from USS John P. Murtha to Naval Air Station North Island on Navy MH-60 Seahawks from Helicopter Sea Combat Squadron (HSC) 23, Saturday, April 11, 2026, following a splashdown in the Pacific Ocean off the coast of California at 5:07 p.m. PDT (8:07 p.m. EDT) on April 10. NASA’s Artemis II mission took NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a 10-day journey around the Moon and back to Earth. Photo Credit: (NASA/Keegan Barber)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201044335",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 10:10:24",
@@ -5620,7 +7870,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604110109)",
       "flickr_desc": "Artemis II NASA astronaut Reid Wiseman, commander, greets Capt. Loren “Wookie” Jacobi of Naval Base San Diego after being flown from USS John P. Murtha to Naval Air Station North Island on Navy MH-60 Seahawks from Helicopter Sea Combat Squadron (HSC) 23, Saturday, April 11, 2026, following a splashdown in the Pacific Ocean off the coast of California at 5:07 p.m. PDT (8:07 p.m. EDT) on April 10. NASA’s Artemis II mission took NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a nearly ten day journey around the Moon and back to Earth. Photo Credit: (NASA/Keegan Barber)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200638441",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 10:11:45",
@@ -5635,7 +7891,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604110111)",
       "flickr_desc": "Artemis II NASA astronaut Christina Koch, mission specialist, and CSA (Canadian Space Agency) astronaut Jeremy Hansen, greet NASA team members after being flown from USS John P. Murtha to Naval Air Station North Island on Navy MH-60 Seahawks from Helicopter Sea Combat Squadron (HSC) 23, Saturday, April 11, 2026, following a splashdown in the Pacific Ocean off the coast of California at 5:07 p.m. PDT (8:07 p.m. EDT) on April 10. NASA’s Artemis II mission took NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a nearly ten day journey around the Moon and back to Earth. Photo Credit: (NASA/Keegan Barber)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201048580",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 10:12:48",
@@ -5650,7 +7912,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604110113)",
       "flickr_desc": "Artemis II NASA astronaut Christina Koch, mission specialist, right, joined by Tarah Castleberry, flight surgeon, left, is seen after being flown from USS John P. Murtha to Naval Air Station North Island on Navy MH-60 Seahawks from Helicopter Sea Combat Squadron (HSC) 23, Saturday, April 11, 2026, following a splashdown in the Pacific Ocean off the coast of California at 5:07 p.m. PDT (8:07 p.m. EDT) on April 10. NASA’s Artemis II mission took NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a nearly ten day journey around the Moon and back to Earth. Photo Credit: (NASA/Keegan Barber)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200794328",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 10:15:29",
@@ -5665,7 +7933,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604110116)",
       "flickr_desc": "From left to right, Chief of the Astronaut Office Scott Tingle, NASA Administrator Jared Isaacman, and CSA (Canadian Space Agency) astronaut Jeremy Hansen are seen at Naval Air Station North Island, Saturday, April 11, 2026, following a splashdown in the Pacific Ocean off the coast of California at 5:07 p.m. PDT (8:07 p.m. EDT) on April 10. NASA’s Artemis II mission took NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a nearly ten day journey around the Moon and back to Earth. Photo Credit: (NASA/Keegan Barber)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201553321",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 10:16:18",
@@ -5680,7 +7954,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Artemis II Recovery (NHQ202604110117)",
       "flickr_desc": "Artemis II mission zero gravity indicator “Rise” is seen at Naval Air Station North Island, Saturday, April 11, 2026, following a splashdown in the Pacific Ocean off the coast of California at 5:07 p.m. PDT (8:07 p.m. EDT) on April 10. NASA’s Artemis II mission took NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, mission specialist on a nearly ten day journey around the Moon and back to Earth. Photo Credit: (NASA/Keegan Barber)",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200659842",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 15:52:08",
@@ -5695,7 +7975,13 @@ const PHOTO_DATA = {
       "external": true,
       "title": "Crew Celebrates at Ellington Field",
       "flickr_desc": "The four Artemis II astronauts gather together on stage at a NASA welcome event, wearing matching navy USS John P. Murtha ballcaps. Commander Wiseman, Koch, and Hansen help pilot Glover stand in a lighthearted moment, drawing laughs from the crowd in front of a large NASA meatball logo.",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201423841",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 15:57:48",
@@ -5710,7 +7996,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Crew Return",
       "flickr_desc": "jsc2026e022271 (April 11, 2026) - Artemis II Mission Specialist Jeremy Hansen (center) returns home to Houston, stepping off a plane at Ellington Airport near NASA's Johnson Space Center, on Saturday, April 11, 2026, following his 10-day mission around the Moon. He and his three fellow crew members launched April 1, 2026, from NASA’s Kennedy Space Center in Florida, and splashed down off the coast of California on Friday, April 10, 2026. Photo Credit: NASA/Robert Markowitz",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201661369",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 15:57:51",
@@ -5725,7 +8017,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Crew Return",
       "flickr_desc": "jsc2026e022272 (April 11, 2026) - Artemis II Mission Specialist Jeremy Hansen returns home to Houston, stepping off a plane at Ellington Airport near NASA's Johnson Space Center, on Saturday, April 11, 2026, following his 10-day mission around the Moon. He and his three fellow crew members launched April 1, 2026, from NASA’s Kennedy Space Center in Florida, and splashed down off the coast of California on Friday, April 10, 2026. Photo Credit: NASA/Robert Markowitz",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201562253",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 15:57:58",
@@ -5740,7 +8038,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Crew Return",
       "flickr_desc": "jsc2026e022273 (April 11, 2026) - Artemis II Mission Specialist Christina Koch returns home to Houston, stepping off a plane at Ellington Airport near NASA's Johnson Space Center, on Saturday, April 11, 2026, following her 10-day mission around the Moon. She and her three fellow crew members launched April 1, 2026, from NASA’s Kennedy Space Center in Florida, and splashed down off the coast of California on Friday, April 10, 2026. Photo Credit: NASA/Robert Markowitz",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201661254",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 15:57:59",
@@ -5755,7 +8059,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Crew Return",
       "flickr_desc": "jsc2026e022274 (April 11, 2026) - Artemis II Pilot Victor Glover (top) and Mission Specialist Christina Koch (center) return home to Houston, stepping off a plane at Ellington Airport near NASA's Johnson Space Center, on Saturday, April 11, 2026, following their 10-day mission around the Moon. They launched April 1, 2026, from NASA’s Kennedy Space Center in Florida, and splashed down off the coast of California on Friday, April 10, 2026. Photo Credit: NASA/Robert Markowitz",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201661244",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 15:58:03",
@@ -5770,7 +8080,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Crew Return",
       "flickr_desc": "jsc2026e022275 (April 11, 2026) - Artemis II Pilot Victor Glover returns home to Houston, stepping off a plane at Ellington Airport near NASA's Johnson Space Center, on Saturday, April 11, 2026, following his 10-day mission around the Moon. He and his three fellow crew members launched April 1, 2026, from NASA’s Kennedy Space Center in Florida, and splashed down off the coast of California on Friday, April 10, 2026. Photo Credit: NASA/Robert Markowitz",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201813500",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 15:58:06",
@@ -5785,7 +8101,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Crew Return",
       "flickr_desc": "jsc2026e022276 (April 11, 2026) - Artemis II Commander Reid Wiseman returns home to Houston, stepping off a plane at Ellington Airport near NASA's Johnson Space Center, on Saturday, April 11, 2026, following his 10-day mission around the Moon. He and his three fellow crew members launched April 1, 2026, from NASA’s Kennedy Space Center in Florida, and splashed down off the coast of California on Friday, April 10, 2026. Photo Credit: NASA/Robert Markowitz",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201409946",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 15:58:10",
@@ -5800,7 +8122,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Crew Return",
       "flickr_desc": "jsc2026e022277 (April 11, 2026) - Artemis II Pilot Victor Glover is greeted by NASA's Johnson Space Center Director Vanessa Wyche on his return home to Houston, at Ellington Airport on Saturday, April 11, 2026, following a 10-day trip around the Moon and back. Glover and his three fellow crew members launched April 1, 2026, from NASA’s Kennedy Space Center in Florida, and splashed down off the coast of California on Friday, April 10, 2026. Photo Credit: NASA/Robert Markowitz",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201562128",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 15:58:14",
@@ -5815,7 +8143,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Crew Return",
       "flickr_desc": "jsc2026e022278 (April 11, 2026) - Artemis II Commander Reid Wiseman is greeted by NASA's Johnson Space Center Director Vanessa Wyche on his return home to Houston, at Ellington Airport on Saturday, April 11, 2026, following a 10-day trip around the Moon and back. Wiseman and his three fellow crew members launched April 1, 2026, from NASA’s Kennedy Space Center in Florida, and splashed down off the coast of California on Friday, April 10, 2026. Photo Credit: NASA/Robert Markowitz",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201661154",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 15:58:22",
@@ -5830,7 +8164,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Crew Return",
       "flickr_desc": "jsc2026e022279 (April 11, 2026) - Artemis II Commander Reid Wiseman is greeted by NASA's Johnson Space Center Director Vanessa Wyche on his return home to Houston, at Ellington Airport on Saturday, April 11, 2026, following a 10-day trip around the Moon and back. Wiseman and his three fellow crew members launched April 1, 2026, from NASA’s Kennedy Space Center in Florida, and splashed down off the coast of California on Friday, April 10, 2026. Photo Credit: NASA/Robert Markowitz",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201409941",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 15:58:42",
@@ -5845,7 +8185,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Crew Return",
       "flickr_desc": "jsc2026e022280 (April 11, 2026) - Artemis II Commander Reid Wiseman is greeted by NASA Associate Administrator Amit Kshatriya on his return home to Houston, at Ellington Airport on Saturday, April 11, 2026, following a 10-day trip around the Moon and back. Wiseman and his three fellow crew members launched April 1, 2026, from NASA’s Kennedy Space Center in Florida, and splashed down off the coast of California on Friday, April 10, 2026. Photo Credit: NASA/Robert Markowitz",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201410186",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 15:59:00",
@@ -5858,7 +8204,13 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": false,
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "jsc2026e022281",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 15:59:30",
@@ -5871,7 +8223,13 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": false,
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "jsc2026e022320",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 16:00:00",
@@ -5884,7 +8242,13 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": false,
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "jsc2026e022321",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 16:56:56",
@@ -5899,7 +8263,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Crew Return",
       "flickr_desc": "jsc2026e022269 (April 11, 2026) - Artemis II Pilot Victor Glover (top) and Mission Specialist Christina Koch (center) return home to Houston, stepping off a plane at Ellington Airport near NASA's Johnson Space Center, on Saturday, April 11, 2026, following their 10-day mission around the Moon. They launched April 1, 2026, from NASA’s Kennedy Space Center in Florida, and splashed down off the coast of California on Friday, April 10, 2026. Photo Credit: NASA/David DeHoyos",
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201813565",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 16:57:00",
@@ -5914,7 +8284,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Crew Return",
       "flickr_desc": "jsc2026e022270 (April 11, 2026) - Artemis II Pilot Victor Glover returns home to Houston, stepping off a plane at Ellington Airport near NASA's Johnson Space Center, on Saturday, April 11, 2026, following his 10-day mission around the Moon. He and his three fellow crew members launched April 1, 2026, from NASA’s Kennedy Space Center in Florida, and splashed down off the coast of California on Friday, April 10, 2026. Photo Credit: NASA/David DeHoyos",
-      "enabled": false
+      "enabled": false,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201813575",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 17:00:02",
@@ -5929,7 +8305,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Crew Return",
       "flickr_desc": "jsc2026e022292 (April 11, 2026) - NASA’s Artemis II crew, NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, shared brief remarks with friends, family, and colleagues after they landed at Ellington Airport near NASA’s Johnson Space Center in Houston on Saturday, April 11, 2026, after a nearly 10-day journey around the Moon and back to Earth. Credit: NASA/Bill Stafford",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201576423",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 17:00:15",
@@ -5944,7 +8326,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Crew Return",
       "flickr_desc": "jsc2026e022293 (April 11, 2026) - NASA’s Artemis II crew, NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, shared brief remarks with friends, family, and colleagues after they landed at Ellington Airport near NASA’s Johnson Space Center in Houston on Saturday, April 11, 2026, after a nearly 10-day journey around the Moon and back to Earth. Credit: NASA/Bill Stafford",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201576443",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 17:00:28",
@@ -5959,7 +8347,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Crew Return",
       "flickr_desc": "jsc2026e022294 (April 11, 2026) - CSA (Canadian Space Agency) astronaut Jeremy Hansen, shared brief remarks with friends, family, and colleagues after they landed at Ellington Airport near NASA’s Johnson Space Center in Houston on Saturday, April 11, 2026, after a nearly 10-day journey around the Moon and back to Earth. Credit: NASA/Bill Stafford",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201576368",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 17:00:33",
@@ -5974,7 +8368,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Crew Return",
       "flickr_desc": "jsc2026e022295 (April 11, 2026) - NASA’s Artemis II crew members, NASA astronauts Reid Wiseman and CSA (Canadian Space Agency) astronaut Jeremy Hansen, during the brief remarks with friends, family, and colleagues after they landed at Ellington Airport near NASA’s Johnson Space Center in Houston on Saturday, April 11, 2026, after a nearly 10-day journey around the Moon and back to Earth. Credit: NASA/Bill Stafford",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201424106",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 17:00:41",
@@ -5989,7 +8389,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Crew Return",
       "flickr_desc": "jsc2026e022296 (April 11, 2026) - NASA’s Artemis II mission specialist, Christina Koch, shared brief remarks with friends, family, and colleagues after they landed at Ellington Airport near NASA’s Johnson Space Center in Houston on Saturday, April 11, 2026, after a nearly 10-day journey around the Moon and back to Earth. Credit: NASA/Helen Arase Vargas",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201424136",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 17:01:41",
@@ -6004,7 +8410,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Crew Return",
       "flickr_desc": "jsc2026e022297 (April 11, 2026) - NASA’s Artemis II crew, NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, shared brief remarks with friends, family, and colleagues after they landed at Ellington Airport near NASA’s Johnson Space Center in Houston on Saturday, April 11, 2026, after a nearly 10-day journey around the Moon and back to Earth. Credit: NASA/Helen Arase Vargas",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55200530422",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 17:21:12",
@@ -6019,7 +8431,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Crew Return",
       "flickr_desc": "jsc2026e022310 (April 11, 2026) - NASA’s Artemis II crew, NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, shared brief remarks with friends, family, and colleagues after they landed at Ellington Airport near NASA’s Johnson Space Center in Houston on Saturday, April 11, 2026, after a nearly 10-day journey around the Moon and back to Earth. Credit: NASA/Helen Arase Vargas",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201827775",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 17:21:13",
@@ -6034,7 +8452,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Crew Return",
       "flickr_desc": "jsc2026e022311 (April 11, 2026) - NASA’s Artemis II crew, NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, shared brief remarks with friends, family, and colleagues after they landed at Ellington Airport near NASA’s Johnson Space Center in Houston on Saturday, April 11, 2026, after a nearly 10-day journey around the Moon and back to Earth. Credit: NASA/Helen Arase Vargas",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201424021",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 17:21:16",
@@ -6049,7 +8473,13 @@ const PHOTO_DATA = {
       "external": false,
       "title": "Artemis II Crew Return",
       "flickr_desc": "jsc2026e022312 (April 11, 2026) - NASA’s Artemis II crew, NASA astronauts Reid Wiseman, commander; Victor Glover, pilot; Christina Koch, mission specialist; and CSA (Canadian Space Agency) astronaut Jeremy Hansen, shared brief remarks with friends, family, and colleagues after they landed at Ellington Airport near NASA’s Johnson Space Center in Houston on Saturday, April 11, 2026, after a nearly 10-day journey around the Moon and back to Earth. Credit: NASA/Helen Arase Vargas",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "55201675544",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 17:25:00",
@@ -6062,7 +8492,13 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": false,
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "jsc2026e022287",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 17:28:16",
@@ -6076,7 +8512,13 @@ const PHOTO_DATA = {
       "video": false,
       "external": true,
       "title": "Recovering the Orion Crew Module",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "9609153",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-11 17:30:00",
@@ -6089,7 +8531,13 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": false,
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "jsc2026e022290",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 17:32:00",
@@ -6102,7 +8550,13 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": false,
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "jsc2026e022292",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 17:35:00",
@@ -6115,7 +8569,13 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": false,
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "jsc2026e022293",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 17:40:00",
@@ -6128,7 +8588,13 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": false,
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "jsc2026e022310",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-11 17:42:00",
@@ -6141,7 +8607,13 @@ const PHOTO_DATA = {
       "batch": 1,
       "video": false,
       "external": false,
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "jsc2026e022312",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": "JSC"
     },
     {
       "time": "2026-04-02 00:30:00",
@@ -6154,7 +8626,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-179",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 00:35:00",
@@ -6167,7 +8645,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-241",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 00:40:00",
@@ -6180,7 +8664,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-253",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 08:21:19",
@@ -6193,7 +8683,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-23107",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 08:21:22",
@@ -6206,7 +8702,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-23109",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 08:21:26",
@@ -6219,7 +8721,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-23114",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 08:27:41",
@@ -6232,7 +8740,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-23198",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 08:30:09",
@@ -6245,7 +8759,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-23282",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 08:30:51",
@@ -6258,7 +8778,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-23294",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 08:31:09",
@@ -6271,7 +8797,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-23303",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 08:32:52",
@@ -6284,7 +8816,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-23310",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 08:32:54",
@@ -6297,7 +8835,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-23311",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 14:44:56",
@@ -6310,7 +8854,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-23330",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 14:48:59",
@@ -6323,7 +8873,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-25345",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 14:48:59",
@@ -6336,7 +8892,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-25346",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 14:53:12",
@@ -6349,7 +8911,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-25359",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 14:59:09",
@@ -6362,7 +8930,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-25394",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 14:59:09",
@@ -6375,7 +8949,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-25395",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 14:59:09",
@@ -6388,7 +8968,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-25396",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 15:03:04",
@@ -6401,7 +8987,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-25403",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 15:03:47",
@@ -6414,7 +9006,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-23411",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 16:54:02",
@@ -6427,7 +9025,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-23482",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 16:55:38",
@@ -6440,7 +9044,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-23504",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 16:55:51",
@@ -6453,7 +9063,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-23514",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 17:05:29",
@@ -6466,7 +9082,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-23577",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 17:05:36",
@@ -6479,7 +9101,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-23578",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 17:49:05",
@@ -6492,7 +9120,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-23587",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 19:17:06",
@@ -6505,7 +9139,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-23674",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 19:17:12",
@@ -6518,7 +9158,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-23676",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 19:43:42",
@@ -6531,7 +9177,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-25461",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 19:44:04",
@@ -6544,7 +9196,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-25463",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 20:22:10",
@@ -6557,7 +9215,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-23716",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 20:22:10",
@@ -6570,7 +9234,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-23717",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-02 20:33:42",
@@ -6583,7 +9253,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-25497",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-03 19:31:29",
@@ -6596,7 +9272,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-23732",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 01:43:53",
@@ -6609,7 +9291,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-24179",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 16:22:24",
@@ -6622,7 +9310,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-9564",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 16:34:29",
@@ -6635,7 +9329,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-20318",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 16:34:49",
@@ -6648,7 +9348,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-20336",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 17:47:29",
@@ -6661,7 +9367,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-10300",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 17:49:08",
@@ -6674,7 +9386,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-10405",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 17:50:25",
@@ -6687,7 +9405,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-9566",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 17:57:47",
@@ -6700,7 +9424,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-10511",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:08:47",
@@ -6713,7 +9443,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-14273",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:09:43",
@@ -6726,7 +9462,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-14275",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:09:54",
@@ -6739,7 +9481,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-14276",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:26:57",
@@ -6752,7 +9500,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-14277",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:27:02",
@@ -6765,7 +9519,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-14279",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:27:05",
@@ -6778,7 +9538,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-14280",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:30:18",
@@ -6791,7 +9557,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-19180",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:30:38",
@@ -6804,7 +9576,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-14281",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:31:37",
@@ -6817,7 +9595,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-19204",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:31:47",
@@ -6830,7 +9614,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-19210",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:36:26",
@@ -6843,7 +9633,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-20971",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:38:08",
@@ -6856,7 +9652,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-21030",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:38:15",
@@ -6869,7 +9671,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-21035",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:38:15",
@@ -6882,7 +9690,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-21036",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:39:06",
@@ -6895,7 +9709,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-21062",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:40:32",
@@ -6908,7 +9728,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-21116",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:40:34",
@@ -6921,7 +9747,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-21121",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:40:42",
@@ -6934,7 +9766,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-21136",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:40:47",
@@ -6947,7 +9785,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-21142",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:40:47",
@@ -6960,7 +9804,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-21144",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:40:49",
@@ -6973,7 +9823,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-21146",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:40:50",
@@ -6986,7 +9842,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-21149",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:40:50",
@@ -6999,7 +9861,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-21150",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:40:54",
@@ -7012,7 +9880,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-21151",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:41:31",
@@ -7025,7 +9899,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-21190",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:41:36",
@@ -7038,7 +9918,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-21198",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:41:37",
@@ -7051,7 +9937,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-21201",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:41:45",
@@ -7064,7 +9956,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-16083",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:41:53",
@@ -7077,7 +9975,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-21217",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:42:00",
@@ -7090,7 +9994,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-16091",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:42:05",
@@ -7103,7 +10013,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-21227",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:42:14",
@@ -7116,7 +10032,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-9567",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:42:27",
@@ -7129,7 +10051,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-21238",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:42:27",
@@ -7142,7 +10070,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-21242",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:42:32",
@@ -7155,7 +10089,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-21243",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:42:36",
@@ -7168,7 +10108,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-21257",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:42:40",
@@ -7181,7 +10127,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-16108",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 18:59:59",
@@ -7194,7 +10146,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-12613",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 19:01:31",
@@ -7207,7 +10165,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-12643",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 19:02:23",
@@ -7220,7 +10184,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-12663",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 19:02:28",
@@ -7233,7 +10203,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-12668",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 20:46:04",
@@ -7246,7 +10222,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-15855",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 20:52:14",
@@ -7259,7 +10241,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-15917",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 20:52:16",
@@ -7272,7 +10260,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-15920",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 20:52:19",
@@ -7285,7 +10279,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-15921",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 20:55:41",
@@ -7298,7 +10298,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-14296",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 20:57:31",
@@ -7311,7 +10317,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-14311",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 20:57:33",
@@ -7324,7 +10336,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-14312",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 20:59:32",
@@ -7337,7 +10355,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-11554",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 21:00:03",
@@ -7350,7 +10374,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-11569",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 21:00:13",
@@ -7363,7 +10393,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-11574",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-06 21:11:14",
@@ -7376,7 +10412,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-9572",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-07 17:23:08",
@@ -7389,7 +10431,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-29779",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-07 17:29:17",
@@ -7402,7 +10450,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-28283",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-07 17:37:16",
@@ -7415,7 +10469,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-28292",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-07 18:56:46",
@@ -7428,7 +10488,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-28154",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-08 23:52:56",
@@ -7441,7 +10507,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-25205",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-08 23:53:38",
@@ -7454,7 +10526,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-25206",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-08 23:54:29",
@@ -7467,7 +10545,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-25207",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-08 23:55:04",
@@ -7480,7 +10564,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-25210",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-08 23:55:36",
@@ -7493,7 +10583,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-25211",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-08 23:55:44",
@@ -7506,7 +10602,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-25212",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-08 23:56:53",
@@ -7519,7 +10621,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-25214",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     },
     {
       "time": "2026-04-08 23:58:25",
@@ -7532,7 +10640,13 @@ const PHOTO_DATA = {
       "batch": 2,
       "title": "",
       "flickr_desc": "",
-      "enabled": true
+      "enabled": true,
+      "addedAt": "2026-05-11T09:39:57-04:00",
+      "source": "upstream",
+      "source_id": "ART002-E-25219",
+      "era": "mission",
+      "curator": "hankmt",
+      "center": ""
     }
   ],
   "audio": [
