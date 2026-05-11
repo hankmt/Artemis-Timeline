@@ -70,6 +70,110 @@
   .faq-link { color: #4FC3F7; font-size: 12px; font-weight: 600; text-decoration: none; letter-spacing: 0.5px; margin-left: auto; }
   .faq-link:hover { text-decoration: underline; }
 
+  /* Mini-timeline — full data range with era bands + view rectangle.
+     Sits above the main .timeline-bar. Apollo-in-Real-Time style. */
+  .mini-timeline-wrap {
+    position: relative;
+    background: #0a0a14;
+    flex-shrink: 0;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .mini-timeline {
+    position: relative;
+    height: 40px;
+    margin: 6px 20px 0;
+    cursor: pointer;
+  }
+  .mini-era-rows {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    pointer-events: none;
+  }
+  .mini-era-row {
+    position: relative;
+    flex: 1;
+    background: rgba(255,255,255,0.025);   /* track */
+  }
+  .mini-era-row .era-label {
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.45);
+    z-index: 2;
+    pointer-events: none;
+    text-shadow: 0 0 3px rgba(0,0,0,0.6);
+  }
+  .mini-era-row .era-bar {
+    position: absolute;
+    top: 1px;
+    bottom: 1px;
+    min-width: 4px;
+    border-radius: 1.5px;
+    pointer-events: none;
+  }
+  .mini-era-row.era-pre-flight-hardware .era-bar { background: rgba(123,104,238,0.55); }
+  .mini-era-row.era-pre-flight-training .era-bar { background: rgba(76,175,80,0.55); }
+  .mini-era-row.era-mission .era-bar             { background: rgba(255,179,0,0.55); }
+  .mini-era-row.era-post-mission .era-bar        { background: rgba(239,83,80,0.55); }
+  .mini-photo-dot {
+    position: absolute;
+    bottom: 0;
+    width: 2px;
+    height: 100%;
+    background: rgba(79,195,247,0.5);
+    pointer-events: none;
+  }
+  .mini-view-rect {
+    position: absolute;
+    top: -2px;
+    bottom: -2px;
+    min-width: 4px;
+    border: 1px solid rgba(255,255,255,0.55);
+    background: rgba(79,195,247,0.10);
+    box-shadow: 0 0 0 9999px rgba(0,0,0,0.30);   /* dim everything outside */
+    border-radius: 2px;
+    cursor: grab;
+    z-index: 3;
+  }
+  .mini-view-rect.dragging { cursor: grabbing; }
+  /* Resize handles on the view rect for span/zoom adjustment */
+  .mini-view-rect::before,
+  .mini-view-rect::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    cursor: ew-resize;
+  }
+  .mini-view-rect::before { left: -3px; }
+  .mini-view-rect::after  { right: -3px; }
+
+  /* Wedge connector between the mini-strip's view rect and the main
+     timeline. Drawn as an SVG polygon whose top edge follows the rect
+     edges and whose bottom edge spans the full main-strip width. */
+  .mini-wedge {
+    display: block;
+    width: 100%;
+    height: 10px;
+    pointer-events: none;
+  }
+  .mini-wedge polygon {
+    fill: rgba(79,195,247,0.06);
+    stroke: rgba(79,195,247,0.20);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+
   /* Timeline bar — single line at top */
   .timeline-bar {
     padding: 8px 20px;
@@ -792,6 +896,12 @@
   }
 
   @media (max-width: 768px) {
+    /* Mini-timeline: shave to ~20px on mobile to keep photo area large. */
+    .mini-timeline { height: 20px; margin: 4px 12px 0; }
+    .mini-era-row .era-label { display: none; }
+    .mini-era-rows { gap: 1px; }
+    .mini-wedge { height: 6px; }
+
     /* Mobile bottom-sheet vars — single source of truth for snap points */
     :root {
       --sheet-handle-h: 44px;
@@ -1204,8 +1314,37 @@
 <!-- Header -->
 <div id="header">
   <h1>ARTEMIS <span>II</span> PHOTO TIMELINE</h1>
-  <div class="subtitle">March–April 2026</div>
+  <div class="subtitle" id="headerSubtitle">March–April 2026</div>
   <a href="faq.html" class="faq-link">FAQ</a>
+</div>
+
+<!-- Mini-timeline: full data range with era bands + view rect (Apollo-style overview) -->
+<div class="mini-timeline-wrap" id="miniTimelineWrap">
+  <div class="mini-timeline" id="miniTimeline">
+    <div class="mini-era-rows">
+      <div class="mini-era-row era-pre-flight-hardware" data-era="pre-flight-hardware">
+        <div class="era-label">Hardware</div>
+        <div class="era-bar" id="miniEraBar_hardware"></div>
+      </div>
+      <div class="mini-era-row era-pre-flight-training" data-era="pre-flight-training">
+        <div class="era-label">Training</div>
+        <div class="era-bar" id="miniEraBar_training"></div>
+      </div>
+      <div class="mini-era-row era-mission" data-era="mission">
+        <div class="era-label">Mission</div>
+        <div class="era-bar" id="miniEraBar_mission"></div>
+      </div>
+      <div class="mini-era-row era-post-mission" data-era="post-mission">
+        <div class="era-label">Post-Mission</div>
+        <div class="era-bar" id="miniEraBar_post"></div>
+      </div>
+    </div>
+    <div id="miniPhotoDots"></div>
+    <div class="mini-view-rect" id="miniViewRect" title="Drag to pan; drag edges to zoom"></div>
+  </div>
+  <svg class="mini-wedge" id="miniWedge" viewBox="0 0 100 10" preserveAspectRatio="none">
+    <polygon id="miniWedgePoly" points="0,0 100,0 100,10 0,10"></polygon>
+  </svg>
 </div>
 
 <!-- Timeline bar -->
@@ -2009,6 +2148,32 @@ const SCHEDULE = [
 // Load data from photos.js and initialize
 loadPhotoData();
 PHOTOS.sort((a, b) => a.t - b.t);
+
+// Update the header subtitle to reflect the actual data range. Hank's
+// upstream hardcoded "March–April 2026" because his original curation
+// only covered the mission week; once the pipeline starts adding pre-
+// flight content the range stretches back years.
+(function updateHeaderSubtitle() {
+  if (PHOTOS.length === 0) return;
+  const subtitle = document.getElementById('headerSubtitle');
+  if (!subtitle) return;
+  const first = new Date(PHOTOS[0].t);
+  const last  = new Date(PHOTOS[PHOTOS.length - 1].t);
+  const fy = first.getUTCFullYear();
+  const ly = last.getUTCFullYear();
+  const fmt = { month: 'short', year: 'numeric', timeZone: 'America/New_York' };
+  if (fy === ly) {
+    // Single year: "March – April 2026" style
+    const fmtNoYear = { month: 'long', timeZone: 'America/New_York' };
+    const fMon = first.toLocaleString('en-US', fmtNoYear);
+    const lMon = last.toLocaleString('en-US', fmtNoYear);
+    subtitle.textContent = (fMon === lMon ? fMon : `${fMon}–${lMon}`) + ` ${fy}`;
+  } else {
+    // Multi-year: "Nov 2022 – Apr 2026"
+    subtitle.textContent = `${first.toLocaleString('en-US', fmt)} – ${last.toLocaleString('en-US', fmt)}`;
+  }
+})();
+
 (function() {
 
 let currentPhotoIdx = 0;
@@ -2157,24 +2322,237 @@ function renderTimeline() {
   document.getElementById('playhead').style.left = timeToViewPercent(photo.t) + '%';
 
   updateTimelineLabels();
+  renderMiniTimeline();
 }
+
+// Whether the underlying dataset spans more than one calendar year. Used
+// to decide if labels need a year segment even at high zoom. We can
+// compute this once at load — the dataset shape doesn't change at runtime.
+const DATASET_SPANS_MULTIPLE_YEARS = (() => {
+  if (PHOTOS.length < 2) return false;
+  const a = new Date(PHOTOS[0].t).getUTCFullYear();
+  const b = new Date(PHOTOS[PHOTOS.length - 1].t).getUTCFullYear();
+  return a !== b;
+})();
+
+// ============================================================================
+// MINI-TIMELINE (Apollo-style overview strip)
+//
+// Renders the FULL data range as a small strip above the main timeline,
+// with era-colored bands stacked vertically, photo dots overlaid (filter-
+// aware), and a draggable "view rectangle" that mirrors the main strip's
+// current zoom. A wedge connector visually anchors the relationship.
+// ============================================================================
+
+const MINI_ERAS = [
+  ['pre-flight-hardware', 'miniEraBar_hardware'],
+  ['pre-flight-training', 'miniEraBar_training'],
+  ['mission',             'miniEraBar_mission'],
+  ['post-mission',        'miniEraBar_post'],
+];
+
+// Compute the [start, end] timestamp range of each era across the WHOLE
+// (unfiltered) dataset. Done once at load.
+const MINI_ERA_RANGES = (() => {
+  const ranges = {};
+  for (const [era] of MINI_ERAS) ranges[era] = { min: Infinity, max: -Infinity, count: 0 };
+  for (const p of PHOTOS) {
+    const r = ranges[p.era];
+    if (!r) continue;
+    if (p.t < r.min) r.min = p.t;
+    if (p.t > r.max) r.max = p.t;
+    r.count++;
+  }
+  return ranges;
+})();
+
+function miniPercent(t) {
+  if (T_SPAN <= 0) return 0;
+  return Math.max(0, Math.min(100, ((t - T_START) / T_SPAN) * 100));
+}
+
+function renderMiniEraBands() {
+  for (const [era, elemId] of MINI_ERAS) {
+    const bar = document.getElementById(elemId);
+    if (!bar) continue;
+    const r = MINI_ERA_RANGES[era];
+    if (!r || r.count === 0) { bar.style.display = 'none'; continue; }
+    bar.style.display = '';
+    const leftPct = miniPercent(r.min);
+    const widthPct = Math.max(0.1, miniPercent(r.max) - leftPct);
+    bar.style.left = leftPct + '%';
+    bar.style.width = widthPct + '%';
+  }
+}
+
+// Render photo dots on the mini-strip. Filter-aware so the user can see
+// where their current filter selection lives in the global timeline.
+function renderMiniPhotoDots() {
+  const container = document.getElementById('miniPhotoDots');
+  if (!container) return;
+  // Avoid building a huge DOM tree on full datasets — cap the rendered
+  // tick density. For Hank's tight mission week with ~500 dots in a
+  // pixel-narrow band, we collapse adjacent ticks into one anyway.
+  const html = filteredPhotos.map(p => {
+    const pct = miniPercent(p.t);
+    return `<div class="mini-photo-dot" style="left:${pct}%"></div>`;
+  }).join('');
+  container.innerHTML = html;
+}
+
+function updateMiniViewRect() {
+  const rect = document.getElementById('miniViewRect');
+  if (!rect) return;
+  const leftPct = miniPercent(viewStart);
+  const rightPct = miniPercent(viewEnd);
+  const widthPct = Math.max(0.5, rightPct - leftPct);
+  rect.style.left = leftPct + '%';
+  rect.style.width = widthPct + '%';
+  // Update the wedge polygon: top corners follow the view rect; bottom
+  // corners span the full main-strip width.
+  const poly = document.getElementById('miniWedgePoly');
+  if (poly) {
+    poly.setAttribute('points',
+      `${leftPct},0 ${rightPct},0 100,10 0,10`);
+  }
+}
+
+// Renders everything mini-related at once. Call on every main-strip render.
+function renderMiniTimeline() {
+  renderMiniPhotoDots();
+  updateMiniViewRect();
+}
+
+// One-time wiring: era bands + click + drag handlers.
+(function setupMiniTimeline() {
+  renderMiniEraBands();
+
+  const miniEl = document.getElementById('miniTimeline');
+  const rect = document.getElementById('miniViewRect');
+  if (!miniEl || !rect) return;
+
+  function timeFromClientX(clientX) {
+    const r = miniEl.getBoundingClientRect();
+    const frac = Math.max(0, Math.min(1, (clientX - r.left) / r.width));
+    return T_START + T_SPAN * frac;
+  }
+
+  function panTo(targetCenter) {
+    const span = viewEnd - viewStart;
+    let newStart = targetCenter - span / 2;
+    let newEnd = newStart + span;
+    if (newStart < T_START) { newStart = T_START; newEnd = newStart + span; }
+    if (newEnd > T_END)     { newEnd = T_END;     newStart = newEnd - span; }
+    if (newStart < T_START) newStart = T_START;
+    viewStart = newStart;
+    viewEnd = newEnd;
+    renderTimeline();
+  }
+
+  // Click on mini-strip (not on the view rect itself) → pan main view to
+  // the clicked time, keeping current zoom level.
+  miniEl.addEventListener('click', (e) => {
+    if (e.target === rect || rect.contains(e.target)) return;
+    panTo(timeFromClientX(e.clientX));
+  });
+
+  // Drag the view rect to pan in real time.
+  let dragMode = null;          // 'pan' | 'left' | 'right'
+  let dragStartX = 0;
+  let dragStartSpan = 0;
+  let dragStartT = 0;            // viewStart at drag-start, for pan
+  let dragStartCenter = 0;
+
+  rect.addEventListener('pointerdown', (e) => {
+    if (e.button !== 0) return;
+    e.preventDefault();
+    e.stopPropagation();
+    rect.setPointerCapture(e.pointerId);
+    rect.classList.add('dragging');
+    dragStartX = e.clientX;
+    dragStartSpan = viewEnd - viewStart;
+    dragStartT = viewStart;
+    // Detect edge vs. center via the cursor's offset within the rect.
+    const r = rect.getBoundingClientRect();
+    const fromLeft  = e.clientX - r.left;
+    const fromRight = r.right - e.clientX;
+    if (fromLeft < 8)       dragMode = 'left';
+    else if (fromRight < 8) dragMode = 'right';
+    else                    dragMode = 'pan';
+  });
+
+  rect.addEventListener('pointermove', (e) => {
+    if (!dragMode) return;
+    const r = miniEl.getBoundingClientRect();
+    const dt = ((e.clientX - dragStartX) / r.width) * T_SPAN;
+    if (dragMode === 'pan') {
+      let newStart = dragStartT + dt;
+      let newEnd = newStart + dragStartSpan;
+      if (newStart < T_START) { newStart = T_START; newEnd = newStart + dragStartSpan; }
+      if (newEnd > T_END)     { newEnd = T_END;     newStart = newEnd - dragStartSpan; }
+      if (newStart < T_START) newStart = T_START;
+      viewStart = newStart; viewEnd = newEnd;
+    } else if (dragMode === 'left') {
+      let newStart = dragStartT + dt;
+      if (newStart < T_START) newStart = T_START;
+      if (newStart > viewEnd - MIN_VIEW_SPAN) newStart = viewEnd - MIN_VIEW_SPAN;
+      viewStart = newStart;
+    } else if (dragMode === 'right') {
+      let newEnd = dragStartT + dragStartSpan + dt;
+      if (newEnd > T_END) newEnd = T_END;
+      if (newEnd < viewStart + MIN_VIEW_SPAN) newEnd = viewStart + MIN_VIEW_SPAN;
+      viewEnd = newEnd;
+    }
+    renderTimeline();
+  });
+
+  function endDrag(e) {
+    if (!dragMode) return;
+    dragMode = null;
+    rect.classList.remove('dragging');
+    if (rect.hasPointerCapture(e.pointerId)) {
+      rect.releasePointerCapture(e.pointerId);
+    }
+  }
+  rect.addEventListener('pointerup', endDrag);
+  rect.addEventListener('pointercancel', endDrag);
+})();
 
 function updateTimelineLabels() {
   const labelsContainer = document.querySelector('.timeline-labels');
   const span = viewEnd - viewStart;
   const numLabels = window.matchMedia('(max-width: 768px)').matches ? 6 : 11;
+  const DAY = 24 * 3600000;
+  // Include the year in labels whenever:
+  //   - the visible window crosses a year boundary (without a year, "Apr 15"
+  //     could be either year), OR
+  //   - the dataset itself spans multiple years (without a year, the user
+  //     zoomed into a single-year sliver can't tell WHICH year), OR
+  //   - the span is wide enough that month+day alone is too coarse anyway.
+  const startYear = new Date(viewStart).getUTCFullYear();
+  const endYear   = new Date(viewEnd).getUTCFullYear();
+  const crossesYear = startYear !== endYear;
+  const needYear = crossesYear || DATASET_SPANS_MULTIPLE_YEARS;
+  let opts;
+  if (span < DAY) {
+    // Sub-day: just time. Year context comes from a header or the photo's metadata panel.
+    opts = { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'America/New_York' };
+  } else if (span < 3 * DAY) {
+    opts = needYear
+        ? { month: 'short', day: 'numeric', year: '2-digit', hour: 'numeric', hour12: true, timeZone: 'America/New_York' }
+        : { month: 'short', day: 'numeric', hour: 'numeric', hour12: true, timeZone: 'America/New_York' };
+  } else if (span < 2 * 365 * DAY) {
+    opts = needYear
+        ? { month: 'short', day: 'numeric', year: '2-digit', timeZone: 'America/New_York' }
+        : { month: 'short', day: 'numeric', timeZone: 'America/New_York' };
+  } else {
+    // Extreme zoom-out: just month + year, no day.
+    opts = { month: 'short', year: 'numeric', timeZone: 'America/New_York' };
+  }
   let html = '';
   for (let i = 0; i < numLabels; i++) {
     const t = viewStart + (span * i / (numLabels - 1));
-    const d = new Date(t);
-    let label;
-    if (span < 24 * 3600000) {
-      label = d.toLocaleString('en-US', {hour:'numeric',minute:'2-digit',hour12:true,timeZone:'America/New_York'});
-    } else if (span < 3 * 24 * 3600000) {
-      label = d.toLocaleString('en-US', {month:'short',day:'numeric',hour:'numeric',hour12:true,timeZone:'America/New_York'});
-    } else {
-      label = d.toLocaleString('en-US', {month:'short',day:'numeric',timeZone:'America/New_York'});
-    }
+    const label = new Date(t).toLocaleString('en-US', opts);
     html += `<span>${label}</span>`;
   }
   labelsContainer.innerHTML = html;
