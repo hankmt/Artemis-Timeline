@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Best Artemis II Photo — Vote</title>
+<meta name="description" content="Pick your favorite — head-to-head voting on every photo featured on artemistimeline.com to find THE best Artemis II picture.">
+<meta property="og:title" content="The Best Artemis II Photo — Vote">
+<meta property="og:description" content="Pick your favorite — head-to-head voting on every photo featured on artemistimeline.com to find THE best Artemis II picture.">
+<style>
+  :root {
+    --bg: #07090d;
+    --bg-2: #0e131a;
+    --fg: #e7eef7;
+    --muted: #8a96a6;
+    --accent: #ff8a3d;
+    --accent-2: #4cc8ff;
+    --gold: #ffd166;
+    --border: #1d2632;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--fg);
+               font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+               -webkit-font-smoothing: antialiased; min-height: 100vh; }
+  a { color: var(--accent-2); }
+
+  header {
+    padding: 22px 16px 16px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+  header > * { max-width: 760px; margin-left: auto; margin-right: auto; }
+  header .crumb { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+  header .crumb a { color: var(--muted); text-decoration: underline; }
+  header h1 {
+    font-size: clamp(24px, 4.5vw, 36px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0 auto 6px;
+    color: var(--fg);
+  }
+  header .desc { color: var(--muted); font-size: 13px; line-height: 1.55; margin: 0 auto; }
+  header .stats {
+    margin-top: 12px;
+    display: inline-flex; gap: 18px;
+    color: var(--muted);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    flex-wrap: wrap; justify-content: center;
+  }
+  header .stats em { color: var(--fg); font-style: normal; font-weight: 700; }
+
+  main {
+    padding: 16px 12px 100px;
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+
+  .versus {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 14px;
+    align-items: stretch;
+    margin: 8px 0 0;
+  }
+  @media (max-width: 720px) {
+    .versus { grid-template-columns: 1fr; gap: 10px; }
+    .versus .vs-divider { justify-self: center; margin: 4px 0; }
+  }
+
+  .vs-divider {
+    align-self: center;
+    color: var(--muted);
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+  }
+
+  .pick {
+    position: relative;
+    background: #050810;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  .pick:hover { border-color: var(--accent); box-shadow: 0 8px 22px rgba(255,138,61,0.15); }
+  .pick:active { transform: scale(0.99); }
+  .pick.flash { border-color: var(--accent); box-shadow: 0 0 0 6px rgba(255,138,61,0.20); }
+
+  .pick .imgwrap {
+    aspect-ratio: 3 / 2;
+    background: #050810;
+    overflow: hidden;
+    position: relative;
+  }
+  .pick img {
+    width: 100%; height: 100%; object-fit: contain;
+    display: block;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 250ms ease;
+  }
+  .pick img.loaded { opacity: 1; }
+
+  .pick .pick-meta {
+    padding: 10px 12px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 12px; color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+  .pick .pick-meta .pick-cta {
+    color: var(--accent);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .controls {
+    margin-top: 18px;
+    display: flex; justify-content: center; gap: 10px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    border: 1px solid var(--border);
+    background: var(--bg-2);
+    color: var(--fg);
+    padding: 9px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+    transition: transform 80ms ease;
+    font-family: inherit;
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .btn:hover { background: #14202c; border-color: #2a3947; }
+  .btn:active { transform: scale(0.98); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #1a0d00; }
+
+  .stage { display: none; }
+  .stage.active { display: block; }
+  .loading, .error {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--muted);
+  }
+  .error b { color: #ff5466; }
+  .spin {
+    display: inline-block; width: 14px; height: 14px;
+    border: 2px solid rgba(255,255,255,.25);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: sp 0.7s linear infinite;
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+  @keyframes sp { to { transform: rotate(360deg); } }
+
+  footer {
+    color: var(--muted);
+    font-size: 11px;
+    text-align: center;
+    padding: 24px 16px 40px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+  footer a { color: var(--accent-2); }
+
+  .keyhint {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 11px;
+    text-align: center;
+  }
+  .keyhint kbd {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 11px;
+    color: var(--fg);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="crumb"><a href="..">← Back to /vote</a></p>
+  <h1>The Best Artemis II Photo</h1>
+  <p class="desc">Every photo featured on <a href="https://artemistimeline.com" target="_blank" rel="noopener">artemistimeline.com</a> goes head-to-head. Click your favorite from each pair — your votes shape the Elo rankings to crown the single best image of the mission.</p>
+  <div class="stats">
+    <span>Pool: <em id="stat-pool">—</em> photos</span>
+    <span>Your votes: <em id="stat-mine">0</em></span>
+    <a id="stat-leaderboard" href="leaderboard.html" style="color:var(--accent-2)">See current rankings →</a>
+  </div>
+</header>
+
+<main>
+  <div id="stage-loading" class="stage active loading">
+    <span class="spin"></span> Loading the photo pool…
+  </div>
+
+  <div id="stage-error" class="stage">
+    <div class="error">
+      <b>Something went wrong.</b>
+      <p id="err-msg" style="margin-top:10px"></p>
+      <a href=".." class="btn">← Back to hub</a>
+    </div>
+  </div>
+
+  <div id="stage-vote" class="stage">
+    <div class="versus">
+      <div class="pick" id="pick-a" data-side="a">
+        <div class="imgwrap"><img id="img-a" alt=""></div>
+        <div class="pick-meta">
+          <span id="meta-a"></span>
+          <span class="pick-cta">Pick this →</span>
+        </div>
+      </div>
+
+      <div class="vs-divider">vs</div>
+
+      <div class="pick" id="pick-b" data-side="b">
+        <div class="imgwrap"><img id="img-b" alt=""></div>
+        <div class="pick-meta">
+          <span id="meta-b"></span>
+          <span class="pick-cta">Pick this →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="btn" id="btn-skip" title="Show me a different pair">↻ Skip this pair</button>
+      <a class="btn" href="leaderboard.html">Leaderboard</a>
+    </div>
+
+    <p class="keyhint">Keyboard: <kbd>←</kbd> or <kbd>1</kbd> for left, <kbd>→</kbd> or <kbd>2</kbd> for right, <kbd>Space</kbd> to skip.</p>
+  </div>
+</main>
+
+<footer>
+  Photos: featured on <a href="https://artemistimeline.com" target="_blank" rel="noopener">artemistimeline.com</a> · Mission ART002 (Artemis II) · Not affiliated with NASA.
+</footer>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script>
+(() => {
+  // ====== Config ======
+  const API = "https://photovote-api.hankmt.workers.dev";
+  const R2  = "https://pub-1f1ce68455c0432ea65ac3155a6b2409.r2.dev";
+  const R2_TIMELINE = R2 + "/timeline";   // mirrored 1800px @ Q85 of /web/
+
+  // Compute the doc's directory so the manifest fetch works whether the page
+  // is served from /vote/best/, /vote/best, or /vote/best/index.html.
+  const _docDir = (() => {
+    const p = location.pathname;
+    if (p.endsWith("/")) return p;
+    if (/\.[^/]+$/.test(p)) return p.replace(/[^/]+$/, "");
+    return p + "/";
+  })();
+
+  // Anonymous voter id (shared with the rest of the app)
+  const voterId = (() => {
+    try {
+      let v = localStorage.getItem("av_voter");
+      if (!v) {
+        v = "v_" + Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
+        localStorage.setItem("av_voter", v);
+      }
+      return v;
+    } catch (_) { return "v_anon_" + Math.random().toString(36).slice(2, 10); }
+  })();
+
+  // ====== State ======
+  let pool = [];                // array of { id, orig }
+  let recent = [];              // last few ids shown — avoid showing them again right away
+  const RECENT_KEEP = 30;
+  let current = { a: null, b: null };
+  let nextPair = null;
+  let myVotes = 0;
+  let busy = false;
+
+  const $ = s => document.querySelector(s);
+
+  function show(stage) {
+    document.querySelectorAll(".stage").forEach(s => s.classList.remove("active"));
+    $(stage).classList.add("active");
+  }
+
+  // R2 stores resized .jpg of every photo, keyed by id-without-extension
+  function imgUrl(id) {
+    const stem = id.replace(/\.[^.]+$/, "");
+    return `${R2_TIMELINE}/${encodeURIComponent(stem)}.jpg`;
+  }
+
+  function pickPair() {
+    if (pool.length < 2) return null;
+    const candidates = pool.filter(p => !recent.includes(p.id));
+    const source = candidates.length >= 2 ? candidates : pool;
+    const ai = Math.floor(Math.random() * source.length);
+    let bi;
+    do { bi = Math.floor(Math.random() * source.length); } while (bi === ai);
+    const pair = { a: source[ai], b: source[bi] };
+    if (Math.random() < 0.5) { const t = pair.a; pair.a = pair.b; pair.b = t; }
+    return pair;
+  }
+
+  function preloadImage(src) {
+    return new Promise(resolve => {
+      const img = new Image();
+      img.onload = img.onerror = () => resolve();
+      img.src = src;
+    });
+  }
+
+  function preloadNextPair() {
+    nextPair = pickPair();
+    if (!nextPair) return;
+    preloadImage(imgUrl(nextPair.a.id));
+    preloadImage(imgUrl(nextPair.b.id));
+  }
+
+  function paint(pair) {
+    current = pair;
+    const imgA = $("#img-a"), imgB = $("#img-b");
+    imgA.classList.remove("loaded");
+    imgB.classList.remove("loaded");
+    imgA.src = imgUrl(pair.a.id);
+    imgB.src = imgUrl(pair.b.id);
+    imgA.onload = () => imgA.classList.add("loaded");
+    imgB.onload = () => imgB.classList.add("loaded");
+    $("#meta-a").textContent = pair.a.orig;
+    $("#meta-b").textContent = pair.b.orig;
+    recent.push(pair.a.id, pair.b.id);
+    while (recent.length > RECENT_KEEP) recent.shift();
+  }
+
+  function loadFresh() {
+    const pair = nextPair || pickPair();
+    nextPair = null;
+    if (!pair) {
+      $("#err-msg").textContent = "Pool is too small to compare.";
+      show("#stage-error");
+      return;
+    }
+    paint(pair);
+    preloadNextPair();
+  }
+
+  async function vote(winnerSide) {
+    if (busy || !current.a || !current.b) return;
+    busy = true;
+    const winner = winnerSide === "a" ? current.a : current.b;
+    const loser  = winnerSide === "a" ? current.b : current.a;
+
+    const winnerCard = $(`#pick-${winnerSide}`);
+    winnerCard.classList.add("flash");
+
+    fetch(API + "/best-pair-vote", {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({
+        voter_id: voterId,
+        winner: winner.id,
+        loser: loser.id,
+        ua: navigator.userAgent.slice(0, 200),
+      }),
+    }).catch(() => {});
+
+    myVotes += 1;
+    bumpMyVotes();
+
+    setTimeout(() => {
+      winnerCard.classList.remove("flash");
+      busy = false;
+      loadFresh();
+    }, 220);
+  }
+
+  function bumpMyVotes() {
+    $("#stat-mine").textContent = myVotes.toLocaleString();
+    try {
+      const k = "av_best_votes";
+      const n = (parseInt(localStorage.getItem(k) || "0", 10) || 0) + 1;
+      localStorage.setItem(k, String(n));
+    } catch (_) {}
+  }
+
+  function skip() {
+    if (busy) return;
+    loadFresh();
+  }
+
+  $("#pick-a").addEventListener("click", () => vote("a"));
+  $("#pick-b").addEventListener("click", () => vote("b"));
+  $("#btn-skip").addEventListener("click", skip);
+
+  document.addEventListener("keydown", e => {
+    if (e.target && /input|textarea/i.test(e.target.tagName)) return;
+    if (e.key === "ArrowLeft" || e.key === "1") { e.preventDefault(); vote("a"); }
+    else if (e.key === "ArrowRight" || e.key === "2") { e.preventDefault(); vote("b"); }
+    else if (e.key === " ") { e.preventDefault(); skip(); }
+  });
+
+  // ====== Boot ======
+  try { myVotes = parseInt(localStorage.getItem("av_best_votes") || "0", 10) || 0; } catch (_) {}
+  $("#stat-mine").textContent = myVotes.toLocaleString();
+
+  fetch(_docDir + "manifest.json", { cache: "no-store" })
+    .then(r => r.json())
+    .then(data => {
+      pool = (data && data.photos) || [];
+      $("#stat-pool").textContent = pool.length.toLocaleString();
+      if (pool.length < 2) {
+        $("#err-msg").textContent = "Manifest is empty or has < 2 photos.";
+        show("#stage-error");
+        return;
+      }
+      show("#stage-vote");
+      loadFresh();
+    })
+    .catch(err => {
+      $("#err-msg").textContent = "Couldn't load manifest: " + err.message;
+      show("#stage-error");
+    });
+})();
+</script>
+
+</body>
+</html>

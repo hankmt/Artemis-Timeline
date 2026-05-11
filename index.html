@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>ARTEMIS II PHOTO TIMELINE</title>
 <meta name="description" content="An interactive photo timeline of NASA's Artemis II mission — scrub through every crew moment, lunar flyby shot, and audio clip from April 1–10, 2026.">
+<link rel="canonical" href="https://artemistimeline.com/">
 <link rel="icon" type="image/png" href="pngtree-detailed-full-moon-rendered-in-3d-for-creative-use-png-image_15976807.png">
 
 <!-- Open Graph / link preview -->
@@ -20,8 +21,17 @@
 <meta name="twitter:title" content="Artemis II Photo Timeline">
 <meta name="twitter:description" content="An interactive photo timeline of NASA's Artemis II mission — scrub through every crew moment, lunar flyby shot, and audio clip from April 1–10, 2026.">
 <meta name="twitter:image" content="https://artemistimeline.com/web/9608627.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Artemis II Photo Timeline",
+  "url": "https://artemistimeline.com/",
+  "description": "An interactive photo timeline of NASA's Artemis II mission, with crew photos, video, audio, trajectory data, and mission metadata."
+}
+</script>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
   /* Viewport-height token: 100dvh on supporting browsers (adapts to iOS
      Safari's collapsing toolbars), falls back to 100vh elsewhere. */
   :root {
@@ -54,7 +64,7 @@
     gap: 16px;
     flex-shrink: 0;
   }
-  #header h1 { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; white-space: nowrap; }
+  #header h1 { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; white-space: nowrap; }
   #header h1 span { color: #fff; }
   #header .subtitle { color: #fff; font-size: 12px; }
   .faq-link { color: #4FC3F7; font-size: 12px; font-weight: 600; text-decoration: none; letter-spacing: 0.5px; margin-left: auto; }
@@ -106,7 +116,7 @@
     display: flex;
     justify-content: space-between;
     font-size: 9px;
-    color: #555;
+    color: #888;
     margin-top: 6px;
   }
   /* Photo dots on timeline */
@@ -288,6 +298,12 @@
     padding: 12px 20px;
     gap: 20px;
   }
+  .site-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
 
   /* Photo side — takes available width, fixed height from flex */
   .photo-side {
@@ -395,6 +411,7 @@
     overflow: hidden;
   }
   .photo-desc-toggle {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     width: 100%;
     display: flex;
     align-items: center;
@@ -449,15 +466,16 @@
     border: 1px solid #1a1a2e;
   }
   .meta-section h3 {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 9px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: #555;
+    color: #888;
     margin-bottom: 8px;
   }
   .meta-field { margin-bottom: 10px; }
   .meta-field:last-child { margin-bottom: 0; }
-  .meta-label { color: #666; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .meta-label { color: #888; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
   .meta-value { color: #bbb; font-size: 13px; margin-top: 2px; word-break: break-word; }
   .meta-value.highlight { color: #4FC3F7; font-weight: 600; }
   .units-toggle {
@@ -506,10 +524,10 @@
     bottom: 0;
     height: 22px;
     border-radius: 3px;
-    opacity: 0.7;
+    opacity: 0.9;
     font-size: 9px;
     font-weight: 600;
-    color: rgba(255,255,255,0.85);
+    color: #fff;
     line-height: 22px;
     padding: 0 4px;
     overflow: hidden;
@@ -518,10 +536,10 @@
     text-align: center;
   }
   .timeline-activity-bar.observation-bar {
-    color: rgba(0,0,0,0.9);
+    color: #000;
   }
   .timeline-activity-bar.observation-bar-plain {
-    color: rgba(0,0,0,0.9);
+    color: #000;
   }
 
   /* Timeline hover tooltip */
@@ -601,6 +619,7 @@
     padding: 12px 14px 14px;
   }
   .calendar-title {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 13px;
     font-weight: 700;
     color: #e0e0e0;
@@ -1250,9 +1269,9 @@
       <div class="tip-activity" id="tipActivity"></div>
     </div>
     <div class="zoom-controls">
-      <button class="zoom-btn" id="zoomInBtn" title="Zoom in">+</button>
-      <button class="zoom-btn" id="zoomOutBtn" title="Zoom out">−</button>
-      <button class="zoom-btn" id="zoomResetBtn" title="Reset zoom">⊙</button>
+      <button class="zoom-btn" id="zoomInBtn" title="Zoom in" aria-label="Zoom in">+</button>
+      <button class="zoom-btn" id="zoomOutBtn" title="Zoom out" aria-label="Zoom out">−</button>
+      <button class="zoom-btn" id="zoomResetBtn" title="Reset zoom" aria-label="Reset zoom">⊙</button>
     </div>
   </div>
   <div class="timeline-labels">
@@ -1261,6 +1280,7 @@
 </div>
 
 <!-- Mobile activity label (replaces timeline on small screens) -->
+<main class="site-main">
 <div class="mobile-activity" id="mobileActivity"></div>
 
 <!-- Controls row -->
@@ -1271,6 +1291,7 @@
   </button>
   <button class="filter-btn active" data-filter="all">All Photos and Video</button>
   <button class="filter-btn" data-filter="spacecraft">Crew Photos Only</button>
+  <button class="filter-btn" data-filter="new">New Crew Photos</button>
   <button class="filter-btn" data-filter="exterior">Spacecraft Exterior</button>
   <span class="filter-sep">|</span>
   <button class="filter-btn cam-filter" data-cam="d5a" title="Nikon D5 body 3500015 — on Orion">D5 #1</button>
@@ -1295,8 +1316,8 @@
       <video id="currentVideo" class="photo-img" style="display:none" controls playsinline preload="none"></video>
       <button class="photo-desc-btn" id="photoDescBtn" type="button" onclick="showDescPopup()" style="display:none">Show Desc</button>
     </div>
-    <button class="nav-arrow nav-prev" id="prevBtn" title="Previous photo">‹</button>
-    <button class="nav-arrow nav-next" id="nextBtn" title="Next photo">›</button>
+    <button class="nav-arrow nav-prev" id="prevBtn" title="Previous photo" aria-label="Previous photo">‹</button>
+    <button class="nav-arrow nav-next" id="nextBtn" title="Next photo" aria-label="Next photo">›</button>
     <div id="rotationControls" class="rotation-controls" style="display:none;">
       <button class="rotation-btn" onclick="rotateImage('left')" title="Rotate Left">↺</button>
       <button class="rotation-btn" onclick="resetRotation()" title="Reset Rotation">⟳</button>
@@ -1312,7 +1333,7 @@
     </div>
   </div>
   <div class="meta-panel" id="metaPanel">
-    <div class="bottom-sheet-handle" id="sheetHandle" role="button" aria-label="Toggle information panel">
+    <div class="bottom-sheet-handle" id="sheetHandle" role="button" tabindex="0" aria-label="Toggle information panel">
       <div class="sheet-handle-bar"></div>
       <div class="sheet-handle-title" id="sheetHandleTitle">Show More Information</div>
     </div>
@@ -1321,7 +1342,7 @@
       <div class="traj-label" id="trajLabel"></div>
     </div>
     <div class="calendar-promo" id="calendarPromo">
-      <button class="calendar-dismiss" id="calendarDismiss" onclick="dismissCalendar()" title="Dismiss">&times;</button>
+      <button class="calendar-dismiss" id="calendarDismiss" onclick="dismissCalendar()" title="Dismiss" aria-label="Dismiss calendar promotion">&times;</button>
       <a class="calendar-cover-wrap" href="https://store.dftba.com/products/artemis-ii-2027-calendar" target="_blank" rel="noopener">
         <img class="calendar-cover" src="" alt="Farther — 2027 Calendar" id="calendarCover">
         <div class="calendar-countdown" id="calendarCountdown">
@@ -1391,6 +1412,7 @@
     </div>
   </div>
 </div>
+</main>
 
 
 <script>
@@ -2029,6 +2051,7 @@ const SCHEDULE = [
 
 // Load data from photos.js and initialize
 loadPhotoData();
+PHOTOS.sort((a, b) => a.t - b.t);
 (function() {
 
 let currentPhotoIdx = 0;
@@ -2506,7 +2529,7 @@ function updatePhoto() {
   if (mAct) {
     mEl.innerHTML = `<span class="activity-dot" style="background:${ACTIVITY_COLORS[mAct.a]}"></span><span class="activity-name">${mAct.l}</span>`;
   } else {
-    mEl.innerHTML = `<span class="activity-name" style="color:#555">Between activities</span>`;
+    mEl.innerHTML = `<span class="activity-name" style="color:#888">Between activities</span>`;
   }
   updateAudio(photo.t);
   renderTimeline();
@@ -2516,6 +2539,9 @@ function updatePhoto() {
   // Preload neighboring images via <link rel="prefetch">. Using prefetch (not
   // preload) lets the browser deprioritize these behind the current image,
   // so they load in idle time without competing for bandwidth.
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  const limitedData = connection && (connection.saveData || /(^|-)2g$/.test(connection.effectiveType || ''));
+  if (limitedData || window.matchMedia('(max-width: 768px)').matches) return;
   const preloadOffsets = [-1, 1, 2, 3];
   for (const off of preloadOffsets) {
     const idx = currentPhotoIdx + off;
@@ -2575,6 +2601,7 @@ const tipActivity = document.getElementById('tipActivity');
 const timelineTrack = document.getElementById('timelineTrack');
 
 function updateTooltip(e) {
+  if (isTimelineInteractiveTarget(e.target)) { hoverTip.style.display = 'none'; return; }
   if (isDragging) { hoverTip.style.display = 'none'; return; }
   const rect = this.getBoundingClientRect();
   const frac = (e.clientX - rect.left) / rect.width;
@@ -2586,7 +2613,7 @@ function updateTooltip(e) {
   if (act) {
     tipActivity.innerHTML = `<span class="tip-dot" style="background:${ACTIVITY_COLORS[act.a]}"></span><span class="tip-label">${act.l}</span>`;
   } else {
-    tipActivity.innerHTML = `<span class="tip-label" style="color:#555">No scheduled activity</span>`;
+    tipActivity.innerHTML = `<span class="tip-label" style="color:#888">No scheduled activity</span>`;
   }
   hoverTip.style.display = 'block';
   // Position at cursor X
@@ -2861,7 +2888,7 @@ document.querySelectorAll('[data-filter]').forEach(btn => {
     clearAllFilters();
     this.classList.add('active');
     const filter = this.dataset.filter;
-    filteredPhotos = filter === 'all' ? PHOTOS : filter === 'videos' ? PHOTOS.filter(p => p.v) : filter === 'exterior' ? PHOTOS.filter(p => p.exterior) : PHOTOS.filter(p => p.sc);
+    filteredPhotos = filter === 'all' ? PHOTOS : filter === 'videos' ? PHOTOS.filter(p => p.v) : filter === 'exterior' ? PHOTOS.filter(p => p.exterior) : filter === 'new' ? PHOTOS.filter(p => p.b === 2) : PHOTOS.filter(p => p.sc);
     currentPhotoIdx = 0;
     viewStart = T_START; viewEnd = T_END;
     updatePhoto();
@@ -3220,6 +3247,11 @@ if (sheetHandleEl) {
   sheetHandleEl.addEventListener('touchend', onPointerUp);
   sheetHandleEl.addEventListener('touchcancel', onPointerUp);
   sheetHandleEl.addEventListener('mousedown', onPointerDown);
+  sheetHandleEl.addEventListener('keydown', e => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    e.preventDefault();
+    applySheetState(sheetState === 'closed' ? 'middle' : sheetState === 'middle' ? 'open' : 'closed');
+  });
   window.addEventListener('mousemove', onPointerMove);
   window.addEventListener('mouseup', onPointerUp);
 }
@@ -3258,6 +3290,10 @@ window.addEventListener('resize', syncMobileLayout);
       <label class="filter-option">
         <input type="radio" name="filter-where" value="spacecraft">
         <span>Crew Photos Only</span>
+      </label>
+      <label class="filter-option">
+        <input type="radio" name="filter-where" value="new">
+        <span>New Crew Photos</span>
       </label>
       <label class="filter-option">
         <input type="radio" name="filter-where" value="exterior">

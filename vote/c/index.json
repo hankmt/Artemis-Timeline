@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "buckets": [
+    {
+      "key": "eclipse",
+      "slug": "eclipse",
+      "label": "Eclipse",
+      "count": 145,
+      "showcase": "ART002-E-15995"
+    },
+    {
+      "key": "earth_moon_together",
+      "slug": "earth-moon",
+      "label": "Earth + Moon",
+      "count": 101,
+      "showcase": "ART002-E-21221"
+    },
+    {
+      "key": "earth",
+      "slug": "earth",
+      "label": "Earth",
+      "count": 554,
+      "showcase": "ART002-E-23217"
+    },
+    {
+      "key": "moon_full",
+      "slug": "moon-full",
+      "label": "Full Moon",
+      "count": 1058,
+      "showcase": "ART002-E-24294"
+    },
+    {
+      "key": "moon_crescent",
+      "slug": "crescent",
+      "label": "Crescent Moon & Earth",
+      "count": 1394,
+      "showcase": "ART002-E-23339"
+    },
+    {
+      "key": "lunar_surface",
+      "slug": "lunar-surface",
+      "label": "Lunar Surface",
+      "count": 3045,
+      "showcase": "ART002-E-21327"
+    },
+    {
+      "key": "stars_galaxies",
+      "slug": "stars",
+      "label": "Stars & Galaxies",
+      "count": 226,
+      "showcase": "ART002-E-10650"
+    },
+    {
+      "key": "notable",
+      "slug": "notable",
+      "label": "Notable Highlights",
+      "count": 61,
+      "showcase": "ART002-E-26608"
+    }
+  ]
+}
