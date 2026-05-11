@@ -791,6 +791,55 @@
     vertical-align: middle;
   }
 
+  /* Smooth rotation transition */
+#currentPhoto, #currentVideo {
+  transition: transform 0.3s ease;
+}
+
+/* Styling for the rotation control buttons */
+.rotation-controls {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 100;
+  display: flex;
+  gap: 8px;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.rotation-controls:hover {
+  opacity: 1;
+}
+
+.rotation-btn {
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.rotation-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* Make the reset button have a subtle green tint to indicate 'returning to normal' */
+.rotation-btn:nth-child(2) {
+  border-color: rgba(0, 255, 0, 0.3);
+}
+
+.rotation-btn:nth-child(2):hover {
+  background: rgba(0, 100, 0, 0.8);
+}
+
   @media (max-width: 768px) {
     /* Mobile bottom-sheet vars — single source of truth for snap points */
     :root {
@@ -1269,6 +1318,11 @@
     </div>
     <button class="nav-arrow nav-prev" id="prevBtn" title="Previous photo" aria-label="Previous photo">‹</button>
     <button class="nav-arrow nav-next" id="nextBtn" title="Next photo" aria-label="Next photo">›</button>
+    <div id="rotationControls" class="rotation-controls" style="display:none;">
+      <button class="rotation-btn" onclick="rotateImage('left')" title="Rotate Left">↺</button>
+      <button class="rotation-btn" onclick="resetRotation()" title="Reset Rotation">⟳</button>
+      <button class="rotation-btn" onclick="rotateImage('right')" title="Rotate Right">↻</button>
+    </div>
     <div class="photo-links">
       <div class="desc-hover" id="descHover" style="display:none">
         <button class="photo-desc-toggle" id="descToggleBtn" type="button" onclick="toggleDescTip()" aria-expanded="false">
@@ -1429,6 +1483,7 @@ let PHOTO_DESCS = {};    // photoId → long description (for hover tooltip)
 let descPanelOpen = false; // tracks user's open/closed intent across navigation
 let PHOTOS = [];         // [{t, f, p, loc, cam, set, sc, b, v, ext, desc}, ...]
 let AUDIO = [];
+let currentRotation = 0;
 
 // Load photo/audio data from PHOTO_DATA global (set by photos.js)
 function loadPhotoData() {
@@ -2346,6 +2401,37 @@ function drawTrajectory(ts) {
   }
 }
 
+/**
+ * Rotates the current photo or video by 90 degrees.
+ * @param {string} direction - 'left' or 'right'
+ */
+function rotateImage(direction) {
+  if (direction === 'left') {
+    currentRotation -= 90;
+  } else {
+    currentRotation += 90;
+  }
+
+  const img = document.getElementById('currentPhoto');
+  const video = document.getElementById('currentVideo');
+  const transform = `rotate(${currentRotation}deg)`;
+
+  if (img) img.style.transform = transform;
+  if (video) video.style.transform = transform;
+}
+
+/**
+ * Resets the current photo/video rotation to 0 degrees.
+ */
+function resetRotation() {
+    currentRotation = 0;
+    const img = document.getElementById('currentPhoto'); // Use your actual ID
+    const video = document.getElementById('currentVideo'); // Use your actual ID
+    
+    if (img) img.style.transform = 'rotate(0deg)';
+    if (video) video.style.transform = 'rotate(0deg)';
+}
+
 // --- PHOTO VIEWER ---
 // Main display update: swaps image/video, updates metadata panel, draws
 // trajectory, triggers audio, preloads neighbors, and updates the URL hash.
@@ -2372,12 +2458,18 @@ function updatePhoto() {
   const nasaTitle = flickrId ? PHOTO_TITLES[flickrId] || '' : '';
   const imgEl = document.getElementById('currentPhoto');
   const vidEl = document.getElementById('currentVideo');
+  const rotationControls = document.getElementById('rotationControls');
+  
+  resetRotation();
+  if (rotationControls) {
+    rotationControls.style.display = 'flex';
+  }
   if (photo.v) {
     imgEl.style.display = 'none';
     vidEl.pause();
     vidEl.poster = MEDIA_BASE + 'web/' + encodeURIComponent(photo.f.replace(/\.mp4$/,'-poster.jpg'));
     vidEl.src = MEDIA_BASE + 'web/' + safeSrc;
-    vidEl.style.display = '';
+    vidEl.style.display = ''; 
   } else {
     vidEl.pause();
     vidEl.removeAttribute('src');
@@ -2876,6 +2968,8 @@ function navigateToHash() {
 
 navigateToHash();
 updatePhoto();
+window.rotateImage = rotateImage;
+window.resetRotation = resetRotation;
 
 window.addEventListener('hashchange', () => {
   if (navigateToHash()) { updatePhoto(); ensurePhotoInView(); }
