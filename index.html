@@ -684,10 +684,10 @@
     .desc-hover { display: none !important; }
   }
   /* Photo description button — top-left corner of the image, opens popup */
-  .photo-desc-btn {
+  .photo-desc-btn,
+  .photo-source-btn {
     position: absolute;
     top: 10px;
-    left: 10px;
     z-index: 4;
     background: rgba(0,0,0,0.55);
     -webkit-backdrop-filter: blur(6px);
@@ -703,8 +703,12 @@
     border-radius: 999px;
     font-family: inherit;
     transition: background 0.15s, border-color 0.15s;
+    text-decoration: none;
   }
-  .photo-desc-btn:hover {
+  .photo-desc-btn { left: 10px; }
+  .photo-source-btn { right: 10px; }
+  .photo-desc-btn:hover,
+  .photo-source-btn:hover {
     background: rgba(0,0,0,0.78);
     border-color: rgba(255,255,255,0.32);
   }
@@ -1266,6 +1270,7 @@
       <img id="currentPhoto" class="photo-img" alt="Current photo">
       <video id="currentVideo" class="photo-img" style="display:none" controls playsinline preload="none"></video>
       <button class="photo-desc-btn" id="photoDescBtn" type="button" onclick="showDescPopup()" style="display:none">Show Desc</button>
+      <a class="photo-source-btn" id="sourceLink" href="#" target="_blank" rel="noopener" style="display:none">Source</a>
     </div>
     <button class="nav-arrow nav-prev" id="prevBtn" title="Previous photo" aria-label="Previous photo">‹</button>
     <button class="nav-arrow nav-next" id="nextBtn" title="Next photo" aria-label="Next photo">›</button>
@@ -1421,6 +1426,33 @@ function getFlickrId(filename) {
   return base || null;
 }
 
+// Resolve the authoritative source page from known filename conventions.
+// Individual entries can override this with source_url when a file needs
+// manual attribution or came from a source that cannot be inferred.
+function getSourceUrl(photo) {
+  if (photo.source_url) return photo.source_url;
+
+  const file = photo.file || '';
+  const stem = file.replace(/\.[^.]+$/, '').replace(/~(large|orig)$/i, '');
+
+  let m = file.match(/^(\d{11})[_-]/);
+  if (m) return `https://www.flickr.com/photo.gne?id=${m[1]}`;
+
+  m = file.match(/^(\d{7})\.jpg$/i);
+  if (m) return `https://www.dvidshub.net/image/${m[1]}`;
+
+  m = stem.match(/^(ART\d+)-([A-Z])-(\d+)$/i);
+  if (m) {
+    return `https://eol.jsc.nasa.gov/SearchPhotos/photo.pl?mission=${m[1].toUpperCase()}&roll=${m[2].toUpperCase()}&frame=${m[3]}`;
+  }
+
+  if (/^(KSC-|NHQ|jsc|art\d+e\d+)/i.test(stem)) {
+    return `https://images.nasa.gov/details/${encodeURIComponent(stem)}`;
+  }
+
+  return null;
+}
+
 
 // --- DATA LOADING ---
 // These are populated by loadPhotoData() from the PHOTO_DATA global (photos.js).
@@ -1434,7 +1466,7 @@ let AUDIO = [];
 function loadPhotoData() {
   const data = PHOTO_DATA;
   data.photos.filter(p => p.enabled !== false).forEach(p => {
-    const entry = {t:edt(p.time),f:p.file,p:p.photographer,loc:p.location,cam:p.camera,set:p.settings,sc:!!p.spacecraft,b:p.batch||0};
+    const entry = {t:edt(p.time),f:p.file,p:p.photographer,loc:p.location,cam:p.camera,set:p.settings,sc:!!p.spacecraft,b:p.batch||0,src:getSourceUrl(p)};
     // Camera ID for filter buttons — use explicit camera_id from data if present,
     // otherwise derive from camera string (z9, gopro, iphone)
     if (p.camera_id) entry.cid = p.camera_id;
@@ -2363,6 +2395,7 @@ function updatePhoto() {
     document.getElementById('metaSettings').textContent = '—';
     document.getElementById('photoTitleRow').style.display = 'none';
     document.getElementById('descSection').style.display = 'none';
+    document.getElementById('sourceLink').style.display = 'none';
     renderTimeline();
     return;
   }
@@ -2424,6 +2457,14 @@ function updatePhoto() {
   document.getElementById('metaCamera').textContent = photo.cam;
   document.getElementById('metaSettings').textContent = photo.set;
   document.getElementById('photoCounter').textContent = `${currentPhotoIdx + 1} / ${filteredPhotos.length}`;
+  const sourceLink = document.getElementById('sourceLink');
+  if (photo.src) {
+    sourceLink.href = photo.src;
+    sourceLink.style.display = '';
+  } else {
+    sourceLink.removeAttribute('href');
+    sourceLink.style.display = 'none';
+  }
   if (photo.desc) {
     document.getElementById('descSection').style.display = '';
     document.getElementById('metaDesc').textContent = photo.desc;
