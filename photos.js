@@ -792,7 +792,7 @@ const PHOTO_DATA = {
       "video": true,
       "external": false,
       "title": "Email Trouble",
-      "flickr_desc": "The Artemis II crew discovers they have two Microsoft Outlooks open and neither microphone is working — a familiar IT moment, 3,300 miles from Earth. — via YouTube Shorts",
+      "flickr_desc": "The Artemis II crew discovers they have two Microsoft Outlooks open and neither one is working — a familiar IT moment, 3,300 miles from Earth. — via YouTube Shorts",
       "enabled": true
     },
     {
