@@ -712,6 +712,42 @@
     background: rgba(0,0,0,0.78);
     border-color: rgba(255,255,255,0.32);
   }
+  .photo-source-btn.disabled {
+    color: rgba(255,255,255,0.52);
+    cursor: not-allowed;
+    background: rgba(80,80,90,0.42);
+    border-color: rgba(255,255,255,0.12);
+  }
+  .photo-source-btn.disabled:hover,
+  .photo-source-btn.disabled:focus {
+    background: rgba(80,80,90,0.5);
+    border-color: rgba(255,255,255,0.18);
+  }
+  .photo-source-btn.disabled::after {
+    content: attr(data-tooltip);
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: min(260px, calc(100vw - 32px));
+    padding: 8px 10px;
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 6px;
+    background: rgba(10,10,20,0.94);
+    color: #ddd;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.35;
+    text-transform: none;
+    white-space: normal;
+    text-align: left;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  }
+  .photo-source-btn.disabled:hover::after,
+  .photo-source-btn.disabled:focus::after {
+    display: block;
+  }
 
   /* Long-description popup */
   .desc-popup-modal {
@@ -2460,10 +2496,20 @@ function updatePhoto() {
   const sourceLink = document.getElementById('sourceLink');
   if (photo.src) {
     sourceLink.href = photo.src;
+    sourceLink.classList.remove('disabled');
+    sourceLink.removeAttribute('aria-disabled');
+    sourceLink.removeAttribute('data-tooltip');
+    sourceLink.removeAttribute('tabindex');
+    sourceLink.title = 'Open source photo';
     sourceLink.style.display = '';
   } else {
     sourceLink.removeAttribute('href');
-    sourceLink.style.display = 'none';
+    sourceLink.classList.add('disabled');
+    sourceLink.setAttribute('aria-disabled', 'true');
+    sourceLink.setAttribute('data-tooltip', 'Source URL missing. Have the original? Please open an issue on GitHub.');
+    sourceLink.setAttribute('tabindex', '0');
+    sourceLink.title = 'Source URL missing. Have the original? Please open an issue on GitHub.';
+    sourceLink.style.display = '';
   }
   if (photo.desc) {
     document.getElementById('descSection').style.display = '';
