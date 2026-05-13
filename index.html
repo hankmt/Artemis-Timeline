@@ -260,12 +260,37 @@
     font-size: 10px;
     font-weight: 600;
     transition: all 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
   }
   .filter-btn.active { background: #1a237e; border-color: #3949ab; color: #fff; }
   .filter-sep { color: #333; font-size: 10px; margin: 0 4px; }
   .controls-spacer { flex: 1; }
   .info-text { color: #4FC3F7; font-size: 12px; font-weight: 600; }
   .audio-now { color: #888; font-size: 10px; font-style: italic; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  /* Audio checkbox indicator */
+  .audio-checkbox {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid currentColor;
+    border-radius: 3px;
+    position: relative;
+    flex-shrink: 0;
+  }
+  #muteBtn.audio-on .audio-checkbox::after {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 3px;
+    width: 4px;
+    height: 8px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+  }
 
   /* Centered nav bar above photo */
   .nav-bar {
@@ -912,26 +937,6 @@
       letter-spacing: 0.5px;
       text-transform: uppercase;
       flex-shrink: 0;
-    }
-    .audio-checkbox {
-      display: inline-block;
-      width: 14px;
-      height: 14px;
-      border: 1.5px solid currentColor;
-      border-radius: 3px;
-      position: relative;
-      flex-shrink: 0;
-    }
-    #muteBtn.audio-on .audio-checkbox::after {
-      content: '';
-      position: absolute;
-      top: 0px;
-      left: 3px;
-      width: 4px;
-      height: 8px;
-      border-right: 2px solid currentColor;
-      border-bottom: 2px solid currentColor;
-      transform: rotate(45deg);
     }
 
     .filter-popup-modal {
