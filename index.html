@@ -1469,7 +1469,7 @@ function getSourceUrl(photo) {
   if (photo.source_url) return photo.source_url;
 
   const stem = (photo.file || '').replace(/\.[^.]+$/, '').replace(/~(large|orig)$/i, '');
-  
+
   let m = stem.match(/^(\d{11})(?:[_-]|$)/);
   if (m) return `https://www.flickr.com/photo.gne?id=${m[1]}`;
 
