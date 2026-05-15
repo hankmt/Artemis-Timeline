@@ -1306,7 +1306,7 @@
       <img id="currentPhoto" class="photo-img" alt="Current photo">
       <video id="currentVideo" class="photo-img" style="display:none" controls playsinline preload="none"></video>
       <button class="photo-desc-btn" id="photoDescBtn" type="button" onclick="showDescPopup()" style="display:none">Show Desc</button>
-      <a class="photo-source-btn" id="sourceLink" href="#" target="_blank" rel="noopener" style="display:none">Source</a>
+      <a class="photo-source-btn" id="sourceLink" href="#" target="_blank" rel="noopener" style="display:none">View Source</a>
     </div>
     <button class="nav-arrow nav-prev" id="prevBtn" title="Previous photo" aria-label="Previous photo">‹</button>
     <button class="nav-arrow nav-next" id="nextBtn" title="Next photo" aria-label="Next photo">›</button>
@@ -2499,15 +2499,18 @@ function updatePhoto() {
     sourceLink.removeAttribute('aria-disabled');
     sourceLink.removeAttribute('data-tooltip');
     sourceLink.removeAttribute('tabindex');
-    sourceLink.title = 'Open source photo';
+    sourceLink.title = 'Open source page';
     sourceLink.style.display = '';
   } else {
     sourceLink.removeAttribute('href');
     sourceLink.classList.add('disabled');
     sourceLink.setAttribute('aria-disabled', 'true');
-    sourceLink.setAttribute('data-tooltip', 'Source URL missing. Have the original? Please open an issue on GitHub.');
+
+    const missingSourceMessage = 'Source page URL missing. Have the original? Please open an issue on GitHub.';
+    sourceLink.setAttribute('data-tooltip', missingSourceMessage);
     sourceLink.setAttribute('tabindex', '0');
-    sourceLink.title = 'Source URL missing. Have the original? Please open an issue on GitHub.';
+    sourceLink.title = missingSourceMessage;
+
     sourceLink.style.display = '';
   }
   if (photo.desc) {
