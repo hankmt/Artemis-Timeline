@@ -21,6 +21,32 @@ collection = {
 def ceil(numerator: int, demoninator: int):
     return -(numerator // -demoninator)
 
+def format_datetime(metadata: json):
+    unformatted_time = ""
+    unformatted_date = ""
+    formatted_time = ""
+    formatted_date = ""
+    formatted_datetime = ""
+
+    if "AVAIL:DateCreated" in metadata and len(metadata['AVAIL:DateCreated']) > len(unformatted_time):
+        unformatted_time = metadata['AVAIL:DateCreated']
+    if "EXIF:DateTimeOriginal" in metadata and len(metadata['EXIF:DateTimeOriginal']) > len(unformatted_time):
+        unformatted_time = metadata['EXIF:DateTimeOriginal']
+
+    if " " in unformatted_time or "T" in unformatted_time:
+        unformatted_date, formatted_time = re.split(" |T", unformatted_time.replace("Z", ""))
+    if ":" in unformatted_date:
+        formatted_date = unformatted_date.replace(':', '-')
+    if formatted_date != "" and formatted_time != "":
+        formatted_datetime = f"{formatted_date} {formatted_time}"
+    
+    return formatted_datetime
+
+def format_camera_settings(metadata: json):
+    settings = ""
+
+    return settings
+
 def get_metadata(nasa_id: str, file: str, original: str):
     SETTINGS_SEPERATOR = "·"
 
@@ -29,19 +55,15 @@ def get_metadata(nasa_id: str, file: str, original: str):
     metadata_file = session.get(metadata_location, headers = headers)
     metadata = json.loads(metadata_file.text)
 
-    unformatted_time = metadata['EXIF:DateTimeOriginal'] if "EXIF:DateTimeOriginal" in metadata else metadata['AVAIL:DateCreated'] if "AVAIL:DateCreated" in metadata else ""
-    unformatted_date, formatted_time = re.split(" |T", unformatted_time.replace("Z", ""))
-    formatted_datetime = f"{unformatted_date.replace(':', '-')} {formatted_time}"
-
     data = {
-        "time": formatted_datetime,
+        "time": format_datetime(metadata),
         "file": file.split("/")[-1],
         "file_url": file,
         "original_url": original,
         "photographer": metadata['EXIF:Artist'] if "EXIF:Artist" in metadata else metadata['AVAIL:Photographer'] if "AVAIL:Photographer" in metadata else "",
         "location": metadata['AVAIL:Location'],
         "camera": metadata['EXIF:Model'] if "EXIF:Model" in metadata else "",
-        "settings": "", #f"{metadata['EXIF:FocalLength']} {SETTINGS_SEPERATOR} {metadata['EXIF:LensInfo']} {SETTINGS_SEPERATOR} {metadata['EXIF:ExposureTime']}s {SETTINGS_SEPERATOR} ISO {metadata['EXIF:ISO']} {SETTINGS_SEPERATOR} {None}",
+        "settings": format_camera_settings(metadata), #f"{metadata['EXIF:FocalLength']} {SETTINGS_SEPERATOR} {metadata['EXIF:LensInfo']} {SETTINGS_SEPERATOR} {metadata['EXIF:ExposureTime']}s {SETTINGS_SEPERATOR} ISO {metadata['EXIF:ISO']} {SETTINGS_SEPERATOR} {None}",
         "spacecraft": True,
         "batch": 1,
         "title": metadata['AVAIL:Title'] if "AVAIL:Title" in metadata else "",
