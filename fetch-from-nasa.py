@@ -1,6 +1,16 @@
-import requests, json, re
+import json, re
+import requests
+from dotenv import dotenv_values
+from tqdm import tqdm
 
 BASE_URL = "https://images-api.nasa.gov"
+config = dotenv_values()
+
+headers = {
+    "Authorization": f"Bearer {config['TOKEN']}"
+}
+
+session = requests.Session()
 
 collection = {
     "photos": [],
@@ -8,12 +18,15 @@ collection = {
     "video": []
 }
 
+def ceil(numerator: int, demoninator: int):
+    return -(numerator // -demoninator)
+
 def get_metadata(nasa_id: str, file: str, original: str):
     SETTINGS_SEPERATOR = "·"
 
-    metadata_request = requests.get(f"{BASE_URL}/metadata/{nasa_id}")
+    metadata_request = session.get(f"{BASE_URL}/metadata/{nasa_id}", headers = headers)
     metadata_location = json.loads(metadata_request.text)['location']
-    metadata_file = requests.get(metadata_location)
+    metadata_file = session.get(metadata_location, headers = headers)
     metadata = json.loads(metadata_file.text)
 
     unformatted_time = metadata['EXIF:DateTimeOriginal'] if "EXIF:DateTimeOriginal" in metadata else metadata['AVAIL:DateCreated'] if "AVAIL:DateCreated" in metadata else ""
@@ -38,23 +51,33 @@ def get_metadata(nasa_id: str, file: str, original: str):
 
     return data
 
+def get_page_items(items: list):
+    for item in tqdm(items, desc = "Getting page items", unit = "item", leave = False, ascii = True):
+        item_id = item['data'][0]['nasa_id']
+
+        if "links" not in item:
+            continue
+
+        file_links = sorted(item['links'], key = lambda link: 0 if "size" not in link else link['size'])
+        metadata = get_metadata(item_id, file_links[-2]['href'], file_links[-1]['href'])
+
+        with open(f"web/{metadata['file']}", "wb") as file:
+            file.write(session.get(metadata['file_url'], headers = headers).content)
+
+        collection['photos'].append(metadata)
+
+# Begin execution
 album = "Artemis_II"
-print(f"Getting items from album {album}")
-album_request = requests.get(f"{BASE_URL}/album/{album}?media_type=image")
+print(f"Getting pages of items from album {album}")
+
+album_request = session.get(f"{BASE_URL}/album/{album}?media_type=image", headers = headers)
 album_data = json.loads(album_request.text)
-album_items = album_data['collection']['items']
+page_count = ceil(album_data['collection']['metadata']['total_hits'], 100)
 
-for item in album_items:
-    item_id = item['data'][0]['nasa_id']
-    print(f"Found item {item_id}")
-
-    file_links = sorted(item['links'], key = lambda link: 0 if "size" not in link else link['size'])
-    metadata = get_metadata(item_id, file_links[-2]['href'], file_links[-1]['href'])
-
-    with open(f"web/{metadata['file']}", "wb") as file:
-        file.write(requests.get(metadata['file_url']).content)
-
-    collection['photos'].append(metadata)
+for page_num in tqdm(range(2, page_count + 1), desc = "Getting pages data", initial = 1, unit = "page", ascii = True):
+    get_page_items(album_data['collection']['items'])
+    album_request = session.get(f"{BASE_URL}/album/{album}?page={page_num}&media_type=image", headers = headers)
+    album_data = json.loads(album_request.text)
 
 with open("photos.js", "w") as outfile:
     outfile.write(f"const PHOTO_DATA = {json.dumps(collection, indent = 4)}")
