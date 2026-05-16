@@ -32,8 +32,14 @@ def format_datetime(metadata: json):
         unformatted_time = metadata['AVAIL:DateCreated']
     if "EXIF:DateTimeOriginal" in metadata and len(metadata['EXIF:DateTimeOriginal']) > len(unformatted_time):
         unformatted_time = metadata['EXIF:DateTimeOriginal']
+    if "XMP:DateCreated" in metadata and len(metadata['XMP:DateCreated']) > len(unformatted_time):
+        unformatted_time = metadata['XMP:DateCreated']
 
-    if " " in unformatted_time or "T" in unformatted_time:
+    if (" " in unformatted_time and ":" in unformatted_time) or "T" in unformatted_time:
+        if "-" in unformatted_time:
+            strip_tz = re.search("(.*?)-\d\d:\d\d", unformatted_time)
+            if strip_tz and not "-" in strip_tz.group(0)[:-1]:
+                unformatted_time = strip_tz.group(0)[:-1]
         unformatted_date, formatted_time = re.split(" |T", unformatted_time.replace("Z", ""))
     if ":" in unformatted_date:
         formatted_date = unformatted_date.replace(':', '-')
@@ -74,14 +80,18 @@ def get_metadata(nasa_id: str, file: str, original: str):
     return data
 
 def get_page_items(items: list):
-    for item in tqdm(items, desc = "Getting page items", unit = "item", leave = False, ascii = True):
+    for item in tqdm(items, desc = "Page items downloaded", unit = "item", leave = False):
         item_id = item['data'][0]['nasa_id']
 
         if "links" not in item:
             continue
 
         file_links = sorted(item['links'], key = lambda link: 0 if "size" not in link else link['size'])
-        metadata = get_metadata(item_id, file_links[-2]['href'], file_links[-1]['href'])
+
+        if len(file_links) > 1:
+            metadata = get_metadata(item_id, file_links[-2]['href'], file_links[-1]['href'])
+        else:
+            metadata = get_metadata(item_id, file_links[-1]['href'], file_links[-1]['href'])
 
         with open(f"web/{metadata['file']}", "wb") as file:
             file.write(session.get(metadata['file_url'], headers = headers).content)
@@ -96,7 +106,7 @@ album_request = session.get(f"{BASE_URL}/album/{album}?media_type=image", header
 album_data = json.loads(album_request.text)
 page_count = ceil(album_data['collection']['metadata']['total_hits'], 100)
 
-for page_num in tqdm(range(2, page_count + 1), desc = "Getting pages data", initial = 1, unit = "page", ascii = True):
+for page_num in tqdm(range(2, page_count + 2), desc = "Pages downloaded", unit = "page"):
     get_page_items(album_data['collection']['items'])
     album_request = session.get(f"{BASE_URL}/album/{album}?page={page_num}&media_type=image", headers = headers)
     album_data = json.loads(album_request.text)
