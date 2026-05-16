@@ -119,6 +119,9 @@ def get_page_items(items: list):
         else:
             metadata = get_metadata(item_id, file_links[-1]['href'], file_links[-1]['href'])
 
+        if metadata['time'][:7] != "2026-04":
+            continue
+
         if not os.path.exists(f"web/{metadata['file']}"):
             with open(f"web/{metadata['file']}", "wb") as file:
                 file.write(session.get(metadata['file_url'], headers = headers).content)
