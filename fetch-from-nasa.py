@@ -1,7 +1,22 @@
+#!/usr/bin/env python3
+
+## Created by Michael Rice (xcalibur839). Version 1.0 created on 2026-05-16
+##
+## This Python script will attempt to download all images (TODO: audio, video) directly from the public NASA API, including metadata. Once the files have been
+## downloaded to the web/ folder, the metadata will be saved to photos.js.
+##
+## In order to use this script, you will need to install the dependencies with `pip install -r requirements.txt` and add your NASA API Token to a file called
+## .env with the content TOKEN=YourToken
+##
+## A NASA API Token is free, and can be obtained from https://api.nasa.gov/
+
+# Import internal libraries and external dependencies
 import json, re, os
 import requests
 from dotenv import dotenv_values
 from tqdm import tqdm
+
+# Define base constants and variables that will be used throughout the script
 
 BASE_URL = "https://images-api.nasa.gov"
 config = dotenv_values()
@@ -18,9 +33,13 @@ collection = {
     "video": []
 }
 
+# Define functions that will be used throughout the script
+
+# Get the ceiling of a division. e.g. 5/3 = 2 (1.66.. rounded up)
 def ceil(numerator: int, demoninator: int):
     return -(numerator // -demoninator)
 
+# Extract the date and time from the metadata and format it to align with the expected format for photos.js
 def format_datetime(metadata: json):
     unformatted_time = ""
     unformatted_date = ""
@@ -54,6 +73,7 @@ def format_datetime(metadata: json):
     
     return formatted_datetime
 
+# Extract the camera settings from the metadata and format it to align with the expected format for photos.js
 def format_camera_settings(metadata: json):
     SETTINGS_SEPERATOR = "·"
     settings = ""
@@ -81,6 +101,7 @@ def format_camera_settings(metadata: json):
     settings = f" {SETTINGS_SEPERATOR} ".join((focal_length, lens_info, exposure_time, iso))
     return settings
 
+# Get the metadata for a specific nasa_id item from NASA's metadata API endpoint
 def get_metadata(nasa_id: str, file: str, original: str):
     metadata_request = session.get(f"{BASE_URL}/metadata/{nasa_id}", headers = headers)
     metadata_location = json.loads(metadata_request.text)['location']
@@ -105,6 +126,7 @@ def get_metadata(nasa_id: str, file: str, original: str):
 
     return data
 
+# Get all items from a page provided by NASA's API
 def get_page_items(items: list):
     for item in tqdm(items, desc = "Page items downloaded", unit = "item", leave = False):
         item_id = item['data'][0]['nasa_id']
@@ -128,18 +150,23 @@ def get_page_items(items: list):
 
         collection['photos'].append(metadata)
 
-# Begin execution
+# Begin script execution
+
+# Specify the album name
 album = "Artemis_II"
 print(f"Getting pages of items from album {album}")
 
+# Get the first page of data and calculate the page count
 album_request = session.get(f"{BASE_URL}/album/{album}?media_type=image", headers = headers)
 album_data = json.loads(album_request.text)
 page_count = ceil(album_data['collection']['metadata']['total_hits'], 100)
 
+# Get the data from every item on the page. If there is a next page, repeat for that page as well
 for page_num in tqdm(range(2, page_count + 2), desc = "Pages downloaded", unit = "page"):
     get_page_items(album_data['collection']['items'])
     album_request = session.get(f"{BASE_URL}/album/{album}?page={page_num}&media_type=image", headers = headers)
     album_data = json.loads(album_request.text)
 
+# Now that all images and metadata have been collected, save the metadata to photos.js in the expected format
 with open("photos.js", "w") as outfile:
     outfile.write(f"const PHOTO_DATA = {json.dumps(collection, indent = 4)}")
