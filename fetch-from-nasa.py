@@ -32,17 +32,23 @@ def format_datetime(metadata: json):
         unformatted_time = metadata['AVAIL:DateCreated']
     if "EXIF:DateTimeOriginal" in metadata and len(metadata['EXIF:DateTimeOriginal']) > len(unformatted_time):
         unformatted_time = metadata['EXIF:DateTimeOriginal']
+    if "XMP:CreateDate" in metadata and len(metadata['XMP:CreateDate']) > len(unformatted_time):
+        unformatted_time = metadata['XMP:CreateDate']
     if "XMP:DateCreated" in metadata and len(metadata['XMP:DateCreated']) > len(unformatted_time):
         unformatted_time = metadata['XMP:DateCreated']
 
     if (" " in unformatted_time and ":" in unformatted_time) or "T" in unformatted_time:
         if "-" in unformatted_time:
-            strip_tz = re.search("(.*?)-\d\d:\d\d", unformatted_time)
-            if strip_tz and not "-" in strip_tz.group(0)[:-1]:
-                unformatted_time = strip_tz.group(0)[:-1]
+            strip_tz = re.search(".*?(?=-\d\d:\d\d)", unformatted_time)
+            if strip_tz and not "-" in strip_tz.group(0):
+                unformatted_time = strip_tz.group(0)
         unformatted_date, formatted_time = re.split(" |T", unformatted_time.replace("Z", ""))
+    
     if ":" in unformatted_date:
         formatted_date = unformatted_date.replace(':', '-')
+    else:
+        formatted_date = unformatted_date
+
     if formatted_date != "" and formatted_time != "":
         formatted_datetime = f"{formatted_date} {formatted_time}"
     
