@@ -1196,6 +1196,17 @@
     #header .disclaimer { display: none; }
     .meta-section { min-width: unset; }
   }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 </style>
 <script src="photos.js"></script>
 </head>
@@ -1236,7 +1247,7 @@
 
 <!-- Controls row -->
 <div class="controls-row">
-  <button class="filter-dropdown-trigger" id="filterDropdownTrigger" type="button" onclick="openFilterPopup()">
+  <button class="filter-dropdown-trigger" id="filterDropdownTrigger" type="button" onclick="openFilterPopup()" aria-haspopup="dialog" aria-expanded="false">
     <span id="filterDropdownLabel">Showing All Photos and Videos</span>
     <span class="filter-dropdown-chevron" aria-hidden="true">&#x2039;</span>
   </button>
@@ -1253,7 +1264,7 @@
   <span class="filter-sep">|</span>
   <button class="filter-btn" data-filter="videos">Videos</button>
   <span class="filter-sep">|</span>
-  <button class="filter-btn" id="muteBtn" title="Toggle mission audio"><span class="audio-checkbox" aria-hidden="true"></span><span>PLAY AUDIO</span></button>
+  <button class="filter-btn" id="muteBtn" title="Toggle mission audio" aria-pressed="false"><span class="audio-checkbox" aria-hidden="true"></span><span>PLAY AUDIO</span></button>
   <span class="audio-now" id="audioNow"></span>
   <div class="controls-spacer"></div>
   <span class="info-text" id="photoCounter">1 / 220</span>
@@ -1279,12 +1290,13 @@
     </div>
   </div>
   <div class="meta-panel" id="metaPanel">
-    <div class="bottom-sheet-handle" id="sheetHandle" role="button" tabindex="0" aria-label="Toggle information panel">
+    <h2 class="sr-only">Mission Details & Metadata</h2>
+    <div class="bottom-sheet-handle" id="sheetHandle" role="button" tabindex="0" aria-label="Toggle information panel" aria-expanded="false">
       <div class="sheet-handle-bar"></div>
       <div class="sheet-handle-title" id="sheetHandleTitle">Show More Information</div>
     </div>
     <div class="traj-section">
-      <canvas id="trajCanvas" width="400" height="200"></canvas>
+      <canvas id="trajCanvas" width="400" height="200" role="img" aria-label="Interactive spacecraft trajectory diagram showing distance between Earth and Moon."></canvas>
       <div class="traj-label" id="trajLabel"></div>
     </div>
     <div class="calendar-promo" id="calendarPromo">
@@ -2377,6 +2389,7 @@ function updatePhoto() {
     vidEl.pause();
     vidEl.poster = MEDIA_BASE + 'web/' + encodeURIComponent(photo.f.replace(/\.mp4$/,'-poster.jpg'));
     vidEl.src = MEDIA_BASE + 'web/' + safeSrc;
+    vidEl.setAttribute('aria-label', nasaTitle || (photo.p + ' — ' + photo.loc));
     vidEl.style.display = '';
   } else {
     vidEl.pause();
@@ -2825,12 +2838,17 @@ document.querySelectorAll('[data-cam]').forEach(btn => {
 document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowLeft' && currentPhotoIdx > 0) { currentPhotoIdx--; updatePhoto(); ensurePhotoInView(); }
   if (e.key === 'ArrowRight' && currentPhotoIdx < filteredPhotos.length - 1) { currentPhotoIdx++; updatePhoto(); ensurePhotoInView(); }
+  if (e.key === 'Escape') {
+    closeFilterPopup();
+    closeDescPopup();
+  }
 });
 
 document.getElementById('muteBtn').addEventListener('click', function() {
   audioMuted = !audioMuted;
   this.classList.toggle('audio-on', !audioMuted);
   this.classList.toggle('active', !audioMuted);
+  this.setAttribute('aria-pressed', !audioMuted ? 'true' : 'false');
   document.getElementById('audioDots').style.display = audioMuted ? 'none' : 'block';
   if (audioMuted && currentAudio) {
     currentAudio.pause();
@@ -2930,10 +2948,14 @@ window.openFilterPopup = function() {
   syncFilterPopupState();
   const m = document.getElementById('filterPopupModal');
   if (m) m.style.display = 'flex';
+  const trigger = document.getElementById('filterDropdownTrigger');
+  if (trigger) trigger.setAttribute('aria-expanded', 'true');
 };
 window.closeFilterPopup = function() {
   const m = document.getElementById('filterPopupModal');
   if (m) m.style.display = 'none';
+  const trigger = document.getElementById('filterDropdownTrigger');
+  if (trigger) trigger.setAttribute('aria-expanded', 'false');
 };
 
 function syncFilterPopupState() {
@@ -3066,6 +3088,9 @@ function applySheetState(state) {
   document.body.classList.remove('sheet-state-open', 'sheet-state-middle', 'sheet-state-closed');
   document.body.classList.add('sheet-state-' + state);
   sheetEl.style.top = '';
+  if (sheetHandleEl) {
+    sheetHandleEl.setAttribute('aria-expanded', state !== 'closed' ? 'true' : 'false');
+  }
 }
 
 function snapPxFor(state) {
@@ -3181,11 +3206,12 @@ window.addEventListener('resize', syncMobileLayout);
 </script>
 
 <!-- Mobile filter popup -->
-<div class="filter-popup-modal" id="filterPopupModal" style="display:none">
-  <button class="filter-popup-close" type="button" onclick="closeFilterPopup()">
+<div class="filter-popup-modal" id="filterPopupModal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="filterPopupHeading">
+  <button class="filter-popup-close" type="button" onclick="closeFilterPopup()" aria-label="Close filters dialog">
     <span>Close</span>
     <span class="filter-popup-close-chevron" aria-hidden="true">&#x2039;</span>
   </button>
+  <h3 id="filterPopupHeading" class="sr-only">Filter Photos and Videos</h3>
   <div class="filter-popup-body">
     <div class="filter-section">
       <h4>Where Media Was Taken</h4>
