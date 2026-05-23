@@ -220,17 +220,13 @@ a:hover { text-decoration: underline; }
 }
 
 /* Toggle switch */
-.switch input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+.switch {
+  position: relative;
+  width: 46px;
+  height: 26px;
+  cursor: pointer;
 }
+.switch input { display: none; }
 .switch .slider {
   position: absolute;
   inset: 0;
@@ -249,10 +245,6 @@ a:hover { text-decoration: underline; }
 }
 .switch input:checked + .slider { background: var(--enabled); }
 .switch input:checked + .slider::before { transform: translateX(20px); }
-.switch input:focus-visible + .slider {
-  outline: 2px solid #4FC3F7;
-  outline-offset: 2px;
-}
 
 /* Card body */
 .card-body { flex: 1; min-width: 0; }
@@ -394,17 +386,6 @@ a:hover { text-decoration: underline; }
   .card { flex-wrap: wrap; }
   .card-field input.title-input { width: 100%; }
   .card-field input.med { width: 100%; }
-}
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
 }
 </style>
 <script src="photos.js"></script>
