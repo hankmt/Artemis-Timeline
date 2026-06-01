@@ -55,6 +55,16 @@ The viewer identifies photos by filename patterns:
 
 Open `admin.html` to browse and edit the photo database. You can search, filter by status (enabled/disabled/videos/crew photos), toggle individual entries on and off, and edit all metadata fields. Changes are exported as a new `photos.js` file.
 
+## Star History
+
+<a href="https://www.star-history.com/?repos=hankmt%2FArtemis-Timeline&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=hankmt/Artemis-Timeline&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=hankmt/Artemis-Timeline&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=hankmt/Artemis-Timeline&type=date&legend=top-left" />
+ </picture>
+</a>
+
 ## Built with
 
 [Claude Code](https://claude.ai/claude-code) with Opus 4.6. JPL Horizons API for flight data. Flickr API for pulling image descriptions.
