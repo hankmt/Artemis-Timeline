@@ -20,7 +20,7 @@ Images and audio are hosted on Cloudflare R2 and referenced via `MEDIA_BASE` at 
 ## Adding photos
 
 1. Create a 1600px-wide web version of your image: `convert original.jpg -resize 1600x -quality 85 web/filename.jpg`
-2. Upload it to the `web/` folder in the R2 bucket (via the Cloudflare dashboard or `wrangler r2 object put artemistimeline/web/filename.jpg --file=web/filename.jpg`).
+2. Upload it to the `web/` folder in the R2 bucket by running `pnpm r2:web:sync`, or let the GitHub Action handle it automatically on push. The same uploader also syncs mission audio from `audio/` into the bucket's `audio/` prefix.
 3. Open `admin.html` in your browser and click **+ Add Photo**.
 4. Fill in the filename, timestamp, photographer, camera info, etc. The entry will sort into chronological position automatically.
 5. Click **Export photos.js** to download the updated data file.
