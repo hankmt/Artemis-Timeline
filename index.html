@@ -387,6 +387,7 @@
   .photo-links-row .desc-hover {
     flex: 1;
     min-width: 0;
+    width: auto;
   }
   .photo-links-row .photo-source-btn-inline {
     display: flex;
@@ -1230,6 +1231,24 @@
     .nav-next { right: 0; }
     .photo-desc-toggle { padding: 12px 14px; }
     .desc-hover-tip { font-size: 13px; line-height: 1.65; }
+    /* Source link inside desc-hover on mobile */
+    .desc-hover .photo-source-btn-inline {
+      display: block;
+      padding: 12px 14px;
+      border: 0;
+      border-top: 1px solid #1a1a2e;
+      border-radius: 0;
+      background: transparent;
+      color: #4FC3F7;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+    .desc-hover .photo-source-btn-inline.disabled {
+      color: rgba(255,255,255,0.3);
+    }
 
     /* Calendar promo — inline inside the sheet (original template) */
     .calendar-promo {
@@ -3255,8 +3274,10 @@ const MOBILE_MQ = window.matchMedia('(max-width: 768px)');
 const sheetEl = document.getElementById('metaPanel');
 const sheetHandleEl = document.getElementById('sheetHandle');
 const descHoverEl = document.getElementById('descHover');
+const sourceLinkEl = document.getElementById('sourceLink');
 const trajSectionEl = document.querySelector('.traj-section');
 const photoLinksEl = document.querySelector('.photo-side .photo-links');
+const photoLinksRowEl = document.querySelector('.photo-links-row');
 
 let sheetState = 'middle'; // 'open' | 'middle' | 'closed'
 
@@ -3285,9 +3306,17 @@ function relocateDescHoverForViewport() {
       // Place it right after the orion map so it's grouped with photo info.
       trajSectionEl.insertAdjacentElement('afterend', descHoverEl);
     }
+    // Put source link inside descHover on mobile so it's visible in the sheet
+    if (sourceLinkEl && sourceLinkEl.parentElement !== descHoverEl) {
+      descHoverEl.appendChild(sourceLinkEl);
+    }
   } else {
-    if (photoLinksEl && descHoverEl.parentElement !== photoLinksEl) {
-      photoLinksEl.appendChild(descHoverEl);
+    // On desktop, put both back in the side-by-side row
+    if (photoLinksRowEl && descHoverEl.parentElement !== photoLinksRowEl) {
+      photoLinksRowEl.prepend(descHoverEl);
+    }
+    if (photoLinksRowEl && sourceLinkEl && sourceLinkEl.parentElement !== photoLinksRowEl) {
+      photoLinksRowEl.appendChild(sourceLinkEl);
     }
   }
 }
