@@ -260,12 +260,37 @@
     font-size: 10px;
     font-weight: 600;
     transition: all 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
   }
   .filter-btn.active { background: #1a237e; border-color: #3949ab; color: #fff; }
   .filter-sep { color: #333; font-size: 10px; margin: 0 4px; }
   .controls-spacer { flex: 1; }
   .info-text { color: #4FC3F7; font-size: 12px; font-weight: 600; }
   .audio-now { color: #888; font-size: 10px; font-style: italic; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  /* Audio checkbox indicator */
+  .audio-checkbox {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid currentColor;
+    border-radius: 3px;
+    position: relative;
+    flex-shrink: 0;
+  }
+  #muteBtn.audio-on .audio-checkbox::after {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 3px;
+    width: 4px;
+    height: 8px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+  }
 
   /* Centered nav bar above photo */
   .nav-bar {
@@ -325,6 +350,7 @@
     min-height: 0;
     overflow: hidden;
     position: relative;
+    touch-action: pan-y;
   }
   .photo-img {
     max-width: 100%;
@@ -334,14 +360,16 @@
   }
   .photo-img.fullscreen {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 50;
-    width: 100%;
-    height: 100%;
+    inset: 0;
+    z-index: 1300;
+    width: 100vw;
+    height: var(--vh);
+    max-width: none;
+    max-height: none;
     object-fit: contain;
     background-color: #0d0d1a;
+    border-radius: 0;
+    cursor: zoom-out;
   }
   /* Prev/Next arrow overlays on photo */
   .nav-arrow {
@@ -375,6 +403,45 @@
     gap: 8px;
     padding-top: 10px;
     flex-shrink: 0;
+  }
+  .photo-links-row {
+    display: flex;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .photo-links-row .desc-hover {
+    flex: 1;
+    min-width: 0;
+    width: auto;
+  }
+  .photo-links-row .photo-source-btn-inline {
+    display: flex;
+    align-items: center;
+    padding: 11px 14px;
+    border: 1px solid #1a1a2e;
+    background: rgba(0,0,0,0.25);
+    border-radius: 6px;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .photo-links-row .photo-source-btn-inline:hover {
+    background: rgba(255,255,255,0.03);
+    border-color: rgba(255,255,255,0.25);
+  }
+  .photo-links-row .photo-source-btn-inline.disabled {
+    color: rgba(255,255,255,0.4);
+    cursor: not-allowed;
+  }
+  .photo-links-row .photo-source-btn-inline.disabled:hover {
+    background: rgba(0,0,0,0.25);
+    border-color: #1a1a2e;
   }
   .data-sources {
     margin-top: auto;
@@ -703,6 +770,7 @@
     border-radius: 999px;
     font-family: inherit;
     transition: background 0.15s, border-color 0.15s;
+    text-decoration: none;
   }
   .photo-desc-btn:hover {
     background: rgba(0,0,0,0.78);
@@ -794,7 +862,7 @@
   @media (max-width: 768px) {
     /* Mobile bottom-sheet vars — single source of truth for snap points */
     :root {
-      --sheet-handle-h: 44px;
+      --sheet-handle-h: 84px;
       --sheet-middle-h: 192px; /* orion map flush at top + a little chrome */
       /* y-coord of the sheet's top edge; default matches the middle snap so
          pre-JS layout already reserves the right space for the photo. */
@@ -816,7 +884,6 @@
     .timeline-playhead { top: 0; height: 34px; }
     /* Keep activity bars, audio dots, and day labels visible on mobile */
     .timeline-labels { font-size: 8px; margin-top: 4px; }
-    .timeline-audio-dots { display: block; }
     .audio-dot { width: 6px; height: 6px; top: 2px; transform: translateX(-3px); }
     .photo-dot { width: 6px; height: 6px; top: 2px; transform: translateX(-3px); }
     .photo-dot.active { width: 8px; height: 8px; top: 1px; transform: translateX(-4px); }
@@ -840,7 +907,7 @@
        unchanged) but visually leaves the row on mobile. */
     #photoCounter {
       position: fixed;
-      bottom: calc(var(--vh) - var(--sheet-top-y) + 10px);
+      bottom: calc(var(--vh) - var(--sheet-top-y) + 32px);
       left: 50%;
       transform: translateX(-50%);
       z-index: 4;
@@ -857,6 +924,10 @@
       text-transform: uppercase;
       pointer-events: none;
       transition: bottom 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+    body.sheet-state-open #photoCounter,
+    body.sheet-state-middle #photoCounter {
+      display: none;
     }
     .filter-dropdown-trigger {
       display: flex;
@@ -912,26 +983,6 @@
       letter-spacing: 0.5px;
       text-transform: uppercase;
       flex-shrink: 0;
-    }
-    .audio-checkbox {
-      display: inline-block;
-      width: 14px;
-      height: 14px;
-      border: 1.5px solid currentColor;
-      border-radius: 3px;
-      position: relative;
-      flex-shrink: 0;
-    }
-    #muteBtn.audio-on .audio-checkbox::after {
-      content: '';
-      position: absolute;
-      top: 0px;
-      left: 3px;
-      width: 4px;
-      height: 8px;
-      border-right: 2px solid currentColor;
-      border-bottom: 2px solid currentColor;
-      transform: rotate(45deg);
     }
 
     .filter-popup-modal {
@@ -1021,12 +1072,12 @@
       padding: 0;
       gap: 0;
       overflow: hidden;
-      padding-bottom: calc(min(var(--vh) - var(--sheet-top-y), var(--sheet-middle-h)) + 4px);
+      padding-bottom: calc(var(--vh) - var(--sheet-top-y) + 4px);
     }
     /* Middle snap: let the photo extend slightly past the sheet's top edge
        so a sliver of image peeks through the rounded sheet corners. */
     body.sheet-state-middle .viewer {
-      padding-bottom: calc(var(--sheet-middle-h) - 24px);
+      padding-bottom: calc(var(--sheet-middle-h) + 4px);
     }
     .photo-side {
       flex: 1;
@@ -1044,6 +1095,11 @@
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
+    }
+    body.photo-fullscreen-active .photo-desc-btn,
+    body.photo-fullscreen-active #photoCounter,
+    body.photo-fullscreen-active .meta-panel {
+      display: none !important;
     }
     /* descHover lives inside the bottom sheet on mobile (moved by JS) */
     .photo-side .photo-links { display: none; }
@@ -1072,8 +1128,7 @@
       -webkit-overflow-scrolling: touch;
       overscroll-behavior: contain;
       transition: top 0.32s cubic-bezier(0.32, 0.72, 0, 1);
-      /* default = middle */
-      top: calc(var(--vh) - var(--sheet-middle-h));
+      top: calc(var(--vh) - var(--sheet-handle-h) - var(--safe-bottom));
     }
     .meta-panel.sheet-open    { top: 35vh; }
     .meta-panel.sheet-middle  { top: calc(var(--vh) - var(--sheet-middle-h)); }
@@ -1101,6 +1156,14 @@
       -webkit-tap-highlight-color: transparent;
       touch-action: none;
       background: transparent;
+    }
+    .meta-panel:not(.sheet-closed) .bottom-sheet-handle {
+      position: sticky;
+      order: 0;
+      top: 0;
+      flex-shrink: 0;
+      background: #0a0a14;
+      padding: 8px 16px 10px;
     }
     .meta-panel.sheet-dragging .bottom-sheet-handle { cursor: grabbing; }
     .sheet-handle-bar {
@@ -1132,28 +1195,27 @@
        on top of it. */
     .traj-section {
       order: 1;
-      margin: 0;
-      padding: 0;
-      border: none;
-      border-radius: 14px 14px 0 0;
+      margin: 8px 6px 0;
+      padding: 6px;
+      border: 1px solid #1a1a2e;
+      border-radius: 8px;
       background: rgba(0,0,0,0.35);
       flex-shrink: 0;
-      max-height: 140px;
-      overflow: hidden;
+      max-height: none;
+      overflow: visible;
     }
     .traj-section canvas {
-      border-radius: 14px 14px 0 0;
+      border-radius: 0;
       width: 100%;
-      height: 122px; /* leaves room for the trajectory label, total ≤140px */
-      object-fit: contain;
+      height: auto;
       display: block;
     }
-    .traj-label { padding-bottom: 4px; }
+    .traj-label { padding-bottom: 0; }
     .meta-panel > .calendar-promo { order: 2; margin: 10px 12px 0; flex-shrink: 0; }
     .desc-hover { order: 3; margin: 10px 12px 0; width: auto; flex-shrink: 0; }
     .meta-panel > .meta-section:not(#descSection) { order: 4; margin: 10px 12px 0; flex-shrink: 0; }
     .meta-panel > #descSection { order: 5; margin: 10px 12px 0; flex-shrink: 0; }
-    .meta-panel > .data-sources { order: 6; margin-top: 14px; flex-shrink: 0; }
+    .meta-panel > .data-sources { order: 8; margin-top: 14px; flex-shrink: 0; }
 
     /* Title only visible when sheet is closed */
     .sheet-handle-title { display: none; }
@@ -1173,6 +1235,27 @@
     .nav-next { right: 0; }
     .photo-desc-toggle { padding: 12px 14px; }
     .desc-hover-tip { font-size: 13px; line-height: 1.65; }
+    /* Source link at bottom of sheet on mobile */
+    .meta-panel > .photo-source-btn-inline {
+      display: block;
+      order: 6;
+      margin: 12px 12px 16px;
+      padding: 12px 14px;
+      border: 1px solid #1a1a2e;
+      border-radius: 6px;
+      background: rgba(0,0,0,0.25);
+      color: #4FC3F7;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      text-decoration: none;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .meta-panel > .photo-source-btn-inline.disabled {
+      color: rgba(255,255,255,0.3);
+    }
 
     /* Calendar promo — inline inside the sheet (original template) */
     .calendar-promo {
@@ -1195,6 +1278,17 @@
     #header .subtitle { font-size: 10px; }
     #header .disclaimer { display: none; }
     .meta-section { min-width: unset; }
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 </style>
 <script src="photos.js"></script>
@@ -1236,7 +1330,7 @@
 
 <!-- Controls row -->
 <div class="controls-row">
-  <button class="filter-dropdown-trigger" id="filterDropdownTrigger" type="button" onclick="openFilterPopup()">
+  <button class="filter-dropdown-trigger" id="filterDropdownTrigger" type="button" onclick="openFilterPopup()" aria-haspopup="dialog" aria-expanded="false">
     <span id="filterDropdownLabel">Showing All Photos and Videos</span>
     <span class="filter-dropdown-chevron" aria-hidden="true">&#x2039;</span>
   </button>
@@ -1253,7 +1347,7 @@
   <span class="filter-sep">|</span>
   <button class="filter-btn" data-filter="videos">Videos</button>
   <span class="filter-sep">|</span>
-  <button class="filter-btn" id="muteBtn" title="Toggle mission audio"><span class="audio-checkbox" aria-hidden="true"></span><span>PLAY AUDIO</span></button>
+  <button class="filter-btn" id="muteBtn" title="Toggle mission audio" aria-pressed="false"><span class="audio-checkbox" aria-hidden="true"></span><span>PLAY AUDIO</span></button>
   <span class="audio-now" id="audioNow"></span>
   <div class="controls-spacer"></div>
   <span class="info-text" id="photoCounter">1 / 220</span>
@@ -1270,21 +1364,25 @@
     <button class="nav-arrow nav-prev" id="prevBtn" title="Previous photo" aria-label="Previous photo">‹</button>
     <button class="nav-arrow nav-next" id="nextBtn" title="Next photo" aria-label="Next photo">›</button>
     <div class="photo-links">
-      <div class="desc-hover" id="descHover" style="display:none">
-        <button class="photo-desc-toggle" id="descToggleBtn" type="button" onclick="toggleDescTip()" aria-expanded="false">
-          Image Description
-        </button>
-        <div class="desc-hover-tip" id="descHoverTip"></div>
+      <div class="photo-links-row">
+        <div class="desc-hover" id="descHover" style="display:none">
+          <button class="photo-desc-toggle" id="descToggleBtn" type="button" onclick="toggleDescTip()" aria-expanded="false">
+            Image Description
+          </button>
+          <div class="desc-hover-tip" id="descHoverTip"></div>
+        </div>
+        <a class="photo-source-btn-inline" id="sourceLink" href="#" target="_blank" rel="noopener" style="display:none">Go to Image Source</a>
       </div>
     </div>
   </div>
   <div class="meta-panel" id="metaPanel">
-    <div class="bottom-sheet-handle" id="sheetHandle" role="button" tabindex="0" aria-label="Toggle information panel">
+    <h2 class="sr-only">Mission Details & Metadata</h2>
+    <div class="bottom-sheet-handle" id="sheetHandle" role="button" tabindex="0" aria-label="Toggle information panel" aria-expanded="false">
       <div class="sheet-handle-bar"></div>
       <div class="sheet-handle-title" id="sheetHandleTitle">Show More Information</div>
     </div>
     <div class="traj-section">
-      <canvas id="trajCanvas" width="400" height="200"></canvas>
+      <canvas id="trajCanvas" width="400" height="200" role="img" aria-label="Interactive spacecraft trajectory diagram showing distance between Earth and Moon."></canvas>
       <div class="traj-label" id="trajLabel"></div>
     </div>
     <div class="calendar-promo" id="calendarPromo">
@@ -1421,6 +1519,32 @@ function getFlickrId(filename) {
   return base || null;
 }
 
+// Resolve the authoritative source page from known filename conventions.
+// Individual entries can override this with source_url when a file needs
+// manual attribution or came from a source that cannot be inferred.
+function getSourceUrl(photo) {
+  if (photo.source_url) return photo.source_url;
+
+  const stem = (photo.file || '').replace(/\.[^.]+$/, '').replace(/~(large|orig)$/i, '');
+
+  let m = stem.match(/^(\d{11})(?:[_-]|$)/);
+  if (m) return `https://www.flickr.com/photo.gne?id=${m[1]}`;
+
+  m = stem.match(/^(\d{7})$/);
+  if (m) return `https://www.dvidshub.net/image/${m[1]}`;
+
+  m = stem.match(/^(ART\d+)-([A-Z])-(\d+)$/i);
+  if (m) {
+    return `https://eol.jsc.nasa.gov/SearchPhotos/photo.pl?mission=${m[1].toUpperCase()}&roll=${m[2].toUpperCase()}&frame=${m[3]}`;
+  }
+
+  if (/^(KSC-|NHQ|jsc|art\d+e\d+)/i.test(stem)) {
+    return `https://images.nasa.gov/details/${encodeURIComponent(stem)}`;
+  }
+
+  return null;
+}
+
 
 // --- DATA LOADING ---
 // These are populated by loadPhotoData() from the PHOTO_DATA global (photos.js).
@@ -1434,7 +1558,7 @@ let AUDIO = [];
 function loadPhotoData() {
   const data = PHOTO_DATA;
   data.photos.filter(p => p.enabled !== false).forEach(p => {
-    const entry = {t:edt(p.time),f:p.file,p:p.photographer,loc:p.location,cam:p.camera,set:p.settings,sc:!!p.spacecraft,b:p.batch||0};
+    const entry = {t:edt(p.time),f:p.file,p:p.photographer,loc:p.location,cam:p.camera,set:p.settings,sc:!!p.spacecraft,b:p.batch||0,src:getSourceUrl(p)};
     // Camera ID for filter buttons — use explicit camera_id from data if present,
     // otherwise derive from camera string (z9, gopro, iphone)
     if (p.camera_id) entry.cid = p.camera_id;
@@ -2225,7 +2349,7 @@ function drawTrajectory(ts) {
   const dpr = window.devicePixelRatio || 1;
   const rect = canvas.getBoundingClientRect();
   const W = rect.width;
-  const H = Math.round(W * 0.32); // wide & short
+  const H = Math.round(W * 0.32);
   canvas.width = W * dpr;
   canvas.height = H * dpr;
   canvas.style.height = H + 'px';
@@ -2363,6 +2487,7 @@ function updatePhoto() {
     document.getElementById('metaSettings').textContent = '—';
     document.getElementById('photoTitleRow').style.display = 'none';
     document.getElementById('descSection').style.display = 'none';
+    document.getElementById('sourceLink').style.display = 'none';
     renderTimeline();
     return;
   }
@@ -2372,11 +2497,14 @@ function updatePhoto() {
   const nasaTitle = flickrId ? PHOTO_TITLES[flickrId] || '' : '';
   const imgEl = document.getElementById('currentPhoto');
   const vidEl = document.getElementById('currentVideo');
+  imgEl.classList.remove('fullscreen');
+  document.body.classList.remove('photo-fullscreen-active');
   if (photo.v) {
     imgEl.style.display = 'none';
     vidEl.pause();
     vidEl.poster = MEDIA_BASE + 'web/' + encodeURIComponent(photo.f.replace(/\.mp4$/,'-poster.jpg'));
     vidEl.src = MEDIA_BASE + 'web/' + safeSrc;
+    vidEl.setAttribute('aria-label', nasaTitle || (photo.p + ' — ' + photo.loc));
     vidEl.style.display = '';
   } else {
     vidEl.pause();
@@ -2424,6 +2552,27 @@ function updatePhoto() {
   document.getElementById('metaCamera').textContent = photo.cam;
   document.getElementById('metaSettings').textContent = photo.set;
   document.getElementById('photoCounter').textContent = `${currentPhotoIdx + 1} / ${filteredPhotos.length}`;
+  const sourceLink = document.getElementById('sourceLink');
+  if (photo.src) {
+    sourceLink.href = photo.src;
+    sourceLink.classList.remove('disabled');
+    sourceLink.removeAttribute('aria-disabled');
+    sourceLink.removeAttribute('data-tooltip');
+    sourceLink.removeAttribute('tabindex');
+    sourceLink.title = 'Open source page';
+    sourceLink.style.display = '';
+  } else {
+    sourceLink.removeAttribute('href');
+    sourceLink.classList.add('disabled');
+    sourceLink.setAttribute('aria-disabled', 'true');
+
+    const missingSourceMessage = 'Source page URL missing. Have the original? Please open an issue on GitHub.';
+    sourceLink.setAttribute('data-tooltip', missingSourceMessage);
+    sourceLink.setAttribute('tabindex', '0');
+    sourceLink.title = missingSourceMessage;
+
+    sourceLink.style.display = '';
+  }
   if (photo.desc) {
     document.getElementById('descSection').style.display = '';
     document.getElementById('metaDesc').textContent = photo.desc;
@@ -2761,10 +2910,96 @@ function ensurePhotoInView() {
 
 function goPrev() { if (currentPhotoIdx > 0) { currentPhotoIdx--; updatePhoto(); ensurePhotoInView(); } }
 function goNext() { if (currentPhotoIdx < filteredPhotos.length - 1) { currentPhotoIdx++; updatePhoto(); ensurePhotoInView(); } }
-function toggleFullscreenPhoto() { const currentPhoto = document.getElementById("currentPhoto"); currentPhoto.classList.toggle("fullscreen"); }
+function toggleFullscreenPhoto() {
+  const currentPhoto = document.getElementById("currentPhoto");
+  currentPhoto.classList.toggle("fullscreen");
+  document.body.classList.toggle('photo-fullscreen-active', currentPhoto.classList.contains('fullscreen'));
+}
+let photoSwipeStartX = 0;
+let photoSwipeStartY = 0;
+let photoSwipePointerId = null;
+let photoSwipeMoved = false;
+let photoSwipeNavigated = false;
+let photoWheelLastAt = 0;
+function handlePhotoSwipe(dx, dy) {
+  if (Math.abs(dx) < 45 || Math.abs(dx) < Math.abs(dy) * 1.4) return false;
+  if (dx < 0) goNext();
+  else goPrev();
+  return true;
+}
+function onPhotoPointerDown(e) {
+  if (!e.isPrimary || (e.pointerType === 'mouse' && e.button !== 0)) return;
+  if (e.target.closest && e.target.closest('button, video')) return;
+  photoSwipePointerId = e.pointerId;
+  photoSwipeStartX = e.clientX;
+  photoSwipeStartY = e.clientY;
+  photoSwipeMoved = false;
+  photoSwipeNavigated = false;
+  if (photoContainerEl && photoContainerEl.setPointerCapture) {
+    photoContainerEl.setPointerCapture(e.pointerId);
+  }
+}
+function onPhotoPointerMove(e) {
+  if (!e.isPrimary || e.pointerId !== photoSwipePointerId || photoSwipeNavigated) return;
+  const dx = e.clientX - photoSwipeStartX;
+  const dy = e.clientY - photoSwipeStartY;
+  if (Math.abs(dx) > 8 || Math.abs(dy) > 8) photoSwipeMoved = true;
+  if (handlePhotoSwipe(dx, dy)) {
+    photoSwipeMoved = true;
+    photoSwipeNavigated = true;
+  }
+}
+function onPhotoPointerUp(e) {
+  if (!e.isPrimary || e.pointerId !== photoSwipePointerId) return;
+  const dx = e.clientX - photoSwipeStartX;
+  const dy = e.clientY - photoSwipeStartY;
+  if (!photoSwipeNavigated && handlePhotoSwipe(dx, dy)) {
+    photoSwipeMoved = true;
+    photoSwipeNavigated = true;
+  }
+  if (photoContainerEl && photoContainerEl.hasPointerCapture && photoContainerEl.hasPointerCapture(e.pointerId)) {
+    photoContainerEl.releasePointerCapture(e.pointerId);
+  }
+  photoSwipePointerId = null;
+}
+function cancelPhotoPointer(e) {
+  if (photoContainerEl && photoContainerEl.hasPointerCapture && photoContainerEl.hasPointerCapture(e.pointerId)) {
+    photoContainerEl.releasePointerCapture(e.pointerId);
+  }
+  photoSwipePointerId = null;
+  photoSwipeMoved = false;
+  photoSwipeNavigated = false;
+}
+function onPhotoWheel(e) {
+  const horizontal = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
+  if (Math.abs(horizontal) < 35) return;
+  const now = Date.now();
+  if (now - photoWheelLastAt < 450) return;
+  photoWheelLastAt = now;
+  if (horizontal > 0) goNext();
+  else goPrev();
+  e.preventDefault();
+}
 document.getElementById('prevBtn').addEventListener('click', goPrev);
 document.getElementById('nextBtn').addEventListener('click', goNext);
-document.getElementById("currentPhoto").addEventListener("click", toggleFullscreenPhoto);
+const photoContainerEl = document.querySelector('.photo-container');
+if (photoContainerEl) {
+  photoContainerEl.addEventListener('pointerdown', onPhotoPointerDown, true);
+  photoContainerEl.addEventListener('pointermove', onPhotoPointerMove, true);
+  photoContainerEl.addEventListener('pointerup', onPhotoPointerUp, true);
+  photoContainerEl.addEventListener('pointercancel', cancelPhotoPointer, true);
+  photoContainerEl.addEventListener('wheel', onPhotoWheel, { passive: false, capture: true });
+  photoContainerEl.addEventListener('click', e => {
+    if (e.target.closest && e.target.closest('button, video')) return;
+    if (document.getElementById("currentPhoto").style.display === 'none') return;
+    if (photoSwipeMoved) {
+      e.preventDefault();
+      photoSwipeMoved = false;
+      return;
+    }
+    toggleFullscreenPhoto();
+  });
+}
 
 
 // --- FILTERS ---
@@ -2823,14 +3058,24 @@ document.querySelectorAll('[data-cam]').forEach(btn => {
 });
 
 document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    const currentPhoto = document.getElementById("currentPhoto");
+    currentPhoto.classList.remove('fullscreen');
+    document.body.classList.remove('photo-fullscreen-active');
+  }
   if (e.key === 'ArrowLeft' && currentPhotoIdx > 0) { currentPhotoIdx--; updatePhoto(); ensurePhotoInView(); }
   if (e.key === 'ArrowRight' && currentPhotoIdx < filteredPhotos.length - 1) { currentPhotoIdx++; updatePhoto(); ensurePhotoInView(); }
+  if (e.key === 'Escape') {
+    closeFilterPopup();
+    closeDescPopup();
+  }
 });
 
 document.getElementById('muteBtn').addEventListener('click', function() {
   audioMuted = !audioMuted;
   this.classList.toggle('audio-on', !audioMuted);
   this.classList.toggle('active', !audioMuted);
+  this.setAttribute('aria-pressed', !audioMuted ? 'true' : 'false');
   document.getElementById('audioDots').style.display = audioMuted ? 'none' : 'block';
   if (audioMuted && currentAudio) {
     currentAudio.pause();
@@ -2930,10 +3175,14 @@ window.openFilterPopup = function() {
   syncFilterPopupState();
   const m = document.getElementById('filterPopupModal');
   if (m) m.style.display = 'flex';
+  const trigger = document.getElementById('filterDropdownTrigger');
+  if (trigger) trigger.setAttribute('aria-expanded', 'true');
 };
 window.closeFilterPopup = function() {
   const m = document.getElementById('filterPopupModal');
   if (m) m.style.display = 'none';
+  const trigger = document.getElementById('filterDropdownTrigger');
+  if (trigger) trigger.setAttribute('aria-expanded', 'false');
 };
 
 function syncFilterPopupState() {
@@ -3054,8 +3303,10 @@ const MOBILE_MQ = window.matchMedia('(max-width: 768px)');
 const sheetEl = document.getElementById('metaPanel');
 const sheetHandleEl = document.getElementById('sheetHandle');
 const descHoverEl = document.getElementById('descHover');
+const sourceLinkEl = document.getElementById('sourceLink');
 const trajSectionEl = document.querySelector('.traj-section');
 const photoLinksEl = document.querySelector('.photo-side .photo-links');
+const photoLinksRowEl = document.querySelector('.photo-links-row');
 
 let sheetState = 'middle'; // 'open' | 'middle' | 'closed'
 
@@ -3066,6 +3317,9 @@ function applySheetState(state) {
   document.body.classList.remove('sheet-state-open', 'sheet-state-middle', 'sheet-state-closed');
   document.body.classList.add('sheet-state-' + state);
   sheetEl.style.top = '';
+  if (sheetHandleEl) {
+    sheetHandleEl.setAttribute('aria-expanded', state !== 'closed' ? 'true' : 'false');
+  }
 }
 
 function snapPxFor(state) {
@@ -3084,9 +3338,19 @@ function relocateDescHoverForViewport() {
       // Place it right after the orion map so it's grouped with photo info.
       trajSectionEl.insertAdjacentElement('afterend', descHoverEl);
     }
+    // Put source link at the very bottom of the sheet on mobile
+    if (sourceLinkEl && sourceLinkEl.parentElement !== sheetEl) {
+      sheetEl.appendChild(sourceLinkEl);
+      sourceLinkEl.textContent = 'Go to the original image source';
+    }
   } else {
-    if (photoLinksEl && descHoverEl.parentElement !== photoLinksEl) {
-      photoLinksEl.appendChild(descHoverEl);
+    // On desktop, put both back in the side-by-side row
+    if (photoLinksRowEl && descHoverEl.parentElement !== photoLinksRowEl) {
+      photoLinksRowEl.prepend(descHoverEl);
+    }
+    if (photoLinksRowEl && sourceLinkEl && sourceLinkEl.parentElement !== photoLinksRowEl) {
+      photoLinksRowEl.appendChild(sourceLinkEl);
+      sourceLinkEl.textContent = 'Go to Image Source';
     }
   }
 }
@@ -3181,11 +3445,12 @@ window.addEventListener('resize', syncMobileLayout);
 </script>
 
 <!-- Mobile filter popup -->
-<div class="filter-popup-modal" id="filterPopupModal" style="display:none">
-  <button class="filter-popup-close" type="button" onclick="closeFilterPopup()">
+<div class="filter-popup-modal" id="filterPopupModal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="filterPopupHeading">
+  <button class="filter-popup-close" type="button" onclick="closeFilterPopup()" aria-label="Close filters dialog">
     <span>Close</span>
     <span class="filter-popup-close-chevron" aria-hidden="true">&#x2039;</span>
   </button>
+  <h3 id="filterPopupHeading" class="sr-only">Filter Photos and Videos</h3>
   <div class="filter-popup-body">
     <div class="filter-section">
       <h4>Where Media Was Taken</h4>
