@@ -1,3 +1,4 @@
+// Artemis II photo data — era and center fields backfilled 2026-05-31
 const PHOTO_DATA = {
   "photos": [
     {
