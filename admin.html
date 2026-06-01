@@ -387,6 +387,17 @@ a:hover { text-decoration: underline; }
   .card-field input.title-input { width: 100%; }
   .card-field input.med { width: 100%; }
 }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 </style>
 <script src="photos.js"></script>
 </head>
@@ -399,18 +410,18 @@ a:hover { text-decoration: underline; }
       <div class="unsaved-dot"></div>
       Unsaved changes
     </div>
-    <a href="index.html" class="back-link">&larr; Back to Timeline</a>
+    <a href="index.html" class="back-link"><span aria-hidden="true">&larr;</span> Back to Timeline</a>
   </div>
 </div>
 
 <div class="stats-bar" id="stats-bar"></div>
 
 <div class="toolbar">
-  <div class="tabs">
-    <button class="tab-btn active" data-tab="photos" onclick="switchTab('photos')">Photos / Videos</button>
-    <button class="tab-btn" data-tab="audio" onclick="switchTab('audio')">Audio</button>
+  <div class="tabs" role="tablist" aria-label="Media Admin Tabs">
+    <button class="tab-btn active" id="tab-photos" role="tab" aria-selected="true" aria-controls="photo-list" data-tab="photos" onclick="switchTab('photos')">Photos / Videos</button>
+    <button class="tab-btn" id="tab-audio" role="tab" aria-selected="false" aria-controls="audio-list" data-tab="audio" onclick="switchTab('audio')">Audio</button>
   </div>
-  <input type="text" class="search-input" id="search" placeholder="Search title, filename, photographer, location...">
+  <input type="text" class="search-input" id="search" placeholder="Search title, filename, photographer, location..." aria-label="Search entries by title, filename, photographer, or location">
   <div class="filters" id="filters">
     <button class="filter-btn active" data-filter="all">All</button>
     <button class="filter-btn" data-filter="enabled">Enabled Only</button>
@@ -422,8 +433,8 @@ a:hover { text-decoration: underline; }
   <button class="save-btn" onclick="exportJSON()">Export photos.js</button>
 </div>
 
-<div class="card-list" id="photo-list"></div>
-<div class="card-list hidden" id="audio-list"></div>
+<div class="card-list" id="photo-list" role="tabpanel" aria-labelledby="tab-photos"></div>
+<div class="card-list hidden" id="audio-list" role="tabpanel" aria-labelledby="tab-audio"></div>
 <div class="count-label" id="count-label"></div>
 
 <script>
@@ -477,8 +488,11 @@ function updateStats() {
 // Tabs
 function switchTab(tab) {
   currentTab = tab;
-  document.querySelectorAll('.tab-btn').forEach(b =>
-    b.classList.toggle('active', b.dataset.tab === tab));
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    const active = b.dataset.tab === tab;
+    b.classList.toggle('active', active);
+    b.setAttribute('aria-selected', active ? 'true' : 'false');
+  });
   document.getElementById('photo-list').classList.toggle('hidden', tab !== 'photos');
   document.getElementById('audio-list').classList.toggle('hidden', tab !== 'audio');
   updateCountLabel();
@@ -548,22 +562,24 @@ function renderPhotos() {
       <img class="card-thumb" src="web/${photo.file}" alt="" loading="lazy"
            onerror="this.style.display='none'">
       <div class="card-toggle">
-        <label class="switch">
-          <input type="checkbox" ${photo.enabled ? 'checked' : ''}
-                 onchange="setPhotoField(${idx},'enabled',this.checked)">
+        <label class="switch" for="enabled-check-${idx}">
+          <input type="checkbox" id="enabled-check-${idx}" ${photo.enabled ? 'checked' : ''}
+                 onchange="setPhotoField(${idx},'enabled',this.checked)"
+                 aria-label="Enable photo entry ${idx}">
           <span class="slider"></span>
         </label>
       </div>
       <div class="card-body">
         <div class="card-row">
           <div class="card-field">
-            <input class="title-input" value="${esc(photo.title || '')}"
+            <label class="sr-only" for="title-input-${idx}">Title</label>
+            <input class="title-input" id="title-input-${idx}" value="${esc(photo.title || '')}"
                    onchange="setPhotoField(${idx},'title',this.value)"
                    placeholder="Title">
           </div>
           <div class="card-field">
-            <label>Time</label>
-            <input type="datetime-local" class="time-input"
+            <label for="time-input-${idx}">Time</label>
+            <input type="datetime-local" class="time-input" id="time-input-${idx}"
                    value="${timeToDatetimeLocal(photo.time)}"
                    step="1"
                    onblur="setPhotoField(${idx},'time',datetimeLocalToTime(this.value))"
@@ -572,25 +588,25 @@ function renderPhotos() {
         </div>
         <div class="card-row">
           <div class="card-field">
-            <label>Photographer</label>
-            <input class="short" value="${esc(photo.photographer || '')}"
+            <label for="photographer-input-${idx}">Photographer</label>
+            <input class="short" id="photographer-input-${idx}" value="${esc(photo.photographer || '')}"
                    onchange="setPhotoField(${idx},'photographer',this.value)">
           </div>
           <div class="card-field">
-            <label>Location</label>
-            <input class="short" value="${esc(photo.location || '')}"
+            <label for="location-input-${idx}">Location</label>
+            <input class="short" id="location-input-${idx}" value="${esc(photo.location || '')}"
                    onchange="setPhotoField(${idx},'location',this.value)">
           </div>
         </div>
         <div class="card-row">
           <div class="card-field">
-            <label>Camera</label>
-            <input class="med" value="${esc(photo.camera || '')}"
+            <label for="camera-input-${idx}">Camera</label>
+            <input class="med" id="camera-input-${idx}" value="${esc(photo.camera || '')}"
                    onchange="setPhotoField(${idx},'camera',this.value)">
           </div>
           <div class="card-field">
-            <label>Settings</label>
-            <input class="med" value="${esc(photo.settings || '')}"
+            <label for="settings-input-${idx}">Settings</label>
+            <input class="med" id="settings-input-${idx}" value="${esc(photo.settings || '')}"
                    onchange="setPhotoField(${idx},'settings',this.value)">
           </div>
         </div>
@@ -606,19 +622,20 @@ function renderPhotos() {
                    onchange="setPhotoField(${idx},'external',this.checked)"> External</label>
           </div>
           <div class="card-field">
-            <label>File</label>
-            <input class="med" style="font-size:11px;font-family:monospace;color:var(--text-dim)" value="${esc(photo.file)}"
+            <label for="file-input-${idx}">File</label>
+            <input class="med" id="file-input-${idx}" style="font-size:11px;font-family:monospace;color:var(--text-dim)" value="${esc(photo.file)}"
                    onchange="setPhotoField(${idx},'file',this.value)"
                    placeholder="filename.jpg">
           </div>
         </div>
         <div style="display:flex;gap:12px;align-items:center;margin-top:4px">
           <button class="desc-toggle" onclick="toggleDesc(this)">Show description</button>
-          <button class="delete-btn" onclick="deletePhoto(${idx})">Delete</button>
+          <button class="delete-btn" onclick="deletePhoto(${idx})" aria-label="Delete entry ${idx}">Delete</button>
         </div>
         <div class="desc-section">
           <div class="card-field" style="width:100%">
-            <textarea class="desc-area" onchange="setPhotoField(${idx},'flickr_desc',this.value)"
+            <label class="sr-only" for="desc-input-${idx}">Description</label>
+            <textarea class="desc-area" id="desc-input-${idx}" onchange="setPhotoField(${idx},'flickr_desc',this.value)"
                       placeholder="Description...">${esc(photo.flickr_desc || '')}</textarea>
           </div>
         </div>
@@ -640,15 +657,16 @@ function renderAudio() {
     const disabledClass = audio.enabled ? '' : ' disabled-card';
     return `<div class="audio-card${disabledClass}" data-aidx="${idx}">
       <div class="card-toggle">
-        <label class="switch">
-          <input type="checkbox" ${audio.enabled ? 'checked' : ''}
-                 onchange="setAudioField(${idx},'enabled',this.checked)">
+        <label class="switch" for="audio-enabled-check-${idx}">
+          <input type="checkbox" id="audio-enabled-check-${idx}" ${audio.enabled ? 'checked' : ''}
+                 onchange="setAudioField(${idx},'enabled',this.checked)"
+                 aria-label="Enable audio entry ${idx}">
           <span class="slider"></span>
         </label>
       </div>
       <div class="card-field">
-        <label>Time</label>
-        <input type="datetime-local" class="time-input"
+        <label for="audio-time-input-${idx}">Time</label>
+        <input type="datetime-local" class="time-input" id="audio-time-input-${idx}"
                value="${timeToDatetimeLocal(audio.time)}"
                step="1"
                onblur="setAudioField(${idx},'time',datetimeLocalToTime(this.value))"
@@ -656,8 +674,8 @@ function renderAudio() {
       </div>
       <span class="audio-file">${esc(audio.file)}</span>
       <div class="card-field" style="flex:1">
-        <label>Desc</label>
-        <input class="med" value="${esc(audio.desc || '')}"
+        <label for="audio-desc-input-${idx}">Desc</label>
+        <input class="med" id="audio-desc-input-${idx}" value="${esc(audio.desc || '')}"
                onchange="setAudioField(${idx},'desc',this.value)">
       </div>
     </div>`;
