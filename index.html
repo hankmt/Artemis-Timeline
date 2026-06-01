@@ -1231,22 +1231,25 @@
     .nav-next { right: 0; }
     .photo-desc-toggle { padding: 12px 14px; }
     .desc-hover-tip { font-size: 13px; line-height: 1.65; }
-    /* Source link inside desc-hover on mobile */
-    .desc-hover .photo-source-btn-inline {
+    /* Source link at bottom of sheet on mobile */
+    .meta-panel > .photo-source-btn-inline {
       display: block;
+      order: 99;
+      margin: 12px 12px 16px;
       padding: 12px 14px;
-      border: 0;
-      border-top: 1px solid #1a1a2e;
-      border-radius: 0;
-      background: transparent;
+      border: 1px solid #1a1a2e;
+      border-radius: 6px;
+      background: rgba(0,0,0,0.25);
       color: #4FC3F7;
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.8px;
       text-transform: uppercase;
       text-decoration: none;
+      text-align: center;
+      flex-shrink: 0;
     }
-    .desc-hover .photo-source-btn-inline.disabled {
+    .meta-panel > .photo-source-btn-inline.disabled {
       color: rgba(255,255,255,0.3);
     }
 
@@ -3306,9 +3309,10 @@ function relocateDescHoverForViewport() {
       // Place it right after the orion map so it's grouped with photo info.
       trajSectionEl.insertAdjacentElement('afterend', descHoverEl);
     }
-    // Put source link inside descHover on mobile so it's visible in the sheet
-    if (sourceLinkEl && sourceLinkEl.parentElement !== descHoverEl) {
-      descHoverEl.appendChild(sourceLinkEl);
+    // Put source link at the very bottom of the sheet on mobile
+    if (sourceLinkEl && sourceLinkEl.parentElement !== sheetEl) {
+      sheetEl.appendChild(sourceLinkEl);
+      sourceLinkEl.textContent = 'Go to the original image source';
     }
   } else {
     // On desktop, put both back in the side-by-side row
@@ -3317,6 +3321,7 @@ function relocateDescHoverForViewport() {
     }
     if (photoLinksRowEl && sourceLinkEl && sourceLinkEl.parentElement !== photoLinksRowEl) {
       photoLinksRowEl.appendChild(sourceLinkEl);
+      sourceLinkEl.textContent = 'Go to Image Source';
     }
   }
 }
